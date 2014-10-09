@@ -4,18 +4,17 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:header="urn:import:org.ednovo.gooru.client.mvp.play.collection.header">
 	<ui:style field= "playerStyle" src="previewend.css"/>
-	<g:FlowPanel>
-  		<g:FlowPanel styleName="{playerStyle.collectionImageContainer}" >
+	<ui:with type="org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle" field="playerBundleStyle" />
+	<g:FlowPanel styleName="col-md-12">
+  		<g:FlowPanel styleName="col-md-4 col-sm-4 {playerBundleStyle.getPlayerStyleResource.collectionImageContainer}">
   			<g:Image ui:field="collectionThumbnail" styleName="{playerStyle.collectionImage}"></g:Image>
-  			<!-- <g:FlowPanel ui:field="thumbnailContainer">
-  				<g:HTMLPanel styleName="{playerStyle.collectionreplay}"><g:Label styleName="{playerStyle.collectionreplayText}" ui:field="replayCollection"></g:Label></g:HTMLPanel>
-  			</g:FlowPanel> -->
   		</g:FlowPanel>
-        <g:HTMLPanel styleName="{playerStyle.clearfix} {playerStyle.collectionbuttons}">
-            <!-- <g:HTMLPanel  styleName="{playerStyle.endTitle}" ui:field="learningobjectiveText"></g:HTMLPanel> -->
-            <g:Button styleName="secondary" ui:field="shareCollectionBtn"></g:Button>
-            <g:Button styleName="secondary" ui:field="customizeCollectionBtn"></g:Button>
-            <g:Button ui:field="studyButton" styleName="{playerStyle.preview}"></g:Button>
+        <g:HTMLPanel styleName="col-md-8 col-sm-8 {playerBundleStyle.getPlayerStyleResource.collectionbuttons}">
+            <g:HTMLPanel  styleName="{playerBundleStyle.getPlayerStyleResource.buttonsContainer}">
+	            <g:Button styleName="secondary" ui:field="shareCollectionBtn"></g:Button>
+	            <g:Button styleName="secondary" ui:field="customizeCollectionBtn"></g:Button>
+	            <g:Button ui:field="studyButton" styleName="{playerStyle.preview}"></g:Button>
+            </g:HTMLPanel>
             <hr/>
             <g:HTML ui:field="collectionGoal" styleName="{playerStyle.goal}"></g:HTML>
      		<!-- <g:Button styleName="secondary" ui:field="assignCollectionBtn"></g:Button> -->

@@ -2348,3 +2348,9 @@ fieldset {
 	}
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+		.containerMain {
+  	 		 width: auto !important;
+		}
+}
+

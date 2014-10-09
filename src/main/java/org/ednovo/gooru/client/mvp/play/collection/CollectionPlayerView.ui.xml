@@ -5,6 +5,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:header="urn:import:org.ednovo.gooru.client.mvp.play.collection.header"
 	xmlns:footer="urn:import:org.ednovo.gooru.client.mvp.play.collection.footer">
 	<ui:style field= "playerStyle" src="collectionplayer.css"/>
+	<ui:with type="org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle" field="playerHeaderStyle" />
 		<ui:style>
 		.wrapper {
 			position: relative;
@@ -124,11 +125,11 @@
     <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
   </g:HTMLPanel>
 </g:HTMLPanel>
-		<g:FlowPanel>
+		<g:FlowPanel styleName="{playerHeaderStyle.getPlayerStyleResource.fixedContainer}">
 			<header:StudyPlayerHeaderView ui:field="headerView"></header:StudyPlayerHeaderView>
+			<g:FlowPanel ui:field="navigationContainer" styleName="{playerStyle.resource-container}"></g:FlowPanel>
 		</g:FlowPanel>
-		<g:FlowPanel ui:field="navigationContainer"></g:FlowPanel>
-		<g:FlowPanel ui:field="playerBodyContainer"></g:FlowPanel>
+		<g:FlowPanel ui:field="playerBodyContainer" styleName="{playerHeaderStyle.getPlayerStyleResource.bodyContent}"></g:FlowPanel>
 		<footer:StudyPlayerFooterView ui:field="footerView"></footer:StudyPlayerFooterView>
 	</g:FlowPanel>
 </ui:UiBinder>

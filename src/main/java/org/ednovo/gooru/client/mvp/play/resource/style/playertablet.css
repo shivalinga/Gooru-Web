@@ -34,8 +34,9 @@ html{
 .whitebg{}
 .navigationWrapper{}
 .animationWrapper{}
+
 .loginStatus{
-	margin-right:50px;
+	
 }
 .collectionItem {
     margin: 5px;
@@ -95,3 +96,33 @@ html{
 	width:100%;
 }
 
+
+
+.player-resource-title{
+	
+}
+.resourceCountStyle{
+	
+}
+.fixedContainer{
+	
+}
+.bodyContent{
+	padding-top:0px;
+}
+.greybackground{
+	
+}
+.collectionImageContainer{
+	margin-bottom:25px;
+}
+
+.collectionImage{
+	
+}
+.buttonsContainer{
+	
+}
+.collectionbuttons{
+	
+}

@@ -2104,7 +2104,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 	}
 	
 	public void addFixedPostionForNavigation(){
-		collectionPlayerTocPresenter.getWidget().getElement().getStyle().setPosition(Position.FIXED);
+		//collectionPlayerTocPresenter.getWidget().getElement().getStyle().setPosition(Position.FIXED);
 	}
 	public void adjustCollectionMetadaBody(boolean isHome){
 		if(isHome){

@@ -37,17 +37,14 @@
 	margin: auto;
 }
 .player-resource-title {
+	color: white;
+	float: left;
 	font-size: 20px;
-	padding-top: 12px;
 	max-width: 58%;
 	min-width: 10%;
-	float: left;
-	white-space: nowrap !important;
 	overflow: hidden;
-	margin-right: 5px;
 	text-overflow: ellipsis;
-	color: white;
-	margin-left: 10px;
+	white-space: nowrap;
 }
 
 .dislike-button {
@@ -150,14 +147,15 @@
 	background: #4E9746;
 }
 .loginStatus {
-    float:right;
-    margin-top:8px;
-    line-height:12px;
-    background-color:#46873F;
-    border:1px solid #386D32;
-    box-shadow: inset 0px 0px 6px #3C7335;
-    padding:6px 15px;
-    border-radius:20px;
+   background-color: #46873f;
+	border: 1px solid #386d32;
+	border-radius: 20px;
+	box-shadow: 0 0 6px #3c7335 inset;
+	float: right;
+	line-height: 12px;
+	margin-right: 35px;
+	padding: 7px 15px;
+	color: #ffffff;
 }
     
  .loginStatus span {  
@@ -300,6 +298,13 @@
 
 .studyPlayer .tabs{
 	background: #4e9746;
+}
+.studyPlayer{
+	background: #4e9746;
+	padding: 7px 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	position: relative;
+	width: 100%;
 }
 
 .toolTip{

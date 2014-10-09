@@ -38,6 +38,7 @@ import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.effects.FadeInAndOut;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
+import org.ednovo.gooru.client.htmltags.SectionTag;
 import org.ednovo.gooru.client.mvp.classpages.tabitem.assignments.collections.CollectionsView;
 import org.ednovo.gooru.client.mvp.home.LoginPopupUc;
 import org.ednovo.gooru.client.mvp.play.collection.preview.PreviewPlayerPresenter;
@@ -99,7 +100,7 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 	@UiField
 	static FlowPanel studyMainContianer;
 	@UiField
-	FlowPanel metadataContainer;
+	SectionTag metadataContainer;
 	@UiField
 	FlowPanel standardsContainer,leftPanelContainer,rightPanelContainer;
 	@UiField
@@ -298,6 +299,9 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 			metadataContainer.clear();
 			if(content!=null){
 				metadataContainer.add(content);
+				Label clearFixLabel=new Label();
+				clearFixLabel.setStyleName("clearfix");
+				metadataContainer.add(clearFixLabel);
 			}
 		}
 	}

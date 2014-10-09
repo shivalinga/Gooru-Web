@@ -165,7 +165,7 @@ public class CollectionPlayerView extends BasePopupViewWithHandlers<CollectionPl
 		  {
 			  ipadSectiondiv.setVisible(false);
 			  androidSectiondiv.setVisible(false);
-			  headerView.getElement().setAttribute("style", "position:fixed;");
+			 // headerView.getElement().setAttribute("style", "position:fixed;");
 			  
 		  }
 		  setUiText();
@@ -176,7 +176,7 @@ public class CollectionPlayerView extends BasePopupViewWithHandlers<CollectionPl
 	public void onIpadCloseClick(ClickEvent clickEvent){
 		 ipadSectiondiv.setVisible(false);
 		  androidSectiondiv.setVisible(false);
-		  headerView.getElement().setAttribute("style", "position:fixed;");
+		 // headerView.getElement().setAttribute("style", "position:fixed;");
 		  StringUtil.IPAD_MESSAGE_Close_Click = true;
 		  CollectionPlayerMetadataView.onClosingAndriodorIpaddiv();
 		  ResourcePlayerMetadataView.onClosingAndriodorIpaddiv();
@@ -186,7 +186,7 @@ public class CollectionPlayerView extends BasePopupViewWithHandlers<CollectionPl
 	public void onAndriodCloseClick(ClickEvent clickEvent){
 		 ipadSectiondiv.setVisible(false);
 		  androidSectiondiv.setVisible(false);
-		  headerView.getElement().setAttribute("style", "position:fixed;");
+		 // headerView.getElement().setAttribute("style", "position:fixed;");
 		  StringUtil.IPAD_MESSAGE_Close_Click = true;
 		  CollectionPlayerMetadataView.onClosingAndriodorIpaddiv();
 		  ResourcePlayerMetadataView.onClosingAndriodorIpaddiv();

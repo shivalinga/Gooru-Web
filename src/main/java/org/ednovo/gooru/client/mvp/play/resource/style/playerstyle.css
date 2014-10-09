@@ -43,15 +43,7 @@
 
 
 .loginStatus {
-    background-color: #46873f;
-    border: 1px solid #386d32;
-    border-radius: 20px;
-    box-shadow: 0 0 6px #3c7335 inset;
-    float: right;
-    line-height: 12px;
-	margin-right:35px;
-    padding: 6px 15px;
-	color:#ffffff;
+	
 }
 
 .loginStatus .loggingIcon {
@@ -979,25 +971,13 @@ font-size: 31px;
 	overflow-y: scroll !important;
 }
 .rightPanel{
-	width: 240px;
-	min-height: 650px;
-	height:auto;
-	float: right;
-	padding: 30px 20px 20px 20px;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box
+	padding-top: 30px;
 }
 .leftPanel{
-	width: 700px;
-	min-height: 650px;
-	float: left;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	padding: 30px;
-	background: white;
-	border-right: 1px solid #ddd;
+	    background: none repeat scroll 0 0 white;
+	    border-right: 1px solid #ddd;
+		padding-left:0;
+		padding-right:0;
 }
 .playerBodyContainer{
 	background: #f0f0f0;
@@ -1023,4 +1003,52 @@ font-size: 31px;
 	border-bottom: 1px solid #ddd;
 }
 
+.player-resource-title{
+		color: white;
+	float: left;
+	font-size: 20px;
+	max-width: 58%;
+	min-width: 10%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
+.resourceCountStyle{
+	color: #fff;
+	font-size: 16px;
+	line-height: 1.5;
+	margin-bottom: 0px;
+	margin-left: 18px;
+}
+.fixedContainer{
+	position:fixed;
+	width:100%;
+	z-index:999;
+}
+.bodyContent{
+	padding-top:180px;
+}
+.greybackground{
+	background: #f0f0f0;
+	padding-left: 0;
+	padding-right: 0;
+	float: left;
+	width: 100%;
+}
+.collectionImageContainer{
+}
+.collectionImage{
+	border-left: 10px solid #1076bb;
+	width: 100%;
+}
+.buttonsContainer{
+	width:100%;
+	display:inline-block;
+}
+.collectionbuttons{
+	
+}
+.collectionbuttons hr{
+	margin:10px 0;
+}

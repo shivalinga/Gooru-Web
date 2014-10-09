@@ -10,9 +10,8 @@
 	position:relative;
 }
 .nav-toc-wrapperContainerMain{
-	margin:0 auto;
-	background-color: #333333;
-	width:940px;
+	position: relative;
+	margin: 0 46px;
 }
 
 .nav-toc-wrapper{

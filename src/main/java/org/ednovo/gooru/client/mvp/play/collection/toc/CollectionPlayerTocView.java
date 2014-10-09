@@ -59,9 +59,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlayerTocUiHandlers> implements IsCollectionPlayerTocView{
 
 	@UiField FlowPanel navgationTocContainer;
-	@UiField Label previousButton,nextButton,hideText,resourceCountLabel;
+	@UiField Label previousButton,nextButton,resourceCountLabel;
 	
-	@UiField HTMLEventPanel hideButton;
 	
 	private int selectedWidgetIndex=-1;
 	
@@ -75,18 +74,10 @@ public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlay
 	@Inject
 	public CollectionPlayerTocView(){
 		setWidget(uiBinder.createAndBindUi(this));
-		hideText.setText(i18n.GL0592());
-		hideText.getElement().setId("lblHideText");
-		hideText.getElement().setAttribute("alt",i18n.GL0592());
-		hideText.getElement().setAttribute("title",i18n.GL0592());
 		
 		previousButton.getElement().setId("lblPreviousButton");
 		navgationTocContainer.getElement().setId("fpnlNavgationTocContainer");
 		nextButton.getElement().setId("lblNextButton");
-		hideButton.getElement().setId("epnlHideButton");
-		if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.COLLECTION_PLAY)){
-			hideButton.setVisible(false);
-		}
 	}
 	public void clearNavigationPanel(){
 		navgationTocContainer.clear();
@@ -301,79 +292,5 @@ public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlay
 			}
 		}
 	}
-	/**
-	 * 
-	 * @function onhideBtnClicked 
-	 * 
-	 * @created_date : 11-Dec-2013
-	 * 
-	 * @description
-	 * 
-	 * 
-	 * @parm(s) : @param clickEvent
-	 * 
-	 * @return : void
-	 *
-	 * @throws : <Mentioned if any exceptions>
-	 *
-	 */
-	@UiHandler("hideButton")
-	public void onhideBtnClicked(ClickEvent clickEvent) 
-	{
-		PlaceRequest collectionRequest = AppClientFactory.getPlaceManager().getCurrentPlaceRequest();
-		String collectionId = collectionRequest.getParameter("id", null);
-		String collectionItemId = collectionRequest.getParameter("rid", null);
-		String chkViewParam = collectionRequest.getParameter("view", null);
-		
-		Map<String,String> params = new LinkedHashMap<String,String>();
-		params.put("id", collectionId);
-		params = PreviewPlayerPresenter.setConceptPlayerParameters(params);
-		
-	if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.RESOURCE_PLAY))
-	{
-		PlaceRequest request=new PlaceRequest(PlaceTokens.RESOURCE_PLAY).
-				with("id", collectionId);
-		AppClientFactory.getPlaceManager().revealPlace(false,request,true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.COLLECTION_PLAY) && chkViewParam == null && collectionItemId != null)
-	{
-		PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).
-				with("id", collectionId).with("rid", collectionItemId);
-		AppClientFactory.getPlaceManager().revealPlace(false,request,true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.PREVIEW_PLAY) && chkViewParam == null && collectionItemId != null)
-	{
-		params.put("rid", collectionItemId);
-		PlaceRequest placeRequest=AppClientFactory.getPlaceManager().preparePlaceRequest(PlaceTokens.PREVIEW_PLAY, params);
-		AppClientFactory.getPlaceManager().revealPlace(false, placeRequest, true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.COLLECTION_PLAY) && chkViewParam == null && collectionItemId == null)
-	{
-		PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).
-				with("id", collectionId);
-		AppClientFactory.getPlaceManager().revealPlace(false,request,true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.PREVIEW_PLAY) && chkViewParam == null && collectionItemId == null)
-	{
-		PlaceRequest placeRequest=AppClientFactory.getPlaceManager().preparePlaceRequest(PlaceTokens.PREVIEW_PLAY, params);
-		AppClientFactory.getPlaceManager().revealPlace(false, placeRequest, true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.COLLECTION_PLAY) && chkViewParam.equalsIgnoreCase("end"))
-	{
-		PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).
-				with("id", collectionId).with("view", "end");
-		AppClientFactory.getPlaceManager().revealPlace(false,request,true);
-	}
-	else if(AppClientFactory.getCurrentPlaceToken().contains(PlaceTokens.PREVIEW_PLAY) && chkViewParam.equalsIgnoreCase("end"))
-	{
-		params.put("view", "end");
-		PlaceRequest placeRequest=AppClientFactory.getPlaceManager().preparePlaceRequest(PlaceTokens.PREVIEW_PLAY, params);
-		AppClientFactory.getPlaceManager().revealPlace(false, placeRequest, true);
-
-	}
-	}
-
-	
-
 	
 }

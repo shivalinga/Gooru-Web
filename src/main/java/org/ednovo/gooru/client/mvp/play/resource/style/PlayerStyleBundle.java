@@ -87,5 +87,26 @@ public interface PlayerStyleBundle extends ClientBundle {
 		String collectionPlayerContainer();
 		
 		String blocksmall();
+		
+		String loginStatus();
+		
+		@ClassName("player-resource-title")
+		String playerResourceTitle();
+		
+		String resourceCountStyle();
+		
+		String fixedContainer();
+		
+		String bodyContent();
+		
+		String greybackground();
+		
+		String collectionImageContainer();
+		
+		String collectionImage();
+		
+		String buttonsContainer();
+		
+		String collectionbuttons();
 	}
 }

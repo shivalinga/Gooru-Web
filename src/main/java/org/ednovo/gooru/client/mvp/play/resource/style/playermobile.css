@@ -82,7 +82,44 @@ header{
 }
 .blocksmall{}
 
+/* new responsive css*/
 
+.loginStatus{
+		display:inline;
+		float:none !important;
+		margin-right:0 !important;
+}
+.player-resource-title{
+	float:none;
+	max-width:100%;
+}
 
+.resourceCountStyle{
+	text-align: center;
+	margin-left: 0;
+}
 
+.fixedContainer{
+	
+}
 
+.bodyContent{
+	padding-top:0px;
+}
+
+.greybackground{
+	
+}
+.collectionImageContainer{
+	margin-bottom:25px;
+}
+.collectionImage{}
+.buttonsContainer{
+	
+}
+.buttonsContainer{
+	
+}
+.collectionbuttons{
+	
+}
