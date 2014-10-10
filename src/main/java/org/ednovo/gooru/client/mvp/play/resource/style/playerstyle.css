@@ -214,24 +214,7 @@
 }
 
 
-.leftPanel {
-    background: none repeat scroll 0 0 white;
-    border-right: 1px solid #ddd;
-    box-sizing: border-box;
-    float: left;
-    min-height: 650px;
-    padding:0;
-    width: 75%;
-}
 
-
-.rightPanel {
-    box-sizing: border-box;
-    float: right;
-    padding: 30px 20px 20px;
-    width: 25%;
-	position:relative;
-}
 
 .bodyContent .greybg{
 	background:#f0f0f0;
@@ -432,15 +415,13 @@ display: inline-block;
 	margin-right:10px;
 }
 
-.rightPanel aside:last-child{
+/* .rightPanel aside:last-child{
 	position:absolute;
 	bottom:15px;
 	border-top:1px solid #cccccc;
 	width:84%;
 	margin:0;
-	
-	
-}
+} */
 
 
 .flagCollection a{
@@ -957,7 +938,7 @@ font-size: 31px;
 .studyplayer-container {
 	visibility: visible;
 	width: 100%;
-	min-width: 1020px;
+/* 	min-width: 1020px; */
 	top: 0 !important;
 	left: 0 !important;
 	right: 0 !important;
@@ -966,8 +947,6 @@ font-size: 31px;
 	overflow: visible;
 	z-index: 99999;
 	background-color: #ddd;
-	min-height: 655px;
-	height: auto;
 	overflow-y: scroll !important;
 }
 .rightPanel{
@@ -1052,3 +1031,4 @@ font-size: 31px;
 .collectionbuttons hr{
 	margin:10px 0;
 }
+.logStatus{}

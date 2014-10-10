@@ -108,5 +108,7 @@ public interface PlayerStyleBundle extends ClientBundle {
 		String buttonsContainer();
 		
 		String collectionbuttons();
+		
+		String logStatus();
 	}
 }

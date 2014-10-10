@@ -80,6 +80,7 @@
     display:inline-block;
     vertical-align:middle;
     border:3px solid #87BADD;
+    box-sizing: content-box;
 }
  .userImage{
     width:40px;
@@ -573,4 +574,57 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', end
 
 .block{
     padding: 30px 0;
+}
+
+.avatarblock{
+	width:100%;
+/*	margin:25px 0;*/
+	padding:35px 0;
+	border-bottom:1px solid #dedede;
+}
+
+.avatarblock .avatar{
+	width:48px;
+	height:48px;
+	display:inline-block;
+	margin-right: 15px;
+	   vertical-align: top;
+}
+.avatarblock .commentsSection{
+display: inline-block;
+    vertical-align: top;
+    width:70%;
+}
+.avatarblock:last-child{
+	border-bottom:none;
+}
+
+.avatarblock .commentsHeader{
+	font-size:15px;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+
+.avatarblock .commentsStatus{
+    display: inline-block;
+    width: auto;
+	color:#adadad;
+	font-weight:bold;
+	text-align:right;
+	vertical-align:top;
+	float:right;
+	
+}
+
+.avatarblock .ActiveButton{
+	float:right;
+	margin-right:0;
+	margin-top:0;
+	margin-bottom:0;
+}
+
+.avatarblock .commentsSection textarea{
+	width:100%;
+	border:1px solid #e1e1e1;
 }

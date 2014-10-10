@@ -38,6 +38,7 @@ import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.effects.FadeInAndOut;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
+import org.ednovo.gooru.client.htmltags.AsideTag;
 import org.ednovo.gooru.client.htmltags.SectionTag;
 import org.ednovo.gooru.client.mvp.classpages.tabitem.assignments.collections.CollectionsView;
 import org.ednovo.gooru.client.mvp.home.LoginPopupUc;
@@ -99,8 +100,8 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 
 	@UiField
 	static FlowPanel studyMainContianer;
-	@UiField
-	SectionTag metadataContainer;
+//	@UiField
+//	SectionTag metadataContainer;
 	@UiField
 	FlowPanel standardsContainer,leftPanelContainer,rightPanelContainer;
 	@UiField
@@ -118,10 +119,12 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 	@UiField Label lblAuthor, lblCourse, lblStandards,teacherNameLabel,dueDate,/*insightsHeaderText,insightsContentText,*/lbllanguageObjectiveText,lbllanguageObjective,successPostMsg,
 				lbldepthOfKnowledgeText,lbllearningAndInnovationText,lblAudienceText,lblInstructionalmethodText,lblunitTitle,unitTitleValue;
 	@UiField Image profileThumbnailImage,userPhoto;
-	@UiField HTMLPanel teacherPanel,classInfoPanel,authorPanel,courseSection,standardSection,teacherContainer,viewSection,dueDateSection,directionSection,teacherProfileContainer,languageObjectiveContainer,addComment,loginMessaging,
-						depthOfKnowledgePanel,audiencePanel,instructionalmethodPanel,learningAndInnovationSkillPanel,
-						InstructionalmethodContainer,audienceContainer,learningAndInnovationSkillsContainer,depthOfKnowledgeContainer;
+	@UiField HTMLPanel classInfoPanel,teacherContainer,teacherProfileContainer,addComment,loginMessaging,
+						depthOfKnowledgePanel,audiencePanel,instructionalmethodPanel,learningAndInnovationSkillPanel;
 	@UiField Anchor previewFlagButton,seeMoreAnchor,loginUrl, signupUrl;
+	
+	@UiField AsideTag teacherPanel,dueDateSection,directionSection,authorPanel,courseSection,standardSection,viewSection,languageObjectiveContainer,depthOfKnowledgeContainer,learningAndInnovationSkillsContainer,audienceContainer,InstructionalmethodContainer;
+	
 	@UiField CollectionPlayerStyleBundle playerStyle;
 	@UiField HTML teacherTipLabel;
 	//@UiField Frame insightsFrame;
@@ -296,12 +299,12 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 	@Override
     public void setInSlot(Object slot, Widget content) {
 		if(slot==CollectionPlayerMetadataPresenter.METADATA_PRESENTER_SLOT){
-			metadataContainer.clear();
+			//metadataContainer.clear();
 			if(content!=null){
-				metadataContainer.add(content);
-				Label clearFixLabel=new Label();
-				clearFixLabel.setStyleName("clearfix");
-				metadataContainer.add(clearFixLabel);
+				if(leftPanelContainer.getWidgetCount()>1){
+					leftPanelContainer.remove(0);
+				}
+				leftPanelContainer.insert(content,0);
 			}
 		}
 	}
@@ -350,7 +353,7 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 		lbllanguageObjectiveText.getElement().setAttribute("title",i18n.GL1721());
 		
 		studyMainContianer.getElement().setId("fpnlStudyMainContianer");
-		metadataContainer.getElement().setId("fpnlMetadataContainer");
+		//metadataContainer.getElement().setId("fpnlMetadataContainer");
 		teacherContainer.getElement().setId("pnlTeacherContainer");
 		classInfoPanel.getElement().setId("pnlClassInfoPanel");
 		lblClassInfo.getElement().setId("lblClassInfo");

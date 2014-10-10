@@ -1,9 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-html{
-	width:760px;
-	overflow:auto !important;
-}
+
 
 .container{
 	width:960px;
@@ -105,7 +102,7 @@ html{
 	
 }
 .fixedContainer{
-	
+	position:relative;
 }
 .bodyContent{
 	padding-top:0px;
@@ -126,3 +123,4 @@ html{
 .collectionbuttons{
 	
 }
+.logStatus{}

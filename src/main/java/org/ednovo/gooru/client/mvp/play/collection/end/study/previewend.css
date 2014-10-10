@@ -102,3 +102,6 @@ background-color: #DDD;
     background: url("images/preview-arrow.png") 125px center no-repeat, #1076BB;
     cursor: pointer;
 }
+.block{
+	padding: 30px 0;
+}

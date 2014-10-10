@@ -47,9 +47,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -58,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceRequest;
 
 public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlayerTocUiHandlers> implements IsCollectionPlayerTocView{
 
-	@UiField FlowPanel navgationTocContainer;
+	@UiField FlowPanel navgationTocContainer,carouselContainer;
 	@UiField Label previousButton,nextButton,resourceCountLabel;
 	
 	
@@ -132,14 +135,14 @@ public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlay
 				navgationTocContainer.add(tocCollectionEndView);
 				//resources width with padding and margin constitutes 100px for each and collection home and end with padding and margin width
 				//have 100px each. navgationTocContainer width is derived from this.
-				if(resourcesSize>7){
+				//if(resourcesSize>7){
 					navgationTocContainer.getElement().removeAttribute("style");
-					new ResourceCurosal(nextButton, previousButton, navgationTocContainer, resourcesSize+2, 100);
-				}else{
-					nextButton.getElement().getStyle().setVisibility(Visibility.HIDDEN);
-					previousButton.getElement().getStyle().setVisibility(Visibility.HIDDEN);
-					navgationTocContainer.getElement().setAttribute("style", "width:"+((resourcesSize+2)*100)+"px !important;");
-				}
+					new ResourceCurosal(nextButton, previousButton, navgationTocContainer, resourcesSize+2, 100,carouselContainer);
+//				}else{
+//					nextButton.getElement().getStyle().setVisibility(Visibility.HIDDEN);
+//					previousButton.getElement().getStyle().setVisibility(Visibility.HIDDEN);
+//					navgationTocContainer.getElement().setAttribute("style", "width:"+((resourcesSize+2)*100)+"px !important;");
+//				}
 				String resourceString = resourceCount == 1? resourceCount + " " + i18n.GL1110().toLowerCase() : resourceCount + " " + i18n.GL0174().toLowerCase();
 				String questionString = questionCount == 1? questionCount + " " + i18n.GL0308().toLowerCase() : questionCount + " " + i18n.GL1042().toLowerCase();
 				String finalMessage = "";

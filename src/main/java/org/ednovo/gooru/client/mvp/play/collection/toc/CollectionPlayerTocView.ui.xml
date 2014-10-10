@@ -5,16 +5,16 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:header="urn:import:org.ednovo.gooru.client.mvp.play.collection.header" xmlns:uc="urn:import:org.ednovo.gooru.client.uc">
 	<ui:style field= "playerStyle" src="collectionplayertoc.css"/>
 	<ui:with type="org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle" field="playerBundleStyle" />
-	<g:HTMLPanel styleName="containerMain">
+	<g:HTMLPanel styleName="container">
 		<g:HTMLPanel styleName="row">
 			<g:Label ui:field="resourceCountLabel" styleName="{playerBundleStyle.getPlayerStyleResource.resourceCountStyle}"></g:Label>
-			<g:HTMLPanel styleName="{playerStyle.nav-toc-wrapperContainerMain}">
+			<g:FlowPanel styleName="{playerStyle.nav-toc-wrapperContainerMain}" >
 				<g:Label styleName="{playerStyle.leftArrow}" ui:field="previousButton"></g:Label>
-				<g:FlowPanel  styleName="{playerStyle.nav-toc-wrapper}  carousel">	
+				<g:FlowPanel  styleName="{playerStyle.nav-toc-wrapper}  carousel" ui:field="carouselContainer">	
 					<g:FlowPanel ui:field="navgationTocContainer" styleName="{playerStyle.nav-toc-container}"></g:FlowPanel>		
 				</g:FlowPanel>
 				<g:Label styleName="{playerStyle.rightArrow}" ui:field="nextButton"></g:Label>
-			</g:HTMLPanel>
+			</g:FlowPanel>
 	 	</g:HTMLPanel>
 	</g:HTMLPanel>
 </ui:UiBinder>

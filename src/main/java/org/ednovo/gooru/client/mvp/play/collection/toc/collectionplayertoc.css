@@ -11,17 +11,17 @@
 }
 .nav-toc-wrapperContainerMain{
 	position: relative;
-	margin: 0 46px;
+	margin: 0 0px;
 }
 
 .nav-toc-wrapper{
-	width:900px;
+	/* width:900px; */
 	/* height: 100px; */
 	overflow: hidden;
 	white-space: nowrap;
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: -10px;
+	/* margin-left: -10px; */
 }
 .nav-toc-wrapperContainer{
 	width:100%;
@@ -38,7 +38,7 @@
     background:url("/images/player/TopNav_LeftArrow.png") no-repeat;
     display:inline-block;
     margin-right:10px;
-    margin-left:-15px;
+    /* margin-left:-15px; */
     vertical-align:middle;
 }
 

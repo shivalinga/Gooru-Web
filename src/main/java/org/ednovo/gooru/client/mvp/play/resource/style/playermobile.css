@@ -4,7 +4,6 @@
 
 html
 {
-	width:760px;
 }
 .container{
 	width:760px;
@@ -64,10 +63,8 @@ header{
 	min-width:100%;
 }
 .studyplayer-container{
-	width:760px;
-	position:relative !important;
 	overflow-x:hidden !important;
-	overflow-y:hidden !important;
+	overflow-y:scroll !important;
 }
 .rightPanel{
 	
@@ -100,7 +97,7 @@ header{
 }
 
 .fixedContainer{
-	
+	position:relative;
 }
 
 .bodyContent{
@@ -123,3 +120,8 @@ header{
 .collectionbuttons{
 	
 }
+
+.logStatus{
+		margin:20px 0;
+		text-align:center;
+	}
