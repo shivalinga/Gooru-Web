@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc" xmlns:html5="urn:import:org.ednovo.gooru.client.htmltags">
+	<ui:style field= "playerStyle" src="collectionplayermetadata.css" type="org.ednovo.gooru.client.mvp.play.collection.body.CollectionPlayerStyleBundle" />
+	<ui:with type="org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle" field="playerResponseStyle"/>
+	    <g:FlowPanel styleName="col-md-3 col-sm-3 {playerResponseStyle.getPlayerStyleResource.rightPanel} hidden-xs hidden-sm" ui:field="rightPanelContainer">
+          <g:HTMLPanel styleName="{playerStyle.classInfo}" ui:field="teacherContainer"> 
+              <g:HTMLPanel ui:field="classInfoPanel" styleName="{playerStyle.classInfoRibbon}">
+               	 <g:Label styleName="{playerStyle.h2}" ui:field="lblClassInfo"></g:Label>
+              </g:HTMLPanel>
+              <html5:AsideTag styleName="{playerStyle.infoSection}">
+                  <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblclassTitle"></g:Label>
+                  <g:Label styleName="{playerStyle.courseTitle}" ui:field="classTitleValue"></g:Label>
+              </html5:AsideTag>
+              <html5:AsideTag styleName="{playerStyle.infoSection}">
+                  <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblunitTitle"></g:Label>
+                  <g:Label styleName="{playerStyle.courseTitle}" ui:field="unitTitleValue"></g:Label>
+              </html5:AsideTag>
+              <html5:AsideTag ui:field="teacherPanel" styleName="{playerStyle.infoSection}">
+                  <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblTeacher"></g:Label>
+                  <g:HTMLPanel styleName="{playerStyle.userImageContainer}" ui:field="teacherProfileContainer">
+               	<!-- <g:Image styleName="{playerStyle.userImage}" ui:field="teacherProfileThumbnailImage"></g:Image> -->
+               </g:HTMLPanel>
+               <g:Label styleName="{playerStyle.username}" ui:field="teacherNameLabel"></g:Label>
+              </html5:AsideTag>
+              <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="dueDateSection">
+                  <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lbldueDate"></g:Label>
+                  <g:Label ui:field="dueDate"></g:Label>
+              </html5:AsideTag>
+              <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="directionSection">
+                  <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblDirections"></g:Label>
+                  <g:Label ui:field="lblDirectionsDesc"></g:Label>
+              </html5:AsideTag>
+          </g:HTMLPanel>
+          <html5:AsideTag ui:field="authorPanel" styleName="{playerStyle.infoSection}">
+              <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblAuthor" />
+              <g:HTMLPanel styleName="{playerStyle.userImageContainer}">
+              	<g:Image styleName="{playerStyle.userImage}" ui:field="profileThumbnailImage"></g:Image>
+              	<g:HTML styleName="{playerStyle.teacherTipOuterContainer}" ui:field="teacherTipLabel"></g:HTML>   
+              </g:HTMLPanel>
+              <g:Label styleName="{playerStyle.username}" ui:field="userNameLabel"></g:Label>
+              <g:FlowPanel ui:field="teamContainer" styleName="{playerStyle.username}"></g:FlowPanel>
+          </html5:AsideTag>
+          <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="courseSection">
+              <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblCourse" />
+              <g:FlowPanel styleName="{playerStyle.courseTitle}" ui:field="courseTitle"></g:FlowPanel>
+          </html5:AsideTag>
+          <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="standardSection">
+              <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblStandards" />
+             <g:FlowPanel ui:field="standardsContainer" styleName="{playerStyle.standard_section}"></g:FlowPanel>
+          </html5:AsideTag>
+          <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="viewSection">
+              <g:Label ui:field="viewsCountLabel" styleName="{playerStyle.views}"/>
+          </html5:AsideTag>
+            <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="languageObjectiveContainer">
+                 <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lbllanguageObjectiveText" />
+                 <g:Label ui:field="lbllanguageObjective" />
+                 <g:Anchor ui:field = "seeMoreAnchor"/> 
+                 <!--  <g:InlineLabel ui:field="lbllanguageObjectiveAll" /> -->
+           </html5:AsideTag>
+            <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="depthOfKnowledgeContainer">
+                 <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lbldepthOfKnowledgeText" />
+                 <g:HTMLPanel ui:field="depthOfKnowledgePanel"></g:HTMLPanel>
+           </html5:AsideTag> 
+           
+            <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="learningAndInnovationSkillsContainer">
+                 <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lbllearningAndInnovationText" />
+                 <g:HTMLPanel ui:field="learningAndInnovationSkillPanel" />
+           </html5:AsideTag>
+            <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="audienceContainer">
+                 <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblAudienceText" />
+                 <g:HTMLPanel ui:field="audiencePanel"/>
+           </html5:AsideTag>
+            <html5:AsideTag styleName="{playerStyle.infoSection}" ui:field="InstructionalmethodContainer">
+                 <g:Label styleName="h6 {playerStyle.marginBotton10Px}" ui:field="lblInstructionalmethodText" />
+                 <g:HTMLPanel ui:field="instructionalmethodPanel" />
+           </html5:AsideTag>
+          <html5:AsideTag styleName="{playerStyle.infoSection}">
+             <g:Anchor ui:field="previewFlagButton"/>
+          </html5:AsideTag>
+      </g:FlowPanel>
+</ui:UiBinder>

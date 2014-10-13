@@ -37,6 +37,7 @@ import org.ednovo.gooru.client.mvp.play.collection.event.SetPlayerLoginStatusEve
 import org.ednovo.gooru.client.mvp.play.collection.event.UpdateCommentChildViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.preview.end.PreviewEndPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.preview.home.PreviewHomePresenter;
+import org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle;
 import org.ednovo.gooru.client.service.LibraryServiceAsync;
 import org.ednovo.gooru.client.service.PlayerAppServiceAsync;
 import org.ednovo.gooru.client.uc.PlayerBundle;
@@ -50,8 +51,11 @@ import org.ednovo.gooru.shared.model.player.CommentsDo;
 import org.ednovo.gooru.shared.model.player.CommentsListDo;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
@@ -318,6 +322,14 @@ public class CollectionPlayerMetadataPresenter extends PresenterWidget<IsCollect
 		getView().setClasspageInsightsUrl(classpageId, sessionId);
 	}
 	
+	@Override
+	public FlowPanel getMenuContainer() {
+		if(collectionPlayerPresenter!=null){
+			return collectionPlayerPresenter.getMenuContainer();
+		}else{
+			return null;
+		}
+	}
 
 }
 	

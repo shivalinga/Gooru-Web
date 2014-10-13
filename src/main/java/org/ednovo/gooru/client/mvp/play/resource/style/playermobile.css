@@ -112,7 +112,9 @@ header{
 }
 .collectionImage{}
 .buttonsContainer{
-	
+	width:100%;
+	display:inline-block;
+	margin-top:25px;
 }
 .buttonsContainer{
 	
@@ -124,4 +126,7 @@ header{
 .logStatus{
 		margin:20px 0;
 		text-align:center;
-	}
+}
+.closeButton{
+	right:50px;
+}

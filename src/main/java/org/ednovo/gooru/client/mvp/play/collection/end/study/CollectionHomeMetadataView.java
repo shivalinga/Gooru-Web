@@ -225,7 +225,6 @@ public class CollectionHomeMetadataView extends BaseViewWithHandlers<CollectionH
 		return resourceLink;
 	}
 	public void setCollectionImage(String thumbnailUrl){
-		System.out.println("helloo"+thumbnailUrl);
 		collectionThumbnail.setUrl(thumbnailUrl);
 	}
 	public void setCollectionGoal(String collectionGoal){

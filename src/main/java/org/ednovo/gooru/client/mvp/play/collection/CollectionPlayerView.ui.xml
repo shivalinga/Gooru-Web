@@ -98,38 +98,42 @@
 	cursor: pointer;
 }
 	</ui:style>
-	<g:FlowPanel>
-	<g:HTMLPanel styleName="{style.tabSection}" ui:field="androidSectiondiv">
-  <g:HTMLPanel styleName="{style.imgSection}"><g:Image url="images/tablet.png" width="129" height="73"/></g:HTMLPanel>
-  <g:HTMLPanel styleName="{style.info}" ui:field="msglinkPanel"><g:HTMLPanel ui:field="msgPanel"> </g:HTMLPanel>
-   </g:HTMLPanel>
-    <g:Image url="images/close.png" width="20" height="20" ui:field="closeAndriodBtn" styleName="{style.close}"/>
-</g:HTMLPanel>
-	<g:HTMLPanel styleName="{style.tabSection}" ui:field="ipadSectiondiv">
-  <g:HTMLPanel styleName="{style.viewResult}">
-    <g:HTMLPanel styleName="{style.closesmall}"><g:Image ui:field="closeIpadBtn" url="images/close-small.png" width="14" height="14"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/gooru-thumbnail.png" width="80" height="79"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}">
-      <g:HTMLPanel styleName="{style.rating}">
-        <g:HTMLPanel styleName="{style.gooru}" ui:field="gooruPanel"></g:HTMLPanel>
-        <g:HTMLPanel styleName="{style.ednovo}" ui:field="ednovoPanel"></g:HTMLPanel>
-        <g:HTMLPanel styleName="{style.stars}"></g:HTMLPanel>
-        <g:HTMLPanel styleName="{style.normal}" ui:field="appstorePanel"></g:HTMLPanel>
-      </g:HTMLPanel>
-    </g:HTMLPanel>
-    <g:Anchor styleName="{style.resource-cover} {style.view}" target="_blank" href="https://itunes.apple.com/in/app/gooru/id674087861?mt=8" ui:field="viewAnchor"></g:Anchor>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="" width="100" height="74"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img-type.png" width="100" height="74"/></g:HTMLPanel>
-    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
-  </g:HTMLPanel>
-</g:HTMLPanel>
-		<g:FlowPanel styleName="{playerHeaderStyle.getPlayerStyleResource.fixedContainer}">
-			<header:StudyPlayerHeaderView ui:field="headerView"></header:StudyPlayerHeaderView>
-			<g:FlowPanel ui:field="navigationContainer" styleName="{playerStyle.resource-container}"></g:FlowPanel>
+	<g:FlowPanel styleName="player">
+		<g:FlowPanel ui:field="menuContent"></g:FlowPanel>
+		<g:FlowPanel ui:field="playerContent">
+			<g:HTMLPanel styleName="{style.tabSection}" ui:field="androidSectiondiv">
+	  			<g:HTMLPanel styleName="{style.imgSection}"><g:Image url="images/tablet.png" width="129" height="73"/></g:HTMLPanel>
+	  			<g:HTMLPanel styleName="{style.info}" ui:field="msglinkPanel"><g:HTMLPanel ui:field="msgPanel"> </g:HTMLPanel>
+	   			</g:HTMLPanel>
+	   			<g:Image url="images/close.png" width="20" height="20" ui:field="closeAndriodBtn" styleName="{style.close}"/>
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="{style.tabSection}" ui:field="ipadSectiondiv">
+			  <g:HTMLPanel styleName="{style.viewResult}">
+			    <g:HTMLPanel styleName="{style.closesmall}"><g:Image ui:field="closeIpadBtn" url="images/close-small.png" width="14" height="14"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/gooru-thumbnail.png" width="80" height="79"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}">
+			      <g:HTMLPanel styleName="{style.rating}">
+			        <g:HTMLPanel styleName="{style.gooru}" ui:field="gooruPanel"></g:HTMLPanel>
+			        <g:HTMLPanel styleName="{style.ednovo}" ui:field="ednovoPanel"></g:HTMLPanel>
+			        <g:HTMLPanel styleName="{style.stars}"></g:HTMLPanel>
+			        <g:HTMLPanel styleName="{style.normal}" ui:field="appstorePanel"></g:HTMLPanel>
+			      </g:HTMLPanel>
+			    </g:HTMLPanel>
+			    <g:Anchor styleName="{style.resource-cover} {style.view}" target="_blank" href="https://itunes.apple.com/in/app/gooru/id674087861?mt=8" ui:field="viewAnchor"></g:Anchor>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="" width="100" height="74"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img-type.png" width="100" height="74"/></g:HTMLPanel>
+			    <g:HTMLPanel styleName="{style.resource-cover}"><g:Image url="images/result-img.png" width="100" height="75"/></g:HTMLPanel>
+			  </g:HTMLPanel>
+			</g:HTMLPanel>
+			<g:Anchor styleName="visible-sm visible-xs" ui:field="menuButton"><img class="" src="images/toggleIcon.png"/></g:Anchor>
+			<g:FlowPanel styleName="{playerHeaderStyle.getPlayerStyleResource.fixedContainer}">
+				<header:StudyPlayerHeaderView ui:field="headerView"></header:StudyPlayerHeaderView>
+				<g:FlowPanel ui:field="navigationContainer" styleName="{playerStyle.resource-container}"></g:FlowPanel>
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="playerBodyContainer" styleName="{playerHeaderStyle.getPlayerStyleResource.bodyContent}"></g:FlowPanel>
+			<footer:StudyPlayerFooterView ui:field="footerView"></footer:StudyPlayerFooterView>
 		</g:FlowPanel>
-		<g:FlowPanel ui:field="playerBodyContainer" styleName="{playerHeaderStyle.getPlayerStyleResource.bodyContent}"></g:FlowPanel>
-		<footer:StudyPlayerFooterView ui:field="footerView"></footer:StudyPlayerFooterView>
 	</g:FlowPanel>
 </ui:UiBinder>

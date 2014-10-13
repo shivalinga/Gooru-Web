@@ -39,13 +39,8 @@
     margin: 5px;
 }
 
-.leftPanel{
-	width:75%;
-}
 
-.rightPanel{
-	width:25%;
-}
+
 .ojectimg{
 	width:150px;
 }
@@ -84,10 +79,10 @@
 	min-height:100%;
 }
 .rightPanel{
-	width:25%;
+	
 }
 .leftPanel{
-	width:75%;
+	
 }
 .playerBodyContainer{
 	width:100%;
@@ -124,3 +119,6 @@
 	
 }
 .logStatus{}
+.closeButton{
+	right:50px;
+}

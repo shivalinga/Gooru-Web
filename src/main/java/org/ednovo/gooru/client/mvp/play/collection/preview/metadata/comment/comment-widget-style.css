@@ -11,7 +11,6 @@
     padding:30px 0px;
     transition: height 1s ease;
     position:relative;
-    width:620px;
 }
 
 .comment.deleting {
@@ -30,7 +29,7 @@
 }
 
 .messageInfo {
-    width: 560px;
+   
     float:left;
 }
 

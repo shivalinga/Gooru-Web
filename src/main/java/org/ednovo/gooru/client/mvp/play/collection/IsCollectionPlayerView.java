@@ -27,6 +27,7 @@ package org.ednovo.gooru.client.mvp.play.collection;
 import org.ednovo.gooru.client.gin.IsViewWithHandlers;
 import org.ednovo.gooru.shared.model.content.ContentReportDo;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.gwtplatform.mvp.client.PopupView;
@@ -54,4 +55,6 @@ public interface IsCollectionPlayerView extends PopupView, IsViewWithHandlers<Co
 	public void showClasspage(String classpageId,String page);
 	public void updateAuthorDetails();
 	public void setNarrationButton(Button narrationButton);
+	public void addClonedMenuContent(FlowPanel rightPanelElement);
+	public FlowPanel menuContent();
 }

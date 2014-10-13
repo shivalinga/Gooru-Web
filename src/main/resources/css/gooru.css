@@ -2341,6 +2341,67 @@ fieldset {
 	color:white;
 	background: url(../images/preview-arrow-small.png) 70px center no-repeat, #1076bb;
 }
+/*ipad player menu style */
+#page {
+	position: relative; /* Set the position property so z-index will apply */
+	z-index: 20; /* Make sure this is higher than #menu */
+
+	height: 100%;
+}
+
+#page h1 {
+	margin: 0;
+}
+
+#toggle-menu {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 5px 5px;
+/*	border: 1px solid #eee;*/
+	z-index:999999;
+	outline:none;
+}
+#toggle-menu:hover{
+	opacity:0.7;
+}
+
+#menu {
+	display: none;
+	position:absolute;
+	top: 0;
+	right: 0;
+/*	background:none repeat scroll 0 0 #f0f0f0;*/
+	width: 240px;
+	padding: 15px 25px;
+	margin: 0;
+	height:100%;
+	list-style: none;
+
+	z-index: 10; /* Make sure the z-index is lower than the #page */
+}
+#page, #menu {
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective: 1000;
+}
+.animating #menu, .menu-visible #menu {
+	display: block;
+}
+.animating #page {
+	transition: transform .25s ease-in-out;
+	-webkit-transition: -webkit-transform .25s ease-in-out;
+}
+.animating.left #page {
+	transform: translate3d( -240px, 0, 0 );
+	-webkit-transform: translate3d( -240px, 0, 0 );
+}
+.animating.right #page {
+	transform: translate3d( 240px, 0, 0 );
+	-webkit-transform: translate3d( 240px, 0, 0 );
+}
+.menu-visible #page {
+	right: 240px;
+}
 @media screen and (min-width: 0px) and (max-width: 1275px) {
 	.panelHeight{
 		width:100%;
@@ -2351,6 +2412,9 @@ fieldset {
 @media (min-width: 768px) and (max-width: 991px) {
 		.containerMain {
   	 		 width: auto !important;
+		}
+		.container {
+			width: auto !important;
 		}
 }
 

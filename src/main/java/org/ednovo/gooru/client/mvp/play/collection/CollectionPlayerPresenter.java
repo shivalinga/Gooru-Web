@@ -89,6 +89,8 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.json.client.JSONNumber;
@@ -96,6 +98,7 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -764,6 +767,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 	public void clearDashBoardIframe(){
 		metadataPresenter.clearDashBoardIframe();
 	}
+	
 	
 	public void setClassCollectionDataInsightsUrl(boolean isHomeView){
 		if(!AppClientFactory.getPlaceManager().getRequestParameter("cid","").equals("")){
@@ -2142,5 +2146,9 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 				}
 			}
 		}
+	}
+	
+	public FlowPanel getMenuContainer(){
+		return getView().menuContent();
 	}
 }

@@ -9,10 +9,10 @@ xmlns:panel="urn:import:org.ednovo.gooru.client.ui" xmlns:html5="urn:import:org.
 	<html5:HeaderTag styleName="{headerStyle.studyPlayer}">
 		<g:HTMLPanel styleName="container">
 			<g:HTMLPanel styleName="row">
-				<g:HTMLPanel styleName="col-md-6 col-xs-8 col-sm-6">
+				<g:HTMLPanel styleName="col-md-6 col-xs-8 col-sm-5">
 					<g:HTML styleName="{playerHeaderStyle.getPlayerStyleResource.playerResourceTitle}" ui:field="resourceTitle"></g:HTML>
 				</g:HTMLPanel>
-				<g:FlowPanel  styleName=" col-md-6 col-xs-12 col-sm-6  {playerHeaderStyle.getPlayerStyleResource.logStatus}">
+				<g:FlowPanel  styleName=" col-md-6 col-xs-12 col-sm-5  {playerHeaderStyle.getPlayerStyleResource.logStatus}">
 					<panel:HTMLEventPanel styleName="{playerHeaderStyle.getPlayerStyleResource.loginStatus} {headerStyle.loginStatus} {headerStyle.loggedIn}" ui:field="authorContainer">
 			            <g:HTMLPanel styleName="{headerStyle.loggingIcon}">
 			                <g:Label styleName="{headerStyle.progress}"></g:Label>
@@ -32,6 +32,6 @@ xmlns:panel="urn:import:org.ednovo.gooru.client.ui" xmlns:html5="urn:import:org.
 	            <g:HTMLPanel styleName="clear"></g:HTMLPanel>
 			</g:HTMLPanel>
 		</g:HTMLPanel>
-		<g:Label ui:field="closeButtonForCollection" styleName="{headerStyle.close-button}"></g:Label>
+		<g:Label ui:field="closeButtonForCollection" styleName="{playerHeaderStyle.getPlayerStyleResource.closeButton}"></g:Label>
 	</html5:HeaderTag>
 </ui:UiBinder>
