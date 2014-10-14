@@ -25,38 +25,22 @@
 package org.ednovo.gooru.client.mvp.play.collection.body;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.ednovo.gooru.client.DataInsightsUrlTokens;
-import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.effects.FadeInAndOut;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
-import org.ednovo.gooru.client.htmltags.AsideTag;
-import org.ednovo.gooru.client.htmltags.SectionTag;
-import org.ednovo.gooru.client.mvp.classpages.tabitem.assignments.collections.CollectionsView;
 import org.ednovo.gooru.client.mvp.home.LoginPopupUc;
-import org.ednovo.gooru.client.mvp.play.collection.preview.PreviewPlayerPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.preview.metadata.comment.CommentWidgetChildView;
 import org.ednovo.gooru.client.mvp.play.resource.style.PlayerStyleBundle;
 import org.ednovo.gooru.client.mvp.search.SearchResultWrapperCBundle;
-import org.ednovo.gooru.client.mvp.search.SearchUiUtil;
-import org.ednovo.gooru.client.uc.CollaboratorsUc;
-import org.ednovo.gooru.client.uc.DownToolTipWidgetUc;
 import org.ednovo.gooru.client.uc.PlayerBundle;
-import org.ednovo.gooru.client.uc.StandardSgItemVc;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
 import org.ednovo.gooru.shared.model.content.AssignmentParentDo;
-import org.ednovo.gooru.shared.model.content.ClasspageItemDo;
 import org.ednovo.gooru.shared.model.content.CollectionDo;
-import org.ednovo.gooru.shared.model.content.StandardFo;
-import org.ednovo.gooru.shared.model.content.checkboxSelectedDo;
 import org.ednovo.gooru.shared.model.library.ConceptDo;
 import org.ednovo.gooru.shared.model.player.CommentsDo;
 import org.ednovo.gooru.shared.model.player.CommentsListDo;
@@ -66,7 +50,6 @@ import org.ednovo.gooru.shared.util.UAgentInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -77,7 +60,6 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -89,7 +71,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Frame;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -207,7 +188,7 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 		toCommentText.setStyleName(PlayerBundle.INSTANCE.getPlayerStyle().toCommentTextPreviewPlayer());
 		loginUrl.setStyleName(PlayerBundle.INSTANCE.getPlayerStyle().toCommentTextPreviewPlayer());
 		signupUrl.setStyleName(PlayerBundle.INSTANCE.getPlayerStyle().toCommentTextPreviewPlayer());
-		
+		userPhoto.getElement().setId("imgUserPhoto");
 		commentField.addClickHandler(new OnCommentsFieldClicked());
 		commentField.addKeyUpHandler(new ValidateConfirmText());
 		commentField.addBlurHandler(new OnCommentsFieldBlur());
@@ -231,9 +212,12 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 		this.collectionDo = collectionDo;
 		rightPanelMetadata.setCollectionMetadata(collectionDo);
 		menuMetadataWidget=new MetadataWidget();
+		menuMetadataWidget.setStyleName("col-md-12 col-sm-12");
+		menuMetadataWidget.addStyleName(PlayerStyleBundle.INSTANCE.getPlayerStyleResource().rightPanel());
 		menuMetadataWidget.setCollectionMetadata(collectionDo);
 		getUiHandlers().getMenuContainer().clear();
 		getUiHandlers().getMenuContainer().add(menuMetadataWidget);
+		getUiHandlers().getMenuContainer().getParent().setStyleName("player");
 		setLeftPanelHeight();
 	}
 	private void setLeftPanelHeight(){
@@ -1080,31 +1064,16 @@ public class CollectionPlayerMetadataView extends BaseViewWithHandlers<Collectio
 	public class ResizeLogicEvent implements ResizeHandler{
 		@Override
 		public void onResize(ResizeEvent event) {
-			//placeCollectionMetadataContainer();
+			placeCollectionMetadataContainer();
 		}
 	}
-//	public void placeCollectionMetadataContainer(){
-//		int clientWidth=Window.getClientWidth();
-//		if(clientWidth>991){
-//			FlowPanel menuContainer=getUiHandlers().getMenuContainer();
-//			if(menuContainer!=null){
-//				if(menuContainer.getWidgetCount()>1){
-//					setRightPanelContainer((FlowPanel)menuContainer.getWidget(0));
-//					getRightPanelContainer().setStyleName("col-md-3 col-sm-3 ");
-//					getRightPanelContainer().addStyleName(PlayerStyleBundle.INSTANCE.getPlayerStyleResource().rightPanel());
-//				}
-//			}
-//		}else{
-//			FlowPanel menuContainer=getUiHandlers().getMenuContainer();
-//			if(menuContainer!=null){
-//				if(menuContainer.getWidgetCount()==0){
-//					getRightPanelContainer().setStyleName("col-md-12 col-sm-12");
-//					getRightPanelContainer().addStyleName(PlayerStyleBundle.INSTANCE.getPlayerStyleResource().rightPanel());
-//					menuContainer.add(getRightPanelContainer());
-//				}
-//			}
-//		}
-//	}
+	public void placeCollectionMetadataContainer(){
+		int clientWidth=Window.getClientWidth();
+		if(clientWidth>991){
+			FlowPanel menuContainer=getUiHandlers().getMenuContainer();
+			menuContainer.getParent().setStyleName("player");
+		}
+	}
 
 	@Override
 	public void setViewCount(String viewCount) {

@@ -47,13 +47,13 @@
 }
 
 .commentField {
-	max-width: 490px;
+	/* max-width: 490px; */
 	max-height: 80px;
     float:left;
     font-size: 12px;
     margin-right:10px;
     min-height: 80px;
-	min-width: 490px;
+	/* min-width: 490px; */
 	border: 1px solid #dddddd;
 	padding: 5px;
 }
@@ -184,7 +184,7 @@ background: -ms-linear-gradient(top,  #efefef 0%,#f9f9f9 20%,#ffffff 40%,#ffffff
 background: linear-gradient(to bottom,  #efefef 0%,#f9f9f9 20%,#ffffff 40%,#ffffff 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
-.commentsSection .userPhoto {
+ .userPhoto {
     margin-right:10px;
     width:40px;
     height:40px;
@@ -627,4 +627,8 @@ display: inline-block;
 .avatarblock .commentsSection textarea{
 	width:100%;
 	border:1px solid #e1e1e1;
+}
+
+.commentsTable{
+	width:100%;
 }

@@ -2112,7 +2112,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 	}
 	public void adjustCollectionMetadaBody(boolean isHome){
 		if(isHome){
-			metadataPresenter.getWidget().getElement().getStyle().setPaddingTop(122+50, Unit.PX);
+			//metadataPresenter.getWidget().getElement().getStyle().setPaddingTop(122+50, Unit.PX);
 		}else{
 			addFixedPositionNavArrows();
 		}

@@ -14,7 +14,7 @@
 							<html5:SectionTag styleName="{playerStyle.block} {playerStyle.commentsSection}">
 								<g:HTMLPanel styleName="col-md-12">
 								   <g:Label ui:field="commentCount" styleName="{playerStyle.commentsH2}"></g:Label>
-								   <g:VerticalPanel ui:field="commentsContainer"/>
+								   <g:VerticalPanel ui:field="commentsContainer" styleName="{playerStyle.commentsTable}"/>
 								   <g:Label ui:field="seeMoreButton" styleName="{playerStyle.seeMore}" />
 								   <g:Label ui:field="noCommentsLbl"/>
 								   <g:HTMLPanel styleName="{playerStyle.avatarblock}" ui:field="addComment">
@@ -26,7 +26,7 @@
 									      	<g:Label ui:field="toCommentText"></g:Label>
 								      </g:HTMLPanel>
 								      <g:HTMLPanel styleName="col-md-1 col-xs-3 col-sm-2">
-								     		<g:Image styleName="" ui:field="userPhoto"></g:Image>
+								     		<g:Image styleName="{playerStyle.userPhoto}" ui:field="userPhoto"></g:Image>
 								      </g:HTMLPanel>
 								      <g:HTMLPanel styleName="col-md-10 col-xs-6 col-sm-8">
 								      		<g:TextArea styleName="{playerStyle.commentField} form-control" ui:field="commentField"></g:TextArea>

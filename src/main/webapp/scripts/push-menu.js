@@ -13,7 +13,7 @@ function showAuthorContianer() {
       transitionEnd = 'transitionend webkitTransitionEnd otransitionend MSTransitionEnd';
  
   /* When the toggle menu link is clicked, animation starts */
-  $body.addClass( 'animating' );
+  $body.addClass('animating');
  
   console.log("animatin funtion..");
   /***
@@ -27,8 +27,8 @@ function showAuthorContianer() {
    $body.addClass( 'left' );
   }
   
-  $body.removeClass( 'animating left right' );
-  $body.toggleClass( 'menu-visible' );
+//  $body.removeClass( 'animating left right' );
+//  $body.toggleClass( 'menu-visible' );
   /***
    * When the animation (technically a CSS transition)
    * has finished, remove all animating classes and

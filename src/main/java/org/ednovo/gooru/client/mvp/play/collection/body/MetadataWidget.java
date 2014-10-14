@@ -75,7 +75,7 @@ public class MetadataWidget extends Composite {
 	@UiField HTMLPanel teacherContainer,classInfoPanel,teacherProfileContainer,depthOfKnowledgePanel,learningAndInnovationSkillPanel,
 	                    audiencePanel,instructionalmethodPanel;
 	@UiField Anchor  seeMoreAnchor,previewFlagButton;
-	@UiField Image profileThumbnailImage,userPhoto;
+	@UiField Image profileThumbnailImage;
 	@UiField HTML teacherTipLabel;
 	@UiField AsideTag teacherPanel,dueDateSection,directionSection,authorPanel,courseSection,standardSection,viewSection,languageObjectiveContainer,
 	                  depthOfKnowledgeContainer,learningAndInnovationSkillsContainer,audienceContainer,InstructionalmethodContainer;
@@ -492,7 +492,6 @@ public class MetadataWidget extends Composite {
 		languageObjectiveContainer.getElement().setId("pnlLanguageObjectiveContainer");
 		lbllanguageObjective.getElement().setId("lbllanguageObjective");
 		seeMoreAnchor.getElement().setId("lnkSeeMoreAnchor");
-		userPhoto.getElement().setId("imgUserPhoto");
 		lbldepthOfKnowledgeText.setText(i18n.GL1693());
 		lbldepthOfKnowledgeText.getElement().setId("lbldepthOfKnowledgeText");
 		lbldepthOfKnowledgeText.getElement().setAttribute("alt",i18n.GL1693());
