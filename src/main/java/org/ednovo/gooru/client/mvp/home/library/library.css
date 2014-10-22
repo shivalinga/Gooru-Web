@@ -38,6 +38,7 @@
 	border-left:1px solid #ddd;
 	cursor:default;
 	width: 9.1%;
+	box-sizing:content-box;
 }
 
 #courseTabs .tabsLi.math {
@@ -192,6 +193,7 @@
 	margin-top:-1px;
 	cursor:pointer;
 	transition: background-color 0.5s ease;
+	box-sizing:content-box;
 }
 
 .unitLiActive {
@@ -206,6 +208,7 @@
 	-moz-box-shadow: 0 0 10px rgba(0,0,0,.1);
 	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.1);
 	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	box-sizing:content-box;
 }
 
 .unitLi:hover {
@@ -346,6 +349,7 @@
 	float:left;
 	padding:20px;
 	width: 53%;
+	box-sizing:content-box;
 }
 
 #contentScroll .topicBlock .collectionInfo .collectionImage {
@@ -603,6 +607,7 @@
 	margin-left: 0px;
 	height: 113px;
 	vertical-align: top;
+	box-sizing:content-box;
 }
 
 #featuredCourseTabs .courseTitle {

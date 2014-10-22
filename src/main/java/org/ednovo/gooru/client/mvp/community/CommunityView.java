@@ -7,6 +7,7 @@ import org.ednovo.gooru.client.mvp.home.library.LibraryView;
 import org.ednovo.gooru.client.mvp.home.register.RegisterVc;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -39,6 +40,7 @@ public class CommunityView extends BaseViewWithHandlers<CommunityUiHandlers> imp
 		Window.scrollTo(0, 0);
 		landingpagePanel.add(libraryView);
 		landingpagePanel.getElement().setId("pnlPartnerPanel");
+		landingpagePanel.getElement().getStyle().setMarginTop(39, Unit.PX);
 	}
 
 	@Override

@@ -153,7 +153,6 @@ public class DiscoverToolTipUc extends Composite implements HasMouseOutHandlers{
 		ulPanel.addStyleName(res.css().partnersDropdown());
 		for (final Object key : publicPartnerList.keySet()) {
 			final Anchor partnerTitle = new Anchor(key.toString());
-			partnerTitle.setHref("");
 			LiPanel liPanel=new LiPanel();
 		/*	partnerTitle.addStyleName("courseOption");*/
 			partnerTitle.addClickHandler(new ClickHandler() {
@@ -291,7 +290,7 @@ public class DiscoverToolTipUc extends Composite implements HasMouseOutHandlers{
 			final LibraryUserDo libraryUserDo = partnersList.get(i);
 			 LiPanel  liPanel=new LiPanel();
 			final Anchor partnerTitle =new  Anchor(libraryUserDo.getDisplayName()); 
-			partnerTitle.setHref("");
+			
 
 			/*new Label(libraryUserDo.getDisplayName());*/
 		//	partnerTitle.addStyleName("courseOption");

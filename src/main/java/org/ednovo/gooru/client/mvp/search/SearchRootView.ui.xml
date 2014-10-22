@@ -31,13 +31,13 @@
 			margin: 0 2px;
 			padding-bottom: 2px;
 		}
-		<!-- .notifyLink:HOVER {
+		/*.notifyLink:HOVER {
 		    border-bottom: 2px solid #A6CAA2;
 		    cursor: pointer;
 		    padding-bottom: 2px;
 		    color: #4E9746;
 		    text-decoration:none;
-		} -->
+		} */
 		.notifyLinks {
 		    color: #4E9746 !important;
 		    cursor: default;
@@ -114,13 +114,13 @@
 		.searchResultPanel {
 		    clear: both;
 		    height: 34px;
-		   <!--  margin: 20px auto 0; -->
+		    /*margin: 20px auto 0; */
 		    width: 796px;
 		}
 		
 		.searchResult {
 			color: #515151;
-			<!-- float: left; -->
+		   /* float: left;*/
 			margin: 32px 0 0 204px;
 			display: inline-block;
 			padding-bottom: 10px;

@@ -100,6 +100,9 @@ public class GooruEntry implements EntryPoint {
 		PlayerStyleBundle.INSTANCE.getPlayerStyleResource().ensureInjected();
 		StyleInjector.injectAtEnd("@media (min-width: 768px) and (max-width: 991px) {"+HomeCBundle.INSTANCE.getResponsiveStyle().getText()+"}");
 		StyleInjector.injectAtEnd("@media (max-width: 767px){"+HomeCBundle.INSTANCE.getResponsive1Style().getText()+"}");
+		StyleInjector.inject("@media (min-width: 320px) and (max-width: 479px){"+ HomeCBundle.INSTANCE.getResponsive2Style().getText()+"}");
+		StyleInjector.inject("@media (min-width: 480px) and (max-width: 767px) {"+ HomeCBundle.INSTANCE.getResponsive3Style().getText()+"}");
+
 		HomeCBundle.INSTANCE.css().ensureInjected();
 	}
 	

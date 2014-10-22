@@ -93,7 +93,7 @@ public class WrapView extends BaseView implements IsWrapView {
 		headerUc.getElement().setId("homeHeaderUc");
 		wrapperPanel.getElement().setId("spnlWrapperPanel");
 		
-		  Boolean isIpad = !!Navigator.getUserAgent().matches("(.*)iPad(.*)");
+		/*  Boolean isIpad = !!Navigator.getUserAgent().matches("(.*)iPad(.*)");
 		  Boolean isAndriod = !!Navigator.getUserAgent().matches("(.*)Android(.*)");
 		  Boolean isWinDskp = !!Navigator.getUserAgent().matches("(.*)NT(.*)");
 		  
@@ -124,8 +124,10 @@ public class WrapView extends BaseView implements IsWrapView {
 		//	  wrapperPanel.getElement().setAttribute("style", "margin-top:36px;");
 			  headerUc.getElement().getFirstChildElement().setAttribute("style", "position:fixed;");
 			 // wrapperPanel.getElement().getFirstChildElement().getFirstChildElement().setAttribute("style", "position:fixed;");
-		  }
-		 
+		  }*/
+			ipadSectiondiv.setVisible(false);
+			androidSectiondiv.setVisible(false);
+			headerUc.getElement().getFirstChildElement().setAttribute("style", "position:fixed;");
 		  setUiText();
 	}
 

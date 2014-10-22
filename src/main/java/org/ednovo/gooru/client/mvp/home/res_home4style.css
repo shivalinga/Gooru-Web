@@ -1,264 +1,189 @@
-header{
-	position:relative !important;
-}
-.searchbox .navbar-form{
-	box-shadow:none;
-	border-bottom:none;
-	margin:0 0;
 
+.searchbox{
+		display:block !important;
 }
+	
+.searchbox .form-control{
+		height:33px;
+ }
+	
+
 .bannerInner img {
-	min-height: 130px;
 }
 
 .bodyWrapper {
-	margin-top: 0;
 }
 
 .bannerInner .caption {
-	left: 5%;
-	position: absolute;
-	right: 6%;
-	text-align: center;
-	top: 3%;
-}
-.searchbox .navbar-form .form-control {
-	width: 88% !important;
-	margin: 0 auto;
-}
-.searchbox{
-	padding-right:10px !important;
 }
 
 .banner {
-	margin-top: 0px;
 }
-.mainmenu .navbar-header .navbar-toggle {
-	position: absolute;
-	right: 0;
-}
+
 .landingPageHelpDottedBoxContainer {
 	
 }
 
 .getStart .getContentContainer h4 {
-	font-size: 20px;
+
 }
 
 .getContentContainer p {
-	font-size: 16px;
 }
 
 .getStart .getInnerRight h3 {
-	font-size: 30px;
+
 }
 
 .getInnerRight p {
-	font-size: 16px;
+
 }
 
 .getStart .getInnerRight h4 {
-	font-size: 20px;
 }
 
 .communityblock {
-	text-align: center;
+
 }
 
 .communityblock a {
-	display: block;
-	margin: 10px 0 0 0;
+
 }
 
 .communityblock a {
-	font-size: 16px;
+
 }
 
 .bannerInner .caption {
-	left: 5%;
-	position: absolute;
-	right: 6%;
-	text-align: center;
-	top: 3%;
 }
 
 .bannerInner .caption h2 {
-	color: #ffffff;
-	font-family: "Arvo", serif !important;
-	font-size: 18px;
-	font-weight: 600;
-	margin: 2px 5px;
-	text-shadow: 0 2px 4px #666;
 }
 
 .bannerInner .caption p {
-	font-size: 12px;
+
 }
 
 .banner #bs-example-navbar-collapse-2 {
-	margin: 0 0;
+
 }
 
 .banner #bs-example-navbar-collapse-3 {
-	margin: 0 0;
+
 }
 
 .banner .navbar-nav {
-	margin: 0 0;
+
 }
 
 .banner .navbar-header {
-	margin: 0 0 !important;
+
 }
 
 .searchContainer .col-md-3 h2 {
-	font-size: 30px;
+
 }
 
 .searchContainer .sInner p {
-	font-size: 18px;
+
 }
 
 .searchContainer .sInner .form-control {
-	height: 42px;
-	font-size: 18px;
+
 }
 .mission p, .yourSupport p{
-		font-size:16px;
+
 	}
 	.yourSupport{
-	text-align:center;
+
 }
 .badgepadd {
-	display: block;
-	height: auto;
-	margin: 25px 0;
+
 }
 .social {
-    padding-left: 0;
-    padding-right: 0;
-    text-align: left;
+
 }
 .social{
-	text-align:center !important;
-	margin-top:25px;
+
 }
 .margin {
-	margin: 15px 0;
-}
-.mainmenu .navbar-toggle{
-		margin-right:0;
-		margin-top:13px;
-	}
-.searchbox .form-control{
-	height:37px;
-}
-.searchbox .form-group {
-	width: auto;
-}
-.searchbox{
-	display:none;
+
 }
 .mainmenu{
-	width:100% !important;
+
 }
 .mainmenu .navbar-collapse{
-	width:100%;
-	float:left;
-	margin-top:10px;
+
 }
 .mainmenu .container > .navbar-header, .mainmenu .container-fluid > .navbar-header, .mainmenu .container > .navbar-collapse, .mainmenu .container-fluid > .navbar-collapse{
-	margin-left:0 !important;
-	margin-right:0 !important;
+
 }
 .mainmenu .navbar-default .navbar-collapse, .mainmenu .navbar-default .navbar-form{
-	border-color:#333333;
+
 }
 
 .mainmenu  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .mainmenu .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus{
-	color:#ffffff;
-	opacity:0.7;
+
 }
 .mainmenu .nav{
-	float:left;
-	width:100%;
-	margin:7.5px 0;
+
 }
 
 .mainmenu .navbar-collapse{
-	padding-left:0 !important;
-	padding-right:0 !important;
+
 }
 .searchContainer .col-md-3 h2{
-	font-size:30px;
+
 }
 
 .searchContainer .sInner p{
-	font-size:18px;
+
 }
 
 .searchContainer .sInner .form-control{
-	height:42px;
-	font-size:18px;
+
 }
 
 .login a:focus {
-background-color: #393939;
-color: #ffffff;
-opacity: 1;
+
 }
 .dropdowDisplay{
-position: static;
-float: none;
-width: auto;
-margin-top: 0;
-background-color: transparent;
-border: 0;
-box-shadow: none;
- color: white;
+
 }
 .dropdowDisplay >li >a{
-	color: #ffffff;
-font-size: 13px;
+
 }
 .mainmenu .navbar-collapse {
-	padding-left: 0 !important;
-padding-right: 0 !important;
+
 }
 .mainmenu .navbar-collapse {
-	width: 100%;
-	float: left;
-margin-top: 10px;
+
 }
 
 .districDropDown{
-	margin-left:3%;
+
 }
 .mainmenu .navbar-header{
-	float:none;
+
 }
 .mainmenu .nav>li {
-	border-right:0;
+
 }
 .loggedInfo{
-	padding:18px 0px;
-	float:none;
 }
 .logoutDownArrow{
-	float:none;
-	display:block;
+
 }
 .logoutDownArrow:hover{
-	background-color: #393939;
+
 }
 .logoutPanel{
-	background:none;
+
 }
 .userMenuBottomLine{
-	height:0px;
 }
 .logoutPanel .dropdowDisplay {
-	margin-left:3%;
+
 }
 .menuActive{}
 .menu{}
@@ -275,16 +200,15 @@ margin-top: 10px;
 .collectionToolTipLabel{}
 .folderToolTipLabel{}
 .partnersDropdown{
-	margin-left:3%;
+	
 }
 .tooltipContainer{
-	position:static;
-	margin-left:3%;
+
 }
 .rightArrow{}
 
 .classpageListContainer {
-	margin-left:3%;
+	
 }
 
 .loginBtn {

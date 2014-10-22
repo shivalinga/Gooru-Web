@@ -490,9 +490,8 @@
 					</g:HTMLPanel>
 					<g:HTMLPanel styleName="mobileStyle">
 						<g:FlowPanel ui:field="editSearchInputFloPanel"
-							styleName="col-md-3 col-sm-5 {res1.css.searchbox}">
-							<g:HTMLPanel width="100%" height="100%"
-								ui:field="headerSearchBarVerPanel" styleName="navbar-form navbar-left">
+							styleName="col-md-3 col-sm-5  col-xs-3 searchbox {res1.css.searchbox}">
+							<g:HTMLPanel ui:field="headerSearchBarVerPanel" styleName="navbar-form navbar-left">
 								<g:FlowPanel ui:field="headerSearchBarFloPanel"
 									styleName="form-group">
 									<uc:AppSuggestBox ui:field="editSearchTxtBox"

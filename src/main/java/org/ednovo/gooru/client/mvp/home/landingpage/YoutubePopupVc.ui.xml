@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:style field="landingPageStyle" src="org/ednovo/gooru/client/mvp/home/landing-page.css" />
+<ui:style field="landingPageStyle" src="org/ednovo/gooru/client/mvp/home/landing-page.css" />
 <g:HTMLPanel>
 <g:HTMLPanel styleName="{landingPageStyle.borderTopStyle}"/>
 	<g:HTMLPanel styleName="{landingPageStyle.topWrapper}">

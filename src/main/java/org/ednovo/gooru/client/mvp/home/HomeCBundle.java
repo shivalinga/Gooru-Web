@@ -48,6 +48,16 @@ public interface HomeCBundle extends ClientBundle{
 	@NotStrict
 	@Source("res_home2style.css")
 	HomeCss getResponsive1Style();
+	
+	@NotStrict
+	@Source("res_home3style.css")
+	HomeCss getResponsive2Style();
+
+	@NotStrict
+	@Source("res_home4style.css")
+	HomeCss getResponsive3Style();
+
+	
 	public interface HomeCss extends CssResource{
 		
 		/*HomeView*/

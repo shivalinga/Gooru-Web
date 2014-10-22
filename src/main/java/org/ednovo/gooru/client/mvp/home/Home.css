@@ -2531,9 +2531,9 @@ footer .col-md-4 {
  */}
 
 .searchbox {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-	width: 28% !important;
+	padding-left: 0 ;
+	padding-right: 0 ;
+	width: 28% ;
 }
 
 .searchbox .form-group {
