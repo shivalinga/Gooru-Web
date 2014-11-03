@@ -1066,9 +1066,9 @@ public class CollectionInfoTabView extends BaseViewWithHandlers<CollectionInfoTa
 					addCourseBtn.getElement().setAttribute("alt",ADD_COURSE);
 					addCourseBtn.getElement().setAttribute("title",ADD_COURSE);
 					removeCourseBtn.setVisible(false);
-					if(courseCode!=null&&!courseCode.equals("")){
-						getUiHandlers().deleteCourseOrStandard(collectionDo.getGooruOid(), courseCode);
-					}
+//					if(courseCode!=null&&!courseCode.equals("")){
+//						getUiHandlers().deleteCourseOrStandard(collectionDo.getGooruOid(), courseCode);
+//					}
 					courseCode="";
 				}else{
 					for (CodeDo code : collectionDoVal.getTaxonomySet()) {
@@ -1167,7 +1167,9 @@ public class CollectionInfoTabView extends BaseViewWithHandlers<CollectionInfoTa
 	 *            specifies event type
 	 */
 	@UiHandler("addCourseBtn")
-	public void onAddCourseClick(ClickEvent clickEvent) {final StandardsPreferenceOrganizeToolTip standardsPreferenceOrganizeToolTip=new StandardsPreferenceOrganizeToolTip();
+	public void onAddCourseClick(ClickEvent clickEvent) {
+		
+	//	final StandardsPreferenceOrganizeToolTip standardsPreferenceOrganizeToolTip=new StandardsPreferenceOrganizeToolTip();
 	
 		if(courseListUc!=null){
 			courseListUc.center();
@@ -1534,7 +1536,7 @@ public class CollectionInfoTabView extends BaseViewWithHandlers<CollectionInfoTa
 		return new DownToolTipWidgetUc(closeLabel, description);
 	}
 	
-public void deleteCourse(String collectionId, String courseCode, String action) {
+	public void deleteCourse(String collectionId, String courseCode, String action) {
 	  	
 		AppClientFactory.getInjector().getResourceService().deleteTaxonomyResource(collectionId, Integer.parseInt(courseCode), new SimpleAsyncCallback<Void>() {
 			@Override
