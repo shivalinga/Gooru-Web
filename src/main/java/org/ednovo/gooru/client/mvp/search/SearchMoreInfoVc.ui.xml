@@ -14,12 +14,13 @@
                </g:FlowPanel> -->
              <!--   <g:Label styleName="{res.css.moreInfoResourcesCountLblTxt}" text="Liciense" /> -->
             
-             <g:Label ui:field="rightsLbl" styleName="{res.css.moreInfoRightsLbl}" visible="false"></g:Label>
+             <g:Label ui:field="rightsLbl"  visible="false"></g:Label>
              <s:MoreInfoFieldVc imageStyle="{res.css.rightsIcon}"  ui:field="resourceSearchRightsFieldVc"/>
             
 				
 		<g:ScrollPanel styleName="{res.css.moreInfoRightScrollPanel}" ui:field="resourceScrPanel">
-			<g:FlowPanel styleName="{res.css.moreInfoRightPanel}" ui:field="resourceMoreInfoRightPanel" >
+			<!-- <g:FlowPanel styleName="{res.css.moreInfoRightPanel}" ui:field="resourceMoreInfoRightPanel" > -->
+				<g:FlowPanel  ui:field="resourceMoreInfoRightPanel" >			
 				<g:Label styleName="{res.css.moreInfoResourcesCountLblTxt}" ui:field="countLblTxt" />
 				<g:Label styleName="{res.css.moreInfoResourcesCountLblTxt}" ui:field="countLbl"/>
 				<g:Label styleName="{res.css.notFriendly}" ui:field="lblNotFriendly"/>

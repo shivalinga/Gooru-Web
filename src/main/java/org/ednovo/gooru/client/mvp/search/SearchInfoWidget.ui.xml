@@ -5,19 +5,31 @@
 		/* Add CSS here. See the GWT docs on UI Binder for more details */
 	</ui:style>
 	<ui:style field="playerStyle" src="searchInfo.css" />
-	<g:HTMLPanel>
 		<!-- Add GWT widgets here. Enter < and hit Ctrl-Space to auto-complete 
 			widget names. The ui:field attribute binds an element to a field in the owner 
 			class. See the GWT docs on UI Binder for more details. -->
-		<g:HTMLPanel styleName="{playerStyle.resource-info-metadata-wrapper}">
-            <g:HTMLPanel styleName="{playerStyle.loadingImageMainDivShare}"
+		<g:HTMLPanel ui:field="totalContainer">
+            <g:HTMLPanel styleName="{playerStyle.loadingImageMainDivShare} hidden-xs"
 				  ui:field="loadingImagePanel">
 				  <g:Label styleName="{playerStyle.loadingImageForShare}" ui:field="lblloadingImage"/>
 		    </g:HTMLPanel>
-			<g:HTMLPanel styleName="{playerStyle.resource-info-metadata-innerwrapper}">
-			<g:Label styleName="{playerStyle.resource-image}" ui:field="resourceTypeImage" />
-			<g:HTML ui:field="lblcollectionName" styleName="{playerStyle.labelTitle}"></g:HTML>
-			<g:Button styleName="green {playerStyle.btnGreen}" ui:field="addTagsBtn">Add Tags</g:Button>
+		    
+			<g:HTMLPanel styleName="col-md-12 col-xs-12">
+			<g:HTMLPanel styleName="col-md-8">
+			    <g:HTMLPanel styleName="col-md-2 col-xs-2 hidden-sm hidden-xs ">
+			    	<g:Label styleName="{playerStyle.resource-image}" ui:field="resourceTypeImage" />    
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+			    </g:HTMLPanel>
+				<g:HTMLPanel styleName="col-md-10 col-xs-10 {playerStyle.paddingClear} ">
+					<g:HTML ui:field="lblcollectionName" styleName="{playerStyle.labelTitle}"></g:HTML>    
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+				</g:HTMLPanel>
+				<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="col-md-4">
+				<g:Button styleName="green" ui:field="addTagsBtn">Add Tags</g:Button>	    
+				<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+			</g:HTMLPanel>
 			<g:Label ui:field="noInfoAvailable"></g:Label>
 				<!-- <g:Label styleName="{playerStyle.resource-image}" ui:field="resourceTypeImage" />
 				<g:HTML ui:field="lblcollectionName"></g:HTML> -->
@@ -50,78 +62,92 @@
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="resourceDescription" />
 				</g:HTMLPanel> -->
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}" ui:field="generalPanel">
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 " ui:field="generalPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-titleboarder}"
 						ui:field="generalLbl"></g:Label>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
-
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="gradesPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="gradeTitle"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="gradesText" />
+						<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+				
 				</g:HTMLPanel>
 
-				<g:HTMLPanel ui:field="coursePanel">
+				<g:HTMLPanel ui:field="coursePanel" styleName="col-md-12 col-xs-12 ">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="courseText"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="courseInfo"></g:HTMLPanel>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-stand-content}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="standardsContentContainer">
 					<g:Label styleName="{playerStyle.resource-info-stand-text}"
 						ui:field="standardsText"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-stand-title}"
 						ui:field="standaInfo" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 				<g:FlowPanel ui:field="standardsInfoConatiner"
-					styleName="{playerStyle.resource-info-stand-wrapper}" />
-
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}">
+					styleName="col-md-12 col-xs-12 " />
+				<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+				
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 ">
 					<g:Label styleName="{playerStyle.resource-info-stand-text}"
-						ui:field="originalUrlTitle"></g:Label>
+					ui:field="originalUrlTitle"></g:Label>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
-				<g:HTMLPanel styleName="{playerStyle.resource-info-description}"
-					ui:field="originalUrlText">
+				<g:HTMLPanel styleName="col-md-12 ">
+					<g:HTMLPanel ui:field="originalUrlText">
+					</g:HTMLPanel>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
+				
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="thumbnailPanel">
 					<g:Label styleName="{playerStyle.resource-info-stand-text}"
 						ui:field="thumbnailText"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="thumbnailurlValue" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
+					
 				</g:HTMLPanel>
 				
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="aggregationPanel">
 					<g:Label styleName="{playerStyle.resource-info-stand-text}"
 						ui:field="lblAggregation"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="aggregationType"/>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 				
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="publisherPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="publisherText"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="publisherType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="hostPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="hostLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="hostType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:FlowPanel styleName="{playerStyle.resource-info-more-left-wrapper}"
+				<g:FlowPanel styleName="col-md-12 col-xs-12 "
 					ui:field="licenceContainer">
 					<!-- <g:HTMLPanel styleName="{playerStyle.resource-info-more-leftinner-wrapper}"> -->
 					<g:HTMLPanel styleName="{playerStyle.resource-info-rights-wrapper}">
@@ -129,93 +155,105 @@
 							ui:field="legalText"></g:Label>
 						<g:HTMLPanel ui:field="rightsLogoContainer"
 							styleName="{playerStyle.resource-info-rights-text}"></g:HTMLPanel>
+						<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 					</g:HTMLPanel>
 					<!-- </g:HTMLPanel> -->
 				</g:FlowPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="licenceCodePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="licenceCodeLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="licenceCodeType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}">
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 ">
 					<g:Label styleName="{playerStyle.resource-info-more-titleboarder}"
 						ui:field="educationallLbl"></g:Label>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="eduAllignPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="eduAllignLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="eduAllignType"/>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="eduUsePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="eduUseLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="eduUseType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="eduRolePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="eduRoleLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="eduRoleType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="interactivityTypePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="interactiveLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="interactiveType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="ageRangePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="ageRangeLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="ageRangeType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="dKnowledgePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="dKnowledgeLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="dKnowledgeType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="momentsoflearningPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="momentsoflearningLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="momentsoflearningType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="readingLevelPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="readingLevelLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="readingLevelType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="schLevelPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="schLevelLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="schLevelInfo" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
 				<!-- <g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
@@ -226,143 +264,160 @@
 						ui:field="gooruCourseInfo" />
 				</g:HTMLPanel> -->
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}">
+				<g:HTMLPanel styleName="col-md-12">
 					<g:Label styleName="{playerStyle.resource-info-more-titleboarder}"
 						ui:field="resourceInfoLbl"></g:Label>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="dateCreatedPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="dateCreatedLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="createdDateInfo" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="countryCodePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="countryCodeLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="countryCodeType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="languagePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="languageLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="languageType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="dataTypePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="dataTypeLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="dataTypeFormat" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="authorPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="authorLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="authorName" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12 col-xs-12 "
 					ui:field="copyRightPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="copyRightLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="copyRightType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="keyWordsPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="keywordsTitle"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="keywordsInfo" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 				
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="adsPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="adsTitle"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="adsName" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="accessibilityPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-titleboarder}"
 						ui:field="accesibilityLbl"></g:Label>
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="mobileFriendlyPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="mbFriendlyLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="mbFriendlyText" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="accessModePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="accessModelLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="accessModeType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="mediaFeaturePanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="mediaFeatureLbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="mediaFeatureType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="controlPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="controlLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="controlType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="accessHazardPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="acessHazardlLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="acessHazardType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="hasAdaptationPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="hasAdaptationLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="hasAdaptationType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
-
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="isAdaptationPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="isAdaptationLbl"></g:Label>
 					<g:Label styleName="{playerStyle.resource-info-title}"
 						ui:field="isAdaptationType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
-				<g:HTMLPanel styleName="{playerStyle.resource-info-publishContainer}"
+				<g:HTMLPanel styleName="col-md-12"
 					ui:field="accessibilityAPIPanel">
 					<g:Label styleName="{playerStyle.resource-info-more-title}"
 						ui:field="accessibilityAPILbl"></g:Label>
 					<g:HTMLPanel styleName="{playerStyle.resource-info-title}"
 						ui:field="accessibilityAPIType" />
+					<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 				</g:HTMLPanel>
 
 				<!-- <g:HTMLPanel styleName="{playerStyle.gradeContainer}"> -->
@@ -377,5 +432,4 @@
 
 			</g:HTMLPanel>
 		</g:HTMLPanel>
-	</g:HTMLPanel>
 </ui:UiBinder> 

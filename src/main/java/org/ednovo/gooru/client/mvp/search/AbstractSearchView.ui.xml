@@ -1,5 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:s="urn:import:org.ednovo.gooru.client.mvp.search" xmlns:dnd="urn:import:org.ednovo.gooru.client.mvp.dnd">
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res" />
+    
 	<ui:style>
 		.searchFilter {
 			float: left;
@@ -25,10 +27,10 @@
 		}
 	</ui:style>
 	<g:FlowPanel>
-	    <g:ScrollPanel styleName="{style.searchFilter}" ui:field="searchFilterPanel">
+	    <g:ScrollPanel  ui:field="searchFilterPanel">
       		<s:SearchFilterVc ui:field="searchFilterVc"  />
         </g:ScrollPanel>
-		<g:FlowPanel  styleName="{style.searchResultContainer}">
+		<g:FlowPanel  styleName="col-md-9 col-sm-9 {res.css.searchResult}">
 			<dnd:AppMirageDragContainer ui:field="searchResultPanel" />
 			<g:FlowPanel ui:field="paginationFocPanel" styleName="{style.paginationPanel}" />
 		</g:FlowPanel>

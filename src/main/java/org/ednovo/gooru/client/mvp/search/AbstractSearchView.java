@@ -34,9 +34,11 @@ import org.ednovo.gooru.client.mvp.dnd.AppMirageDragContainer;
 import org.ednovo.gooru.client.mvp.dnd.IsDraggable;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDragController;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDropController;
+import org.ednovo.gooru.client.mvp.search.event.FilterEvent;
 import org.ednovo.gooru.client.mvp.search.event.GetSearchKeyWordEvent;
 import org.ednovo.gooru.client.mvp.search.event.RegisterSearchDropEvent;
 import org.ednovo.gooru.client.mvp.search.event.RequestShelfCollectionEvent;
+import org.ednovo.gooru.client.mvp.search.event.SearchFilterEvent;
 import org.ednovo.gooru.client.mvp.search.event.SearchPaginationEvent;
 import org.ednovo.gooru.client.uc.PaginationButtonUc;
 import org.ednovo.gooru.client.util.MixpanelUtil;
@@ -48,6 +50,7 @@ import org.ednovo.gooru.shared.model.search.SearchDo;
 import org.ednovo.gooru.shared.model.search.SearchFilterDo;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -66,17 +69,23 @@ import com.google.gwt.user.client.ui.Widget;
  * @param <T>
  *            type of ResourceSearchResultDo
  */
-public abstract class AbstractSearchView<T extends ResourceSearchResultDo> extends BaseViewWithHandlers<SearchUiHandlers> implements IsSearchView<T>, ClickHandler {
+public abstract class AbstractSearchView<T extends ResourceSearchResultDo>
+		extends BaseViewWithHandlers<SearchUiHandlers> implements
+		IsSearchView<T>, ClickHandler {
 
-	private static AbstractSearchViewUiBinder uiBinder = GWT.create(AbstractSearchViewUiBinder.class);
-	
+	private static AbstractSearchViewUiBinder uiBinder = GWT
+			.create(AbstractSearchViewUiBinder.class);
+
 	private static MessageProperties i18n = GWT.create(MessageProperties.class);
 
-	interface AbstractSearchViewUiBinder extends UiBinder<Widget, AbstractSearchView<?>> {
+	interface AbstractSearchViewUiBinder extends
+			UiBinder<Widget, AbstractSearchView<?>> {
 	}
 
 	@UiField(provided = true)
 	SearchFilterVc searchFilterVc;
+
+	SearchFilterVc searchFilterVc1;
 
 	@UiField(provided = true)
 	AppMirageDragContainer searchResultPanel;
@@ -86,7 +95,7 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 
 	@UiField
 	ScrollPanel searchFilterPanel;
-	
+
 	protected ResourceDragController dragController;
 
 	private static final String PREVIOUS = i18n.GL1462().toUpperCase();
@@ -98,11 +107,14 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	public boolean refreshShelfInfo;
 
 	public boolean refreshedShelfCollections;
-	String rootWebUrl = AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken();
-	
-	private HandlerRegistration handlerRegistration=null;
+	String rootWebUrl = AppClientFactory.getPlaceManager()
+			.getCurrentPlaceRequest().getNameToken();
+
+	private HandlerRegistration handlerRegistration = null;
+
 	/**
-	 * Assign new instance for {@link ResourceDragController}, {@link AppMirageDragContainer}, {@link SearchFilterVc}
+	 * Assign new instance for {@link ResourceDragController},
+	 * {@link AppMirageDragContainer}, {@link SearchFilterVc}
 	 * 
 	 * @param resourceSearch
 	 *            whether resource search or not
@@ -111,21 +123,33 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 		dragController = new ResourceDragController(RootPanel.get());
 		searchResultPanel = new AppMirageDragContainer(dragController);
 		searchFilterVc = new SearchFilterVc(resourceSearch);
+		searchFilterVc1 = new SearchFilterVc(resourceSearch);
 		setWidget(uiBinder.createAndBindUi(this));
+
 		searchFilterPanel.getElement().setId("searchFilterPanelDiv");
-		searchFilterVc.getElement().setId("searchFilterVcsearchFilterVc");
+		searchFilterPanel.getElement().getStyle().setOverflow(Overflow.VISIBLE);
+		searchFilterVc.getElement().setId("searchFilterVc");
 		paginationFocPanel.getElement().setId("fnlPaginationFocPanel");
 		searchResultPanel.getElement().setId("appMirageDragContainer");
-		
+		AppClientFactory.fireEvent(new SearchFilterEvent(searchFilterVc1,resourceSearch));
+
+
 		getBrowseBtn().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
-			getUiHandlers().getAddStandards();
-				
+				getUiHandlers().getAddStandards();
+
 			}
 		});
-		
+		searchFilterVc1.browseStandards.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				getUiHandlers().getAddStandards();
+
+			}
+		});
 
 	}
 
@@ -133,52 +157,54 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	public void preSearch(SearchDo<T> searchDo) {
 		reset();
 		searchFilterVc.setFilter(searchDo.getFilters());
-		if(!AppClientFactory.isAnonymous()) {
+		searchFilterVc1.setFilter(searchDo.getFilters());
+		if (!AppClientFactory.isAnonymous()) {
 			searchFilterVc.getUserStandardPrefCodeId();
-		}else{
+			searchFilterVc1.getUserStandardPrefCodeId();
+		} else {
 			searchFilterVc.getStandardVisiblity();
+			searchFilterVc1.getStandardVisiblity();
 		}
-		}
-		
-	
+	}
 
 	@Override
 	public void postSearch(SearchDo<T> searchDo) {
-		//searchResultPanel.setVisible(false);
+		// searchResultPanel.setVisible(false);
 		searchResultPanel.setClonnable(true);
-		
-		
-		if (searchDo.getSearchResults() != null && searchDo.getSearchResults().size() > 0) {
+		if (searchDo.getSearchResults() != null	&& searchDo.getSearchResults().size() > 0) {
 			for (T searchResult : searchDo.getSearchResults()) {
 				searchDo.getSearchHits();
-				searchResultPanel.addDraggable(renderSearchResult(searchResult));
+				searchResultPanel
+						.addDraggable(renderSearchResult(searchResult));
 			}
 			if (searchDo.getTotalPages() > 1) {
 				if (searchDo.getPageNum() > 1) {
 					paginationFocPanel.add(new PaginationButtonUc(searchDo.getPageNum() - 1, PREVIOUS, this));
 				}
 				int page = searchDo.getPageNum() < 10 ? 1 : searchDo.getPageNum() - 8;
-				for (int count = 1; count < 10 && page <= searchDo.getTotalPages(); page++, ++count) {
-					paginationFocPanel.add(new PaginationButtonUc(page, page == searchDo.getPageNum(), this));
+				for (int count = 1; count < 10&& page <= searchDo.getTotalPages(); page++, ++count) {
+					paginationFocPanel.add(new PaginationButtonUc(page,
+							page == searchDo.getPageNum(), this));
 				}
 				if (searchDo.getPageNum() < searchDo.getTotalPages()) {
-					paginationFocPanel.add(new PaginationButtonUc(searchDo.getPageNum() + 1, NEXT, this));
+					paginationFocPanel.add(new PaginationButtonUc(searchDo
+							.getPageNum() + 1, NEXT, this));
 				}
 			}
 		}
-		
+
 		else {
 			MixpanelUtil.Search_No_Results();
-			if(AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().contains("resource-search"))
-			{
-			searchResultPanel.add(new NOSearchResultCollectionVc());
-			
+			if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest()
+					.getNameToken().contains("resource-search")) {
+				searchResultPanel.add(new NOSearchResultCollectionVc());
+
 			}
-			if(AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().contains("collection-search"))
-			{
-			searchResultPanel.add(new NOSearchResultCollectionVc());
+			if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest()
+					.getNameToken().contains("collection-search")) {
+				searchResultPanel.add(new NOSearchResultCollectionVc());
 			}
-			
+
 		}
 		refreshShelfInfo = true;
 		if (refreshedShelfCollections) {
@@ -203,15 +229,18 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	/**
 	 * @return instance of {@link SearchFilterVc}
 	 */
+	@Override
 	public SearchFilterVc getSearchFilterVc() {
 		return searchFilterVc;
 	}
-	
-	
 
 	@Override
 	public void setSearchFilter(SearchFilterDo searchFilterDo) {
 		getSearchFilterVc().renderFilter(searchFilterDo);
+		searchFilterVc1.renderFilter(searchFilterDo);
+		System.out.println("====================I am In Set Search Filters");
+		AppClientFactory.getEventBus().fireEvent(new FilterEvent(searchFilterDo));
+
 		getUiHandlers().initiateSearch();
 	}
 
@@ -219,13 +248,18 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	public Map<String, String> getSearchFilters() {
 		return getSearchFilterVc().getFilter();
 	}
-
+	
+	@Override
+	public Map<String,String> getSearchFilters1(){
+		return searchFilterVc1.getFilter();
+	}
 	public abstract IsDraggable renderSearchResult(T searchDo);
 
 	@Override
 	public void onClick(ClickEvent event) {
 		if (event.getSource() instanceof PaginationButtonUc) {
-			AppClientFactory.fireEvent(new SearchPaginationEvent(((PaginationButtonUc) event.getSource()).getPage()));
+			AppClientFactory.fireEvent(new SearchPaginationEvent(
+					((PaginationButtonUc) event.getSource()).getPage()));
 		} else {
 			Window.alert("Event is not caught");
 		}
@@ -240,27 +274,34 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 
 	@Override
 	public void setSourceSuggestions(SearchDo<String> sourceSuggestions) {
+		searchFilterVc1.setSourceSuggestions(sourceSuggestions);
 		searchFilterVc.setSourceSuggestions(sourceSuggestions);
 	}
 
 	@Override
 	public void setAggregatorSuggestions(SearchDo<String> aggregatorSuggestions) {
 		searchFilterVc.setAggregatorSuggestions(aggregatorSuggestions);
-	}
-	
-	@Override
-	public void setStandardsSuggestions(SearchDo<CodeDo> standardsSuggestions) {
-		searchFilterVc.setStandardSuggestions(standardsSuggestions);
+		searchFilterVc1.setAggregatorSuggestions(aggregatorSuggestions);
+
 	}
 
 	@Override
-	public void registerDropController(ResourceDropController dropController, RegisterSearchDropEvent.DROP_AREA type) {
+	public void setStandardsSuggestions(SearchDo<CodeDo> standardsSuggestions) {
+		searchFilterVc.setStandardSuggestions(standardsSuggestions);
+		searchFilterVc1.setStandardSuggestions(standardsSuggestions);
+
+	}
+
+	@Override
+	public void registerDropController(ResourceDropController dropController,
+			RegisterSearchDropEvent.DROP_AREA type) {
 		dragController.unregisterDropController(dropController);
 		dragController.registerDropController(dropController);
 	}
 
 	@Override
-	public void unregisterDropController(ResourceDropController dropController, RegisterSearchDropEvent.DROP_AREA type) {
+	public void unregisterDropController(ResourceDropController dropController,
+			RegisterSearchDropEvent.DROP_AREA type) {
 		dragController.unregisterDropController(dropController);
 	}
 
@@ -282,51 +323,52 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 		}
 	}
 
-	protected abstract void refreshShelfCollections(List<FolderDo> shelfCollections);
+	protected abstract void refreshShelfCollections(
+			List<FolderDo> shelfCollections);
 
 	@Override
 	public void setStandardsSuggestionsInfo(SearchDo<CodeDo> result) {
 		searchFilterVc.setSourceSuggestionsInfo(result);
+		searchFilterVc1.setSourceSuggestionsInfo(result);
+
 	}
-	
+
 	@Override
-	public void resetFilters(){
+	public void resetFilters() {
 		searchFilterVc.clearAllFields();
+		searchFilterVc1.clearAllFields();
+		
+
 	}
-	
-	public Button getBrowseBtn()
-	{
+
+	public Button getBrowseBtn() {
 		return searchFilterVc.browseStandards;
 	}
-	
-	public void OnStandardsClickEvent(Button standardsButtonClicked)
-	{
-		if(handlerRegistration!=null){
+
+	public void OnStandardsClickEvent(Button standardsButtonClicked) {
+		if (handlerRegistration != null) {
 			handlerRegistration.removeHandler();
 		}
-		handlerRegistration=standardsButtonClicked.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				getUiHandlers().setUpdatedStandards();
-		
-				
-			}
-		});
+		handlerRegistration = standardsButtonClicked
+				.addClickHandler(new ClickHandler() {
+
+					@Override
+					public void onClick(ClickEvent event) {
+						getUiHandlers().setUpdatedStandards();
+
+					}
+				});
 	}
-	
-	public void setUpdatedStandards(String standardsCode)
-	{
-		if(!standardsCode.isEmpty())
-		{
-		searchFilterVc.addStandardFilter(standardsCode);
-		AppClientFactory.fireEvent(new GetSearchKeyWordEvent());
+
+	public void setUpdatedStandards(String standardsCode) {
+		if (!standardsCode.isEmpty()) {
+			searchFilterVc.addStandardFilter(standardsCode);
+			AppClientFactory.fireEvent(new GetSearchKeyWordEvent());
 		}
 		getUiHandlers().closeStandardsPopup();
 	}
-	
 
-	
-	public abstract void setAddResourceContainerPresenter(AddResourceContainerPresenter addResourceContainerPresenter);
+	public abstract void setAddResourceContainerPresenter(
+			AddResourceContainerPresenter addResourceContainerPresenter);
 
 }

@@ -7,11 +7,7 @@
 		<ui:style field="FolderStyle" src="AddResourceContainerSuccess.css"/>
 		
 	 <g:FlowPanel ui:field="addContent">
-	 			<!-- <g:HTMLPanel ui:field="createCollectionbuttonsContainer" styleName="{res.css.addTextButtonsContainer}">
-					<g:Label ui:field="addResourceText" styleName=""></g:Label>
-					<g:Button styleName="secondary"  ui:field="createCollectionBtnLbl"/>
-				</g:HTMLPanel> -->
-				<g:HTMLPanel ui:field="createCollectionbuttonsContainer">
+	 			<g:HTMLPanel ui:field="createCollectionbuttonsContainer">
 				<g:Label ui:field="addResourceText" styleName=""></g:Label>
 				<g:Anchor ui:field="addCollectiorOrReourceText"></g:Anchor>
 				</g:HTMLPanel>

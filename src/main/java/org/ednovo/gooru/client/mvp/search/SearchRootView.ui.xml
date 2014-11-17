@@ -1,240 +1,308 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:gc="urn:import:org.ednovo.gooru.client.mvp.search" xmlns:sg="urn:import:org.ednovo.gooru.client.mvp.home" >
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:gc="urn:import:org.ednovo.gooru.client.mvp.search"
+	xmlns:uc="urn:import:org.ednovo.gooru.client.uc" xmlns:sg="urn:import:org.ednovo.gooru.client.mvp.home">
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle"
+		field="res"></ui:with>
 	<ui:style type="org.ednovo.gooru.client.mvp.search.SearchRootView.Style">
 		.searchWrapper {
-			/*min-height: 383px;*/
-			margin: 0 auto;
-			/* width: 960px; */
+		/*min-height: 383px;*/
+		margin: 0 auto;
+		/* width: 960px; */
 		}
-		
+
 		.searchTotalContainer {
-			/*position: relative;*/
-			height: auto !important;
-			margin-top: 20px;
+		/*position: relative;*/
+		height: auto !important;
+		margin-top: 20px;
 		}
-		
+
 		.contentDiv {
-			margin: 2px auto 0;
-			width: 723px;
+		margin: 2px auto 0;
+		width: 723px;
 		}
-		
+
 		.PageNotify {
-			margin: 0px 0 0 207px;
-			width: 596px;
-			display: inline-block;
+		margin: 0px 0 0 207px;
+		width: 596px;
+		display: inline-block;
 
 		}
 		.notifyLink {
-			color: #4E9746;
-			cursor: pointer;
-			float: left;
-			margin: 0 2px;
-			padding-bottom: 2px;
+		color: #4E9746;
+		cursor: pointer;
+		float: left;
+		margin: 0 2px;
+		padding-bottom: 2px;
 		}
 		/*.notifyLink:HOVER {
-		    border-bottom: 2px solid #A6CAA2;
-		    cursor: pointer;
-		    padding-bottom: 2px;
-		    color: #4E9746;
-		    text-decoration:none;
+		border-bottom: 2px solid #A6CAA2;
+		cursor: pointer;
+		padding-bottom: 2px;
+		color: #4E9746;
+		text-decoration:none;
 		} */
 		.notifyLinks {
-		    color: #4E9746 !important;
-		    cursor: default;
-		    float: left;
-		    font-size: 15px;
-		    font-weight: bold;
-		    margin: -3px 5px 0 6px;
+		color: #4E9746 !important;
+		cursor: default;
+		float: left;
+		font-size: 15px;
+		font-weight: bold;
+		margin: -3px 5px 0 6px;
 		}
 
 		.resourceBtnActive {
-			color: #515151;
-			padding: 7px 9px 9px 34px;
-			border-radius: 4px;
-			background: #efefef;
-			background-image: url(images/resourcesIco.png); /* fallback */
-			background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#FAFAFA)); /* Saf4+, Chrome */
-			background-image: url(images/resourcesIco.png), -webkit-linear-gradient(top, #EFEFEF, #FAFAFA); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #EFEFEF, #FAFAFA); /* FF3.6+ */
-			background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #EFEFEF, #FAFAFA); /* IE10 */
-			background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #EFEFEF, #FAFAFA); /* Opera 11.10+ */
-			background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #EFEFEF, #FAFAFA); /* W3C */
-			background-repeat:no-repeat;
-			border: 1px solid #b0b0ba;
-			font-size:12px;
-			font-weight: bold;
-			background-position:0 0;
-			cursor:pointer;
-			box-shadow:0 1px 3px #d0d0d5 inset;
+		color: #515151;
+		padding: 7px 9px 9px 34px;
+		border-radius: 4px;
+		background: #efefef;
+		background-image: url(images/resourcesIco.png); /* fallback */
+		background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left
+		bottom, from(#EFEFEF), to(#FAFAFA)); /* Saf4+, Chrome */
+		background-image: url(images/resourcesIco.png),
+		-webkit-linear-gradient(top, #EFEFEF, #FAFAFA); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* FF3.6+ */
+		background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* IE10 */
+		background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* Opera 11.10+ */
+		background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #EFEFEF,
+		#FAFAFA); /* W3C */
+		background-repeat:no-repeat;
+		border: 1px solid #b0b0ba;
+		font-size:12px;
+		font-weight: bold;
+		background-position:0 0;
+		cursor:pointer;
+		box-shadow:0 1px 3px #d0d0d5 inset;
 
 		}
 
 		.collectionBtnActive {
-			color: #515151;
-			padding: 7px 9px 9px 34px;
-			margin-left: 10px;
-			border-radius: 4px;
-			background: #efefef;
-			background-image: url(images/collectionIco.png); /* fallback */
-			background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top, left bottom, from(#EFEFEF), to(#FAFAFA)); /* Saf4+, Chrome */
-			background-image: url(images/collectionIco.png), -webkit-linear-gradient(top, #EFEFEF, #FAFAFA); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #EFEFEF, #FAFAFA); /* FF3.6+ */
-			background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #EFEFEF, #FAFAFA); /* IE10 */
-			background-image: url(images/collectionIco.png), -o-linear-gradient(top, #EFEFEF, #FAFAFA); /* Opera 11.10+ */
-			background-image: url(images/collectionIco.png), linear-gradient(to bottom, #EFEFEF, #FAFAFA); /* W3C */
-			background-repeat:no-repeat;
-			border: 1px solid #b0b0ba;
-			font-size:12px;
-			font-weight: bold;
-			background-position:0 0;
-			cursor:pointer;
-			box-shadow:0 1px 3px #d0d0d5 inset;
+		color: #515151;
+		padding: 7px 9px 9px 34px;
+		margin-left: 10px;
+		border-radius: 4px;
+		background: #efefef;
+		background-image: url(images/collectionIco.png); /* fallback */
+		background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top,
+		left bottom, from(#EFEFEF), to(#FAFAFA)); /* Saf4+, Chrome */
+		background-image: url(images/collectionIco.png),
+		-webkit-linear-gradient(top, #EFEFEF, #FAFAFA); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* FF3.6+ */
+		background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* IE10 */
+		background-image: url(images/collectionIco.png), -o-linear-gradient(top, #EFEFEF,
+		#FAFAFA); /* Opera 11.10+ */
+		background-image: url(images/collectionIco.png), linear-gradient(to bottom, #EFEFEF,
+		#FAFAFA); /* W3C */
+		background-repeat:no-repeat;
+		border: 1px solid #b0b0ba;
+		font-size:12px;
+		font-weight: bold;
+		background-position:0 0;
+		cursor:pointer;
+		box-shadow:0 1px 3px #d0d0d5 inset;
 		}
 
 
 		}
 
 		.resourceSearchButtonImage{
-			margin-left: 5px;
-			padding: 7px 31px !important;
-			background: url(../images/resource-type-icons.png) no-repeat transparent !important;
-			background-position: 2px -24px !important;
-			background-position: 0px -27px !important;
+		margin-left: 5px;
+		padding: 7px 31px !important;
+		background: url(../images/resource-type-icons.png) no-repeat transparent
+		!important;
+		background-position: 2px -24px !important;
+		background-position: 0px -27px !important;
 		}
 
 		.bodyHeight {
-			height: auto !important;
+		height: auto !important;
 		}
 		.panelHeight{
-			overflow-y: auto;
-			overflow-x: hidden;
-			width: 63.75%;
-			padding: 0px 0px 0px 12%;
+		overflow-y: auto;
+		overflow-x: hidden;
+		width: 63.75%;
+		padding: 0px 0px 0px 12%;
 		}
 		.searchResultPanel {
-		    clear: both;
-		    height: 34px;
-		    /*margin: 20px auto 0; */
-		    width: 796px;
+		clear: both;
+		height: 34px;
+		/*margin: 20px auto 0; */
+	/* 	width: 796px; */
 		}
-		
+
 		.searchResult {
-			color: #515151;
-		   /* float: left;*/
-			margin: 32px 0 0 204px;
-			display: inline-block;
-			padding-bottom: 10px;
-			
+		color: #515151;
+		/* float: left;*/
+		margin: 32px 0 0 204px;
+		display: inline-block;
+		padding-bottom: 10px;
+
 		}
-		
+
 		.notifyColorLink {
-			color: #222222;
+		color: #222222;
 		}
 		.loadingImageContainer
 		{
-			 background: url("images/core/search.gif");
- 	     	width: 130px;
-         	height: 100px;
-         	margin: 0 auto;
-         	margin-top: 110px;
+		background: url("images/core/search.gif");
+		width: 130px;
+		height: 100px;
+		margin: 0 auto;
+		margin-top: 110px;
 		}
-		
+
 
 		.secondaryResourceSearchBtn{
-			color: #515151;
-			padding: 7px 9px 9px 34px;
-			border-radius: 4px;
-			background: #efefef;
-			background-image: url(images/resourcesIco.png); /* fallback */
-			background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f0f0f0)); /* Saf4+, Chrome */
-			background-image: url(images/resourcesIco.png), -webkit-linear-gradient(top, #ffffff, #f0f0f0); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #ffffff, #f0f0f0); /* FF3.6+ */
-			background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #ffffff, #f0f0f0); /* IE10 */
-			background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #ffffff, #f0f0f0); /* Opera 11.10+ */
-			background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #ffffff, #f0f0f0); /* W3C */
-			border: 1px solid #ddd;
-			font-size:12px;
-			font-weight: bold;
-			background-repeat:no-repeat;
-			background-position:0 0;
-			font-family:Arial, Helvetica, sans-serif;
-			cursor:pointer;
+		color: #515151;
+		padding: 7px 9px 9px 34px;
+		border-radius: 4px;
+		background: #efefef;
+		background-image: url(images/resourcesIco.png); /* fallback */
+		background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left
+		bottom, from(#efefef), to(#f0f0f0)); /* Saf4+, Chrome */
+		background-image: url(images/resourcesIco.png),
+		-webkit-linear-gradient(top, #ffffff, #f0f0f0); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #ffffff,
+		#f0f0f0); /* FF3.6+ */
+		background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #ffffff,
+		#f0f0f0); /* IE10 */
+		background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #ffffff,
+		#f0f0f0); /* Opera 11.10+ */
+		background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #ffffff,
+		#f0f0f0); /* W3C */
+		border: 1px solid #ddd;
+		font-size:12px;
+		font-weight: bold;
+		background-repeat:no-repeat;
+		background-position:0 0;
+		font-family:Arial, Helvetica, sans-serif;
+		cursor:pointer;
 		}
 
 		.secondaryResourceSearchBtn:hover{
-			color: #515151;
-			background: #efefef;
-			background-image: url(images/resourcesIco.png); /* fallback */
-			background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#efefef)); /* Saf4+, Chrome */
-			background-image: url(images/resourcesIco.png), -webkit-linear-gradient(top, #f0f0f0, #ffffff); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #f0f0f0, #ffffff); /* FF3.6+ */
-			background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #f0f0f0, #ffffff); /* IE10 */
-			background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #f0f0f0, #ffffff); /* Opera 11.10+ */
-			background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #f0f0f0, #ffffff); /* W3C */
-			background-repeat:no-repeat;
+		color: #515151;
+		background: #efefef;
+		background-image: url(images/resourcesIco.png); /* fallback */
+		background-image: url(images/resourcesIco.png), -webkit-gradient(linear, left top, left
+		bottom, from(#f0f0f0), to(#efefef)); /* Saf4+, Chrome */
+		background-image: url(images/resourcesIco.png),
+		-webkit-linear-gradient(top, #f0f0f0, #ffffff); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/resourcesIco.png), -moz-linear-gradient(top, #f0f0f0,
+		#ffffff); /* FF3.6+ */
+		background-image: url(images/resourcesIco.png), -ms-linear-gradient(top, #f0f0f0,
+		#ffffff); /* IE10 */
+		background-image: url(images/resourcesIco.png), -o-linear-gradient(top, #f0f0f0,
+		#ffffff); /* Opera 11.10+ */
+		background-image: url(images/resourcesIco.png), linear-gradient(to bottom, #f0f0f0,
+		#ffffff); /* W3C */
+		background-repeat:no-repeat;
 		}
 
 
 		.secondaryCollectionSearchBtn{
-			color: #515151;
-			padding: 7px 9px 9px 34px;
-			border-radius: 4px;
-			margin-left: 10px;
-			background: #efefef;
-			background-image: url(images/collectionIco.png); /* fallback */
-			background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f0f0f0)); /* Saf4+, Chrome */
-			background-image: url(images/collectionIco.png), -webkit-linear-gradient(top, #ffffff, #f0f0f0); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #ffffff, #f0f0f0); /* FF3.6+ */
-			background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #ffffff, #f0f0f0); /* IE10 */
-			background-image: url(images/collectionIco.png), -o-linear-gradient(top, #ffffff, #f0f0f0); /* Opera 11.10+ */
-			background-image: url(images/collectionIco.png), linear-gradient(to bottom, #ffffff, #f0f0f0); /* W3C */
-			border: 1px solid #ddd;
-			font-size:12px;
-			font-weight: bold;
-			background-repeat:no-repeat;
-			background-position:0 0;
-			font-family:Arial, Helvetica, sans-serif;
-			cursor:pointer;
+		color: #515151;
+		padding: 7px 9px 9px 34px;
+		border-radius: 4px;
+		margin-left: 10px;
+		background: #efefef;
+		background-image: url(images/collectionIco.png); /* fallback */
+		background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top,
+		left bottom, from(#ffffff), to(#f0f0f0)); /* Saf4+, Chrome */
+		background-image: url(images/collectionIco.png),
+		-webkit-linear-gradient(top, #ffffff, #f0f0f0); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #ffffff,
+		#f0f0f0); /* FF3.6+ */
+		background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #ffffff,
+		#f0f0f0); /* IE10 */
+		background-image: url(images/collectionIco.png), -o-linear-gradient(top, #ffffff,
+		#f0f0f0); /* Opera 11.10+ */
+		background-image: url(images/collectionIco.png), linear-gradient(to bottom, #ffffff,
+		#f0f0f0); /* W3C */
+		border: 1px solid #ddd;
+		font-size:12px;
+		font-weight: bold;
+		background-repeat:no-repeat;
+		background-position:0 0;
+		font-family:Arial, Helvetica, sans-serif;
+		cursor:pointer;
 		}
 
 
 		.secondaryCollectionSearchBtn:hover{
-			color: #515151;
-			background: #efefef;
-			background-image: url(images/collectionIco.png); /* fallback */
-			background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#ffffff)); /* Saf4+, Chrome */
-			background-image: url(images/collectionIco.png), -webkit-linear-gradient(top, #f0f0f0, #ffffff); /* Chrome 10+, Saf5.1+ */
-			background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #f0f0f0, #ffffff); /* FF3.6+ */
-			background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #f0f0f0, #ffffff); /* IE10 */
-			background-image: url(images/collectionIco.png), -o-linear-gradient(top, #f0f0f0, #ffffff); /* Opera 11.10+ */
-			background-image: url(images/collectionIco.png), linear-gradient(to bottom, #f0f0f0, #ffffff); /* W3C */
-			background-repeat:no-repeat;
+		color: #515151;
+		background: #efefef;
+		background-image: url(images/collectionIco.png); /* fallback */
+		background-image: url(images/collectionIco.png), -webkit-gradient(linear, left top,
+		left bottom, from(#f0f0f0), to(#ffffff)); /* Saf4+, Chrome */
+		background-image: url(images/collectionIco.png),
+		-webkit-linear-gradient(top, #f0f0f0, #ffffff); /* Chrome 10+, Saf5.1+
+		*/
+		background-image: url(images/collectionIco.png), -moz-linear-gradient(top, #f0f0f0,
+		#ffffff); /* FF3.6+ */
+		background-image: url(images/collectionIco.png), -ms-linear-gradient(top, #f0f0f0,
+		#ffffff); /* IE10 */
+		background-image: url(images/collectionIco.png), -o-linear-gradient(top, #f0f0f0,
+		#ffffff); /* Opera 11.10+ */
+		background-image: url(images/collectionIco.png), linear-gradient(to bottom, #f0f0f0,
+		#ffffff); /* W3C */
+		background-repeat:no-repeat;
 		}
 
 		.secondaryIC img{
-			vertical-align:middle;
-			width:22px;
-			margin-right:5px;
+		vertical-align:middle;
+		width:22px;
+		margin-right:5px;
 		}
 
 	</ui:style>
-	<g:HTMLPanel styleName="{style.searchTotalContainer}">
+	<g:HTMLPanel styleName="{res.css.bodyWrapper}">
 		<!-- <gc:SearchBarVc ui:field="searchBarVc" /> -->
-		<g:FlowPanel styleName="" ui:field="panelSearchPage">
-			<g:FlowPanel styleName="{style.searchResultPanel}">
-				<g:HTML styleName="{style.searchResult}" ui:field="queriedTextHtml" />
-				<g:FlowPanel styleName="{style.PageNotify}" ui:field="flowpanel">
-					<g:HTMLPanel ui:field="contentpanel"></g:HTMLPanel>
-					<g:Button styleName="{style.secondaryResourceSearchBtn}" ui:field="resourceSearchBtn"/>
-					<!-- <g:Label text="|" styleName="{style.notifyLinks}" /> -->
-					<g:Button styleName="{style.secondaryCollectionSearchBtn}" ui:field="collectionSearchBtn"/>
-				</g:FlowPanel>
-			</g:FlowPanel>
-			<g:SimplePanel styleName="{style.searchWrapper}"  ui:field="searchWrapperSimPanel"/>
-			<g:SimplePanel styleName="searchResults" ui:field="shelfTabSimPanel"/>
-			<g:Label ui:field="lodingImage" styleName="{style.loadingImageContainer}" />
-			<sg:FooterUc />
-		</g:FlowPanel>
+		<g:HTMLPanel styleName="{res.css.searchResultMain}">
+			<g:HTMLPanel styleName="container">
+				<g:HTMLPanel styleName="row">
+					<g:FlowPanel styleName="{res.css.searchResultScroll}"
+						ui:field="panelSearchPage">
+						<g:FlowPanel styleName="{style.searchResultPanel} {res.css.innerResult} {res.css.searchInner}">
+						    <g:HTMLPanel styleName="{res.css.searchResult1}">
+								<g:HTMLPanel styleName="col-md-4 col-xs-4 visible-xs {res.css.filtersButton}">
+						        <g:Anchor ui:field="searchFilterMenu" styleName="{res.css.btn} btn btn-primary">
+						            <img src="images/toggleIcon.png"/> Search Filters
+						        </g:Anchor>
+						   		</g:HTMLPanel>
+						   		<g:HTMLPanel styleName="{res.css.PageNotify}">
+								<uc:PPanel>
+									<g:HTML ui:field="queriedTextHtml" />
+								</uc:PPanel>
+								<g:FlowPanel ui:field="flowpanel">
+									<g:HTMLPanel ui:field="contentpanel"></g:HTMLPanel>
+									<g:Button styleName="{res.css.secondaryICactive}" ui:field="resourceSearchBtn" />
+								<!-- <g:Label text="|" styleName="{style.notifyLinks}" /> -->
+									<g:Button styleName="{res.css.secondaryIC1}"	ui:field="collectionSearchBtn" />
+								</g:FlowPanel>
+								</g:HTMLPanel>
+							</g:HTMLPanel>
+						</g:FlowPanel>
+						<g:SimplePanel styleName="{style.searchWrapper}"
+							ui:field="searchWrapperSimPanel" />
+						<g:SimplePanel styleName="searchResults" ui:field="shelfTabSimPanel" />
+						<g:Label ui:field="lodingImage" styleName="{style.loadingImageContainer}" />
+						<sg:FooterUc />
+					</g:FlowPanel>
+
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+
 	</g:HTMLPanel>
 
 </ui:UiBinder> 

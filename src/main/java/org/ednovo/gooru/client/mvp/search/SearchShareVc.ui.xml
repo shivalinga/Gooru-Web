@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:uc="urn:import:org.ednovo.gooru.client.uc">
 	<ui:style>
 		.shareShortenUrl {
 			border: 1px solid #ddd;
@@ -68,19 +69,13 @@
 		}
 		
 	</ui:style>
-	<g:FlowPanel styleName="{style.shareShortenUrlContainer}">
-		<g:FlowPanel styleName="{style.shareLineInSocialMediaPartContainer}">
-			<g:Label styleName="{style.shareLineInSocialMediaText}" ui:field="shareViaText"></g:Label>
-			<g:HTMLPanel styleName="{style.shareLineInSocialMedia}" ui:field="socialContentPanel"/>
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res" />
+	<g:FlowPanel styleName="row-fluid {res.css.panelFooterMenuInfo}">
+		<g:FlowPanel styleName="col-md-4 col-sm-4 col-xs-4 {res.css.shareLink}">
+			<uc:PPanel  ui:field="shareViaText"></uc:PPanel>
+			<g:HTMLPanel  ui:field="socialContentPanel"/>
 		</g:FlowPanel>
-		<g:FlowPanel styleName="{style.shareSeparatorLine}"></g:FlowPanel>
-		<!-- here social media icons will come -->
-		<!-- <g:FlowPanel styleName="{style.shareShortenUrlContainerInputContainer}" ui:field="panelMain">
-			<g:Label>Share this with others by copying and pasting these links</g:Label>
-			<g:TextBox ui:field="shortenUrlTxtBox" readOnly="true" styleName="{style.shareShortenUrl}" />
-		</g:FlowPanel>
-		
-		<g:FlowPanel styleName="{style.embedContainer}" ui:field="embedContainer" /> -->
-		<g:FlowPanel ui:field="socialShareLinksViewContainer"></g:FlowPanel>
+<!-- 		<g:FlowPanel styleName="{style.shareSeparatorLine}"></g:FlowPanel>
+ -->		<g:FlowPanel ui:field="socialShareLinksViewContainer" styleName="col-md-8 col-sm-8 col-xs-8 {res.css.shareRight}"></g:FlowPanel>
 	</g:FlowPanel>	
 </ui:UiBinder> 

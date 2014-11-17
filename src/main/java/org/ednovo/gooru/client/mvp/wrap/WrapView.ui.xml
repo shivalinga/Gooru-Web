@@ -98,6 +98,12 @@
 	</ui:style>
 
 	<g:HTMLPanel styleName="{style.wrapper}" ui:field="panelWrapper">
+	    <g:HTMLPanel ui:field="searchPush">
+	        <g:HTMLPanel ui:field="menuRight">
+	        	<g:HTMLPanel ui:field="resorceSearchFilters" styleName="searchFilters"></g:HTMLPanel>
+	        	<g:HTMLPanel ui:field="collectionSearchFilters" styleName="searchFilters"></g:HTMLPanel>
+	        </g:HTMLPanel>
+	    </g:HTMLPanel>
 		<g:HTMLPanel styleName="{style.tabSection}" ui:field="androidSectiondiv">
 			<g:HTMLPanel styleName="{style.imgSection}">
 				<g:Image url="images/tablet.png" width="129" height="73" />
@@ -147,8 +153,11 @@
 				</g:HTMLPanel>
 			</g:HTMLPanel>
 		</g:HTMLPanel>
-		<sg:HeaderUc ui:field="headerUc" />
-		<g:SimplePanel ui:field="wrapperPanel" styleName="{style.wrapperContent}" />
+		<g:HTMLPanel ui:field="webcontainer">
+				<sg:HeaderUc ui:field="headerUc" />
+				<g:SimplePanel ui:field="wrapperPanel" styleName="{style.wrapperContent}" />	    
+		</g:HTMLPanel>	
+	
 		<!-- <sg:FooterUc /> -->
 	</g:HTMLPanel>
 

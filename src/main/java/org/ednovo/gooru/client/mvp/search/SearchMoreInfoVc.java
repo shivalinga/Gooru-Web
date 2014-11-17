@@ -34,14 +34,12 @@ import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.dnd.AppMirageDragContainer;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDragController;
-import org.ednovo.gooru.client.mvp.search.event.UpdateViewCountInSearchHandler;
 import org.ednovo.gooru.client.uc.DownToolTipWidgetUc;
 import org.ednovo.gooru.client.uc.ErrorMessagePanel;
 import org.ednovo.gooru.client.uc.LicencegItemVc;
 import org.ednovo.gooru.client.uc.StandardSgItemVc;
 import org.ednovo.gooru.client.uc.tooltip.ToolTip;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
-import org.ednovo.gooru.shared.model.content.CollectionDo;
 import org.ednovo.gooru.shared.model.content.TagDo;
 import org.ednovo.gooru.shared.model.search.ResourceSearchResultDo;
 import org.ednovo.gooru.shared.model.search.SearchDo;
@@ -436,7 +434,7 @@ public abstract class SearchMoreInfoVc<T extends ResourceSearchResultDo, C exten
 			Image image = new Image(searchResultDo.getAssetURI()+ searchResultDo.getLicense().getIcon());
 			image.setAltText(i18n.GL0730());
 			image.setTitle(i18n.GL0730());
-			rightsLbl.getElement().setAttribute("style", "padding-left: 309px;");
+			//rightsLbl.getElement().setAttribute("style", "padding-left: 309px;");
 			StandardSgItemVc standardItem = null;
 			LicencegItemVc licencegItemVcObj=null;
 			if (searchResultDo.getLicense().getCode() != null&& !searchResultDo.getLicense().getCode().equalsIgnoreCase(NULL)) {

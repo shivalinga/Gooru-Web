@@ -86,7 +86,9 @@ import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
  * @param <V>
  * @param <P>
  */
-public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, C extends ResourceSearchResultDo, V extends IsSearchView<T>, P extends Proxy<?>> extends BasePlacePresenter<IsSearchView<T>, P> implements SearchUiHandlers {
+public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, C extends ResourceSearchResultDo, V extends IsSearchView<T>, P extends Proxy<?>>
+		extends BasePlacePresenter<IsSearchView<T>, P> implements
+		SearchUiHandlers {
 
 	@Inject
 	private SearchServiceAsync searchService;
@@ -106,16 +108,17 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	private SearchAsyncCallback<SearchDo<CodeDo>> standardSuggestionInfoAsyncCallback;
 
 	private SearchAsyncCallback<SearchDo<String>> sourceSuggestionAsyncCallback;
-	
+
 	private SearchAsyncCallback<SearchDo<String>> aggregatorSuggestionAsyncCallback;
 
 	protected static final String ALL = "*";
 
 	SignUpPresenter signUpViewPresenter = null;
-	
+
 	AddStandardsPresenter addStandardsPresenter = null;
-	
+
 	private boolean setFilter = true;
+
 	/**
 	 * Class constructor
 	 * 
@@ -124,7 +127,9 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	 * @param proxy
 	 *            {@link Proxy}
 	 */
-	public AbstractSearchPresenter(V view, P proxy, SignUpPresenter signUpViewPresenter, AddStandardsPresenter addStandardsPresenterObj) {
+	public AbstractSearchPresenter(V view, P proxy,
+			SignUpPresenter signUpViewPresenter,
+			AddStandardsPresenter addStandardsPresenterObj) {
 		super(view, proxy);
 		this.signUpViewPresenter = signUpViewPresenter;
 		this.addStandardsPresenter = addStandardsPresenterObj;
@@ -154,7 +159,7 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		setSearchAsyncCallback(new SearchAsyncCallback<SearchDo<T>>() {
 
 			@Override
-			protected void run(SearchDo<T> searchDo) {				
+			protected void run(SearchDo<T> searchDo) {
 				requestSearch(searchDo, this);
 			}
 
@@ -195,7 +200,7 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 				@Override
 				protected void run(SearchDo<String> searchDo) {
 					getSearchService().getSuggestSource(searchDo, this);
-				
+
 				}
 
 				@Override
@@ -208,22 +213,22 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 				@Override
 				protected void run(SearchDo<String> searchDo) {
 					getSearchService().getSuggestedAggregator(searchDo, this);
-					
+
 				}
 
 				@Override
 				public void onCallSuccess(SearchDo<String> result) {
 					getView().setAggregatorSuggestions(result);
-					
+
 				}
-				
+
 			});
-			
+
 		}
 	}
 
 	@Override
-	protected void onReveal() {	
+	protected void onReveal() {
 		super.onReveal();
 		AppClientFactory.fireEvent(new RegisterTabDndEvent());
 		AppClientFactory.fireEvent(new ConfirmStatusPopupEvent(true));
@@ -233,43 +238,49 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	@Override
 	protected void onReset() {
 		super.onReset();
-		
+
 		String count = Cookies.getCookie("MyCookie");
-			if(count!= null && Integer.parseInt(count)==7){
-				Window.enableScrolling(false);
-				Cookies.setCookie("MyCookie","8");
-			}
-			else{
-				Window.enableScrolling(false);
-				//Window.enableScrolling(true);
-			}
-		
-		AppClientFactory.fireEvent(new SetFooterEvent(AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken()));
+		if (count != null && Integer.parseInt(count) == 7) {
+			Window.enableScrolling(false);
+			Cookies.setCookie("MyCookie", "8");
+		} else {
+			Window.enableScrolling(false);
+			// Window.enableScrolling(true);
+		}
+
+		AppClientFactory.fireEvent(new SetFooterEvent(AppClientFactory
+				.getPlaceManager().getCurrentPlaceRequest().getNameToken()));
+		System.out.println("======================================Set filter "
+				+ setFilter);
 		if (AppClientFactory.getPlaceManager().refreshPlace()) {
 			if (setFilter) {
 				searchDo.setPageNum(1);
-				getSearchService().getSearchFilters(getCurrentPlaceToken(), new SimpleAsyncCallback<SearchFilterDo>() {
+				getSearchService().getSearchFilters(getCurrentPlaceToken(),
+						new SimpleAsyncCallback<SearchFilterDo>() {
 
-					@Override
-					public void onSuccess(SearchFilterDo searchFilterDo) {
-						getView().setSearchFilter(searchFilterDo);
-					}
-				});
+							@Override
+							public void onSuccess(SearchFilterDo searchFilterDo) {
+								getView().setSearchFilter(searchFilterDo);
+							}
+						});
 				setFilter = false;
 			} else {
 				initiateSearch();
 			}
 		}
-		if (getPlaceManager().getRequestParameter("callback") != null && getPlaceManager().getRequestParameter("callback").equalsIgnoreCase("signup")) {
-			//To show SignUp (Registration popup)
+		if (getPlaceManager().getRequestParameter("callback") != null
+				&& getPlaceManager().getRequestParameter("callback")
+						.equalsIgnoreCase("signup")) {
+			// To show SignUp (Registration popup)
 			Window.enableScrolling(false);
 			AppClientFactory.fireEvent(new SetHeaderZIndexEvent(98, false));
-			String type = getPlaceManager().getRequestParameter("type") ;
-			int displayScreen =getPlaceManager().getRequestParameter("type") !=null  ? Integer.parseInt(type) : 1;
+			String type = getPlaceManager().getRequestParameter("type");
+			int displayScreen = getPlaceManager().getRequestParameter("type") != null ? Integer
+					.parseInt(type) : 1;
 			signUpViewPresenter.displayPopup(displayScreen);
 			addToPopupSlot(signUpViewPresenter);
 		}
-		
+
 		Document doc = Document.get();
 		doc.getElementById("uvTab").getStyle().setDisplay(Display.BLOCK);
 		AppClientFactory.fireEvent(new HomeEvent(HeaderTabType.NONE));
@@ -279,11 +290,11 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	public void prepareFromRequest(PlaceRequest request) {
 		super.prepareFromRequest(request);
 		if (AppClientFactory.getPlaceManager().refreshPlace()) {
-//			if (getPlaceManager().getRequestParameter("callback") != null
-//					&& !getPlaceManager().getRequestParameter("callback")
-//							.equalsIgnoreCase("signup")) {
-				initParam();
-//			}
+			// if (getPlaceManager().getRequestParameter("callback") != null
+			// && !getPlaceManager().getRequestParameter("callback")
+			// .equalsIgnoreCase("signup")) {
+			initParam();
+			// }
 		}
 	}
 
@@ -292,58 +303,73 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		AppClientFactory.fireEvent(new PreSearchEvent(getSearchDo()));
 		getView().preSearch(getSearchDo());
 		setPageTitle(getSearchDo().getSearchQuery());
-		AppClientFactory.setMetaDataDescription(SeoTokens.HOME_META_DESCRIPTION);
-		if (getSearchDo().getSearchQuery() != null && getSearchDo().getSearchQuery().trim().length() >=0) {
+		AppClientFactory
+				.setMetaDataDescription(SeoTokens.HOME_META_DESCRIPTION);
+		if (getSearchDo().getSearchQuery() != null
+				&& getSearchDo().getSearchQuery().trim().length() >= 0) {
 			getSearchAsyncCallback().execute(getSearchDo());
 		}
 	}
 
 	public void setPageTitle(String searchQuery) {
-		String pageToken = AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken();
-		if(pageToken.equals(PlaceTokens.COLLECTION_SEARCH)) {
-			AppClientFactory.setBrowserWindowTitle(SeoTokens.COLLECTION_SEARCH_TITLE+searchQuery);
+		String pageToken = AppClientFactory.getPlaceManager()
+				.getCurrentPlaceRequest().getNameToken();
+		if (pageToken.equals(PlaceTokens.COLLECTION_SEARCH)) {
+			AppClientFactory
+					.setBrowserWindowTitle(SeoTokens.COLLECTION_SEARCH_TITLE
+							+ searchQuery);
 		} else if (pageToken.equals(PlaceTokens.RESOURCE_SEARCH)) {
-			AppClientFactory.setBrowserWindowTitle(SeoTokens.RESOURCE_SEARCH_TITLE+searchQuery);
+			AppClientFactory
+					.setBrowserWindowTitle(SeoTokens.RESOURCE_SEARCH_TITLE
+							+ searchQuery);
 		}
 	}
-	
+
 	/**
 	 * @return search filters such as category, subject, grade, etc..
 	 */
 	protected Map<String, String> getSearchFilters() {
 		Map<String, String> filters = new HashMap<String, String>();
-		String category = getPlaceManager().getRequestParameter(IsSearchView.CATEGORY_FLT);
+		String category = getPlaceManager().getRequestParameter(
+				IsSearchView.CATEGORY_FLT);
 		if (category != null) {
 			filters.put(IsSearchView.CATEGORY_FLT, category);
 		}
-		String subject = getPlaceManager().getRequestParameter(IsSearchView.SUBJECT_FLT);
+		String subject = getPlaceManager().getRequestParameter(
+				IsSearchView.SUBJECT_FLT);
 		if (subject != null) {
 			filters.put(IsSearchView.SUBJECT_FLT, subject);
 		}
-		String grade = getPlaceManager().getRequestParameter(IsSearchView.GRADE_FLT);
+		String grade = getPlaceManager().getRequestParameter(
+				IsSearchView.GRADE_FLT);
 		if (grade != null) {
 			filters.put(IsSearchView.GRADE_FLT, grade);
 		}
-		String standard = getPlaceManager().getRequestParameter(IsSearchView.STANDARD_FLT);
+		String standard = getPlaceManager().getRequestParameter(
+				IsSearchView.STANDARD_FLT);
 		if (standard != null) {
 			filters.put(IsSearchView.STANDARD_FLT, standard);
 		}
-		if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)){
-			String notFriendly = getPlaceManager().getRequestParameter(IsSearchView.MEDIATYPE_FLT);
-			if (notFriendly != null && notFriendly.equalsIgnoreCase("not_ipad_friendly")) {
+		if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest()
+				.getNameToken().equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)) {
+			String notFriendly = getPlaceManager().getRequestParameter(
+					IsSearchView.MEDIATYPE_FLT);
+			if (notFriendly != null
+					&& notFriendly.equalsIgnoreCase("not_ipad_friendly")) {
 				filters.put(IsSearchView.MEDIATYPE_FLT, notFriendly);
 			}
-			String oer=getPlaceManager().getRequestParameter(IsSearchView.OER_FLT);
-			String accessMode=getPlaceManager().getRequestParameter(IsSearchView.ACCESS_MODE_FLT);
-			if(oer != null && oer.equalsIgnoreCase("1")){
+			String oer = getPlaceManager().getRequestParameter(
+					IsSearchView.OER_FLT);
+			String accessMode = getPlaceManager().getRequestParameter(
+					IsSearchView.ACCESS_MODE_FLT);
+			if (oer != null && oer.equalsIgnoreCase("1")) {
 				filters.put(IsSearchView.OER_FLT, oer);
 			}
-			
-			if(accessMode != null){
+
+			if (accessMode != null) {
 				filters.put(IsSearchView.ACCESS_MODE_FLT, accessMode);
 			}
-			
-			
+
 		}
 		return filters;
 	}
@@ -352,7 +378,8 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		return searchAsyncCallback;
 	}
 
-	public void setSearchAsyncCallback(SearchAsyncCallback<SearchDo<T>> searchAsyncCallback) {
+	public void setSearchAsyncCallback(
+			SearchAsyncCallback<SearchDo<T>> searchAsyncCallback) {
 		this.searchAsyncCallback = searchAsyncCallback;
 	}
 
@@ -381,40 +408,34 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	private void initParam() {
 		getSearchDo().setSearchResults(null);
 		String queryVal = "";
-		if(getPlaceManager().getRequestParameter(QUERY) != null)
-		{
-			queryVal = getPlaceManager().getRequestParameter(QUERY);	
-			/*queryVal = queryVal.replaceAll("%5C1", "&");*/
+		if (getPlaceManager().getRequestParameter(QUERY) != null) {
+			queryVal = getPlaceManager().getRequestParameter(QUERY);
+			/* queryVal = queryVal.replaceAll("%5C1", "&"); */
 		}
-		try
-		{
-		queryVal = URL.decodeQueryString(queryVal);
-		}
-		catch(Exception ex)
-		{
-			
+		try {
+			queryVal = URL.decodeQueryString(queryVal);
+		} catch (Exception ex) {
+
 		}
 		getSearchDo().setQuery(queryVal);
-		getSearchDo().setPageNum(getPlaceManager().getRequestParameterAsInt(PAGE_NUM));
-		getSearchDo().setPageSize(getPlaceManager().getRequestParameterAsInt(PAGE_SIZE));
+		getSearchDo().setPageNum(
+				getPlaceManager().getRequestParameterAsInt(PAGE_NUM));
+		getSearchDo().setPageSize(
+				getPlaceManager().getRequestParameterAsInt(PAGE_SIZE));
 		getSearchDo().setFilters(getSearchFilters());
 	}
 
 	@Override
 	public void paginateSearch(int pageNum) {
 		String queryVal = "";
-		if(getPlaceManager().getRequestParameter(QUERY) != null)
-		{
-			queryVal = getPlaceManager().getRequestParameter(QUERY);	
-			/*queryVal = queryVal.replaceAll("%5C1", "&");*/
+		if (getPlaceManager().getRequestParameter(QUERY) != null) {
+			queryVal = getPlaceManager().getRequestParameter(QUERY);
+			/* queryVal = queryVal.replaceAll("%5C1", "&"); */
 		}
-		try
-		{
-		queryVal = URL.decodeQueryString(queryVal);
-		}
-		catch(Exception ex)
-		{
-			
+		try {
+			queryVal = URL.decodeQueryString(queryVal);
+		} catch (Exception ex) {
+
 		}
 		if (getViewToken().equalsIgnoreCase(getCurrentPlaceToken())) {
 			getSearchDo().setPageNum(pageNum);
@@ -428,11 +449,14 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		getSearchDo().setQuery(query);
 		getSearchDo().setPageNum(null);
 		getSearchDo().setPageSize(null);
+
+		System.out
+				.println("==========================================I am in Refresh Search");
 		onSearchRequest(null);
 	}
 
 	@Override
-	public void switchSearch(String viewToken,String searchQuery) {
+	public void switchSearch(String viewToken, String searchQuery) {
 		getSearchDo().setPageNum(null);
 		getSearchDo().setPageSize(null);
 		getSearchDo().setNotFriendly(null);
@@ -460,42 +484,52 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		}
 		if (getViewToken().equalsIgnoreCase(viewToken)) {
 			Map<String, String> params = getView().getSearchFilters();
-			if(!viewToken.equalsIgnoreCase(AppClientFactory.getCurrentPlaceToken())) {
+
+			if (Window.getClientWidth() <= 767) {
+				params = getView().getSearchFilters1();
+			}
+			if (!viewToken.equalsIgnoreCase(AppClientFactory
+					.getCurrentPlaceToken())) {
 				params.clear();
 				params.put(IsSearchView.CATEGORY_FLT, "all");
-				String subject = getPlaceManager().getRequestParameter(IsSearchView.SUBJECT_FLT);
+				String subject = getPlaceManager().getRequestParameter(
+						IsSearchView.SUBJECT_FLT);
 				if (subject != null) {
 					params.put(IsSearchView.SUBJECT_FLT, subject);
 				}
-				String grade = getPlaceManager().getRequestParameter(IsSearchView.GRADE_FLT);
+				String grade = getPlaceManager().getRequestParameter(
+						IsSearchView.GRADE_FLT);
 				if (grade != null) {
 					params.put(IsSearchView.GRADE_FLT, grade);
 				}
-				String standard = getPlaceManager().getRequestParameter(IsSearchView.STANDARD_FLT);
+				String standard = getPlaceManager().getRequestParameter(
+						IsSearchView.STANDARD_FLT);
 				if (standard != null) {
 					params.put(IsSearchView.STANDARD_FLT, standard);
 				}
-				if (viewToken.equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)){
-					String notFriendly = getPlaceManager().getRequestParameter(IsSearchView.MEDIATYPE_FLT);
-					String oer = getPlaceManager().getRequestParameter(IsSearchView.OWNER_FLT);
-					String accessMode = getPlaceManager().getRequestParameter(IsSearchView.ACCESS_MODE_FLT);
+				if (viewToken.equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)) {
+					String notFriendly = getPlaceManager().getRequestParameter(
+							IsSearchView.MEDIATYPE_FLT);
+					String oer = getPlaceManager().getRequestParameter(
+							IsSearchView.OWNER_FLT);
+					String accessMode = getPlaceManager().getRequestParameter(
+							IsSearchView.ACCESS_MODE_FLT);
 					if (notFriendly != null) {
 						params.put(IsSearchView.MEDIATYPE_FLT, notFriendly);
 					}
 					if (oer != null) {
 						params.put(IsSearchView.OER_FLT, oer);
 					}
-					
+
 					if (accessMode != null) {
 						params.put(IsSearchView.ACCESS_MODE_FLT, accessMode);
 					}
-				}else{
+				} else {
 					params.remove(IsSearchView.MEDIATYPE_FLT);
 					params.remove(IsSearchView.OER_FLT);
 					params.remove(IsSearchView.ACCESS_MODE_FLT);
 				}
-				
-				
+
 				getView().resetFilters();
 			}
 			params.put(QUERY, getSearchDo().getUrlQuery());
@@ -509,7 +543,8 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		return standardSuggestionAsyncCallback;
 	}
 
-	public void setStandardSuggestionAsyncCallback(SearchAsyncCallback<SearchDo<CodeDo>> standardSuggestionAsyncCallback) {
+	public void setStandardSuggestionAsyncCallback(
+			SearchAsyncCallback<SearchDo<CodeDo>> standardSuggestionAsyncCallback) {
 		this.standardSuggestionAsyncCallback = standardSuggestionAsyncCallback;
 	}
 
@@ -517,7 +552,8 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		return sourceSuggestionAsyncCallback;
 	}
 
-	public void setSourceSuggestionAsyncCallback(SearchAsyncCallback<SearchDo<String>> sourceSuggestionAsyncCallback) {
+	public void setSourceSuggestionAsyncCallback(
+			SearchAsyncCallback<SearchDo<String>> sourceSuggestionAsyncCallback) {
 		this.sourceSuggestionAsyncCallback = sourceSuggestionAsyncCallback;
 	}
 
@@ -543,23 +579,28 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 			getSourceSuggestionAsyncCallback().execute(searchDo);
 		}
 	}
+
 	@Override
 	public void requestAggregatorSuggestion(SearchDo<String> searchDo) {
 		if (isCurrentView()) {
 			getAggregatorSuggestionAsyncCallback().execute(searchDo);
 		}
 	}
-	protected abstract void requestSearch(SearchDo<T> searchDo, SearchAsyncCallback<SearchDo<T>> searchAsyncCallback);
+
+	protected abstract void requestSearch(SearchDo<T> searchDo,
+			SearchAsyncCallback<SearchDo<T>> searchAsyncCallback);
 
 	@Override
-	public void registerDropController(ResourceDropController dropController, DROP_AREA type) {
+	public void registerDropController(ResourceDropController dropController,
+			DROP_AREA type) {
 		if (isCurrentView()) {
 			getView().registerDropController(dropController, type);
 		}
 	}
 
 	@Override
-	public void unregisterDropController(ResourceDropController dropController, DROP_AREA dropType) {
+	public void unregisterDropController(ResourceDropController dropController,
+			DROP_AREA dropType) {
 		if (isCurrentView()) {
 			getView().unregisterDropController(dropController, dropType);
 		}
@@ -571,21 +612,20 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 			getView().setShelfCollections(shelfCollections);
 		}
 	}
-	
+
 	@Override
 	public void getAddStandards() {
 
-	addToPopupSlot(addStandardsPresenter);
-	getView().OnStandardsClickEvent(addStandardsPresenter.getAddBtn());
+		addToPopupSlot(addStandardsPresenter);
+		getView().OnStandardsClickEvent(addStandardsPresenter.getAddBtn());
 
-		
 	}
-	
+
 	@Override
 	public void setUpdatedStandards() {
 		getView().setUpdatedStandards(addStandardsPresenter.setStandardsVal());
 	}
-	
+
 	@Override
 	public void closeStandardsPopup() {
 		addStandardsPresenter.hidePopup();
@@ -602,7 +642,8 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 	 * @param standardSuggestionInfoAsyncCallback
 	 *            the standardSuggestionInfoAsyncCallback to set
 	 */
-	public void setStandardSuggestionInfoAsyncCallback(SearchAsyncCallback<SearchDo<CodeDo>> standardSuggestionInfoAsyncCallback) {
+	public void setStandardSuggestionInfoAsyncCallback(
+			SearchAsyncCallback<SearchDo<CodeDo>> standardSuggestionInfoAsyncCallback) {
 		this.standardSuggestionInfoAsyncCallback = standardSuggestionInfoAsyncCallback;
 	}
 

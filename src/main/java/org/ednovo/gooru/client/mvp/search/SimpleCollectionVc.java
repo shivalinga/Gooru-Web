@@ -122,7 +122,7 @@ public class SimpleCollectionVc extends Composite implements IsDraggable {
 		SearchMoreInfoVcCBundle.INSTANCE.css().ensureInjected();
 		if(AppClientFactory.getCurrentPlaceToken().equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)){
 			internalPanel1.setStyleName(SearchMoreInfoVcCBundle.INSTANCE.css().resourceCollectionThumbnailPanel());
-			collectionTitlePanel.setStyleName(SearchMoreInfoVcCBundle.INSTANCE.css().resourceCollectionTitlePanel());
+		//	collectionTitlePanel.setStyleName(SearchMoreInfoVcCBundle.INSTANCE.css().resourceCollectionTitlePanel());
 			collectionTitleLbl.getElement().getStyle().setColor("#1076BB");
 			/*internalPanel1.getElement().getStyle().setPaddingTop(10, Unit.PX); 
 			internalPanel1.getElement().getStyle().setPaddingBottom(10, Unit.PX);

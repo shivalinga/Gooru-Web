@@ -34,13 +34,13 @@ import org.ednovo.gooru.shared.model.search.SearchDo;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -80,6 +80,7 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 	@UiField
 	SimplePanel searchWrapperSimPanel, shelfTabSimPanel;
 	@UiField FlowPanel panelSearchPage;
+	@UiField Anchor searchFilterMenu;
 
 	/*@UiField
 	Anchor resourceLinkLbl, collectionLinkLbl;*/
@@ -92,7 +93,9 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 	
 	@UiField
 	Style style;
-
+	@UiField
+	SearchCBundle res;
+	
 	@UiField
 	HTML queriedTextHtml;
 
@@ -101,6 +104,7 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 	 */
 	public SearchRootView() {
 		setWidget(uiBinder.createAndBindUi(this));
+		res.css().ensureInjected();
 		resourceSearchBtn.getElement().setId("btnResource");
 		collectionSearchBtn.getElement().setId("btnCollection");
 		
@@ -110,10 +114,10 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 		searchWrapperSimPanel.getElement().setId("spnlSearchWrapperSimPanel");
 		shelfTabSimPanel.getElement().setId("spnlShelfTabSimPanel");
 		lodingImage.getElement().setId("lblLodingImage");
-
-		int windowHeight=Window.getClientHeight();
+		searchFilterMenu.getElement().setId("toggle-menu1");
+	/*	int windowHeight=Window.getClientHeight();
 		panelSearchPage.setStyleName("panelHeight");
-		panelSearchPage.getElement().getStyle().setHeight(windowHeight - 50, Unit.PX);
+		panelSearchPage.getElement().getStyle().setHeight(windowHeight - 50, Unit.PX);*/
 	}
 
 	@Override
@@ -184,15 +188,15 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 		
 		
 		if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().equals(PlaceTokens.RESOURCE_SEARCH)) {
-			resourceSearchBtn.addStyleName(style.resourceBtnActive());
-			collectionSearchBtn.removeStyleName(style.collectionBtnActive());
-			resourceSearchBtn.removeStyleName(style.secondaryResourceSearchBtn()); 
-			collectionSearchBtn.addStyleName(style.secondaryCollectionSearchBtn());
+			resourceSearchBtn.addStyleName(res.css().secondaryICactive());
+			collectionSearchBtn.removeStyleName(res.css().secondaryIC1active());
+			resourceSearchBtn.removeStyleName(res.css().secondaryIC()); 
+			collectionSearchBtn.addStyleName(res.css().secondaryIC1());
 		} else {
-			collectionSearchBtn.addStyleName(style.collectionBtnActive());
-			resourceSearchBtn.removeStyleName(style.resourceBtnActive());
-			collectionSearchBtn.removeStyleName(style.secondaryCollectionSearchBtn());
-			resourceSearchBtn.addStyleName(style.secondaryResourceSearchBtn()); 
+			collectionSearchBtn.addStyleName(res.css().secondaryIC1active());
+			resourceSearchBtn.removeStyleName(res.css().secondaryICactive());
+			collectionSearchBtn.removeStyleName(res.css().secondaryIC1());
+			resourceSearchBtn.addStyleName(res.css().secondaryIC()); 
 		}
 	}
 
@@ -204,7 +208,8 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 				|| AppClientFactory.getCurrentPlaceToken().equalsIgnoreCase(
 						PlaceTokens.COLLECTION_SEARCH)) {
 			Document doc = Document.get();
-			doc.getBody().setClassName(style.bodyHeight());
+		/*	doc.getBody().setClassName(style.bodyHeight());*/
+
 		}
 		Window.enableScrolling(false);
 		int countValue = searchDo.getSearchResults().size();
@@ -252,4 +257,13 @@ public class SearchRootView extends BaseViewWithHandlers<SearchRootUiHandlers> i
 	public void clearPanel() {
 		contentpanel.clear();
 	}*/
+	@UiHandler("searchFilterMenu")
+	public void searchFilterMenuClickEvent(ClickEvent event){
+		invokeShowHideMenuContainer();
+			
+	}
+	
+	public static native void invokeShowHideMenuContainer() /*-{
+		$wnd.showSearchFilters();
+	}-*/;
 }

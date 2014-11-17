@@ -1,14 +1,18 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:uc="urn:import:org.ednovo.gooru.client.uc"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:with type="org.ednovo.gooru.client.mvp.shelf.ShelfCBundle"
 		field="res" />
-	<g:FlowPanel styleName="{res.css.shareLink2}" ui:field="shareLinkFlwPl">
-		<g:Label ui:field="shareLbl"/>
-		<g:FlowPanel styleName="{res.css.shareLinkBoxContainer}" ui:field="shareLinkContainer">
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res1" />
+	<g:FlowPanel ui:field="shareLinkFlwPl">
+		<uc:PPanel ui:field="shareLbl"/>
+		<uc:PPanel ui:field="shareLinkContainer">
 			<g:TextArea styleName="{res.css.shareLinkBox}" ui:field="shareLinkTxtBox" />
-		</g:FlowPanel>
-		<g:Label styleName="{res.css.shareLinkSwitchUrl}" ui:field="swithUrlLbl"/>
-		<g:Label styleName="{res.css.shareLinkSwitchEmbed}" ui:field="swithToEmbedLbl"/>
+		</uc:PPanel>
+		<uc:PPanel>
+			<g:Anchor  ui:field="swithUrlLbl"/>
+			<g:Anchor  ui:field="swithToEmbedLbl"/>    
+		</uc:PPanel>
+		
 	</g:FlowPanel>
 </ui:UiBinder> 

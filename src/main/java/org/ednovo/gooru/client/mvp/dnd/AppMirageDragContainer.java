@@ -27,14 +27,14 @@
  */
 package org.ednovo.gooru.client.mvp.dnd;
 
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Search Team
  * 
  */
-public class AppMirageDragContainer extends VerticalPanel {
+public class AppMirageDragContainer extends FlowPanel {
 
 	private final AppPickupDragController dragController;
 

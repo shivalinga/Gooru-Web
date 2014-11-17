@@ -1,29 +1,32 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc" xmlns:s="urn:import:org.ednovo.gooru.client.mvp.search.collection">
 	<ui:with type="org.ednovo.gooru.client.mvp.search.collection.CollectionSearchResultCBundle" field="res" />
-	<s:CollectionSearchResultWrapperVc ui:field="wrapperVc">
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res1" />
+	
+	<s:CollectionSearchResultWrapperVc ui:field="wrapperVc"  styleName="{res1.css.panel} panel panel-default">
+	    
 		<s:content>
-			<g:FlowPanel styleName="{res.css.collectionPanel}">
-				<g:FlowPanel styleName="{res.css.collectionHeaderPanel}">
+				<g:FlowPanel  styleName="col-md-12 col-sm-12 col-xs-12 thumbBlock">
 					<uc:CollectionImageUc ui:field="collectionImageUc" />
-					<g:FlowPanel styleName="{res.css.collectionHeaderTextPanel}" ui:field="collectionTitlePanel">
-						<g:HTML styleName="{res.css.collectionTitle}" ui:field="collectionTitleLbl" />
-						<g:Image  styleName="{res.css.imgHeight}" ui:field="imgOER"></g:Image>
-						<g:HTMLPanel styleName="{res.css.authorContainer}">
-							<g:Label styleName="{res.css.author}" ui:field="creatorNameLbl" />
-							<g:Label styleName="{res.css.authorName}" ui:field="creatorNameLblValue" />
-							<g:FlowPanel ui:field="teamFlowPanel" styleName="{res.css.collaboratorStyle}"></g:FlowPanel>
-							<g:HTMLPanel ui:field="containerPanel"></g:HTMLPanel>
-						</g:HTMLPanel>
+					<g:FlowPanel styleName="{res1.css.resourceHeaderTextPanel}" ui:field="collectionTitlePanel">
+						<uc:H4Panel styleName="resourceSearchTitle">
+							<g:HTML styleName="{res.css.collectionTitle}" ui:field="collectionTitleLbl" />
+							<g:Image  styleName="{res.css.imgHeight}" ui:field="imgOER"></g:Image>
+						</uc:H4Panel>
+							
+								<g:Label styleName="{res.css.author}" ui:field="creatorNameLbl" />
+								<g:Label styleName="{res.css.authorName}" ui:field="creatorNameLblValue" />
+								<g:FlowPanel ui:field="teamFlowPanel" styleName="{res.css.collaboratorStyle}"></g:FlowPanel>
+								<g:HTMLPanel ui:field="containerPanel"></g:HTMLPanel>
+							
 						<g:FlowPanel styleName="{res.css.metaDataPanel}">
 							<g:FlowPanel ui:field="metaDataPanelFloPanel" />
 							<g:Label styleName="{res.css.resourceCount}" ui:field="resourceCountLbl" />
 						</g:FlowPanel>
 						<g:FlowPanel styleName="{res.css.standards}" ui:field="standardsFloPanel" />
 					</g:FlowPanel>
+					<g:HTML  ui:field="collectionDescriptionHtml" />
 				</g:FlowPanel>
-				<g:HTML styleName="{res.css.collectionDescription}" ui:field="collectionDescriptionHtml" />
-			</g:FlowPanel>
 		</s:content>
 	</s:CollectionSearchResultWrapperVc>
 </ui:UiBinder> 

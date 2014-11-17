@@ -171,8 +171,11 @@ public class SimpleResourceVc extends Composite implements IsDraggable {
 		//boolean setVisibility = mediaType !=null ?  mediaType.equalsIgnoreCase("not_iPad_friendly") ? false : true : true;
 		
 		if (resourceTitleLbl.getText().length() > 30){
-			resourceTitleLbl.getElement().getStyle().setWidth(210, Unit.PX);
-			resourceTitleLbl.getElement().getStyle().setFloat(Float.LEFT);
+			String resourceTitleText=resourceTitleLbl.getText();
+			 resourceTitleText=resourceTitleText.substring(0, 26)+"...";
+			 resourceTitleLbl.setText(resourceTitleText);
+			 //resourceTitleLbl.getElement().getStyle().setWidth(210, Unit.PX);
+			//resourceTitleLbl.getElement().getStyle().setFloat(Float.LEFT);
 		}else{
 			resourceTitleLbl.getElement().getStyle().clearWidth();
 			resourceTitleLbl.getElement().getStyle().clearFloat();

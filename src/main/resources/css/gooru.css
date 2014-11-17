@@ -58,6 +58,7 @@ caption,th,td {
 a img {
 	border: 0;
 }
+
 .shelfFolderItemTitle{
 	padding-top: 3px;
 	white-space: nowrap !important;
@@ -2236,6 +2237,14 @@ fieldset {
 	color:white;
 	background: url(../images/preview-arrow-small.png) 70px center no-repeat, #1076bb;
 }
+
+.searchPushDisplay{
+	display:block;
+}
+.searchPushHide{
+	display:none;
+}
+
 /*ipad player menu style */
 #page {
 	position: relative; /* Set the position property so z-index will apply */
@@ -2297,6 +2306,7 @@ fieldset {
 /* .menu-visible #page {
 	right: 240px;
 } */
+
 @media screen and (min-width: 0px) and (max-width: 1275px) {
 	.panelHeight{
 		width:100%;
@@ -2311,5 +2321,188 @@ fieldset {
 		.container {
 			width: auto !important;
 		}
+}
+
+#searchPush{
+	display:none;
+}
+
+#main {
+	position: relative; /* Set the position property so z-index will apply */
+	/*  z-index: 20;  *//* Make sure this is higher than #menu */
+ background: url("../images/background-image.png") repeat scroll 0 0 #efeded !important;
+	height: 100%;
+}
+
+#main h1 {
+	margin: 0;
+}
+
+#toggle-menu1 {
+/*	position: absolute;*/
+	top: 10px;
+	left: 10px;
+	padding: 5px 5px;
+/*	border: 1px solid #eee;*/
+	z-index:999999;
+	outline:none;
+}
+#toggle-menu1:hover{
+	opacity:0.7;
+}
+
+#menuRight {
+	display: none;
+	position:absolute;
+	top:0;
+	left: 0;
+	right:0;
+	bottom:0;
+/*	background:none repeat scroll 0 0 #f0f0f0;*/
+	width: 180px;
+	padding:0 0;
+	margin: 0;
+	height:100%;
+	list-style: none;
+	background:#ffffff;
+
+
+	z-index: 10; /* Make sure the z-index is lower than the #page */
+}
+
+#menuRight .searchFilters{
+	margin-top:0;
+}
+
+/*#menu a {
+	display: block;
+	color: #fff;
+	padding: 15px 0;
+	border-bottom: 1px solid rgba( 255, 255, 255, 0.05 );
+}
+*/
+/* Animations */
+
+
+
+/* Hide the menu unless it's animating or visible */
+.animating #menuRight, .menu-visible1 #menuRight {
+	display: block;
+}
+
+/***
+* If the animating class is present then apply
+* the CSS transition to #page over 250ms.
+*/
+.animating #main {
+	transition: transform .25s ease-in-out;
+	-webkit-transition: -webkit-transform .25s ease-in-out;
+}
+
+/***
+* If the left class is present then transform
+* the #page element 240px to the left.
+*/	
+.animating.left #main {
+	transform: translate3d( 180px, 0, 0 );
+	-webkit-transform: translate3d( 180px, 0, 0 );
+}
+
+/***
+* If the right class is present then transform
+* the #page element 240px to the right.
+*/
+.animating.right #main {
+	transform: translate3d( -180px, 0, 0 );
+	-webkit-transform: translate3d( -180px, 0, 0 );
+}
+
+/***
+* If the menu-visible class is present then
+* shift the #page 240px from the right edge
+* via position: absolute to keep it in the 
+* open position. When .animating, .left and
+* .right classes are not present the CSS
+* transform does not apply to #page.
+*/
+.menu-visible1 {
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+/* .menu-visible1 #main {
+	left:180px;
+} */
+
+.menu-visible1 #searchPush{
+	display:block;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+	#main, #menuRight {
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective:0;
+	
+}
+	
+}
+
+@media(max-width:767px){
+	html{
+ 		overflow:visible !important;
+ 	}
+	
+}
+@media(min-width:768px){
+ 
+ 	html{
+ 		overflow:hidden;
+ 	}
+	
+	#main, #menuRight {
+		-webkit-backface-visibility: hidden;
+		-webkit-perspective:0;
+		transform: translate3d( 180px, 0, 0 );
+	-webkit-transform:initial !important;
+	}
+	.menu-visible1 #main {
+	 left: 0px; 
+	}
+
+	.animating #menu, .menu-visible #menu {
+		display: none;
+	}
+	.animating #page {
+	transition: transform .25s ease-in-out;
+	-webkit-transition:hidden;
+	}
+	.animating.left #page {
+	transform: translate3d( 0p, 0, 0 );
+	-webkit-transform: translate3d( 0, 0, 0 );
+	}	
+
+	#searchPush{
+		display:none !important;
+	}
+}
+@media (min-width: 1200px) {
+	
+	#main, #menuRight {
+	-webkit-backface-visibility: hidden;
+	-webkit-perspective:0;
+	}
+	.animating #menu, .menu-visible #menu {
+		display: none;
+	}
+	.animating #page {
+	transition: transform .25s ease-in-out;
+	-webkit-transition:hidden;
+	}
+	.animating.left #page {
+	transform: translate3d( 0p, 0, 0 );
+	-webkit-transform: translate3d( 0, 0, 0 );
+	}	
+}
+
 }
 

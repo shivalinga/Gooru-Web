@@ -82,7 +82,7 @@ grade modification......
 }
 
 .moreInfoRightScrollPanel {
-	width: 548px;
+	width: 100%;
 	height: 212px;
 	float: left;
 	padding-left: 10px;
@@ -186,9 +186,8 @@ grade modification......
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #999999;
-	width: 534px;
+	width: 100%;
 	position: relative;
-	height: 94px;
 	clear: both;
 	
 }
@@ -196,7 +195,7 @@ grade modification......
 .resourceCollectionTitlePanel {
 	float: left;
 	height: 70px;
-	max-width:275px
+	
 }
 
 

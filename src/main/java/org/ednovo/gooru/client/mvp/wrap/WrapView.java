@@ -36,14 +36,12 @@ import org.ednovo.gooru.client.uc.tooltip.DiscoverToolTip;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
 import org.ednovo.gooru.shared.model.user.UserDo;
 import org.ednovo.gooru.shared.util.StringUtil;
-import org.ednovo.gooru.shared.util.UAgentInfo;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -67,7 +65,10 @@ public class WrapView extends BaseView implements IsWrapView {
 
 	@UiField
 	HeaderUc headerUc;
-
+	
+	@UiField
+	HTMLPanel resorceSearchFilters,collectionSearchFilters,webcontainer,searchPush,menuRight;
+	
 	@UiField HTMLPanel panelWrapper,ipadSectiondiv,androidSectiondiv;
 	
 	@UiField com.google.gwt.user.client.ui.Image closeIpadBtn,closeAndriodBtn;
@@ -92,6 +93,8 @@ public class WrapView extends BaseView implements IsWrapView {
 		viewAnchor.getElement().setId("lnkViewAnchor");
 		headerUc.getElement().setId("homeHeaderUc");
 		wrapperPanel.getElement().setId("spnlWrapperPanel");
+		searchPush.getElement().setId("searchPush");
+		menuRight.getElement().setId("menuRight");
 		
 		/*  Boolean isIpad = !!Navigator.getUserAgent().matches("(.*)iPad(.*)");
 		  Boolean isAndriod = !!Navigator.getUserAgent().matches("(.*)Android(.*)");
@@ -127,6 +130,7 @@ public class WrapView extends BaseView implements IsWrapView {
 		  }*/
 			ipadSectiondiv.setVisible(false);
 			androidSectiondiv.setVisible(false);
+			webcontainer.getElement().setId("main");
 			headerUc.getElement().getFirstChildElement().setAttribute("style", "position:fixed;");
 		  setUiText();
 	}
@@ -241,5 +245,16 @@ public class WrapView extends BaseView implements IsWrapView {
 		  viewAnchor.getElement().setAttribute("alt", i18n.GL1428());
 		  viewAnchor.getElement().setAttribute("title", i18n.GL1428());
 		  
+	}
+	
+	@Override
+	public HTMLPanel getSearchFiltersPanel(){
+		return resorceSearchFilters;
+	}
+	
+	@Override
+	public HTMLPanel getCollectionSearchFiltersPanel(){
+		
+		return collectionSearchFilters;
 	}
 }

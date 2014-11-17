@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.gin.AppClientFactory;
+import org.ednovo.gooru.client.uc.PPanel;
 import org.ednovo.gooru.client.util.MixpanelUtil;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
 import org.ednovo.gooru.shared.util.StringUtil;
@@ -39,9 +40,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -51,9 +52,10 @@ public class SocialShareLinksView extends Composite {
 	TextArea shareLinkTxtBox;
 	
 	@UiField
-	FlowPanel shareLinkFlwPl,shareLinkContainer;
+	FlowPanel shareLinkFlwPl;
 
-	@UiField Label swithUrlLbl, swithToEmbedLbl, shareLbl;
+	@UiField Anchor swithUrlLbl, swithToEmbedLbl;
+	@UiField PPanel  shareLbl,shareLinkContainer;
 	
 	static MessageProperties i18n = GWT.create(MessageProperties.class);
 	
@@ -131,7 +133,7 @@ public class SocialShareLinksView extends Composite {
 		return shareLinkTxtBox;
 	}
 
-	public Label getShareLbl() {
+	public PPanel getShareLbl() {
 		return shareLbl;
 	}
 
@@ -139,7 +141,7 @@ public class SocialShareLinksView extends Composite {
 		return shareLinkFlwPl;
 	}
 	
-	public FlowPanel getShareLinkContainer() {
+	public PPanel getShareLinkContainer() {
 		return shareLinkContainer;
 	}
 

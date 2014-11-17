@@ -57,7 +57,6 @@
 	margin-top: 0px;
 	clear:both;
 	width: auto;
-	min-width: 403px;
 }
 
 .resourceCount {
@@ -69,7 +68,7 @@
 .standards {
     clear: both;
     float: left;
-    height: 20px;
+ /*    height: 20px; */
     margin-top: 15px;
 }
 

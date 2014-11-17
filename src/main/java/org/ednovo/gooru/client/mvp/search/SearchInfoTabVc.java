@@ -40,8 +40,6 @@ import org.ednovo.gooru.shared.model.search.ResourceSearchResultDo;
 import org.ednovo.gooru.shared.model.social.SocialShareDo;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Float;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -104,11 +102,11 @@ public class SearchInfoTabVc extends Composite {
 		socialShareLinksView.getshareLinkTxtBox().setReadOnly(true);
 		//shareViaText.setText(GL0638);
 		socialShareLinksView.getShareLbl().setText(i18n.GL0511());
-		socialShareLinksView.getShareLinkFlwPl().getElement().getStyle().setPaddingTop(0, Unit.PX);
+	/*	socialShareLinksView.getShareLinkFlwPl().getElement().getStyle().setPaddingTop(0, Unit.PX);
 		socialShareLinksView.getShareLinkFlwPl().getElement().getStyle().setWidth(22, Unit.PC);
 		socialShareLinksView.getShareLinkFlwPl().getElement().getStyle().setFloat(Float.LEFT);
 		socialShareLinksView.getShareLinkFlwPl().getElement().getStyle().setPaddingLeft(10, Unit.PX);
-		socialShareLinksView.getShareLinkContainer().getElement().getStyle().setWidth(353, Unit.PX);
+		socialShareLinksView.getShareLinkContainer().getElement().getStyle().setWidth(353, Unit.PX);*/
 		setShareUrlGenerationAsyncCallback(new SimpleAsyncCallback<Map<String, String>>() {
 			@Override
 			public void onSuccess(Map<String, String> shortenUrl) {

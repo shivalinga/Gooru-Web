@@ -38,16 +38,17 @@ import org.ednovo.gooru.client.effects.FadeInAndOut;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.search.event.AggregatorSuggestionEvent;
 import org.ednovo.gooru.client.mvp.search.event.GetSearchKeyWordEvent;
-import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
 import org.ednovo.gooru.client.mvp.search.event.SourceSuggestionEvent;
 import org.ednovo.gooru.client.mvp.search.event.StandardsSuggestionEvent;
 import org.ednovo.gooru.client.mvp.search.event.StandardsSuggestionInfoEvent;
-import org.ednovo.gooru.client.mvp.search.event.SwitchSearchEvent;
 import org.ednovo.gooru.client.uc.AppMultiWordSuggestOracle;
 import org.ednovo.gooru.client.uc.AppSuggestBox;
 import org.ednovo.gooru.client.uc.DisclosurePanelUc;
 import org.ednovo.gooru.client.uc.DownToolTipUc;
 import org.ednovo.gooru.client.uc.DownToolTipWidgetUc;
+import org.ednovo.gooru.client.uc.H4Panel;
+import org.ednovo.gooru.client.uc.H5Panel;
+import org.ednovo.gooru.client.uc.PPanel;
 import org.ednovo.gooru.client.uc.StandardPreferenceTooltip;
 import org.ednovo.gooru.client.uc.tooltip.ToolTip;
 import org.ednovo.gooru.client.ui.HTMLEventPanel;
@@ -87,8 +88,6 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
@@ -140,11 +139,15 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 	/*@UiField
 	DisclosurePanelUc authorPanelUc;*/
 	
-	@UiField HTMLPanel panelNotMobileFriendly,categoryPanelUc,subjectPanelUc,gradePanelUc,aggregatorPanelUc,sourcePanelUc,authorPanelUc,standardPanelUc,accessModePanel;
+	@UiField HTMLPanel categoryPanelUc,subjectPanelUc,gradePanelUc,aggregatorPanelUc,sourcePanelUc,authorPanelUc,standardPanelUc,accessModePanel;
+	
+	@UiField PPanel panelNotMobileFriendly; 
 	
 	@UiField
-	HTMLPanel /*contentpanel,*/oerPanel;
-
+	PPanel /*contentpanel,*/oerPanel;
+	
+	@UiField
+	H5Panel resourceFormatLbl,subjectLbl,gradeLbl,standardLbl,accessModeLbl;
 	@UiField(provided = true)
 	AppSuggestBox sourceSgstBox;
 
@@ -167,17 +170,22 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 	FlowPanel standardContainerFloPanel;
 
 	@UiField
-	Label sourcesNotFoundLbl,filtersText,/*notifyText,*/aggregatorNotFoundLbl;
+	Label sourcesNotFoundLbl,aggregatorNotFoundLbl;
+	
+	@UiField
+	H4Panel filtersText;
 
 	@UiField
 	Label standardsNotFoundLbl;
 	
 	@UiField
-	Label publisherTooltip, standardHelpicon,clearAll,aggregatorTooltip,resourceFormatLbl,subjectLbl,gradeLbl,aggregatorLbl,sourceLbl,authorLbl,standardLbl,accessModeLbl;
+	Label publisherTooltip, standardHelpicon,clearAll,aggregatorTooltip,aggregatorLbl,sourceLbl,authorLbl;
 
 	@UiField
 	HTMLEventPanel sourceToolTip, standardToolTip,aggregatorToolTip;
 	
+	@UiField
+	SearchCBundle res;
 	/*@UiField Image publisherTooltip;*/
 	CheckBox chkNotFriendly = null;
 	CheckBox chkOER = null;
@@ -188,7 +196,7 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 	@UiField
 	Style style;
 	
-		ToolTip toolTip = null;
+	ToolTip toolTip = null;
 	
 	private AppMultiWordSuggestOracle sourceSuggestOracle;
 
@@ -243,6 +251,7 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 	 */
 	public SearchFilterVc(final boolean resourceSearch) {
 		this.resourceSearch = resourceSearch;
+		res.INSTANCE.css().ensureInjected();
 		standardSuggestOracle = new AppMultiWordSuggestOracle(true);
 		standardSearchDo.setPageSize(15);
 		standardsInfoSearchDo.setPageSize(20);
@@ -475,10 +484,10 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 		aggregatorLbl.getElement().setAttribute("alt",i18n.GL1628()+i18n.GL_SPL_SEMICOLON()+" ");
 		aggregatorLbl.getElement().setAttribute("title",i18n.GL1628()+i18n.GL_SPL_SEMICOLON()+" ");
 		
-		standardSgstBox.getElement().getStyle().setMarginTop(2, Unit.PX);
-		standardSgstBox.getElement().getStyle().setMarginLeft(3, Unit.PX);
+		/*standardSgstBox.getElement().getStyle().setMarginTop(2, Unit.PX);
+		standardSgstBox.getElement().getStyle().setMarginLeft(3, Unit.PX);*/
 		
-		browseStandards.getElement().getStyle().setPadding(4, Unit.PX);
+	//	browseStandards.getElement().getStyle().setPadding(4, Unit.PX);
 		
 //		aggregatorPanelUc.setHeaderTitle(i18n.GL1628()+i18n.GL_SPL_SEMICOLON()+" ");
 		
@@ -492,10 +501,8 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 			sourceSgstBox.addSelectionHandler(this);
 			aggregatorSgstBox.addSelectionHandler(this);
 			aggregatorNotFoundLbl.getElement().getStyle().setOpacity(0.0);
-			
-			
+						
 			publisherTooltip.addMouseOverHandler(new MouseOverHandler() {
-				
 				@Override
 				public void onMouseOver(MouseOverEvent event) {
 					toolTip = new ToolTip(i18n.GL1769());
@@ -607,7 +614,7 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 		standardToolTip.getElement().setId("epnlStandardToolTip");
 		standardsNotFoundLbl.getElement().setId("lblStandardsNotFoundLbl");
 		standardContainerFloPanel.getElement().setId("fpnlStandardContainerFloPanel");
-	}
+}
 	
 
 	/**
@@ -705,17 +712,16 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 			}
 		});
 	}
-	public void renderOERCheckBox(HTMLPanel disclosurePanelVc, String key, final String value) {
+	public void renderOERCheckBox(PPanel disclosurePanelVc, String key, final String value) {
 		chkOER = new CheckBox();	
 		chkOER.setText(value);
 		chkOER.setName(key);
 		
 		if(value.equalsIgnoreCase("OER")){
-			disclosurePanelVc.setStyleName("oerContainer");
 			chkOER.getElement().setId("chkOer");
-			chkOER.getElement().getStyle().setMarginTop(20, Unit.PX);
+			//chkOER.getElement().getStyle().setMarginTop(20, Unit.PX);
 		}
-			chkOER.setStyleName(CssTokens.FILTER_CHECKBOX);
+		//	chkOER.setStyleName(CssTokens.FILTER_CHECKBOX);
 			chkOER.addStyleName(value.toLowerCase());
 			disclosurePanelVc.add(chkOER);
 	
@@ -759,19 +765,19 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 	 * @param key check box name
 	 * @param value check box value
 	 */
-	public void renderCheckBox(HTMLPanel disclosurePanelVc, String key, final String value) {
+	public void renderCheckBox(PPanel disclosurePanelVc, String key, final String value) {
 		
 		chkNotFriendly = new CheckBox();
 		chkNotFriendly.setText(value);
 		chkNotFriendly.setName(key);
 		
 		if(value.equalsIgnoreCase("Mobile Friendly")){
-			disclosurePanelVc.setStyleName("mobilefriendlyContainer");
+			//disclosurePanelVc.setStyleName("mobilefriendlyContainer");
 			chkNotFriendly.getElement().setId("chkNotFriendly");
 //			chkNotFriendly.getElement().getStyle().setMarginTop(20, Unit.PX);
 	
 		}
-		chkNotFriendly.setStyleName(CssTokens.FILTER_CHECKBOX);
+		//chkNotFriendly.setStyleName(CssTokens.FILTER_CHECKBOX);
 		chkNotFriendly.addStyleName(value.toLowerCase());
 		disclosurePanelVc.add(chkNotFriendly);
 		chkNotFriendly.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
@@ -790,6 +796,37 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 		
 	}
 	
+	public void renderCheckBox1(HTMLPanel disclosurePanelVc, String key, final String value) {
+		chkNotFriendly = new CheckBox();
+		chkNotFriendly.setText(value);
+		chkNotFriendly.setName(key);
+		
+		if(value.equalsIgnoreCase("Mobile Friendly")){
+			//disclosurePanelVc.setStyleName("mobilefriendlyContainer");
+			chkNotFriendly.getElement().setId("chkNotFriendly");
+//			chkNotFriendly.getElement().getStyle().setMarginTop(20, Unit.PX);
+	
+		}
+		if(resourceSearch)
+		chkNotFriendly.setStyleName(res.css().filterCheckBox());
+		chkNotFriendly.addStyleName(value.toLowerCase());
+		disclosurePanelVc.add(chkNotFriendly);
+		chkNotFriendly.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+
+			@Override
+			public void onValueChange(ValueChangeEvent<Boolean> event) {
+				if (chkNotFriendly.getValue()){
+						MixpanelUtil.MOS_Filter("Selected");
+					
+				}else{
+						MixpanelUtil.MOS_Filter("Unselected");
+				}
+				AppClientFactory.fireEvent(new GetSearchKeyWordEvent());
+			}
+		});
+		
+	}
+
 	/*public void renderRadioButtons(final DisclosurePanelUc disclosurePanelVc, String key, String value){
 		final QuestionTypeFilter questionTypeFilter=new QuestionTypeFilter(key);
 		questionTypeFilter.radioButton.addClickHandler(new ClickHandler() {
@@ -898,18 +935,18 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 				Iterator<Map.Entry<String, String>> categoriesIterator = searchFilterDo.getCategories().entrySet().iterator();
 				while (categoriesIterator.hasNext()) {
 					Map.Entry<String, String> entry = categoriesIterator.next();
-					renderCheckBox(categoryPanelUc, entry.getKey(), entry.getValue());
+					renderCheckBox1(categoryPanelUc, entry.getKey(), entry.getValue());
 				}
 			}
 			if (searchFilterDo.getGradeLevels() != null) {		
-				renderCheckBox(gradePanelUc, "K-4", i18n.GL0166());
-				renderCheckBox(gradePanelUc, "5-8", i18n.GL0167());
-				renderCheckBox(gradePanelUc, "9-12", i18n.GL0168());
-				renderCheckBox(gradePanelUc, "H", i18n.GL0169());
+				renderCheckBox1(gradePanelUc, "K-4", i18n.GL0166());
+				renderCheckBox1(gradePanelUc, "5-8", i18n.GL0167());
+				renderCheckBox1(gradePanelUc, "9-12", i18n.GL0168());
+				renderCheckBox1(gradePanelUc, "H", i18n.GL0169());
 			}
 			if (searchFilterDo.getSubjects() != null) {
 				for (String subject : searchFilterDo.getSubjects()) {
-					renderCheckBox(subjectPanelUc, subject, subject);
+					renderCheckBox1(subjectPanelUc, subject, subject);
 				}
 			}
 			
@@ -928,8 +965,8 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 			renderOERCheckBox(oerPanel, "not_show_OER", "OER");
 			renderCheckBox(panelNotMobileFriendly, "not_ipad_friendly", "Mobile Friendly");
 			final Image imgNotFriendly = new Image("images/mos/questionmark.png");
-			imgNotFriendly.getElement().getStyle().setLeft(114, Unit.PX);
-			imgNotFriendly.getElement().getStyle().setTop(-16, Unit.PX);
+			imgNotFriendly.getElement().getStyle().setLeft(104, Unit.PX);
+			imgNotFriendly.getElement().getStyle().setTop(-25, Unit.PX);
 			imgNotFriendly.getElement().getStyle().setMarginLeft(30, Unit.PX);
 			imgNotFriendly.getElement().getStyle().setPosition(Position.RELATIVE);
 	
@@ -970,8 +1007,8 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 			//added for OER search
 			
 			final Image oer = new Image("images/mos/questionmark.png");
-			oer.getElement().getStyle().setLeft(85, Unit.PX);
-			oer.getElement().getStyle().setTop(-20, Unit.PX);
+			oer.getElement().getStyle().setLeft(72, Unit.PX);
+			oer.getElement().getStyle().setTop(-23, Unit.PX);
 			oer.getElement().getStyle().setPosition(Position.RELATIVE);
 			oer.getElement().getStyle().setCursor(Cursor.POINTER);
 			oer.setAltText(i18n.GL0732());
@@ -1699,4 +1736,7 @@ public class SearchFilterVc extends Composite implements SelectionHandler<Sugges
 		standardPanelUc.setVisible(true);
 	}
 	
+	public FlowPanel getMainContainer(){
+		return myCollectionSearch;
+	}
 }

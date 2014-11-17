@@ -36,7 +36,6 @@ import org.ednovo.gooru.client.event.InvokeLoginEvent;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.addTagesPopup.AddTagesPopupView;
 import org.ednovo.gooru.client.mvp.dnd.IsDraggableMirage;
-import org.ednovo.gooru.client.mvp.home.library.events.StandardPreferenceSettingEvent;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDragUc;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.collaborators.vc.SuccessPopupViewVc;
@@ -46,7 +45,6 @@ import org.ednovo.gooru.client.mvp.shelf.event.PublishButtonHideEvent;
 import org.ednovo.gooru.client.mvp.shelf.event.PublishButtonHideEventHandler;
 import org.ednovo.gooru.client.mvp.shelf.event.RefreshCollectionItemInShelfListEvent;
 import org.ednovo.gooru.client.mvp.shelf.event.RefreshType;
-import org.ednovo.gooru.client.uc.AlertContentUc;
 import org.ednovo.gooru.client.uc.ConfirmationPopupVc;
 import org.ednovo.gooru.client.uc.ResourceImageUc;
 import org.ednovo.gooru.client.uc.tooltip.ToolTip;
@@ -58,6 +56,7 @@ import org.ednovo.gooru.shared.model.content.CollectionDo;
 import org.ednovo.gooru.shared.model.content.CollectionItemDo;
 import org.ednovo.gooru.shared.model.content.ThumbnailDo;
 import org.ednovo.gooru.shared.model.folder.FolderListDo;
+import org.ednovo.gooru.shared.util.InfoUtil;
 import org.ednovo.gooru.shared.util.ResourceImageUtil;
 import org.ednovo.gooru.shared.util.StringUtil;
 
@@ -98,7 +97,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.Widget;
-import org.ednovo.gooru.shared.util.InfoUtil;
 
 
 /**

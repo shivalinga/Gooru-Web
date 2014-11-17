@@ -35,7 +35,6 @@ import org.ednovo.gooru.client.mvp.dnd.IsDraggable;
 import org.ednovo.gooru.client.mvp.home.LoginPopupUc;
 import org.ednovo.gooru.client.mvp.search.AbstractSearchView;
 import org.ednovo.gooru.client.mvp.search.AddResourceContainerPresenter;
-import org.ednovo.gooru.client.mvp.search.resource.ResourceSearchResultVc;
 import org.ednovo.gooru.shared.model.folder.FolderDo;
 import org.ednovo.gooru.shared.model.search.CollectionSearchResultDo;
 

@@ -41,6 +41,7 @@ public interface PlayerSmallMobileBundle extends ClientBundle {
 	public static final PlayerSmallMobileBundle INSTANCE = GWT.create(PlayerSmallMobileBundle.class);
 	
 	
+	
 	@NotStrict
 	@Source("playersmallmobile.css")
 	PlayerSmallMobileStyleResource getPlayerSmallMobile();

@@ -99,7 +99,7 @@ public class NOSearchResultCollectionVc extends Composite {
 		btnLibrary.getElement().setAttribute("alt",i18n.GL0506());
 		btnLibrary.getElement().setAttribute("title",i18n.GL0506());
 		
-		btnLibrary.getElement().getStyle().setMarginLeft(180, Unit.PX);
+		/*btnLibrary.getElement().getStyle().setMarginLeft(180, Unit.PX);*/
 		didnotFindText.setText(i18n.GL0704());
 		didnotFindText.getElement().setId("lblDidnotFindText");
 		didnotFindText.getElement().setAttribute("alt",i18n.GL0704());

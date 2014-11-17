@@ -2,8 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sl="urn:import:org.ednovo.gooru.client.mvp.shelf.list"
 	xmlns:uc="urn:import:org.ednovo.gooru.client.uc">
-	<ui:with type="org.ednovo.gooru.client.mvp.shelf.list.ShelfListCBundle"
-		field="res" />
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res1"></ui:with>
+	<ui:with type="org.ednovo.gooru.client.mvp.shelf.list.ShelfListCBundle"	field="res" />
 	<ui:style field="folderStyle" src="../folderList.css" type="org.ednovo.gooru.client.mvp.shelf.FolderStyleBundle" />
 	<ui:style>
 		.shelfPanel {
@@ -90,11 +90,11 @@
 		}
 
 	</ui:style>
-	<g:FocusPanel styleName="{style.shelfPanel} mediaCssToHide" ui:field="shelfFocPanel">
+	<g:FocusPanel styleName="col-md-4 {res1.css.rightPanel} hidden-xs hidden-sm " ui:field="shelfFocPanel">
 			<g:ScrollPanel ui:field="collectionListScrollpanel" styleName="{style.collectionScrlPanel}">
 				<g:FlowPanel styleName="{folderStyle.folderPanel}">
 					<g:FlowPanel ui:field="folderCollectionPanel">
-						<sl:ShelfAddCollection ui:field="addCollectionItem" />
+						<sl:ShelfAddCollection ui:field="addCollectionItem"/>
 						<sl:ShelfAddCollection ui:field="newCollectionShelf"/>
 					</g:FlowPanel>
 					<g:HTMLPanel styleName="{folderStyle.organizeButtons}" ui:field="organizeButtonPanel">

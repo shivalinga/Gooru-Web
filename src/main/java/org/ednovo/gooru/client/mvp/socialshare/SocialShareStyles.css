@@ -1,5 +1,4 @@
 .classPageShareContainer {
-	width: 175px;
 	float: left;
 	margin-top: 6px;
 	padding: 0px 20px 10px 0px;
@@ -64,9 +63,7 @@
 .classPageShareButtonsBg:hover {
 	background: #1076bb;
 	/* cursor:pointer;   */
-	width: 105px;
-	height: 30px;
-}
+  }
 
 .classPageShareButtonsFTEBg:hover {
 	background: #1076bb;

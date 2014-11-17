@@ -2,39 +2,45 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" 
 xmlns:s="urn:import:org.ednovo.gooru.client.mvp.search" xmlns:rating="urn:import:org.ednovo.gooru.client.mvp.rating">
 	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchResultWrapperCBundle" field="res" />
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle" field="res1" />
+	
 	<g:FlowPanel >
-		<g:FocusPanel ui:field="dragHandleFocPanel" styleName="{res.css.searchResultWrapper}" >
-			<g:FlowPanel>
-				<g:SimplePanel styleName="{res.css.contentPanel}" ui:field="contentSimPanel" />			
+		<g:FocusPanel ui:field="dragHandleFocPanel">
+			<g:FlowPanel styleName="panel-body {res1.css.panel_body}">
+			     <g:HTMLPanel styleName="row">
+				<g:SimplePanel ui:field="contentSimPanel"/>			
 				<g:FlowPanel styleName="{res.css.ratingWidgetPanel}" ui:field="ratingWidgetPanel"></g:FlowPanel>
-					<g:Label styleName="{res.css.statusLbl}" ui:field="addedStatusLbl" />
+				<g:Label styleName="{res.css.statusLbl}" ui:field="addedStatusLbl" />
+				</g:HTMLPanel>
 			</g:FlowPanel>
 		</g:FocusPanel>
 		<g:Label ui:field="resourcePlayerClickPanel"></g:Label>
-		<g:FlowPanel styleName="{res.css.disclosureMainHeader}">
-			<g:FlowPanel ui:field="disclosureHeaderFloPanel" styleName="{res.css.disclosureHeader}">
+		<g:FlowPanel styleName="{res1.css.panel_footer_main}">
+			<g:FlowPanel styleName="{res1.css.panel_footer}">
+			<g:FlowPanel ui:field="disclosureHeaderFloPanel" styleName="btn_group btn-group-justified">
 				<!-- <g:FocusPanel ui:field="infoLblFocPanel">
 					<g:Label styleName="{res.css.infoLbl}" ui:field="infoLbl" />
 				</g:FocusPanel> -->
-				<g:FocusPanel ui:field="moreInfoLinkFocPanel">
-					<g:Label styleName="{res.css.infoLbl}" ui:field="moreInfoLbl" />
+				<g:FocusPanel ui:field="moreInfoLinkFocPanel" styleName="btn-group">
+					<g:Anchor  ui:field="moreInfoLbl" />
 				</g:FocusPanel>
-				<g:FocusPanel ui:field="collectionFocPanel">
-					<g:Label styleName="{res.css.moreInfo}" ui:field="collcResLbl" />
+				<g:FocusPanel ui:field="collectionFocPanel" styleName="btn-group">
+					<g:Anchor  ui:field="collcResLbl" />
 				</g:FocusPanel> 
-				<g:FocusPanel ui:field="shareLinkFocPanel">
-					<g:Label styleName="{res.css.share}" ui:field="shareLbl" />
+				<g:FocusPanel ui:field="shareLinkFocPanel" styleName="btn-group">
+					<g:Anchor  ui:field="shareLbl" />
 				</g:FocusPanel>
-				<g:FocusPanel ui:field="addLinkFocPanel">
-					<g:Label styleName="{res.css.share}" ui:field="addLbl" />
+				<g:FocusPanel ui:field="addLinkFocPanel" styleName="btn-group">
+					<g:Anchor  ui:field="addLbl" />
 				</g:FocusPanel>
 			</g:FlowPanel>
 		</g:FlowPanel>
-		<g:DisclosurePanel styleName="{res.css.disclosurePanel}" animationEnabled="true" ui:field="disclosureDisPanel">
+		</g:FlowPanel>
+		<g:DisclosurePanel  animationEnabled="true" ui:field="disclosureDisPanel">
 			<g:customHeader>
-				<g:SimplePanel />
+				<g:SimplePanel/>
 			</g:customHeader>
-			<g:SimplePanel ui:field="disclosureContentSimPanel" styleName="{res.css.disclosureContentPanel}" />
+			<g:SimplePanel ui:field="disclosureContentSimPanel"/>
 		</g:DisclosurePanel>
 	</g:FlowPanel>
 </ui:UiBinder> 

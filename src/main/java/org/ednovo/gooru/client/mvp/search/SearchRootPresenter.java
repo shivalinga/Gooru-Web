@@ -42,7 +42,6 @@ import org.ednovo.gooru.shared.model.search.ResourceSearchResultDo;
 import org.ednovo.gooru.shared.model.search.SearchDo;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
@@ -123,7 +122,6 @@ public class SearchRootPresenter extends BasePresenter<IsSearchRootView, SearchR
 		String msg = Cookies.getCookie("TakeATour");
 	    if (msg==null)
 			msg="";
-		
 //		getView().clearPanel();
 		/*if(!msg.equalsIgnoreCase("viewed") && AppClientFactory.isAnonymous()){
 //			document.getElementById("searchFilterPanelDiv").getStyle().setMarginTop(-95, Unit.PX);
@@ -131,7 +129,7 @@ public class SearchRootPresenter extends BasePresenter<IsSearchRootView, SearchR
 		} else {
 			document.getElementById("searchFilterPanelDiv").getStyle().setMarginTop(0, Unit.PX);
 		}*/
-		document.getElementById("searchFilterPanelDiv").getStyle().setMarginTop(0, Unit.PX);
+	/*	document.getElementById("searchFilterPanelDiv").getStyle().setMarginTop(0, Unit.PX);*/
 		shelfTabPresenter.enableFolderCollectionPanel();
 		setInSlot(TYPE_SHELF_TAB, shelfTabPresenter);
 		

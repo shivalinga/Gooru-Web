@@ -32,9 +32,13 @@
 			.borderOrLabel {
 				position: absolute;
 				top: -16px;
-				left: 220px;
+				left: 44%;
 				background: #fff;
 				padding: 10px 20px 10px 20px;
+			}
+			.browseLibrary{
+				width:100%;
+				text-align:center;
 			}
 		</ui:style>
 
@@ -43,14 +47,17 @@
 			<div class="{noResultStyle.container}">
 				<div class="{noResultStyle.noResults}">
 					<g:Label styleName="{style.header}" ui:field="didnotFindText"></g:Label>
-					<g:Button styleName="primary" ui:field="btnLibrary"></g:Button>
+					<g:HTMLPanel styleName="{style.browseLibrary}">
+						<g:Button styleName="primary" ui:field="btnLibrary"></g:Button>    
+					</g:HTMLPanel>
+					
 					<div class="{style.oRLableStyle}">
 						<div class="{style.borderLableStyle}"></div>
 						<g:Label styleName="{style.borderOrLabel}" ui:field="orText"></g:Label>
 					</div>
 					<g:Label styleName="{style.tipTextLabel}" ui:field="tryTipsText"></g:Label>
 					<div>
-						<div class="{noResultStyle.leftColumn}">
+						<div>
 
 							<div class="{noResultStyle.liPosition}">
 								<div class="{noResultStyle.orange}"></div>

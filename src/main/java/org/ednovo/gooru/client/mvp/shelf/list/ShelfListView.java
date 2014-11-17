@@ -40,6 +40,7 @@ import org.ednovo.gooru.client.mvp.dnd.DropBox;
 import org.ednovo.gooru.client.mvp.dnd.IsDraggable.DRAG_TYPE;
 import org.ednovo.gooru.client.mvp.folders.event.RefreshFolderType;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDropController;
+import org.ednovo.gooru.client.mvp.search.SearchCBundle;
 import org.ednovo.gooru.client.mvp.search.event.RegisterSearchDropEvent;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
 import org.ednovo.gooru.client.mvp.search.event.UnregisterSearchDropEvent;
@@ -137,6 +138,9 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 	ShelfListCBundle res;
 
 	@UiField
+	SearchCBundle res1;
+
+	@UiField
 	SimplePanel dragImageSimPanel;
 
 	@UiField
@@ -230,7 +234,10 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 	 */
 	public ShelfListView() {
 		res = ShelfListCBundle.INSTANCE;
+		res1=SearchCBundle.INSTANCE;
 		res.css().ensureInjected();
+		res1.css().ensureInjected();
+		
 		ShelfCBundle.INSTANCE.css().ensureInjected();
 		setWidget(uiBinder.createAndBindUi(this));
 		newCollectionShelf.setLabel(i18n.GL0993());
@@ -312,12 +319,12 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		
 		myShelfVerPanelHolder.add(myShelfVerPanel);
 		
-		  Boolean isIpad = !!Navigator.getUserAgent().matches("(.*)iPad(.*)");
+/*		  Boolean isIpad = !!Navigator.getUserAgent().matches("(.*)iPad(.*)");
 		  Boolean isAndriod = !!Navigator.getUserAgent().matches("(.*)Android(.*)");
 		  Boolean isWinDskp = !!Navigator.getUserAgent().matches("(.*)NT(.*)");
-		  
+*/		  
 		  UAgentInfo detector = new UAgentInfo(Navigator.getUserAgent());
-		  
+/*		  
 		  if(isIpad && !StringUtil.IPAD_MESSAGE_Close_Click)
 		  {
 			  shelfFocPanel.getElement().setAttribute("style", "position:relative;");
@@ -328,8 +335,8 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		  }
 		  else
 		  {
-			  shelfFocPanel.getElement().setAttribute("style", "position:fixed;");
-		  }
+*/			  shelfFocPanel.getElement().setAttribute("style", "position:fixed;");
+//		  }
 		
 		folderLabel.addClickHandler(new CreateNewFolder());
 		collectionLabel.addClickHandler(new CreateNewCollection());
@@ -352,8 +359,8 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		} else if (AppClientFactory.getCurrentPlaceToken().equals(PlaceTokens.SHELF)) {
 			shelfFocPanel.setStyleName(res.css().shelfPanelForShelf());
 		} else {
-			shelfFocPanel.setStyleName(res.css().shelfPanel());
-			shelfFocPanel.addStyleName("mediaCssToHide");
+			shelfFocPanel.setStyleName(res1.css().rightPanel());
+			shelfFocPanel.addStyleName("hidden-xs hidden-sm");
 		}
 	}
 

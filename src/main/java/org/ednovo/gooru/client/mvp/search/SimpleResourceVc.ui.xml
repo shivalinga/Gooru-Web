@@ -12,7 +12,6 @@
 			clear: both;
 			height: 56px;
 			padding-top: 14px;
-			width: 500px;
 		}
 		
 		.resourceTitlePanel {
@@ -70,11 +69,17 @@
 			width: 100%;
 			float: left;
 		}
+		.paddingClear{
+			padding:0;	
+		}
 	</ui:style>
 	<g:HTMLPanel>
 		<g:FlowPanel styleName="{style.resourceThumbnailPanel}" ui:field="internalPanel1">
-			<uc:ResourceImageUc ui:field="resourceImageUc" />
-			<g:Label styleName="{style.resourceOrder}" ui:field="positionLbl" />
+		    <g:HTMLPanel styleName="col-md-3 hidden-sm hidden-xs">
+		    	<uc:ResourceImageUc ui:field="resourceImageUc" />    
+		    </g:HTMLPanel>
+		    <g:HTMLPanel styleName="col-md-9 col-xs-12">
+		    <g:Label styleName="{style.resourceOrder}" ui:field="positionLbl" />
 			<g:FlowPanel styleName="{style.resourceTitlePanel}" ui:field="resourceTitlePanel">
 			   <g:HTMLPanel styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleContainer">
 				<g:HTML styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleLbl" />
@@ -84,6 +89,7 @@
 			<g:FlowPanel styleName="{style.metaDataPanel}" ui:field="metaDataFloPanel" />
 			<g:FlowPanel styleName="{style.ratingsPanel}" ui:field="ratingWidgetPanel"></g:FlowPanel>
 			</g:FlowPanel>
+			</g:HTMLPanel>
 		</g:FlowPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

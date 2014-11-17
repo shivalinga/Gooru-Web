@@ -28,6 +28,8 @@ import org.ednovo.gooru.client.gin.IsView;
 import org.ednovo.gooru.client.mvp.home.event.HeaderTabType;
 import org.ednovo.gooru.shared.model.user.UserDo;
 
+import com.google.gwt.user.client.ui.HTMLPanel;
+
 /**
  * @author Search Team
  * 
@@ -79,5 +81,9 @@ public interface IsWrapView extends IsView {
 	 * 
 	 */
 	void setDiscoverLinkFromLibrary(String discoverLink);
+
+	HTMLPanel getSearchFiltersPanel();
+
+	HTMLPanel getCollectionSearchFiltersPanel();
 	
 }

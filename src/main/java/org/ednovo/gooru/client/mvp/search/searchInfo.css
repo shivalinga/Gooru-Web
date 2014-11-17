@@ -46,7 +46,7 @@
 	color: #515151;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	white-space: pre;
+	/* white-space: pre; */
 	/* margin-top: 2px; */
 }
 
@@ -146,7 +146,7 @@
 	font-size: 12px;
 	color: #515151;
 	font-weight: bold;
-	width: 500px;
+	width:100%;
 	height: 23px;
 	border-bottom: 1.5px solid #aaa;
 	margin-bottom: 5px;
@@ -424,7 +424,7 @@
 }
 
 .resource-info-publishContainer {
-	width: 500px;
+	width:100%;
 	float: left;
 	padding-bottom: 4px;
 }
@@ -479,10 +479,10 @@
 .labelTitle {
 	font-weight: bold;
 	color: black;
-	width:375px;
-	overflow: hidden;
+	width:100%;
+/* 	overflow: hidden;
 text-overflow: ellipsis;
-white-space: nowrap;
+white-space: nowrap; */
 }
 
 .loadingImageMainDivShare {
@@ -511,5 +511,8 @@ white-space: nowrap;
 	padding: 5px;
 	border-radius: 4px;
 	color: white;
-	margin-top:-21px;
+
+}
+.paddingClear{
+	padding:0;
 }

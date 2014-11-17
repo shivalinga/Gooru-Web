@@ -10,9 +10,9 @@
 			
 			
 			/*padding-top: 10px;
-padding-bottom: 10px;
-border-bottom: 1px solid #515151;
-width: 497px;*//
+			padding-bottom: 10px;
+			border-bottom: 1px solid #515151;
+			width: 497px;*//
 			
 		}
 		/***/
@@ -41,10 +41,10 @@ width: 497px;*//
 			font-weight: bold;
 			height: 18px;
 			margin-bottom: 3px;
-			overflow: hidden;
+			/* overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			width: 210px;
+			width: 210px; */
 		}
 		
 		.metaDataPanel {
@@ -107,11 +107,17 @@ width: 497px;*//
 		.resourceCountImg {
 			clear: both;
 		}
+		.paddingClear{
+			padding:0;	
+		}
 </ui:style>
 	<g:HTMLPanel>
 		<g:FlowPanel styleName="{style.collectionThumbnailPanel}" ui:field="internalPanel1">
-			<uc:CollectionImageUc ui:field="collectionImageUc" />
-			<g:FlowPanel styleName="{style.collectionTitlePanel}" ui:field="collectionTitlePanel">
+		    <g:HTMLPanel styleName=" col-md-4  hidden-sm hidden-xs">
+					<uc:CollectionImageUc ui:field="collectionImageUc"  />        
+		    </g:HTMLPanel>
+		
+			<g:FlowPanel styleName=" col-md-4  col-xs-12 {style.paddingClear}" ui:field="collectionTitlePanel">
 				<g:HTML styleName="{style.collectionTitle}" ui:field="collectionTitleLbl" />
 				<g:Label styleName="{style.author}" ui:field="creatorNameLbl" />
 				<g:Label styleName="{style.authorName}" ui:field="creatorNameLblValue" />
@@ -121,12 +127,13 @@ width: 497px;*//
 				<g:Label styleName="{style.resourceCountImg}" />	
 				<g:Label styleName="{style.resourceCount}" ui:field="resourceCountLbl" />
 				<g:Label styleName="{style.resourceCount}" ui:field="questionCountLbl" />
+				
 			</g:FlowPanel>
 			
-			<g:FlowPanel styleName="{style.collectionGradesPanel}" ui:field="collectionGradePanel">
+			<g:FlowPanel styleName="col-md-4  {style.paddingClear}" ui:field="collectionGradePanel">
 				<g:Label styleName="{style.grades}" ui:field="gradesLblValue" />
 			</g:FlowPanel>
-			
+			<g:HTMLPanel styleName="clearfix"></g:HTMLPanel>
 		</g:FlowPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

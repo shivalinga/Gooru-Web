@@ -1,285 +1,287 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc"
-xmlns:panel="urn:import:org.ednovo.gooru.client.ui">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc"
+	xmlns:panel="urn:import:org.ednovo.gooru.client.ui">
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle"
+		field="res"></ui:with>
+
 	<ui:style type="org.ednovo.gooru.client.mvp.search.SearchFilterVc.Style">
 
 		.searchFilterVcContainer {
-			float: left;
-			clear: both;
-			min-height: 450px;
-			width: 185px;
-			padding-left: 14px;
-			margin-right: 10px;
-			overflow-x: hidden;
-			background-color: #FFFFFF;
-			box-sizing: border-box;
-			-moz-box-sizing: border-box;
+		float: left;
+		clear: both;
+		min-height: 450px;
+		width: 185px;
+		padding-left: 14px;
+		margin-right: 10px;
+		overflow-x: hidden;
+		background-color: #FFFFFF;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
 		}
-		
+
 		.active {
-			border-bottom: 2px solid #4E9746 !important;
-			font-weight: bold;
+		border-bottom: 2px solid #4E9746 !important;
+		font-weight: bold;
 		}
-		
+
 		.titleText {
-			padding-bottom: 2px;
-			margin-top: 20px;
-			border-bottom: 1px #DDD solid;
-			font-size: 16px !important;
+		padding-bottom: 2px;
+		margin-top: 20px;
+		border-bottom: 1px #DDD solid;
+		font-size: 16px !important;
 		}
-		
+
 		.notFound {
-			clear: both;
-			float: left;
-			color: orange;
-			display:none;
+		clear: both;
+		float: left;
+		color: orange;
+		display:none;
 		}
-		
+
 		.clearAll {
-			color: #4e9746;
-			float: right;
-			width: 50px;
-			cursor: pointer;
-			margin-top: 15px;
+		color: #4e9746;
+		float: right;
+		width: 50px;
+		cursor: pointer;
+		margin-top: 15px;
 		}
 		.clearAll:HOVER {
-			color: #A6CAA2;
+		color: #A6CAA2;
 		}
 
 		.helpIconBtn {
-			position: absolute;
-			right: 0;
-			margin-top: -20px;
-			margin-right: 10px;
-			color: #0f76bb;
-			cursor: pointer;
-			font-size: 11px;
+		position: absolute;
+		right: 0;
+		margin-top: -20px;
+		margin-right: 10px;
+		color: #0f76bb;
+		cursor: pointer;
+		font-size: 11px;
 		}
 		.helpIconBtnAggregator {
-			position: absolute;
-			right: 0;
-			margin-top: -20px;
-			margin-right: 65px;
-			color: #0f76bb;
-			cursor: pointer;
-			font-size: 11px;
-			background: url(images/mos/questionmark.png) no-repeat;
-			width: 18px;
-			height: 15px;
+		position: absolute;
+		right: 0;
+		margin-top: -20px;
+		margin-right: 65px;
+		color: #0f76bb;
+		cursor: pointer;
+		font-size: 11px;
+		background: url(images/mos/questionmark.png) no-repeat;
+		width: 18px;
+		height: 15px;
 		}
 		.helpIconBtnPublisher {
-			position: absolute;
-			right: 0;
-			margin-top: -20px;
-			margin-right: 85px;
-			color: #0f76bb;
-			cursor: pointer;
-			font-size: 11px;
-			background: url(images/mos/questionmark.png) no-repeat;
-			width: 18px;
-			height: 15px;
+		position: absolute;
+		right: 0;
+		margin-top: -20px;
+		margin-right: 85px;
+		color: #0f76bb;
+		cursor: pointer;
+		font-size: 11px;
+		background: url(images/mos/questionmark.png) no-repeat;
+		width: 18px;
+		height: 15px;
 		}
 		.sourceToolTip {
-			position: absolute;
-			margin-top: -10px;
-			width: 140px;
+		position: absolute;
+		margin-top: -10px;
+		width: 140px;
 		}
-		
+
 		.notifyLink {
-			color: #4E9746;
-			cursor: pointer;
-			float: left;
-			margin: 0 2px;
-			padding-bottom: 2px;
+		color: #4E9746;
+		cursor: pointer;
+		float: left;
+		margin: 0 2px;
+		padding-bottom: 2px;
 		}
 		.notifyLink:HOVER {
-		    border-bottom: 2px solid #A6CAA2;
-		    cursor: pointer;
-		    padding-bottom: 2px;
-		    color: #4E9746;
-		    text-decoration:none;
+		border-bottom: 2px solid #A6CAA2;
+		cursor: pointer;
+		padding-bottom: 2px;
+		color: #4E9746;
+		text-decoration:none;
 		}
 		.notifyLinks {
-		    color: #4E9746 !important;
-		    cursor: default;
-		    float: left;
-		    font-size: 15px;
-		    font-weight: bold;
-		    margin: -3px 5px 0 6px;
+		color: #4E9746 !important;
+		cursor: default;
+		float: left;
+		font-size: 15px;
+		font-weight: bold;
+		margin: -3px 5px 0 6px;
 		}
-		
+
 		.PageNotify {
-			margin: 17px auto 0;
-			width: 596px;
-			display: inline-block;
-			vertical-align:top;
+		margin: 17px auto 0;
+		width: 596px;
+		display: inline-block;
+		vertical-align:top;
 		}
 		.oer {
-			margin: 20px auto 0;
+		margin: 20px auto 0;
 		}
 		.aggregatorTooltip{
-			left: 82px;
-			top: 390px;
-			margin-left: 0px;
-			position: absolute;
-			cursor: pointer;
+		left: 82px;
+		top: 390px;
+		margin-left: 0px;
+		position: absolute;
+		cursor: pointer;
 		}
 		.publisherTooltip{
-			left: 73px;
-			top: 461px;
-			margin-left: 0px;
-			position: absolute;
-			cursor: pointer;
+		left: 73px;
+		top: 461px;
+		margin-left: 0px;
+		position: absolute;
+		cursor: pointer;
 		}
 
 		.headerLbl{
-			font-weight: bold;
-			margin: 10px 0px 5px 0px;
-			display: inline-block;
+		font-weight: bold;
+		margin: 10px 0px 5px 0px;
+		display: inline-block;
 		}
 		.browseContainer{
-			float: left;
-			margin-left: -7px;
-			margin-top: 2px;
+		float: left;
+		margin-left: -7px;
+		margin-top: 2px;
 
 		}
 		.standardsBrowseBtn{
-			padding: 4px 4px;
+		padding: 4px 4px;
 
 		}
 
 		.flowPanelContainer{
-			display: inline-block;
+		display: inline-block;
 		}
 
 
 	</ui:style>
-	<g:FlowPanel styleName="{style.searchFilterVcContainer}" ui:field="myCollectionSearch">
-		<g:FlowPanel>
-			<g:Label styleName="{style.titleText}" ui:field="filtersText"/>
-		</g:FlowPanel>
-		
-		<!-- <g:FlowPanel styleName="{style.PageNotify}" ui:field="flowpanel">
-			<g:HTMLPanel ui:field="contentpanel"></g:HTMLPanel>
-			<g:Anchor  styleName="{style.notifyLink}" ui:field="resourceLinkLbl" />
-			<g:Label  styleName="{style.notifyLinks}" ui:field="notifyText"/>
-			<g:Anchor  styleName="{style.notifyLink}" ui:field="collectionLinkLbl" />
-		</g:FlowPanel> -->
-		
-		
-		<g:HTMLPanel ui:field="oerPanel"/>
-		
-		<g:HTMLPanel ui:field="panelNotMobileFriendly"></g:HTMLPanel>
-		
-		<g:HTMLPanel>
-			<g:Label styleName="{style.headerLbl}" ui:field="resourceFormatLbl"></g:Label>
-			<g:HTMLPanel  ui:field="categoryPanelUc" />
-		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-			<g:Label styleName="{style.headerLbl}" ui:field="subjectLbl"></g:Label>
-			<g:HTMLPanel  ui:field="subjectPanelUc" />
-		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-			<g:Label styleName="{style.headerLbl}" ui:field="gradeLbl"></g:Label>
-			<g:HTMLPanel  ui:field="gradePanelUc" />
-		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-		    <g:Label styleName="{style.headerLbl}" ui:field="standardLbl"></g:Label>
-			<g:HTMLPanel  ui:field="standardPanelUc">
-			    <g:HTMLPanel styleName="{style.browseContainer}">
-					<g:Button ui:field="browseStandards" styleName="secondary">Browse</g:Button>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<uc:AppSuggestBox ui:field="standardSgstBox" width="105px" />
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-				 	<g:Label styleName="{style.helpIconBtn}" ui:field="standardHelpicon" visible="false"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-				 	<panel:HTMLEventPanel ui:field="standardToolTip" visible="false" styleName="{style.sourceToolTip}"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:Label styleName="{style.notFound}" ui:field="standardsNotFoundLbl" />
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:FlowPanel styleName="{style.flowPanelContainer}" ui:field="standardContainerFloPanel" />
+	<g:FlowPanel styleName="col-md-3 col-sm-3 {res.css.searchFilters} hidden-xs"
+		ui:field="myCollectionSearch">
+		<g:HTMLPanel styleName="{res.css.filtersInner}">
+			<uc:H4Panel ui:field="filtersText">
+			</uc:H4Panel>
+			<uc:PPanel ui:field="oerPanel" styleName="{res.css.oerContainer}" />
+
+			<uc:PPanel ui:field="panelNotMobileFriendly" styleName="{res.css.mobilefriendlyContainer}"></uc:PPanel>
+
+			<g:HTMLPanel styleName="{res.css.categoryFilterContainer}">
+				<uc:H5Panel  ui:field="resourceFormatLbl"></uc:H5Panel>
+				<g:HTMLPanel ui:field="categoryPanelUc" />
+			</g:HTMLPanel>
+
+			<g:HTMLPanel styleName="categorySubjectContainer">
+				<uc:H5Panel  ui:field="subjectLbl"></uc:H5Panel>
+				<g:HTMLPanel ui:field="subjectPanelUc" />
+			</g:HTMLPanel>
+
+			<g:HTMLPanel styleName="filterGradeContainer">
+				<uc:H5Panel ui:field="gradeLbl"></uc:H5Panel>
+				<g:HTMLPanel ui:field="gradePanelUc"/>
+			</g:HTMLPanel>
+
+			<g:HTMLPanel styleName="{res.css.filterStandardContainer}">
+				<uc:H5Panel  ui:field="standardLbl"></uc:H5Panel>
+				<g:HTMLPanel ui:field="standardPanelUc">
+					<g:Button ui:field="browseStandards" styleName="{res.css.btn} btn btn-default">Browse</g:Button>
+					<uc:AppSuggestBox ui:field="standardSgstBox" styleName="form-control {res.css.form_control}" />
+					<g:HTMLPanel>
+						<g:Label styleName="{style.helpIconBtn}" ui:field="standardHelpicon"
+							visible="false" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<panel:HTMLEventPanel ui:field="standardToolTip"
+							visible="false" styleName="{style.sourceToolTip}" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:Label styleName="{style.notFound}" ui:field="standardsNotFoundLbl" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:FlowPanel styleName="{style.flowPanelContainer}"
+							ui:field="standardContainerFloPanel" />
+					</g:HTMLPanel>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
-		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-		    <g:Label styleName="{style.headerLbl}" visible="false" ui:field="sourceLbl"></g:Label>
-			<g:HTMLPanel  ui:field="sourcePanelUc" visible="false">
-				<g:HTMLPanel>
-				 	<g:Label styleName="{style.helpIconBtnPublisher}" ui:field="publisherTooltip"/>
-				</g:HTMLPanel> 
-				<g:HTMLPanel>
-					<uc:AppSuggestBox ui:field="sourceSgstBox" width="130px" />
-				</g:HTMLPanel>
-				<!-- <uc:add>
-				 	<g:Label styleName="{style.helpIconBtn}" ui:field="sourceHelpicon" visible="false"/>
-				</uc:add> -->
-				<g:HTMLPanel>
-				 	<panel:HTMLEventPanel ui:field="sourceToolTip" visible="false" styleName="{style.sourceToolTip}"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:Label styleName="{style.notFound}" ui:field="sourcesNotFoundLbl"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:FlowPanel styleName="{style.flowPanelContainer}" ui:field="sourceContainerFloPanel" />
-				</g:HTMLPanel>
-			</g:HTMLPanel>
-		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-			<g:HTMLPanel  ui:field="aggregatorPanelUc" visible="false">
-			     <g:Label styleName="{style.headerLbl}" visible="false" ui:field="aggregatorLbl"></g:Label>
-			 	<g:HTMLPanel>
-				 	<g:Label styleName="{style.helpIconBtnAggregator}" ui:field="aggregatorTooltip"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<uc:AppSuggestBox ui:field="aggregatorSgstBox" width="130px" />
-				</g:HTMLPanel>
-				<!-- <uc:add>
-				 	<g:Label styleName="{style.helpIconBtn}" ui:field="aggregatorHelpicon" visible="false"/>
-				</uc:add> -->
-				<g:HTMLPanel>
-				 	<panel:HTMLEventPanel ui:field="aggregatorToolTip" visible="false" styleName="{style.sourceToolTip}"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:Label styleName="{style.notFound}" ui:field="aggregatorNotFoundLbl"/>
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:FlowPanel styleName="{style.flowPanelContainer}"  ui:field="aggregatorContainerFloPanel" />
+
+			<g:HTMLPanel>
+				<g:Label styleName="{style.headerLbl}" visible="false"	ui:field="sourceLbl"></g:Label>
+				<g:HTMLPanel ui:field="sourcePanelUc" visible="false">
+					<g:HTMLPanel>
+						<g:Label styleName="{style.helpIconBtnPublisher}"
+							ui:field="publisherTooltip" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<uc:AppSuggestBox ui:field="sourceSgstBox" width="130px" />
+					</g:HTMLPanel>
+					<!-- <uc:add> <g:Label styleName="{style.helpIconBtn}" ui:field="sourceHelpicon" 
+						visible="false"/> </uc:add> -->
+					<g:HTMLPanel>
+						<panel:HTMLEventPanel ui:field="sourceToolTip"
+							visible="false" styleName="{style.sourceToolTip}" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:Label styleName="{style.notFound}" ui:field="sourcesNotFoundLbl" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:FlowPanel styleName="{style.flowPanelContainer}"
+							ui:field="sourceContainerFloPanel" />
+					</g:HTMLPanel>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
-		</g:HTMLPanel>
-		
-		
-		
-		<g:HTMLPanel>
-		    <g:Label styleName="{style.headerLbl}" visible="false" ui:field="authorLbl"></g:Label>
-			<g:HTMLPanel  ui:field="authorPanelUc" visible="false">
-				<g:HTMLPanel>
-					<g:TextBox ui:field="authorTxtBox" width="130px" />
-				</g:HTMLPanel>
-				<g:HTMLPanel>
-					<g:FlowPanel styleName="{style.flowPanelContainer}" ui:field="authorContainerFloPanel" />
+
+			<g:HTMLPanel>
+				<g:HTMLPanel ui:field="aggregatorPanelUc" visible="false">
+					<g:Label styleName="{style.headerLbl}" visible="false"
+						ui:field="aggregatorLbl"></g:Label>
+					<g:HTMLPanel>
+						<g:Label styleName="{style.helpIconBtnAggregator}"
+							ui:field="aggregatorTooltip" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<uc:AppSuggestBox ui:field="aggregatorSgstBox"
+							width="130px" />
+					</g:HTMLPanel>
+					<!-- <uc:add> <g:Label styleName="{style.helpIconBtn}" ui:field="aggregatorHelpicon" 
+						visible="false"/> </uc:add> -->
+					<g:HTMLPanel>
+						<panel:HTMLEventPanel ui:field="aggregatorToolTip"
+							visible="false" styleName="{style.sourceToolTip}" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:Label styleName="{style.notFound}" ui:field="aggregatorNotFoundLbl" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:FlowPanel styleName="{style.flowPanelContainer}"
+							ui:field="aggregatorContainerFloPanel" />
+					</g:HTMLPanel>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
+			<g:HTMLPanel>
+				<g:Label styleName="{style.headerLbl}" visible="false"
+					ui:field="authorLbl"></g:Label>
+				<g:HTMLPanel ui:field="authorPanelUc" visible="false">
+					<g:HTMLPanel>
+						<g:TextBox ui:field="authorTxtBox" width="130px" />
+					</g:HTMLPanel>
+					<g:HTMLPanel>
+						<g:FlowPanel styleName="{style.flowPanelContainer}"
+							ui:field="authorContainerFloPanel" />
+					</g:HTMLPanel>
+				</g:HTMLPanel>
+			</g:HTMLPanel>
+
+			<g:HTMLPanel styleName="filterAccess ModeContainer">
+				<uc:H5Panel  visible="false"	ui:field="accessModeLbl"></uc:H5Panel>
+				<g:HTMLPanel ui:field="accessModePanel" />
+			</g:HTMLPanel>
+
+			<g:FlowPanel>
+				<g:Label styleName="{style.clearAll}" ui:field="clearAll" />
+			</g:FlowPanel>
+
 		</g:HTMLPanel>
-		
-		<g:HTMLPanel>
-			<g:Label styleName="{style.headerLbl}" visible="false"  ui:field="accessModeLbl"></g:Label>
-			<g:HTMLPanel  ui:field="accessModePanel" />
-		</g:HTMLPanel>
-		
-		<g:FlowPanel>
-			<g:Label  styleName="{style.clearAll}" ui:field="clearAll" />
-		</g:FlowPanel>
-		
+
 	</g:FlowPanel>
 </ui:UiBinder> 

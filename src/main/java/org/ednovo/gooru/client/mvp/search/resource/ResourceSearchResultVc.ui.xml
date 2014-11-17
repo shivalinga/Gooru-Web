@@ -1,22 +1,32 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc" xmlns:sea="urn:import:org.ednovo.gooru.client.mvp.search.resource">
-   <ui:with type="org.ednovo.gooru.client.mvp.search.resource.ResourceSearchResultCBundle" field="res" />
-	<sea:ResourceSearchResultWrapperVc ui:field="wrapperVcr">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:uc="urn:import:org.ednovo.gooru.client.uc"
+	xmlns:sea="urn:import:org.ednovo.gooru.client.mvp.search.resource">
+	<ui:with
+		type="org.ednovo.gooru.client.mvp.search.resource.ResourceSearchResultCBundle"
+		field="res" />
+	<ui:with type="org.ednovo.gooru.client.mvp.search.SearchCBundle"
+		field="res1" />
+
+	<sea:ResourceSearchResultWrapperVc
+		ui:field="wrapperVcr" styleName="{res1.css.panel} panel panel-default">
 		<sea:content>
-			<g:FlowPanel styleName="{res.css.resourcePanel}">
-				<g:FlowPanel styleName="{res.css.resourceHeaderPanel}">
-					<uc:ResourceImageUc ui:field="resourceImageUc" />
-					<g:FlowPanel styleName="{res.css.resourceHeaderTextPanel}" ui:field="resourceTitlePanel">
-						<uc:HTMLEventPanel styleName="resourceSearchTitle" ui:field="resourceTitleContainer">
-						    <g:HTML styleName="{res.css.resourceTitle}" ui:field="lblResourceTitle"></g:HTML>
-						    <g:Image  styleName="{res.css.imgHeight}" ui:field="imgOER"></g:Image>
-						    <g:Image  styleName="{res.css.imgHeight}" ui:field="imgNotFriendly"></g:Image>
-						</uc:HTMLEventPanel>
-						<g:FlowPanel styleName="{res.css.metaDataPanel}" ui:field="metaDataFloPanel"/>
-						<g:FlowPanel styleName="{res.css.standards}" ui:field="standardsFloPanel" />
-					</g:FlowPanel>
+			<g:FlowPanel styleName="col-md-9 col-sm-9 col-xs-9 thumbBlock">
+				<uc:ResourceImageUc ui:field="resourceImageUc"/>
+				<g:FlowPanel	styleName="{res1.css.resourceHeaderTextPanel} col-md-8 {res.css.paddingClear}"
+					ui:field="resourceTitlePanel">
+					<uc:H4Panel ui:field="resourceTitleContainer">
+						<g:HTML styleName="{res.css.resourceTitle}" ui:field="lblResourceTitle"></g:HTML>
+						<g:Image styleName="{res.css.imgHeight}" ui:field="imgOER"></g:Image>
+						<g:Image styleName="{res.css.imgHeight}" ui:field="imgNotFriendly"></g:Image>
+					</uc:H4Panel>
+					<g:FlowPanel styleName="{res.css.metaDataPanel}"
+						ui:field="metaDataFloPanel" />
+					<g:FlowPanel styleName="{res.css.standards}" ui:field="standardsFloPanel" />
+					<g:HTMLPanel styleName="clearfix"> </g:HTMLPanel>
 				</g:FlowPanel>
-				 <g:HTML styleName="{res.css.resourceDescription}" ui:field="resourceDescriptionHtml" />  
+				<g:HTMLPanel styleName="clearfix"> </g:HTMLPanel>
+				<g:HTML ui:field="resourceDescriptionHtml" />
 			</g:FlowPanel>
 		</sea:content>
 	</sea:ResourceSearchResultWrapperVc>

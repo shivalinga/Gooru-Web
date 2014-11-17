@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:gg="urn:import:org.ednovo.gooru.client.uc">
+	<ui:style field="SocialShare" src="SocialShareStyles.css" />
+	<g:HTMLPanel>
+		<g:HTMLPanel styleName="{SocialShare.classPageEmailPopupContainer}">
+			<g:HTMLPanel styleName="{SocialShare.classPageEmailHeaderContent}">
+				<g:HTMLPanel styleName="{SocialShare.classPageEmailHeaderDesc}" ui:field="emailToFriendText"></g:HTMLPanel>
+			</g:HTMLPanel>
+			<g:HTMLPanel styleName="{SocialShare.classPageEmailMainContainer}">
+				<g:HTMLPanel styleName="{SocialShare.classPageEmailBlueText}" ui:field="emailSentText"></g:HTMLPanel>
+				<g:Label styleName="{SocialShare.classPageEmailDescText}" ui:field="toEmailLbl"></g:Label>
+				<g:HTMLPanel styleName="{SocialShare.clear}"></g:HTMLPanel>
+				<g:HTMLPanel styleName="{SocialShare.classPageEmailButtonOuterDiv}">
+					<g:HTMLPanel styleName="{SocialShare.classPageEmailButtonContainer}">
+						<g:HTMLPanel styleName="{SocialShare.classPageEmailButtonBg}">
+							<g:HTMLPanel styleName="{SocialShare.classPageEmailButtonTitle}">
+								<g:Label styleName="{SocialShare.classPageEmailOktext}" ui:field="okLbl"></g:Label>
+							</g:HTMLPanel>
+						</g:HTMLPanel>
+
+					</g:HTMLPanel>
+				</g:HTMLPanel>
+
+			</g:HTMLPanel>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

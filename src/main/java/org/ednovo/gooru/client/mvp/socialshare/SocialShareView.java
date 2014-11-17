@@ -33,6 +33,7 @@ import org.ednovo.gooru.client.mvp.socialshare.event.UpdateSocialShareMetaDataEv
 import org.ednovo.gooru.client.mvp.socialshare.event.UpdateSocialShareMetaDataHandler;
 import org.ednovo.gooru.client.service.UserServiceAsync;
 import org.ednovo.gooru.client.uc.EmailShareUc;
+import org.ednovo.gooru.client.uc.PPanel;
 import org.ednovo.gooru.client.ui.HTMLEventPanel;
 import org.ednovo.gooru.client.util.MixpanelUtil;
 import org.ednovo.gooru.client.util.PlayerDataLogEvents;
@@ -43,13 +44,13 @@ import org.ednovo.gooru.shared.model.user.SettingDo;
 import org.ednovo.gooru.shared.util.StringUtil;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ErrorEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -84,11 +85,17 @@ IsSocialShareView {
 
 
 	@UiField
-	HTMLEventPanel fbPanel,twitterPanel,emailPanel,fbIconPanel,twIconPanel,emailIconPanel;
+	HTMLEventPanel twitterPanel,emailPanel,fbIconPanel,twIconPanel,emailIconPanel;
 
 	@UiField
-	HTMLPanel shareTextPanel,shareIconPanel,panelfbIcon,panelTwIcon, panelEmailIcon,panelTwitter,panelEmail,socialShareContainer,facbookText,twitterText,emailText;
-
+	HTMLPanel shareTextPanel,shareIconPanel,panelfbIcon,panelTwIcon, panelEmailIcon,socialShareContainer;
+	
+	@UiField
+	Anchor facbookText,twitterText,emailText;
+	
+	@UiField
+	PPanel fbPanel,panelTwitter,panelEmail;
+	
 	private SocialShareDo socialDo;
 
 	private UserServiceAsync userService;
@@ -182,14 +189,14 @@ IsSocialShareView {
 		setPresenter(new SocialSharePresenter(this));
 		//		shareTextPanel.getElement().getStyle().setCursor(Cursor.POINTER);
 
-		try {
+	/*	try {
 			if(socialDo.getIsSearchShare()){
 				socialShareContainer.getElement().getStyle().setWidth(100, Unit.PX);
 			}
 		} catch (Exception e) {
 
 		}
-
+*/
 		if (socialDo.isOnlyIcon()) {
 			shareTextPanel.setVisible(false);
 			shareIconPanel.setVisible(true);
@@ -216,9 +223,9 @@ IsSocialShareView {
 			panelTwIcon.setStyleName(socialShareStyle.classPageShareButtonsFTEBgDisable());
 			panelEmailIcon.setStyleName(socialShareStyle.classPageShareButtonsFTEBgDisable());
 
-			fbPanel.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
-			panelTwitter.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
-			panelEmail.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
+		//	fbPanel.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
+		//	panelTwitter.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
+		//	panelEmail.setStyleName(socialShareStyle.classPageShareButtonsBgDisable());
 
 			//				shareTextPanel.getElement().getStyle().setCursor(Cursor.DEFAULT);
 			//				shareIconPanel.getElement().getStyle().setCursor(Cursor.DEFAULT);
@@ -228,9 +235,9 @@ IsSocialShareView {
 			panelTwIcon.setStyleName(socialShareStyle.twitterPageShareIconButtonsBg());
 			panelEmailIcon.setStyleName(socialShareStyle.classPageShareButtonsFTEBg());
 
-			fbPanel.setStyleName(socialShareStyle.fbPageShareButtonsBg());
-			panelTwitter.setStyleName(socialShareStyle.twitterPageShareButtonsBg());
-			panelEmail.setStyleName(socialShareStyle.classPageShareButtonsBg());
+			//fbPanel.setStyleName(socialShareStyle.fbPageShareButtonsBg());
+			//panelTwitter.setStyleName(socialShareStyle.twitterPageShareButtonsBg());
+			//panelEmail.setStyleName(socialShareStyle.classPageShareButtonsBg());
 
 			//				shareTextPanel.getElement().getStyle().setCursor(Cursor.POINTER);
 			//				shareIconPanel.getElement().getStyle().setCursor(Cursor.POINTER);
