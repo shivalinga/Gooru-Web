@@ -278,7 +278,6 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		assessmentLabel.getElement().setId("lblAssessmentLabel");
 		assessmentLabel.getElement().setAttribute("alt", i18n.GL3007());
 		assessmentLabel.getElement().setAttribute("title", i18n.GL3007());
-		assessmentLabel.removeFromParent();
 		organizelbl.getElement().setInnerText(i18n.GL0180());
 		organizelbl.getElement().setId("pnlOrganizelbl");
 		organizelbl.getElement().setAttribute("alt", i18n.GL0180());
@@ -1575,33 +1574,38 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			final String o1 = AppClientFactory.getPlaceManager().getRequestParameter(O1_LEVEL);
-			final String o2 = AppClientFactory.getPlaceManager().getRequestParameter(O2_LEVEL);
-			final String o3 = AppClientFactory.getPlaceManager().getRequestParameter(O3_LEVEL);
-			Map<String, String> params = new HashMap<String, String>();
-			if(collectionType!=null){
-				params.put(TYPE, collectionType);
+			if(collectionType.equalsIgnoreCase("assessment")){
+				Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
 			}
-			if(o3!=null) {
-				params.put(O1_LEVEL, o1);
-				params.put(O2_LEVEL, o2);
-				params.put(O3_LEVEL, o3);
-				params.put("folderId", o3);
-				AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
-			} else if(o2!=null) {
-				params.put(O1_LEVEL, o1);
-				params.put(O2_LEVEL, o2);
-				params.put("folderId", o2);
-				AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
-			} else if(o1!=null){
-				params.put(O1_LEVEL, o1);
-				params.put("folderId", o1);
-				AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
-			} else {
-				AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+			else {
+				final String o1 = AppClientFactory.getPlaceManager().getRequestParameter(O1_LEVEL);
+				final String o2 = AppClientFactory.getPlaceManager().getRequestParameter(O2_LEVEL);
+				final String o3 = AppClientFactory.getPlaceManager().getRequestParameter(O3_LEVEL);
+				Map<String, String> params = new HashMap<String, String>();
+				if(collectionType!=null){
+					params.put(TYPE, collectionType);
+				}
+				if(o3!=null) {
+					params.put(O1_LEVEL, o1);
+					params.put(O2_LEVEL, o2);
+					params.put(O3_LEVEL, o3);
+					params.put("folderId", o3);
+					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+				} else if(o2!=null) {
+					params.put(O1_LEVEL, o1);
+					params.put(O2_LEVEL, o2);
+					params.put("folderId", o2);
+					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+				} else if(o1!=null){
+					params.put(O1_LEVEL, o1);
+					params.put("folderId", o1);
+					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+				} else {
+					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+				}
+				Window.enableScrolling(false);
+				
 			}
-			Window.enableScrolling(false);
-			
 		}
 	}
 	

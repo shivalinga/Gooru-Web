@@ -578,16 +578,6 @@ public class ShelfView extends BaseViewWithHandlers<ShelfUiHandlers> implements
 		//collectionPreviewBtn.getElement().getStyle().setFontWeight(FontWeight.NORMAL);
 		simplePencilPanel.setVisible(false);
 
-		editCollectionDescTitle
-				.addMouseOverHandler(new OnCollectionDescriptionClick());
-		editCollectionDescTitle
-				.addMouseOutHandler(new OnCollectionDescriptionOut());
-		collectionDescriptionTitle.addMouseOverHandler(new OnCollectionDescriptionClick());
-		collectionDescriptionTitle.addMouseOutHandler(new OnCollectionDescriptionOut());
-		
-		collectionTitleContainer.addMouseOverHandler(new hideEditPencil());
-		collectionTitleContainer.addMouseOutHandler(new showEditPencil());
-
 		assignTabVc.addClickHandler(this);
 		collaboratorTabVc.addClickHandler(this);
 		
@@ -788,6 +778,16 @@ public class ShelfView extends BaseViewWithHandlers<ShelfUiHandlers> implements
 		editPanel.getElement().getStyle().setBackgroundColor("white");
 		collectionFloPanel.getElement().setAttribute("style", "min-height:"+(Window.getClientHeight()-100)+"px");
 		if(collection != null) {
+			
+			if(!collection.getCollectionType().equals("quiz")){
+				editCollectionDescTitle.addMouseOverHandler(new OnCollectionDescriptionClick());
+				editCollectionDescTitle.addMouseOutHandler(new OnCollectionDescriptionOut());
+				collectionDescriptionTitle.addMouseOverHandler(new OnCollectionDescriptionClick());
+				collectionDescriptionTitle.addMouseOutHandler(new OnCollectionDescriptionOut());
+				collectionTitleContainer.addMouseOverHandler(new hideEditPencil());
+				collectionTitleContainer.addMouseOutHandler(new showEditPencil());
+			}
+			
 			if (collection.getMeta()!=null && collection.getMeta().getCollaboratorCount() > 0 && collection.getLastModifiedUser() != null){
 				String lastModifiedDate = collection.getLastModified().toString() != null ? getTimeStamp(collection.getLastModified().getTime()+"") : "";
 				String lastModifiedUser = collection.getLastModifiedUser().getUsername() != null ?  collection.getLastModifiedUser().getUsername() : "";

@@ -71,6 +71,7 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -118,7 +119,7 @@ public class CollectionResourceTabView extends
 	HTMLPanel panelNoResourceContainer,panelLoading,contentPanel;
 
 	@UiField
-	Button buttonContainer, buttonContainerForQuestion, buttonContainerAddGray,buttonContainerForQuestionGreay ;
+	Button buttonContainer, buttonContainerForQuestion, buttonContainerAddGray,buttonContainerForQuestionGreay,editAssesmentButton ;
 
 	private CollectionDo collectionDo;
 
@@ -165,6 +166,12 @@ public class CollectionResourceTabView extends
 		buttonContainer.getElement().setId("btnNewResource");
 		buttonContainer.getElement().setAttribute("alt",i18n.GL0851());
 		buttonContainer.getElement().setAttribute("title",i18n.GL0851());
+		
+		
+		editAssesmentButton.setText(i18n.GL3102());
+		editAssesmentButton.getElement().setId("btnEditAssessment");
+		editAssesmentButton.getElement().setAttribute("alt",i18n.GL3102());
+		editAssesmentButton.getElement().setAttribute("title",i18n.GL3102());
 		
 		buttonContainerAddGray.setText(i18n.GL0851());
 		buttonContainerAddGray.getElement().setId("btnButtonContainerAddGray");
@@ -221,8 +228,11 @@ public class CollectionResourceTabView extends
 		sequenceVerPanel.getElement().setId("vpnlSequenceVerPanel");
 		panelNoResourceContainer.getElement().setId("pnlPanelNoResourceContainer");
 		
-		
-		
+	}
+	
+	@UiHandler("editAssesmentButton")
+	public void editAssementButton(ClickEvent event){
+		Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
 	}
 
 	@Override
@@ -342,8 +352,17 @@ public class CollectionResourceTabView extends
 	}
 	public void showOrHideResourceButton(String collectionType, int size){
 		if(collectionType!=null&&collectionType.equals("quiz")){
+			editAssesmentButton.setVisible(true);
+			buttonContainerForQuestionGreay.setVisible(false);
 			buttonContainerAddGray.setVisible(false);
 			buttonContainer.setVisible(false);
+			buttonContainerForQuestion.setVisible(false);
+		}else{
+			editAssesmentButton.setVisible(true);
+			buttonContainerForQuestionGreay.setVisible(true);
+			buttonContainerAddGray.setVisible(true);
+			buttonContainer.setVisible(true);
+			buttonContainerForQuestion.setVisible(true);
 		}
 	}
 	
@@ -1008,11 +1027,11 @@ public class CollectionResourceTabView extends
 	public void showNoCollectionsItemsMessage(String collectionType){
 		if(collectionType!=null&&collectionType.equals("quiz")){
 			setAttributeToWidget(noResourceLineOneLabel,i18n.GL3014());
-			setAttributeToWidget(noResourceLineTwoLabel,i18n.GL0855());
-			setAttributeToWidget(noResourceLineThreeLabel,"");
-			setAttributeToWidget(noResourceLineFourLabel," "+i18n.GL3015());
-			setAttributeToWidget(noResourceLineSixLabel,"");
-			setAttributeToWidget(noResourceLineFiveLabel," "+i18n.GL0857());
+//			setAttributeToWidget(noResourceLineTwoLabel,i18n.GL0855());
+//			setAttributeToWidget(noResourceLineThreeLabel,"");
+//			setAttributeToWidget(noResourceLineFourLabel," "+i18n.GL3015());
+//			setAttributeToWidget(noResourceLineSixLabel,"");
+//			setAttributeToWidget(noResourceLineFiveLabel," "+i18n.GL0857());
 		}else{
 			setAttributeToWidget(noResourceLineOneLabel,i18n.GL0854());
 			setAttributeToWidget(noResourceLineTwoLabel,i18n.GL0855());

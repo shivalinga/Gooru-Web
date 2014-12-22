@@ -97,8 +97,6 @@ public class OrganizeToolTip extends PopupPanel implements HasMouseOutHandlers{
 		lblCreateAsseement.getElement().setAttribute("alt", i18n.GL3011());
 		lblCreateAsseement.getElement().setAttribute("title", i18n.GL3011());
 		
-		lblCreateAsseement.removeFromParent();
-		
 		lblCreateFolder.setText(i18n.GL1758());
 		lblCreateFolder.getElement().setId("lblLblCreateFolder");
 		lblCreateFolder.getElement().setAttribute("alt", i18n.GL1758());
@@ -180,10 +178,11 @@ public class OrganizeToolTip extends PopupPanel implements HasMouseOutHandlers{
 			@Override
 			public void onClick(ClickEvent event) {
 				if (!AppClientFactory.isAnonymous()){
-					Map<String, String> params= new HashMap<String, String>();
-					params.put("myCollection", "true");
-					params.put("type", "assessment");
-					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+//					Map<String, String> params= new HashMap<String, String>();
+//					params.put("myCollection", "true");
+//					params.put("type", "assessment");
+//					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
+					Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
 				}
 			}
 		});

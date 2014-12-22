@@ -160,6 +160,8 @@ public class BaseServiceImpl extends GwtAbstractServiceImpl implements RemoteSer
 	
 	private static final String COMMUNITY_LIBRARY_ID = "community.library.gooruOid";
 	
+	private static final String ASSESSMENT_ENDPOINT = "assessment.endpoint";
+	
 	private static final String HTTPS = "https";
 	
 	private static final String HTTP = "http";
@@ -205,6 +207,10 @@ public class BaseServiceImpl extends GwtAbstractServiceImpl implements RemoteSer
 	
 	public String getMosLink(){
 		return restConstants.getProperty(MOS_LINK);
+	}
+	
+	public String getAssessementEndPoint(){
+		return restConstants.getProperty(ASSESSMENT_ENDPOINT);
 	}
 	
 	public String getRestEndPoint() {
@@ -372,6 +378,7 @@ public class BaseServiceImpl extends GwtAbstractServiceImpl implements RemoteSer
 		filterProperties.setTaxonomyPreferences(getTaxonomyPreferences());
 		filterProperties.setAnalyticsEndPoint(getAnalyticsEndPoint());
 		filterProperties.setCommunityLibraryGooruOid(getCommunityLibaryGooruOid());
+		filterProperties.setAssessementEndPoint(getAssessementEndPoint());
 		user.setSettings(filterProperties);
 	}
 

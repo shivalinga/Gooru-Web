@@ -22,7 +22,7 @@
 			ui:field="newQuestionLabel">A Question</g:Label> <g:Label styleName="{res.css.assessmentPopupList}" 
 			ui:field="searchLabel">A Resource from Search</g:Label> </gg:HTMLEventPanel> -->
 		<g:HTMLPanel styleName="{res.css.contentCollectionEdit}">
-
+			<g:Button styleName="primary" ui:field="editAssesmentButton"></g:Button>
 			<g:Button styleName="plusButton {res.css.addResource}" ui:field="buttonContainer"></g:Button>
 
 			<g:Button styleName="plusButton disabled {res.css.addResourceDisable}"

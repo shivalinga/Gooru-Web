@@ -80,6 +80,7 @@
 				<prop key="stories.url">${stories.url}</prop>
 				<prop key="community.library.gooruOid">${community.library.gooruOid}</prop>
 				<prop key="show.stories">${show.stories}</prop>
+				<prop key="assessment.endpoint">${assessment.endpoint}</prop>
 			</props>
 		</property>
 	</bean>
