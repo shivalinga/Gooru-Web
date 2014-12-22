@@ -368,7 +368,7 @@ public class CollectionResourceTabView extends
 	
 	public void modifyExistingCollectionItemWidget(final CollectionItemDo collectionItemDo){
 		collectionItemDo.setCollection(collectionDo);
-		shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo);
+		shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo,collectionDo.getCollectionType());
 		shelfCollectionResourceVc.getEditInfoLbl().addClickHandler(
 				new ClickHandler() {
 					@Override
@@ -547,7 +547,7 @@ public class CollectionResourceTabView extends
 			int sequencePostion = collectionItemDo.getItemSequence();
 			sequencePostion = sequencePostion >= sequenceVerPanel.getWidgetCount() ? sequenceVerPanel.getWidgetCount() - 1 : sequencePostion;
 			sequenceVerPanel.insert(sequenceLbl, sequencePostion);
-			shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo);
+			shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo,collectionDo.getCollectionType());
 			resetSequence();
 			/*
 				Again enabled DnD
@@ -706,7 +706,7 @@ public class CollectionResourceTabView extends
 		int sequencePostion = collectionItemDo.getItemSequence();
 		sequencePostion = sequencePostion >= sequenceVerPanel.getWidgetCount() ? sequenceVerPanel.getWidgetCount() - 1 : sequencePostion;
 		sequenceVerPanel.insert(sequenceLbl, sequencePostion);
-		final ShelfCollectionResourceChildView shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo);
+		final ShelfCollectionResourceChildView shelfCollectionResourceVc = new ShelfCollectionResourceChildView(this, collectionItemDo,collectionDo.getCollectionType());
 		resetSequence();
 		Window.Location.reload();
 		shelfCollectionResourceVc.getEditInfoLbl().addClickHandler(	new ClickHandler() {

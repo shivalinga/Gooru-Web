@@ -262,6 +262,8 @@ public class ShelfCollectionResourceChildView extends
 	private static final String OOPS = i18n.GL0061();
 
 	private static final String EDIT_CONFIRM =i18n.GL0975();
+	
+	private  String collectionType=null;
 
 	private String selectedCollectionId;
 	private boolean youtube;
@@ -348,8 +350,9 @@ public class ShelfCollectionResourceChildView extends
 	 */
 	public ShelfCollectionResourceChildView(
 			IsCollectionResourceTabView collectionResourceTabView,
-			CollectionItemDo collectionItem) {
+			CollectionItemDo collectionItem,String collectionType) {
 		this.collectionResourceTabView = collectionResourceTabView;
+		this.collectionType=collectionType;
 		res = CollectionEditResourceCBundle.INSTANCE;
 		CollectionEditResourceCBundle.INSTANCE.css().ensureInjected();
 		initWidget(uiBinder.createAndBindUi(this));
@@ -801,7 +804,11 @@ public class ShelfCollectionResourceChildView extends
 		@Override
 		public void onMouseOver(MouseOverEvent event) {
 			if ((actionVerPanel.isVisible()==false) && (actionVerPanelForUpdateTime.isVisible()==false) && (actionVerPanelForUpdatePDF.isVisible()==false)) {
-				EditBtn.setVisible(true);
+				if(!collectionType.equals("quiz")){
+					EditBtn.setVisible(true);
+				}else{
+					EditBtn.setVisible(false);
+				}
 				
 				/**
 				 * Hot fix changes
@@ -911,7 +918,7 @@ public class ShelfCollectionResourceChildView extends
 				
 //				resourceImageUc.renderSearch(collectionItem.getResource().getCategory(), tumbnailUrl, collectionItem.getResource().getUrl(), collectionItem.getCollectionItemId(),PLAYER_NAME,resourceTitle, youtube,"");
 				String resourceFormat = collectionItem.getResource().getResourceFormat() !=null ? collectionItem.getResource().getResourceFormat().getDisplayName() : "text";
-				resourceImageUc.renderSearch(resourceFormat, tumbnailUrl, collectionItem.getResource().getUrl(), collectionItem.getCollectionItemId(),resourceTitle, youtube,collectionItem.getNarration());
+				resourceImageUc.renderSearch(resourceFormat, tumbnailUrl, collectionItem.getResource().getUrl(), collectionItem.getCollectionItemId(),resourceTitle, youtube,collectionItem.getNarration(),collectionType,null);
 			}
 		} else {
 				try {
@@ -932,7 +939,7 @@ public class ShelfCollectionResourceChildView extends
 					.getUrl(), collectionItem.getCollectionItemId(),
 					PLAYER_NAME,resourceTitle, youtube,"");*/
 				String resourceFormat =  collectionItem.getResource().getResourceFormat() != null ? collectionItem.getResource().getResourceFormat().getDisplayName() : "text";
-				resourceImageUc.renderSearch(resourceFormat, collectionItem.getResource().getThumbnails().getUrl(), collectionItem.getResource().getUrl(), collectionItem.getCollectionItemId(),resourceTitle, youtube,collectionItem.getNarration());
+				resourceImageUc.renderSearch(resourceFormat, collectionItem.getResource().getThumbnails().getUrl(), collectionItem.getResource().getUrl(), collectionItem.getCollectionItemId(),resourceTitle, youtube,collectionItem.getNarration(),collectionType,null);
 		}
 
 		if (collectionItem.getNarration() != null && !collectionItem.getNarration().trim().isEmpty()){
@@ -1302,22 +1309,30 @@ public class ShelfCollectionResourceChildView extends
 		resourceAnchor.setStyleName("");
 		resourceAnchor.getElement().appendChild(resourceTitleLbl.getElement());
 		resourceTitleContainer.add(resourceAnchor);
-		resourceAnchor.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				AppClientFactory.getPlaceManager().setRefreshPlace(false);
-			}
-		});
+		if(collectionType!=null&&!collectionType.equals("quiz")){
+			resourceAnchor.addClickHandler(new ClickHandler() {
+				@Override
+				public void onClick(ClickEvent event) {
+					AppClientFactory.getPlaceManager().setRefreshPlace(false);
+				}
+			});
+		}else{
+			resourceAnchor.setTarget("_blank");
+		}
 	}
 	
 	public String getResourceLink(){
-		String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
-		if(collectionItemDo.getNarration()!=null&&!collectionItemDo.getNarration().trim().equals("")){
-			String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId()+"&tab=narration";
-			return resourceLink;
+		if(collectionType!=null&&!collectionType.equals("quiz")){
+			String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
+			if(collectionItemDo.getNarration()!=null&&!collectionItemDo.getNarration().trim().equals("")){
+				String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId()+"&tab=narration";
+				return resourceLink;
+			}else{
+				String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId();
+				return resourceLink;
+			}
 		}else{
-			String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId();
-			return resourceLink;
+			return AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint();
 		}
 	}
 
