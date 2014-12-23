@@ -29,6 +29,7 @@ import java.util.Map;
 
 import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.gin.AppClientFactory;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.util.ImageUtil;
 import org.ednovo.gooru.client.util.MixpanelUtil;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
@@ -238,7 +239,7 @@ public class ResourceImageUc extends Composite implements ClickHandler {
 	@Override
 	public void onClick(ClickEvent event) {
 		//Implementing Mixpanel
-		if(collectionType!=null&&!collectionType.equals("quiz")){
+		if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			if(AppClientFactory.getCurrentPlaceToken().equalsIgnoreCase(PlaceTokens.PROFILE_PAGE)) {
 				MixpanelUtil.Preview_Resource_From_Profile("ResourceImageUc");
 			} else {

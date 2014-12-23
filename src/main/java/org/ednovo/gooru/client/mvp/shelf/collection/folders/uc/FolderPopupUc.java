@@ -7,6 +7,7 @@ import java.util.Map;
 import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.shelf.ShelfCBundle;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.list.TreeMenuImages;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
 import org.ednovo.gooru.shared.model.folder.FolderDo;
@@ -137,7 +138,7 @@ public abstract class FolderPopupUc extends PopupPanel {
 	}
 	
 	public void setCollectionType(String collectionType){
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			addAttributesToWidget(inputDescLbl,i18n.GL3036());
 			addAttributesToWidget(popupHeaderTitleLbl,i18n.GL3037());
 		}else{

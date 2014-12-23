@@ -44,6 +44,7 @@ import java.util.Map;
 
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.add.drive.GoogleDocsResourceView;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.add.drive.GoogleWebResource;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.exists.ExistsResourceView;
@@ -1018,7 +1019,7 @@ public class AddResourceView extends PopupViewWithUiHandlers<AddResourceUiHandle
 //				searchTabButton.getElement().getStyle().setDisplay(Display.NONE);
 //				myDriveButton.getElement().getStyle().setDisplay(Display.NONE);
 				System.out.println("questionType===>"+collectionDo.getCollectionType());
-				if(collectionDo!=null&&collectionDo.getCollectionType().equalsIgnoreCase("quiz")){
+				if(collectionDo!=null&&collectionDo.getCollectionType().equalsIgnoreCase(ShelfPresenter.ASSESSMENT)){
 					System.out.println("if===>"+collectionDo.getCollectionType());
 					hideTabButtons(false, true, true);
 				}else{
@@ -1060,7 +1061,7 @@ public class AddResourceView extends PopupViewWithUiHandlers<AddResourceUiHandle
 //				myComputerTabButton.getElement().getStyle().setDisplay(Display.NONE);
 //				searchTabButton.getElement().getStyle().setDisplay(Display.NONE);
 //				myDriveButton.getElement().getStyle().setDisplay(Display.NONE);
-				if(collectionDo!=null&&collectionDo.getCollectionType().equalsIgnoreCase("quiz")){
+				if(collectionDo!=null&&collectionDo.getCollectionType().equalsIgnoreCase(ShelfPresenter.ASSESSMENT)){
 					hideTabButtons(false, true, true);
 				}else{
 					hideTabButtons(false, true, false);
@@ -1217,7 +1218,7 @@ public class AddResourceView extends PopupViewWithUiHandlers<AddResourceUiHandle
 	private class AssessmentQuestionsEvent implements ClickHandler{
 		public void onClick(ClickEvent event) {
 			Window.enableScrolling(false);
-			if(collectionDo!=null&&collectionDo.getCollectionType().equals("quiz")){
+			if(collectionDo!=null&&collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
 				tabViewContainer.clear();
 				tabViewContainer.add(new HTML("<h3>Comming soon........</h3>"));
 			}

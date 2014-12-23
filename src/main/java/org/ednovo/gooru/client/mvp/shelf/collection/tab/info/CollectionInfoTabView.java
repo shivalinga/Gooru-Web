@@ -36,6 +36,7 @@ import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.effects.FadeInAndOut;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.collection.CollectionCBundle;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.assign.CollectionAssignCBundle;
 import org.ednovo.gooru.client.mvp.shelf.event.AddCourseEvent;
@@ -739,7 +740,7 @@ public class CollectionInfoTabView extends BaseViewWithHandlers<CollectionInfoTa
 	}
 	
 	public void modifyStaticText(String collectionType){
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			addAttributesToWidget(selectGradeLbl,i18n.GL3025());
 			addAttributesToWidget(selectCourseLbl,i18n.GL3026());
 			addAttributesToWidget(standardsDefaultText, i18n.GL3027());

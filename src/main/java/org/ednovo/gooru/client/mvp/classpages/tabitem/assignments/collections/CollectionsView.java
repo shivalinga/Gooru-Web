@@ -37,6 +37,7 @@ import org.ednovo.gooru.client.mvp.classpages.edit.EditClasspageView;
 import org.ednovo.gooru.client.mvp.home.WaitPopupVc;
 import org.ednovo.gooru.client.mvp.search.event.SetMarkButtonEvent;
 import org.ednovo.gooru.client.mvp.search.event.SetMarkButtonHandler;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.socialshare.event.UpdateSocialShareMetaDataEvent;
 import org.ednovo.gooru.client.mvp.socialshare.event.UpdateSocialShareMetaDataHandler;
 import org.ednovo.gooru.client.uc.tooltip.ToolTip;
@@ -372,7 +373,12 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 	 */
 	private void setClasspageItemTitle(){
 		classpageItemTitle.setHTML(classpageItemDo.getCollectionTitle());
-		classpageItemTitle.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());
+		if(classpageItemDo!=null && classpageItemDo.getCollectionType()!=null && classpageItemDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
+			classpageItemTitle.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint());
+			classpageItemTitle.setTarget("_blank");
+		}else{
+			classpageItemTitle.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());
+		}
 	}
 	/**
 	 * 
@@ -489,7 +495,12 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 	public void setThumbnailUrl(){
 		collectionImage.setUrl(classpageItemDo.getThumbnailUrl()!=null?StringUtil.formThumbnailName(classpageItemDo.getThumbnailUrl(),"-160x120."):"null");
 		Anchor thumbnailAnchor=new Anchor();
-		thumbnailAnchor.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());
+		if(classpageItemDo!=null && classpageItemDo.getCollectionType()!=null && classpageItemDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
+			thumbnailAnchor.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint());
+			thumbnailAnchor.setTarget("_blank");
+		}else{
+			thumbnailAnchor.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());
+		}
 		thumbnailAnchor.getElement().appendChild(collectionImage.getElement());
 		thumbnailContainer.add(thumbnailAnchor);
 	}

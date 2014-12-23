@@ -35,6 +35,7 @@ import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.event.CollectionEditShareEvent;
 import org.ednovo.gooru.client.mvp.shelf.event.RefreshCollectionInShelfListEvent;
 import org.ednovo.gooru.client.mvp.shelf.event.RefreshType;
@@ -743,7 +744,7 @@ public class CollectionAssignTabView extends BaseViewWithHandlers<CollectionAssi
 	}
 
 	public void modifyStaticText(String collectionType){
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			lblAssignCollectionTitle.setText(i18n.GL3032());
 			lblAssignCollectionTitle.getElement().setAttribute("alt",i18n.GL3032());
 			lblAssignCollectionTitle.getElement().setAttribute("title",i18n.GL3032());

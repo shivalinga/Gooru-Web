@@ -34,6 +34,7 @@ import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
 import org.ednovo.gooru.client.mvp.play.collection.preview.PreviewPlayerPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.preview.home.ResourceCurosal;
 import org.ednovo.gooru.client.mvp.play.collection.preview.metadata.NavigationConfirmPopup;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.uc.HTMLEventPanel;
 import org.ednovo.gooru.client.uc.PlayerBundle;
 import org.ednovo.gooru.client.uc.TocCollectionEndView;
@@ -152,7 +153,7 @@ public class CollectionPlayerTocView extends BaseViewWithHandlers<CollectionPlay
 				String resourceString = resourceCount == 1? resourceCount + " " + i18n.GL1110().toLowerCase() : resourceCount + " " + i18n.GL0174().toLowerCase();
 				String questionString = questionCount == 1? questionCount + " " + i18n.GL0308().toLowerCase() : questionCount + " " + i18n.GL1042().toLowerCase();
 				String finalMessage = "";
-				String message=(collectionDo.getCollectionType()!=null&&collectionDo.getCollectionType().equals("quiz"))?i18n.GL3042():i18n.GL0578();
+				String message=(collectionDo.getCollectionType()!=null&&collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT))?i18n.GL3042():i18n.GL0578();
 				if (resourceCount >0 && questionCount > 0){
 					finalMessage = resourceString + " " + i18n.GL_GRR_AND() + " " + questionString + " " + message + i18n.GL_SPL_SEMICOLON()+" ";
 				}else if (resourceCount >0){

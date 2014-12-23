@@ -31,6 +31,7 @@ import java.util.List;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.item.CollectionEditResourceCBundle;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.item.CollectionEditResourceCBundle.CollectionEditResourceCss;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.item.EditQuestionPopupVc;
@@ -351,18 +352,20 @@ public class CollectionResourceTabView extends
 		contentPanel.setVisible(true);
 	}
 	public void showOrHideResourceButton(String collectionType, int size){
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			editAssesmentButton.setVisible(true);
 			buttonContainerForQuestionGreay.setVisible(false);
 			buttonContainerAddGray.setVisible(false);
 			buttonContainer.setVisible(false);
 			buttonContainerForQuestion.setVisible(false);
+			dragAndDropLabel.setVisible(false);
 		}else{
 			editAssesmentButton.setVisible(true);
 			buttonContainerForQuestionGreay.setVisible(true);
 			buttonContainerAddGray.setVisible(true);
 			buttonContainer.setVisible(true);
 			buttonContainerForQuestion.setVisible(true);
+			dragAndDropLabel.setVisible(true);
 		}
 	}
 	
@@ -460,7 +463,9 @@ public class CollectionResourceTabView extends
 				});
 		collectionResourcePanelVc.remove(collectionItemDo.getItemSequence());
 		//sequenceVerPanel.remove(collectionItemDo.getItemSequence()-1);
-		collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());	
+		if(collectionDo!=null&&!collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
+			collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());
+		}
 		
 		collectionResourcePanelVc.insert(shelfCollectionResourceVc, collectionItemDo.getItemSequence());
 
@@ -660,9 +665,12 @@ public class CollectionResourceTabView extends
 
 				}
 			});
-			collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());
-			/*collectionResourcePanelVc.add(shelfCollectionResourceVc);
-			setResourceSequence();*/
+			if(collectionDo!=null&&!collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
+				collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());
+			}else{
+				collectionResourcePanelVc.add(shelfCollectionResourceVc);
+				//setResourceSequence();
+			}
 			AppClientFactory.fireEvent(new UpdateResourceCountEvent(collectionDo.getCollectionItems().size()));
 		}
 		hideNoResourceMsg();
@@ -847,8 +855,11 @@ public class CollectionResourceTabView extends
 						}
 					}
 				});
-		collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());
-		/*collectionResourcePanelVc.add(shelfCollectionResourceVc);*/
+		if(collectionDo!=null&&!collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
+			collectionResourcePanelVc.addDraggable(shelfCollectionResourceVc,collectionItemDo.getItemSequence());
+		}else{
+			collectionResourcePanelVc.add(shelfCollectionResourceVc);
+		}
 	}
 
 	public class EditQuestionPopupWidget extends EditQuestionPopupVc {
@@ -1025,7 +1036,7 @@ public class CollectionResourceTabView extends
 	}
 	
 	public void showNoCollectionsItemsMessage(String collectionType){
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			setAttributeToWidget(noResourceLineOneLabel,i18n.GL3014());
 //			setAttributeToWidget(noResourceLineTwoLabel,i18n.GL0855());
 //			setAttributeToWidget(noResourceLineThreeLabel,"");

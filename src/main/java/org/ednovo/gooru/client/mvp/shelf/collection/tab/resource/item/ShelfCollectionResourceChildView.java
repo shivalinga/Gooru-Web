@@ -38,6 +38,7 @@ import org.ednovo.gooru.client.mvp.addTagesPopup.AddTagesPopupView;
 import org.ednovo.gooru.client.mvp.dnd.IsDraggableMirage;
 import org.ednovo.gooru.client.mvp.resource.dnd.ResourceDragUc;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.collaborators.vc.SuccessPopupViewVc;
 import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.IsCollectionResourceTabView;
 import org.ednovo.gooru.client.mvp.shelf.event.InsertCollectionItemInAddResourceEvent;
@@ -804,7 +805,7 @@ public class ShelfCollectionResourceChildView extends
 		@Override
 		public void onMouseOver(MouseOverEvent event) {
 			if ((actionVerPanel.isVisible()==false) && (actionVerPanelForUpdateTime.isVisible()==false) && (actionVerPanelForUpdatePDF.isVisible()==false)) {
-				if(!collectionType.equals("quiz")){
+				if(collectionType!=null && !collectionType.equals(ShelfPresenter.ASSESSMENT)){
 					EditBtn.setVisible(true);
 				}else{
 					EditBtn.setVisible(false);
@@ -1309,7 +1310,7 @@ public class ShelfCollectionResourceChildView extends
 		resourceAnchor.setStyleName("");
 		resourceAnchor.getElement().appendChild(resourceTitleLbl.getElement());
 		resourceTitleContainer.add(resourceAnchor);
-		if(collectionType!=null&&!collectionType.equals("quiz")){
+		if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			resourceAnchor.addClickHandler(new ClickHandler() {
 				@Override
 				public void onClick(ClickEvent event) {
@@ -1322,7 +1323,7 @@ public class ShelfCollectionResourceChildView extends
 	}
 	
 	public String getResourceLink(){
-		if(collectionType!=null&&!collectionType.equals("quiz")){
+		if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
 			if(collectionItemDo.getNarration()!=null&&!collectionItemDo.getNarration().trim().equals("")){
 				String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId()+"&tab=narration";

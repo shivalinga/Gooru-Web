@@ -46,6 +46,7 @@ import org.ednovo.gooru.client.mvp.play.collection.preview.home.customize.Rename
 import org.ednovo.gooru.client.mvp.play.collection.preview.metadata.comment.CommentWidgetChildView;
 import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataView;
 import org.ednovo.gooru.client.mvp.search.SearchResultWrapperCBundle;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.service.ResourceServiceAsync;
 import org.ednovo.gooru.client.uc.PlayerBundle;
 import org.ednovo.gooru.client.uc.tooltip.GlobalToolTip;
@@ -345,7 +346,7 @@ public class CollectionEndView extends BaseViewWithHandlers<CollectionEndUiHandl
 		this.collectionDo = collectionDo;
 		//showPopupAfterGmailSignin();
 		setCollectionImage(collectionDo.getThumbnails().getUrl());
-		String message=(collectionDo.getCollectionType()!=null&&collectionDo.getCollectionType().equals("quiz"))?i18n.GL3044():i18n.GL2083();
+		String message=(collectionDo.getCollectionType()!=null&&collectionDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT))?i18n.GL3044():i18n.GL2083();
 		headingText.setText(message);
 //		setCollectionGoal(collectionDo.getGoals());
 //		assignCollectionBtn.getElement().setAttribute("collectionId", collectionDo.getGooruOid());

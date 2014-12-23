@@ -26,6 +26,7 @@ package org.ednovo.gooru.client.mvp.play.collection.header;
 
 
 import org.ednovo.gooru.client.gin.AppClientFactory;
+import org.ednovo.gooru.client.mvp.shelf.ShelfPresenter;
 import org.ednovo.gooru.client.uc.PlayerBundle;
 import org.ednovo.gooru.client.uc.tooltip.GlobalToolTip;
 import org.ednovo.gooru.client.ui.HTMLEventPanel;
@@ -147,7 +148,7 @@ public class StudyPlayerHeaderView extends Composite{
 		loginUserName.setText(AppClientFactory.getLoggedInUser().getUsernameDisplay());
 		loginUserName.getElement().setAttribute("alt",AppClientFactory.getLoggedInUser().getUsernameDisplay());
 		loginUserName.getElement().setAttribute("title",AppClientFactory.getLoggedInUser().getUsernameDisplay());
-		if(collectionType!=null&&collectionType.equals("quiz")){
+		if(collectionType!=null&&collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			wishingText.setText(i18n.GL1530());
 			wishingText.getElement().setAttribute("alt",i18n.GL1530());
 			wishingText.getElement().setAttribute("title",i18n.GL1530());
