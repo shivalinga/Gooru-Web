@@ -182,7 +182,7 @@ public class OrganizeToolTip extends PopupPanel implements HasMouseOutHandlers{
 //					params.put("myCollection", "true");
 //					params.put("type", "assessment");
 //					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.COLLECTION,params);
-					Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
+					Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.CREATE_ASSIGNMENT, "_blank", "");
 				}
 			}
 		});

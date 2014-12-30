@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BaseViewWithHandlers;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
@@ -233,7 +234,8 @@ public class CollectionResourceTabView extends
 	
 	@UiHandler("editAssesmentButton")
 	public void editAssementButton(ClickEvent event){
-		Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
+		String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
+		Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.EDIT_ASSIGNMENT+collectionId, "_blank", "");
 	}
 
 	@Override

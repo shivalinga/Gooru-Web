@@ -1574,8 +1574,8 @@ public class ShelfListView extends BaseViewWithHandlers<ShelfListUiHandlers> imp
 		
 		@Override
 		public void onClick(ClickEvent event) {
-			if(collectionType.equalsIgnoreCase("assessment")){
-				Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
+			if(collectionType!=null&&collectionType.equalsIgnoreCase("assessment")){
+				Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.CREATE_ASSIGNMENT, "_blank", "");
 			}
 			else {
 				final String o1 = AppClientFactory.getPlaceManager().getRequestParameter(O1_LEVEL);

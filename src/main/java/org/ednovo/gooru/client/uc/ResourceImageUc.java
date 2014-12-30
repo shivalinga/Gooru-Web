@@ -239,7 +239,6 @@ public class ResourceImageUc extends Composite implements ClickHandler {
 	@Override
 	public void onClick(ClickEvent event) {
 		//Implementing Mixpanel
-		if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
 			if(AppClientFactory.getCurrentPlaceToken().equalsIgnoreCase(PlaceTokens.PROFILE_PAGE)) {
 				MixpanelUtil.Preview_Resource_From_Profile("ResourceImageUc");
 			} else {
@@ -264,13 +263,16 @@ public class ResourceImageUc extends Composite implements ClickHandler {
 				}else{
 					if(AppClientFactory.getCurrentPlaceToken().equals(PlaceTokens.SHELF)){
 						String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
-						if(getNarration()!=null&& !getNarration().equalsIgnoreCase("")){
-							
-							PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).with("id", collectionId).with("rid", gooruOid).with("tab", "narration");
-							AppClientFactory.getPlaceManager().revealPlace(false,request,true);
+						if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
+							if(getNarration()!=null&& !getNarration().equalsIgnoreCase("")){
+								PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).with("id", collectionId).with("rid", gooruOid).with("tab", "narration");
+								AppClientFactory.getPlaceManager().revealPlace(false,request,true);
+							}else{
+								PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).with("id", collectionId).with("rid", gooruOid);
+								AppClientFactory.getPlaceManager().revealPlace(false,request,true);
+							}
 						}else{
-							PlaceRequest request=new PlaceRequest(PlaceTokens.COLLECTION_PLAY).with("id", collectionId).with("rid", gooruOid);
-							AppClientFactory.getPlaceManager().revealPlace(false,request,true);
+							Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.PLAY_ASSIGNMENT+collectionId, "_blank", "");
 						}
 					}else if (AppClientFactory.getCurrentPlaceToken().equals(PlaceTokens.PROFILE_PAGE) || AppClientFactory.getCurrentPlaceToken().equals(PlaceTokens.COLLECTION_SEARCH)){
 						if(getNarration()!=null&& !getNarration().equalsIgnoreCase("")){
@@ -285,9 +287,6 @@ public class ResourceImageUc extends Composite implements ClickHandler {
 				
 				}
 			}
-		}else{
-			Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
-		}
 /*		Map<String, String> params = new HashMap<String, String>();
 		params.put("id", getResourceId());
 		params.put("pn", getPlayerName());

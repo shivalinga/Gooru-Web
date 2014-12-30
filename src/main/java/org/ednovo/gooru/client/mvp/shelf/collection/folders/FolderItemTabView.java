@@ -692,7 +692,7 @@ public class FolderItemTabView extends BaseViewWithHandlers<FolderItemTabUiHandl
 	
 	@UiHandler("assessmentButton")
 	public void onClickNewAssessmentBtn(ClickEvent clickEvent){
-		Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
+		Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.CREATE_ASSIGNMENT, "_blank", "");
 //		if (AppClientFactory.getLoggedInUser().getUserUid().equals(AppClientFactory.GOORU_ANONYMOUS)) {
 //			AppClientFactory.fireEvent(new InvokeLoginEvent());
 //		} else {

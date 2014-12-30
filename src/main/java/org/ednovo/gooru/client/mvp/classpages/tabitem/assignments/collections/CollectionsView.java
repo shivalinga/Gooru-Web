@@ -374,7 +374,7 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 	private void setClasspageItemTitle(){
 		classpageItemTitle.setHTML(classpageItemDo.getCollectionTitle());
 		if(classpageItemDo!=null && classpageItemDo.getCollectionType()!=null && classpageItemDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
-			classpageItemTitle.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint());
+			classpageItemTitle.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.PLAY_ASSIGNMENT+classpageItemDo.getCollectionId());
 			classpageItemTitle.setTarget("_blank");
 		}else{
 			classpageItemTitle.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());
@@ -496,7 +496,7 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 		collectionImage.setUrl(classpageItemDo.getThumbnailUrl()!=null?StringUtil.formThumbnailName(classpageItemDo.getThumbnailUrl(),"-160x120."):"null");
 		Anchor thumbnailAnchor=new Anchor();
 		if(classpageItemDo!=null && classpageItemDo.getCollectionType()!=null && classpageItemDo.getCollectionType().equals(ShelfPresenter.ASSESSMENT)){
-			thumbnailAnchor.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint());
+			thumbnailAnchor.setHref(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.PLAY_ASSIGNMENT+classpageItemDo.getCollectionId());
 			thumbnailAnchor.setTarget("_blank");
 		}else{
 			thumbnailAnchor.setHref("#"+PlaceTokens.COLLECTION_PLAY+"&id="+classpageItemDo.getCollectionId()+"&cid="+classpageItemDo.getCollectionItemId()+"&page="+getCurrentPlaceToken()+"&eventid="+AppClientFactory.getPlaceManager().getClasspageEventId());

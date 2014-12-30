@@ -1539,7 +1539,7 @@ public class ShelfView extends BaseViewWithHandlers<ShelfUiHandlers> implements
 			PlaceRequest placeRequest=AppClientFactory.getPlaceManager().preparePlaceRequest(PlaceTokens.COLLECTION_PLAY, params);
 			AppClientFactory.getPlaceManager().revealPlace(false,placeRequest,true);
 		}else{
-			Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint(), "_blank", "");
+			Window.open(AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.PLAY_ASSIGNMENT+collectionDo.getGooruOid(), "_blank", "");
 		}
 	}
 

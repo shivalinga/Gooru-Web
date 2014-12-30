@@ -1323,8 +1323,8 @@ public class ShelfCollectionResourceChildView extends
 	}
 	
 	public String getResourceLink(){
+		String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
 		if(collectionType!=null&&!collectionType.equals(ShelfPresenter.ASSESSMENT)){
-			String collectionId=AppClientFactory.getPlaceManager().getRequestParameter("id", null);
 			if(collectionItemDo.getNarration()!=null&&!collectionItemDo.getNarration().trim().equals("")){
 				String resourceLink="#"+PlaceTokens.COLLECTION_PLAY+"&id="+collectionId+"&rid="+collectionItemDo.getCollectionItemId()+"&tab=narration";
 				return resourceLink;
@@ -1333,7 +1333,7 @@ public class ShelfCollectionResourceChildView extends
 				return resourceLink;
 			}
 		}else{
-			return AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint();
+			return AppClientFactory.loggedInUser.getSettings().getAssessementEndPoint()+PlaceTokens.PLAY_ASSIGNMENT+collectionId;
 		}
 	}
 
