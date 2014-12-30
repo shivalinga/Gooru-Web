@@ -45,13 +45,21 @@ public interface CollectionSummaryIndividualUiHandlers extends BaseUiHandlers{
 	/**
 	 * This method is used to generate pdf with given html
 	 * @param htmlString
+	 * @param collectionTitle 
 	 * @param isClickedOnEmail
 	 */
-	void setHtmltopdf(String htmlString,boolean isClickedOnEmail);
+	void setHtmltopdf(String htmlString,String collectionTitle, boolean isClickedOnEmail);
 	/**
 	 * This method is used to set Open-ended response data
 	 * @param resourceGooruId
 	 * @param questionType
 	 */
 	void setOEtextData(String resourceGooruId,String questionType);
+	/**
+	 * This method is used to set error message
+	 * @param loadingImage
+	 */
+	void setNoDataMessage(HTMLPanel loadingImage);
+	
+	public void clearFrame();
 }

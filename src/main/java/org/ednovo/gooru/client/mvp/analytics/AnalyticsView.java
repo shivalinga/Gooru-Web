@@ -28,6 +28,7 @@ import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -60,6 +61,8 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 	
 	@UiField Label setNoDataText;
 	
+	@UiField Frame downloadFile;
+	
 	boolean isSummayClicked=false,isProgressClicked=false,isPersonalizedBtnClicked=false;
 	
 	Map<String,GradeJsonData> loadcollectionsmap=new HashMap<String, GradeJsonData>();
@@ -84,6 +87,7 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 		setStaticData();
 		pnlMainContainer.setVisible(false);
 		setNoDataText.setVisible(false);
+		downloadFile.setVisible(false);
 	}
 	/**
 	 * This inner class is used to handle change event of the collections.
@@ -91,9 +95,12 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 	public class loadCollectionsChangeHandler implements ChangeHandler{
 		@Override
 		public void onChange(ChangeEvent event) {
+			String classpageId=AppClientFactory.getPlaceManager().getRequestParameter("classpageid", null);
+			String selectedCollectionId=loadCollections.getValue(loadCollections.getSelectedIndex());
+			getUiHandlers().checkCollectionStaus(classpageId, selectedCollectionId);
 			//when changing the collections drop down reset all the changes.
-			getUiHandlers().setClickedTabPresenter(CLEARPROGRESS,"","");
-			getUiHandlers().setClickedTabPresenter(CLEARSUMMARY,"","");
+			/*getUiHandlers().setClickedTabPresenter(CLEARPROGRESS,"","");
+			getUiHandlers().setClickedTabPresenter(CLEARSUMMARY,"","");*/
 			btnCollectionProgress.setText(i18n.GL2296());
 			btnCollectionSummary.setText(i18n.GL2296());
 		}
@@ -106,8 +113,10 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 		loadCollections.clear();
 		if(gradeData!=null){
 			for (GradeJsonData gradeJsonData : gradeData) {
-				loadcollectionsmap.put(gradeJsonData.getResourceGooruOId(), gradeJsonData);
-				loadCollections.addItem(gradeJsonData.getTitle(), gradeJsonData.getResourceGooruOId());
+				if(gradeJsonData.getTitle()!=null){
+					loadcollectionsmap.put(gradeJsonData.getResourceGooruOId(), gradeJsonData);
+					loadCollections.addItem(gradeJsonData.getTitle(), gradeJsonData.getResourceGooruOId());
+				}
 			}
 		}
 	}
@@ -219,7 +228,11 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 	 */
 	@Override
 	public void resetData(){
-		loadCollections.clear();
+		//loadCollections.clear();
+		btnCollectionSummary.setText(i18n.GL2296());
+		btnCollectionProgress.setText(i18n.GL2296());
+		isSummayClicked=false;
+		isProgressClicked=false;
 	}
 	
 	/* (non-Javadoc)
@@ -269,5 +282,13 @@ public class AnalyticsView extends BaseViewWithHandlers<AnalyticsUiHandlers> imp
 		pnlMainContainer.setVisible(false);
 		setNoDataText.setVisible(true);
 	}
-
+	@Override
+	public void resetDataText() {
+		pnlMainContainer.setVisible(true);
+		setNoDataText.setVisible(false);
+	}
+	@Override
+	public Frame getFrame() {
+		return downloadFile;
+	}
 }

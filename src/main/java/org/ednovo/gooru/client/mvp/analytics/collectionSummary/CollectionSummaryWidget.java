@@ -63,7 +63,7 @@ public class CollectionSummaryWidget extends Composite {
 		collectionLastAccessedlbl.setText(i18n.GL2271());
 		collectionTitle.setText(result.getTitle());
 		collectionLastAccessed.setText(AnalyticsUtil.getCreatedTime(Long.toString(result.getLastModified())));
-		if(result.getThumbnail()!=null){
+		if(result.getThumbnail()!=null && !result.getThumbnail().equalsIgnoreCase("")){
 			collectionImage.setUrl(result.getThumbnail());
 		}else{
 			collectionImage.setUrl("../images/analytics/default-collection-image.png");
@@ -74,7 +74,7 @@ public class CollectionSummaryWidget extends Composite {
 				collectionImage.setUrl("../images/analytics/default-collection-image.png");
 			}
 		});
-		collectionResourcesCount.setText((result.getResourceCount()-result.getTotalQuestionCount())+" Resources | "+result.getTotalQuestionCount()+" Questions");
+		collectionResourcesCount.setText((result.getResourceCount())+" Resources | "+result.getNonResourceCount()+" Questions");
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class CollectionSummaryWidget extends Composite {
 			collectionTitle.setText(i18n.GL0645()+" "+i18n.GL_SPL_SEMICOLON()+" "+result.getTitle());
 			collectionLastAccessedlbl.setText("Sort BY:");
 			collectionLastAccessed.setText(printUserDataDO.getUserName());
-			collectionResourcesCount.setText("Resource in this Collection :"+(result.getResourceCount()-result.getTotalQuestionCount())+" Resources | "+result.getTotalQuestionCount()+" Questions");
+			collectionResourcesCount.setText("Resource in this Collection :"+result.getResourceCount()+" Resources | "+result.getNonResourceCount()+" Questions");
 			sessionAccessedTime.setText(i18n.GL2272()+" "+printUserDataDO.getSessionStartTime());
 			sessionText.setText(i18n.GL2273()+" "+i18n.GL_SPL_SEMICOLON());
 			sessionValue.setText(printUserDataDO.getSession());
@@ -98,7 +98,7 @@ public class CollectionSummaryWidget extends Composite {
 			collectionTitle.setText(i18n.GL0645()+" "+i18n.GL_SPL_SEMICOLON()+" "+result.getTitle());
 			collectionLastAccessedlbl.setText("");
 			collectionLastAccessed.setText("");
-			collectionResourcesCount.setText("Resource in this Collection :"+(result.getResourceCount()-result.getTotalQuestionCount())+" Resources | "+result.getTotalQuestionCount()+" Questions");
+			collectionResourcesCount.setText("Resource in this Collection :"+result.getResourceCount()+" Resources | "+result.getNonResourceCount()+" Questions");
 			sessionAccessedTime.setText(i18n.GL2272()+" "+printUserDataDO.getSessionStartTime());
 			sessionText.setText(i18n.GL2273()+" "+i18n.GL_SPL_SEMICOLON());
 			sessionValue.setText(printUserDataDO.getSession());
@@ -107,7 +107,7 @@ public class CollectionSummaryWidget extends Composite {
 			collectionTitle.setText(i18n.GL0645()+" "+i18n.GL_SPL_SEMICOLON()+" "+result.getTitle());
 			collectionLastAccessedlbl.setText("Sort BY:");
 			collectionLastAccessed.setText(i18n.GL2289());
-			collectionResourcesCount.setText("Resource in this Collection :"+(result.getResourceCount()-result.getTotalQuestionCount())+" Resources | "+result.getTotalQuestionCount()+" Questions");
+			collectionResourcesCount.setText("Resource in this Collection :"+result.getResourceCount()+" Resources | "+result.getNonResourceCount()+" Questions");
 		}
 	}
 }

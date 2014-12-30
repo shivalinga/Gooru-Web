@@ -60,6 +60,7 @@ import org.ednovo.gooru.client.mvp.home.library.events.StandardPreferenceSetting
 import org.ednovo.gooru.client.mvp.home.library.events.StandardPreferenceSettingHandler;
 import org.ednovo.gooru.client.mvp.rating.events.UpdateRatingsInRealTimeEvent;
 import org.ednovo.gooru.client.mvp.rating.events.UpdateRatingsInRealTimeHandler;
+import org.ednovo.gooru.client.mvp.search.IsSearchView;
 import org.ednovo.gooru.client.uc.BrowserAgent;
 import org.ednovo.gooru.client.uc.DownToolTipWidgetUc;
 import org.ednovo.gooru.client.uc.StandardSgItemVc;
@@ -803,6 +804,7 @@ public class LibraryTopicListView extends Composite{
 		params.put("query", searchQuery);
 		params.put("pageSize", "8");
 		params.put("pageNum", "1");
+		params.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
 		return params;
 	}
 

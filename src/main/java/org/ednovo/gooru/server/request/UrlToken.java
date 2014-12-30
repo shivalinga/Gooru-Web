@@ -609,7 +609,7 @@ public enum UrlToken {
 	
 	REVOKE_TOKEN_GD("/gooru-auth/google/revoke-token.g?partyUid={0}"),
 	
-	GET_COLLECTION_SUMMARY("/insights/api/v1/classpage/{0}?sessionToken={1}&data={2}"),
+	GET_COLLECTION_SUMMARY("/insights/api/v1/classpage/{0}.json?sessionToken={1}&data={2}"),
 
 	RESET_TOKEN_EXPIRE("/v2/user/check-reset-token?sessionToken={0}&resetToken={1}"),
 
@@ -645,11 +645,10 @@ V1_GETUSERSFORPATHWAY("/v1/classpage/{0}/users.json?sessionToken={1}&data={2}"),
 	
 	V1_EXPORTOEPATHWAY("/v1/classpage/{0}/oe/export.xls?sessionToken={1}&data={2}&timeZone={3}"),
 	
-	V1_OETEXTJSON("/v1/classpage/{0}/OEText.json?sessionToken={1}&data={2}");
+	V1_OETEXTJSON("/v1/classpage/{0}/OEText.json?sessionToken={1}&data={2}"),
 	
+	V2_DOWNLOADFILE("/v2/media/download?sessionToken={0}&url={1}&filename={2}");
 	
-	
-
 
 	private String url;
 

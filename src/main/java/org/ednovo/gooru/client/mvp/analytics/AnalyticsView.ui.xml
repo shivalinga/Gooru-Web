@@ -4,50 +4,51 @@
 	xmlns:uc="urn:import:org.ednovo.gooru.client.uc">
 	<ui:style field="unitStyle" src="analytics.css" />
 	<ui:with field="i18n" type="org.ednovo.gooru.shared.i18n.MessageProperties"/>
-	<g:HTMLPanel>
-		<g:HTMLPanel ui:field="pnlMainContainer" styleName="{unitStyle.unitDetails}">
+		<g:HTMLPanel>
 					<!-- load all collections start-->
 					<g:HTMLPanel styleName="row {unitStyle.generalSet}">
 					   <g:HTMLPanel>
-					  	  <g:Label styleName="{unitStyle.narrowReportText}" text="{i18n.GL2257}"></g:Label>
+					  	  <g:Label styleName="{unitStyle.narrowReportText}" text="{i18n.GL2257}" title="{i18n.GL2257}"></g:Label>
 					      <g:ListBox styleName="{unitStyle.filterDropDown}" ui:field="loadCollections">
 					  	  </g:ListBox>
 					   </g:HTMLPanel>
 					</g:HTMLPanel>
-					<g:Label styleName="{unitStyle.labelForClassReport}" text="{i18n.GL1873}"></g:Label> 
+				<g:HTMLPanel ui:field="pnlMainContainer" styleName="{unitStyle.unitDetails}">
+					<g:Label styleName="{unitStyle.labelForClassReport}" text="{i18n.GL1873}" title="{i18n.GL1873}"></g:Label> 
 					<!-- load all collections end -->
 					<div class="{unitStyle.reportDiv}">
 						<div class="{unitStyle.reportsGeneration}">
-							<g:InlineLabel text="{i18n.GL1586}"></g:InlineLabel>
+							<g:InlineLabel text="{i18n.GL1586}" title="{i18n.GL1586}"></g:InlineLabel>
 							<span>
 							<g:Image ui:field="collectionProgressQuestionimg"></g:Image>
 							</span>
 						</div>
 						<div id="profile-class-gradebook-view-report">
-							<g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionProgress" styleName="primary" text="{i18n.GL2296}"></g:Button><g:Label ui:field="progressArrowlbl" styleName="{unitStyle.caretUp}"></g:Label> </g:HTMLPanel>
+							<g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionProgress" styleName="primary" text="{i18n.GL2296}" title="{i18n.GL2296}"></g:Button><g:Label ui:field="progressArrowlbl" styleName="{unitStyle.caretUp}"></g:Label> </g:HTMLPanel>
 						</div>
 					</div>
 					<g:HTMLPanel ui:field="collectionProgressSlot" styleName="clearfix">	</g:HTMLPanel>
 					<div class="{unitStyle.reportDiv}">
 						<div class="{unitStyle.reportsGeneration}">
-							<g:InlineLabel text="{i18n.GL1587}"></g:InlineLabel>
+							<g:InlineLabel text="{i18n.GL1587}" title="{i18n.GL1587}"></g:InlineLabel>
 							<span><g:Image ui:field="collectionSummaryQuestionimg"></g:Image></span>
 						</div>
 						<div id="profile-class-gradebook-view-report">
-							 <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionSummary" styleName="primary" text="{i18n.GL2296}"></g:Button> <g:Label ui:field="summaryArrowlbl" styleName="{unitStyle.caretUp}"></g:Label>  </g:HTMLPanel>
+							 <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionSummary" styleName="primary" text="{i18n.GL2296}" title="{i18n.GL2296}"></g:Button> <g:Label ui:field="summaryArrowlbl" styleName="{unitStyle.caretUp}"></g:Label>  </g:HTMLPanel>
 						</div>
 					</div>
 					<g:HTMLPanel ui:field="collectionSummarySlot" styleName="clearfix">	</g:HTMLPanel>
 					<div class="{unitStyle.reportDiv}">
 						<div class="{unitStyle.reportsGeneration}">
-							<g:InlineLabel text="{i18n.GL3087}"></g:InlineLabel>
+							<g:InlineLabel text="{i18n.GL3087}" title="{i18n.GL3087}"></g:InlineLabel>
 							<span><g:Image ui:field="collectionExportQuestionimg"></g:Image></span>
 						</div>
 						<div id="profile-class-gradebook-view-report">
-							  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionResponses"  styleName="primary" text="{i18n.GL2258}"></g:Button> <g:Label ui:field="responsesArrowlbl" styleName="{unitStyle.caretUp}"></g:Label>  </g:HTMLPanel>
+							  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionResponses"  styleName="primary" text="{i18n.GL2258}" title="{i18n.GL2258}"></g:Button> <g:Label ui:field="responsesArrowlbl" styleName="{unitStyle.caretUp}"></g:Label>  </g:HTMLPanel>
 					   	</div>
 					</div>
 		</g:HTMLPanel>
-		<g:Label ui:field="setNoDataText" styleName="{unitStyle.showEmptyMessage}" text="{i18n.GL3099}"></g:Label>
+		<g:Label ui:field="setNoDataText" styleName="{unitStyle.showEmptyMessage}" text="{i18n.GL3099}" title="{i18n.GL3099}"></g:Label>
+		<g:Frame ui:field="downloadFile"/>
 	</g:HTMLPanel>
 </ui:UiBinder>

@@ -123,7 +123,7 @@
 }
 .collectionBreakDown_infobox_print{
 	display: inline-block;
-	width: 264px;
+	width: 220px;
 	white-space: pre;
 }
 .collectionBreakDown_infobox_titles_print{
@@ -134,7 +134,7 @@
 	font-weight: bold;
 	line-height: 50px;
 	text-align: center;
-	width: 264px;
+	width: 220px;
 }
 .collectionBreakDown_infobox_titles_print1{
 	clear: both;
@@ -144,7 +144,7 @@
 	font-weight: bold;
 	line-height: 50px;
 	text-align: center;
-	width: 264px;
+	width: 220px;
 	border-bottom: 1px solid #ccc;
 	padding-left: 5px;
 }

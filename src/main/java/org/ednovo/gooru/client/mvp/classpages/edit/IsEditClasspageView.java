@@ -42,6 +42,7 @@ import org.ednovo.gooru.shared.model.content.CollectionDo;
 import org.ednovo.gooru.shared.model.content.CollectionItemDo;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 
 
 /**
@@ -557,4 +558,6 @@ public interface IsEditClasspageView extends IsViewWithHandlers<EditClasspageUiH
 	*/
 	
 	void hideNoAssignmentsMessagePanel();
+	
+	HTMLPanel getFrameContainer();
 }

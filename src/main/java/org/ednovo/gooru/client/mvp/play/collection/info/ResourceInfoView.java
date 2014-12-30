@@ -213,6 +213,9 @@ public class ResourceInfoView extends BaseViewWithHandlers<ResourceInfoUiHandler
 		standardsText.getElement().setAttribute("title",i18n.GL1877());
 
 		collectionsText.getElement().setId("pnlCollectionsText");
+		collectionsText.getElement().setInnerHTML(i18n.GL0620());
+		collectionsText.getElement().setAttribute("alt",i18n.GL0620());
+		collectionsText.getElement().setAttribute("title",i18n.GL0620());
 		
 		hideText.setText(i18n.GL0592());
 		hideText.getElement().setId("lblHideText");
@@ -2092,6 +2095,9 @@ public class ResourceInfoView extends BaseViewWithHandlers<ResourceInfoUiHandler
 			if(liecenceTooltip != null)
 			{
 			liecenceTooltip.hide();
+			}
+			if(toolTip!=null){
+				toolTip.hide();
 			}
 		}
 		

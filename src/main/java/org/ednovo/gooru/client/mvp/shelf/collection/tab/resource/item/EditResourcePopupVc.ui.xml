@@ -48,7 +48,7 @@
 		<g:HTMLPanel styleName="{res.css.myFolderCollectionFormContent}">
 			<g:HTMLPanel styleName="{res.css.myFolderCollectionFormTitle}" ui:field="resourceFormat"/> 
 			<g:HTMLPanel styleName="{res.css.myFolderCollectionCategoryDiv}">
-				<g:HTMLPanel styleName="{res.css.myFolderCollectionCategoryInputDiv}" ui:field="panelCategory">
+				<g:HTMLPanel styleName="{res.css.myFolderCollectionCategoryInputDivRFormat}" ui:field="panelCategory">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionCategoryDivText}">
 						<g:HTMLPanel>
 							<g:HTMLPanel styleName="" ui:field="categorypanel"></g:HTMLPanel>
@@ -64,13 +64,13 @@
 					ui:field="mandatoryCategoryLbl"></g:Label>
 			</g:HTMLPanel>
 		
-					 <g:HTMLPanel styleName="{res.css.myFolderCollectionFolderUpdateDropdownPanel}" ui:field="resourceTypePanel">
-			<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderUpdateDropdown}">
+		 <g:HTMLPanel styleName="{res.css.reorderLabelContainerRFormat}" ui:field="resourceTypePanel">
+			<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderDropdownRFormat}">
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="videoResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteVideo}" ui:field="video">
@@ -81,10 +81,10 @@
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="interactiveResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteInteractive}" ui:field="interactive">
@@ -95,10 +95,10 @@
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="websiteResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteWebsite}" ui:field="website">
@@ -109,10 +109,10 @@
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="imageResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteImage}" ui:field="image">
@@ -123,10 +123,10 @@
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="textResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteText}" ui:field="texts">
@@ -137,10 +137,10 @@
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel
-					styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}"
+					styleName="{res.css.myFolderCollectionFolderVideoOuterContainerRFormat}"
 					ui:field="audioResourcePanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">
-						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdiv}">
+						<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoInnerdivRFormat}">
 							<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContent}">
 								<g:HTMLPanel
 									styleName="{res.css.myFolderCollectionFolderspriteNew} {res.css.myFolderCollectionFolderspriteAudio}" ui:field="audio">
@@ -380,7 +380,7 @@
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}" ui:field="defaultPanel">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">						
-						<g:HTMLPanel styleName="{res.css.myEducationalPanelSubTitles}" ui:field="defaultText"></g:HTMLPanel>
+						<g:HTMLPanel styleName="{res.css.myEducationalPanelSubTitles} {res.css.setBorder}" ui:field="defaultText"></g:HTMLPanel>
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 			</g:HTMLPanel>
@@ -399,7 +399,7 @@
 						</g:HTMLPanel>
 					</g:HTMLPanel>
 					<g:HTMLPanel styleName="{res.css.myEducationArrowleftContainer}">
-						<g:Label ui:field="momentsOfLearningDropDownLbl"	styleName="{res.css.myFolderCollectionPopupSprite} {res.css.myFolderCollectionArrowleft}"></g:Label>
+						<g:Label ui:field="momentsOfLearningDropDownLbl" styleName="{res.css.myFolderCollectionPopupSprite} {res.css.myFolderCollectionArrowleft}"></g:Label>
 					</g:HTMLPanel>
 				</g:HTMLPanel>
 			
@@ -426,7 +426,7 @@
 				</uc:HTMLEventPanel>
 				<uc:HTMLEventPanel styleName="{res.css.myFolderCollectionFolderVideoOuterContainer}" ui:field="defaultPanelMomentsOfLearningPnl">
 					<g:HTMLPanel styleName="{res.css.myFolderCollectionFolderVideoContainer}">						
-						<g:HTMLPanel styleName="{res.css.myEducationalPanelSubTitles}" ui:field="defaultMomentsOfLearningText"></g:HTMLPanel>
+						<g:HTMLPanel styleName="{res.css.myEducationalPanelSubTitles} {res.css.setBorder}" ui:field="defaultMomentsOfLearningText"></g:HTMLPanel>
 					</g:HTMLPanel>
 				</uc:HTMLEventPanel>
 			</g:HTMLPanel>
@@ -473,9 +473,13 @@
       	 	<g:HTMLPanel ui:field="mediaFeatureContainer">
       	 	 <uc:HTMLEventPanel styleName="{res.css.eHeader}" ui:field="eHearderIconMediafeature"></uc:HTMLEventPanel>
 				  <g:Label styleName="{res.css.h5}" ui:field="mediaLabel" />
+				  
 	 		      <g:HTMLPanel styleName="{res.css.dropdownContainerInstructional}" ui:field="mediaLabelContainer">
 	 		      <g:Label ui:field="lblMediaPlaceHolder" styleName="{res.css.placeHolderText}"></g:Label>
-								<g:Label ui:field="lblMediaFeatureArrow" styleName="{res.css.arrowInstructional}"></g:Label>
+								<!-- <g:Label ui:field="lblMediaFeatureArrow" styleName="{res.css.arrowInstructional}"></g:Label> -->
+								<g:HTMLPanel styleName="{res.css.myEducationArrowleftContainer}" ui:field="mediaDropdownArrowConatainer">
+								<g:Label ui:field="lblMediaFeatureArrow" styleName="{res.css.myFolderCollectionPopupSprite} {res.css.myFolderCollectionArrowleft}"></g:Label>
+			      				 </g:HTMLPanel>
 			       <g:ScrollPanel ui:field="spanelMediaFeaturePanel"
 									styleName="{res.css.scrollPanelContainerInstructional}">
 									<g:HTMLPanel ui:field="htmlMediaFeatureListContainer"

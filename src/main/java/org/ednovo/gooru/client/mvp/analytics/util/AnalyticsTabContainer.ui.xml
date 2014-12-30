@@ -7,9 +7,9 @@
 		<div class="collection_teacher_tab_container">
 				<g:HorizontalPanel styleName="{unitStyle.tabs_teacher_Summary}">
 				<g:HTMLPanel styleName="{unitStyle.buttonsPanel}">
-					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnScoredQuestions" styleName="primary {unitStyle.addButonStyle} {unitStyle.addButonStyleActive}"  text="{i18n.GL2282}"></g:Button>  </g:HTMLPanel>
-					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnOpenEndedQuestions" styleName="primary {unitStyle.addButonStyle}" text="{i18n.GL2283}"></g:Button>  </g:HTMLPanel>
-					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionBreakDown" styleName="primary {unitStyle.addButonStyle}" text="{i18n.GL2284}"></g:Button>  </g:HTMLPanel>
+					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnCollectionBreakDown" styleName="primary {unitStyle.addButonStyle} {unitStyle.addButonStyleActive}" text="{i18n.GL2284}" title="{i18n.GL2284}"></g:Button>  </g:HTMLPanel>
+					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnScoredQuestions" styleName="primary {unitStyle.addButonStyle}"  text="{i18n.GL2282}" title="{i18n.GL2282}"></g:Button>  </g:HTMLPanel>
+					  <g:HTMLPanel styleName="{unitStyle.viewSummaryText}"> <g:Button ui:field="btnOpenEndedQuestions" styleName="primary {unitStyle.addButonStyle}" text="{i18n.GL2283}" title="{i18n.GL2283}"></g:Button>  </g:HTMLPanel>
 				</g:HTMLPanel>
 				  <g:HTMLPanel styleName="{unitStyle.printSaveContainer}"> <g:Button styleName="{unitStyle.print_icon_image}" ui:field="btnPtint"></g:Button>  </g:HTMLPanel>
 				  <g:HTMLPanel> <g:Button styleName="{unitStyle.mail_icon_image}" ui:field="btnEmail"></g:Button>  </g:HTMLPanel>

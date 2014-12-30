@@ -32,7 +32,6 @@ import java.util.Map;
 import org.ednovo.gooru.client.CssTokens;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.search.IsSearchView;
-import org.ednovo.gooru.client.mvp.search.standards.AddStandardsPresenter;
 import org.ednovo.gooru.client.uc.DisclosurePanelUc;
 import org.ednovo.gooru.client.util.MixpanelUtil;
 import org.ednovo.gooru.shared.i18n.MessageProperties;
@@ -49,7 +48,6 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
 
 /**
  * @description : This class used for to show the Pre-filter seach Popup
@@ -81,9 +79,7 @@ public class PreFilterPopup extends PopupPanel {
 //	@UiField SimplePanel standardsPanel;
 	
 	CheckBox gradeCheckBox;
-	@Inject
-	AddStandardsPresenter addStandardsPresenter;
-	
+
 	
 	
 	private static final String COMMA_SEPARATOR = i18n.GL_GRR_COMMA();
@@ -141,17 +137,16 @@ public class PreFilterPopup extends PopupPanel {
 	 * @param currentPlaceToken
 	 */
 	private void setPreSelectedFilters(String currentPlaceToken) {
-		
-		if(AppClientFactory.getPlaceManager().getRequestParameter("flt.grade",null)!=null){
-			setSelectedFilter(eleGradePanelUc, AppClientFactory.getPlaceManager().getRequestParameter("flt.grade",null), ",");
-			setSelectedFilter(middleGradePanelUc, AppClientFactory.getPlaceManager().getRequestParameter("flt.grade",null), ",");
-			setSelectedFilter(highrGradePanelUc, AppClientFactory.getPlaceManager().getRequestParameter("flt.grade",null), ",");
+		String gradeVal=AppClientFactory.getPlaceManager().getRequestParameter("flt.grade",null);
+		String subjectVal=AppClientFactory.getPlaceManager().getRequestParameter("flt.subjectName",null);
+		if(gradeVal!=null){
+			setSelectedFilter(eleGradePanelUc, gradeVal, ",");
+			setSelectedFilter(middleGradePanelUc, gradeVal, ",");
+			setSelectedFilter(highrGradePanelUc, gradeVal, ",");
 		}
-		if(AppClientFactory.getPlaceManager().getRequestParameter("flt.subjectName",null)!=null){
-			setSelectedFilter(subjectPanelUc, AppClientFactory.getPlaceManager().getRequestParameter("flt.subjectName",null), " ~~");
+		if(subjectVal!=null){
+			setSelectedFilter(subjectPanelUc, subjectVal, " ~~");
 		}
-		
-		
 	}
 
 	/**

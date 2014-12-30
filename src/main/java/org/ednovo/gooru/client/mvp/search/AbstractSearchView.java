@@ -118,7 +118,8 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	
 	@UiField Label correctQueryText;
 		
-	String grades,stdCode,subjects,categories;
+	String grades,stdCode,subjects,categories,oerTag,mobileFirendlyTag,ratingTag,publisher,aggregator,accessMode,author,reviewTag;
+
 	
 	protected ResourceDragController dragController;
 
@@ -177,7 +178,16 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 		showSubjectsFilter();
 		showGradesFilter();
 		showStandardsFilter();
-		if(!(stdCode!=null || grades!=null || subjects!=null)){
+		showPublisherFilter();
+		showAggregatorFilter();
+		showOERFilter();
+		showMobileFriendlyFilter();
+		showAccessModeFilter();
+		showAuthorFilter();
+		showRatingsFilter();
+		showReviewFilter();
+	
+		if(!(stdCode!=null || grades!=null || subjects!=null || oerTag!=null || mobileFirendlyTag!=null || ratingTag!=null || publisher!=null || aggregator!=null || accessMode!=null || author!=null|| reviewTag!=null)){
 			standardsConatiner.setVisible(false);
 		}else{
 			standardsConatiner.setVisible(true);
@@ -278,10 +288,18 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 					if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().equalsIgnoreCase(PlaceTokens.RESOURCE_SEARCH)){
 						AppClientFactory.fireEvent(new DisableSpellSearchEvent(PlaceTokens.RESOURCE_SEARCH,getSearchText(),""));
 					}
+					else if (AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken().equalsIgnoreCase(PlaceTokens.COLLECTION_SEARCH)){
+						AppClientFactory.fireEvent(new DisableSpellSearchEvent(PlaceTokens.COLLECTION_SEARCH,getSearchText(),""));
+					}
 				}
 			});
 
 			final String correctSearchTerm = searchDo.getSpellCheckQueryString();
+			String searchTextValue = i18n.GL1468() + " <b>" + correctSearchTerm + "</b>";
+			
+			queriedTextHtml.setHTML(searchTextValue);
+			queriedTextHtml.getElement().setAttribute("alt", StringUtil.removeHtml(searchTextValue));
+			queriedTextHtml.getElement().setAttribute("title", StringUtil.removeHtml(searchTextValue));
 			
 			correctQueryText.setText(searchDo.getSpellCheckQueryString());
 			correctQueryText.addClickHandler(new ClickHandler() {
@@ -302,11 +320,20 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 		}
 		
 		standardsConatiner.clear();
+		System.out.println("presearch:::");
 		showCategoryFilter();
 		showSubjectsFilter();
 		showGradesFilter();
 		showStandardsFilter();
-		if(!(stdCode!=null || grades!=null || subjects!=null)){
+		showPublisherFilter();
+		showAggregatorFilter();
+		showOERFilter();
+		showMobileFriendlyFilter();
+		showAccessModeFilter();
+		showAuthorFilter();
+		showRatingsFilter();
+		showReviewFilter();
+		if(!(stdCode!=null || grades!=null || subjects!=null || oerTag!=null || mobileFirendlyTag!=null || ratingTag!=null|| publisher!=null || aggregator!=null || accessMode!=null || author!=null|| reviewTag!=null)){
 			standardsConatiner.setVisible(false);
 		}else{
 			standardsConatiner.setVisible(true);
@@ -509,7 +536,7 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 	public void onResourceSearchButtonClicked(ClickEvent clickEvent) {
 		if(getSearchText()!=null || getSearchText().length()>0){
 			MixpanelUtil.Show_Resource_Search_Results();
-			AppClientFactory.fireEvent(new SwitchSearchEvent(PlaceTokens.RESOURCE_SEARCH,getSearchText()));
+			AppClientFactory.fireEvent(new SwitchSearchEvent(PlaceTokens.RESOURCE_SEARCH,getSearchText()));	
 		}
 		
 		if(!AppClientFactory.getPlaceManager().getRequestParameter("query").equalsIgnoreCase("")){ 
@@ -573,8 +600,12 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 			for(int i=0; i<gradesSplit.length; i++){
 				if(gradesSplit[i].equals("12gte")){
 					standardsConatiner.add(createTagsLabel(i18n.GL3084(),"gradePanel"));
-				}else{
-					standardsConatiner.add(createTagsLabel(gradesSplit[i],"gradePanel"));
+				}
+				else if(gradesSplit[i].equalsIgnoreCase("pre-k")){
+					standardsConatiner.add(createTagsLabel(i18n.GL3070(),"gradePanel"));
+				}
+				else{
+					standardsConatiner.add(createTagsLabel(i18n.GL0325()+" "+gradesSplit[i],"gradePanel"));
 				}
 				
 			}
@@ -594,6 +625,72 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 //			standardsConatiner.add(createTagsLabel(stdCode,"standPanel"));
 		}
 	}
+	/**
+	 * To show the publisher values in search page
+	 */
+	private void showPublisherFilter() {
+		publisher = AppClientFactory.getPlaceManager().getRequestParameter("flt.publisher");
+		if(publisher!=null){
+			String[] split = publisher.split(",");
+			for(int i=0; i<split.length; i++){
+				standardsConatiner.add(createTagsLabel(split[i],"publisherPanel"));
+			}
+				
+		}
+	}
+	
+	/**
+	 * To show the aggregator values in search page
+	 */
+	private void showAggregatorFilter() {
+		aggregator = AppClientFactory.getPlaceManager().getRequestParameter("flt.aggregator");
+		if(aggregator!=null){
+			String[] split = aggregator.split(",");
+			for(int i=0; i<split.length; i++){
+				standardsConatiner.add(createTagsLabel(split[i],"aggregatorPanel"));
+			}
+				
+		}
+	}
+	/**
+	 * To show the Access mode values in search page
+	 */
+	private void showAccessModeFilter() {
+		accessMode = AppClientFactory.getPlaceManager().getRequestParameter("flt.cfAccessMode");
+		if(accessMode!=null){
+			String[] split = accessMode.split(",");
+			for(int i=0; i<split.length; i++){
+				standardsConatiner.add(createTagsLabel(split[i],"accessPanel"));
+			}
+				
+		}
+	}
+	/**
+	 * To show the Author values in search page
+	 */
+	private void showAuthorFilter() {
+		author = AppClientFactory.getPlaceManager().getRequestParameter("flt.owner");
+		if(author!=null){
+			String[] split = author.split(",");
+			for(int i=0; i<split.length; i++){
+				standardsConatiner.add(createTagsLabel(split[i],"authorPanel"));
+			}
+				
+		}
+	}
+	/**
+	 * To show the Author values in search page
+	 */
+	private void showReviewFilter() {
+		reviewTag = AppClientFactory.getPlaceManager().getRequestParameter("flt.isReviewed");
+		if(reviewTag!=null){
+			if(reviewTag.equalsIgnoreCase("1"))
+			{
+				standardsConatiner.add(createTagsLabel("Only Resources with Reviews","onlyReviewPanel"));
+			}
+
+		}
+	}
 
 	/**
 	 * Show user searched filter 
@@ -607,10 +704,76 @@ public abstract class AbstractSearchView<T extends ResourceSearchResultDo> exten
 
 			@Override
 			public void onCloseLabelClick(ClickEvent event) {
-				AppClientFactory.fireEvent(new SearchFilterEvent(filterValue,panelName));
+				String newFilterVal = filterValue;
+				if(filterValue.contains("Grade "))
+				{
+					newFilterVal = filterValue.replaceAll("Grade ", "");
+				}
+				else if(filterValue.contains("Higher Ed"))
+				{
+					newFilterVal = filterValue.replaceAll("Higher Ed", "12gte");
+				}
+				AppClientFactory.fireEvent(new SearchFilterEvent(newFilterVal,panelName));
 			}
 		};
 	}
+	
+	/**
+	 * Pre-Selected Standards showing in search page
+	 */
+	private void showOERFilter() {
+		oerTag = AppClientFactory.getPlaceManager().getRequestParameter("flt.isOer");
+		if(oerTag!=null){
+			if(oerTag.equalsIgnoreCase("1"))
+			{
+				standardsConatiner.add(createTagsLabel("OER","oerPanel"));
+			}
+
+		}
+	}
+	/**
+	 * Pre-Selected Standards showing in search page
+	 */
+	private void showMobileFriendlyFilter() {
+		mobileFirendlyTag = AppClientFactory.getPlaceManager().getRequestParameter("fltNot.mediaType");
+		if(mobileFirendlyTag!=null){
+			if(mobileFirendlyTag.equalsIgnoreCase("not_ipad_friendly"))
+			{
+				standardsConatiner.add(createTagsLabel("Mobile Friendly","mobileFirendlyPanel"));
+			}
+
+		}
+	}
+	/**
+	 * Pre-Selected Standards showing in search page
+	 */
+	private void showRatingsFilter() {
+
+		ratingTag = AppClientFactory.getPlaceManager().getRequestParameter("flt.rating");
+		if(ratingTag!=null){
+			if(ratingTag.equalsIgnoreCase("5,4,3,2,1,0"))
+			{
+				standardsConatiner.add(createTagsLabel("All Ratings","ratingallPanel"));
+			}
+			else 
+			{
+				String[] ratingsSplit = ratingTag.split(",");
+				for(int i=0; i<ratingsSplit.length; i++){
+					if(ratingsSplit[i].equalsIgnoreCase("0"))
+					{
+						standardsConatiner.add(createTagsLabel("No Ratings","ratingPanel"));	
+					}
+					else
+					{
+					standardsConatiner.add(createTagsLabel(ratingsSplit[i]+" Star","ratingPanel"));
+					}
+				}
+			}
+			
+
+		}
+	}
+	
 	
 	public abstract void setAddResourceContainerPresenter(AddResourceContainerPresenter addResourceContainerPresenter);
 

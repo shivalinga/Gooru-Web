@@ -10,49 +10,49 @@
 		<g:HTMLPanel styleName="{email.emailBodyContent}" ui:field="successMesageContainer">
 			<div class="labelRowDiv" style="padding:0px">
 				<div class="emailLeftContent leftLabel"></div>
-				<g:Label styleName="{email.emailRightContent} {email.emailSuccessMessage}" text="{i18n.GL0648}" ui:field="lblTankYou"/>
+				<g:Label styleName="{email.emailRightContent} {email.emailSuccessMessage}" text="{i18n.GL0648}" title="{i18n.GL0648}" ui:field="lblTankYou"/>
 				<g:Label styleName="{email.emailRightContent} {email.successEmailAddress}" ui:field="emailIdsText"/>
 			</div>
 			<div class="labelRowDiv buttonContainer">
-				<g:Button styleName="primary" ui:field="okBtn" text="{i18n.GL0190}"></g:Button>
+				<g:Button styleName="primary" ui:field="okBtn" text="{i18n.GL0190}" title="{i18n.GL0190}"></g:Button>
 			</div>
 		</g:HTMLPanel>
 		<g:HTMLPanel styleName="{email.emailBodyContent}" ui:field="mainBodycontainer">
 			<div class="labelRowDiv">
-				<g:Label ui:field="lblFrom" styleName="{email.emailLeftContent}" text="{i18n.GL0223} {i18n.GL_SPL_SEMICOLON}"/>
+				<g:Label ui:field="lblFrom" styleName="{email.emailLeftContent}" text="{i18n.GL0223} {i18n.GL_SPL_SEMICOLON}" title="{i18n.GL0223} {i18n.GL_SPL_SEMICOLON}"/>
 				<g:Label styleName="{email.emailRightContent}" ui:field="userNamelbl"/>
 			</div>
 			<div class="labelRowDiv">
-				<g:Label ui:field="lblTo" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0224} {i18n.GL_SPL_SEMICOLON}"/>
+				<g:Label ui:field="lblTo" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0224} {i18n.GL_SPL_SEMICOLON}" title="{i18n.GL0224} {i18n.GL_SPL_SEMICOLON}"/>
 				<div class="emailRightContent">
 					<g:TextBox styleName="{email.emailTextbox}" ui:field="emailTextbox"/>
 				<br/>
 					<g:Label styleName="{email.emailErrorMessage}" ui:field="emailErrorlbl"/>
 				<div>
-				<g:InlineLabel text="{i18n.GL1892}" ui:field="lblWeNeverShareText"/>
+				<g:InlineLabel text="{i18n.GL1892}" title="{i18n.GL1892}" ui:field="lblWeNeverShareText"/>
 				<br/> 
-				<g:Anchor text="{i18n.GL1893}" styleName="pop" ui:field="privacylbl"></g:Anchor> <g:InlineLabel text="{i18n.GL1894}"/></div>
+				<g:Anchor text="{i18n.GL1893}" title="{i18n.GL1893}" styleName="pop" ui:field="privacylbl"></g:Anchor> <g:InlineLabel text="{i18n.GL1894}" title="{i18n.GL1894}"/></div>
 				</div>
 			</div>
 			<div class="labelRowDiv" style="padding:0px">
 				<div class="emailLeftContent leftLabel"></div>
 				<div class="emailRightContent">
-					<g:Label styleName="{email.sendMeCopyMessage}" text="{i18n.GL0225}" ui:field="lblSendMeCopy"/>
+					<g:Label styleName="{email.sendMeCopyMessage}" text="{i18n.GL0225}" title="{i18n.GL0225}" ui:field="lblSendMeCopy"/>
 					<g:CheckBox styleName="{email.sendMeCopyBox}"  ui:field="sendmecopy"/>
 					<div>
 					</div>
 				</div>
 			</div>
 			<div class="labelRowDiv">
-				<g:Label ui:field="lblSubject" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0226} {i18n.GL_SPL_SEMICOLON}"/>
+				<g:Label ui:field="lblSubject" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0226} {i18n.GL_SPL_SEMICOLON}" title="{i18n.GL0226} {i18n.GL_SPL_SEMICOLON}"/>
 				<div class="emailRightContent">
-					<g:TextBox  styleName="{email.emailTextbox}" ui:field="subjectTxt" text="{i18n.GL1443}"></g:TextBox>
+					<g:TextBox  styleName="{email.emailTextbox}" ui:field="subjectTxt" text="{i18n.GL1443}" title="{i18n.GL1443}"></g:TextBox>
 				</div>
 			</div>
 			<div class="labelRowDiv">
-				<g:Label ui:field="lblMessageText" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0227} {i18n.GL_SPL_SEMICOLON}"/>
+				<g:Label ui:field="lblMessageText" styleName="{email.emailLeftContent} {email.leftLabel}" text="{i18n.GL0227} {i18n.GL_SPL_SEMICOLON}" title="{i18n.GL0227} {i18n.GL_SPL_SEMICOLON}"/>
 				<div class="emailRightContent">
-					<g:TextArea styleName="{email.emailMessage}" ui:field="messageTextArea" text="{i18n.GL2294}"></g:TextArea> 
+					<g:TextArea styleName="{email.emailMessage}" ui:field="messageTextArea" text="{i18n.GL2294}" title="{i18n.GL2294}"></g:TextArea> 
 				</div>
 			</div>
 			<div class="labelRowDiv" style="padding:0px">
@@ -60,8 +60,8 @@
 				<g:Label styleName="{email.emailRightContent}" ui:field="displayPdfPathlbl"/>
 			</div>
 			<div class="labelRowDiv buttonContainer">
-				<g:Button styleName="primary" ui:field="sendBtn" text="{i18n.GL0228}"></g:Button>
-				<g:Button styleName="secondary" ui:field="cancelBtn" text="{i18n.GL0142}"></g:Button>
+				<g:Button styleName="primary" ui:field="sendBtn" text="{i18n.GL0228}" title="{i18n.GL0228}"></g:Button>
+				<g:Button styleName="secondary" ui:field="cancelBtn" text="{i18n.GL0142}" title="{i18n.GL0142}"></g:Button>
 			</div>
 		</g:HTMLPanel>
 </div>

@@ -31,6 +31,7 @@ import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.home.library.customize.LoginPluginView;
+import org.ednovo.gooru.client.mvp.play.collection.end.study.CloseCollectionPlayerEvent;
 import org.ednovo.gooru.client.mvp.play.collection.preview.home.assign.AssignPopUpCBundle;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
 import org.ednovo.gooru.client.mvp.shelf.event.RefreshUserShelfCollectionsEvent;
@@ -399,6 +400,7 @@ public abstract class RenameCustomizePopUp extends PopupPanel{
 					AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.SHELF,new String[] {"id",result.getGooruOid()});
 					AppClientFactory.fireEvent(new RefreshUserShelfCollectionsEvent());
 					closePoup();
+					AppClientFactory.fireEvent(new CloseCollectionPlayerEvent(true));
 				}
 			};
 		}

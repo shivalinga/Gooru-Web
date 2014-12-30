@@ -419,6 +419,9 @@ button.disabled, button.disabled:hover {
 	display: inline-block;
 	width: 90px;
 }
+.fivestar label, .fourstar label, .threestar label, .twostar label, .onestar label, .zerostar label{
+	padding-left: 46%;
+}
 
 .categoryFilterContainer .filterCheckBox label {
 	padding: 3px 31px;

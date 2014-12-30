@@ -188,6 +188,104 @@ public class LogoutPopupVc extends Composite{
 						subjectNameVal = subjectNameVal.replace("+", " ");
 						map.put("flt.subjectName", subjectNameVal);
 					}
+					if(map.containsKey("flt.rating"))
+					{
+						String ratingsVal = map.get("flt.rating");
+						ratingsVal = ratingsVal.replaceAll("%252C", ",");
+						try
+						{
+							ratingsVal = URL.decodeQueryString(ratingsVal);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.rating", ratingsVal);
+					}
+					if(map.containsKey("flt.grade"))
+					{
+						String gradeVal = map.get("flt.grade");
+						gradeVal = gradeVal.replaceAll("%252C", ",");
+						try
+						{
+							gradeVal = URL.decodeQueryString(gradeVal);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.grade", gradeVal);
+					}
+					if(map.containsKey("flt.cfAccessMode"))
+					{
+						String accessMode = map.get("flt.cfAccessMode");
+						accessMode = accessMode.replaceAll("%252C", ",");
+						try
+						{
+							accessMode = URL.decodeQueryString(accessMode);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.cfAccessMode", accessMode);
+					}
+					if(map.containsKey("flt.publisher"))
+					{
+						String publisher = map.get("flt.publisher");
+						publisher = publisher.replaceAll("%252C", ",");
+						try
+						{
+							publisher = URL.decodeQueryString(publisher);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.publisher", publisher);
+					}
+					if(map.containsKey("flt.aggregator"))
+					{
+						String aggregator = map.get("flt.aggregator");
+						aggregator = aggregator.replaceAll("%252C", ",");
+						try
+						{
+							aggregator = URL.decodeQueryString(aggregator);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.aggregator", aggregator);
+					}
+					if(map.containsKey("flt.standard"))
+					{
+						String standard = map.get("flt.standard");
+						standard = standard.replaceAll("%252C", ",");
+						try
+						{
+							standard = URL.decodeQueryString(standard);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("flt.standard", standard);
+					}
+					if(map.containsKey("category"))
+					{
+						String category = map.get("category");
+						category = category.replaceAll("%252C", ",");
+						try
+						{
+							category = URL.decodeQueryString(category);
+						}
+						catch(Exception ex)
+						{
+							
+						}
+						map.put("category", category);
+					}
 					map.remove("callback");
 					map.remove("type");
 					map.remove("userName");

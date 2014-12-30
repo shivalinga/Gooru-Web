@@ -168,15 +168,10 @@ public class AddStandardsPreSearchView extends PopupViewWithUiHandlers<AddStanda
 	@Override
 	public void loadData()
 	{
-
-		commonStandards1.setText("Common Core State Standards");
-		texasKnowledge1.setText("Texas Essential Knowledge and Skills");
-		ngss1.setText("Next Generation Science Standards");
-		californiaStandards1.setText("California State Standards");
-		addBtn.setText("Add");
 		addBtn.setEnabled(false);
 		addBtn.removeStyleName("primary");
 		addBtn.addStyleName("secondary");
+	
 
 	}
 	
@@ -345,6 +340,7 @@ public class AddStandardsPreSearchView extends PopupViewWithUiHandlers<AddStanda
 			}
 		}
 	}
+		//setEnableStandardButtons(isCCSSAvailable,isNGSSAvailable,isTEKSAvailable,isCAAvailable);
 	//	appPopUp.getElement().setAttribute("style", "width:1000px;height:599px;z-index:99999;visibility: visible;position: absolute;left: 0 !important;right: 0 !important;margin:auto;top:0 !important;bottom:0 !important;");
 	}
 	/**
@@ -952,16 +948,18 @@ public class AddStandardsPreSearchView extends PopupViewWithUiHandlers<AddStanda
 	 * @see org.ednovo.gooru.client.mvp.home.presearchstandards.IsAddStandardsPreSearchView#setEnableStandardButtons(boolean, boolean, boolean, boolean)
 	 */
 	@Override
-	public void setEnableStandardButtons(boolean isCCSSAvailable,
-			boolean isNGSSAvailable, boolean isTEKSAvailable,
-			boolean isCAAvailable) {
-		this.isCCSSAvailable = isCCSSAvailable;
-		this.isNGSSAvailable = isNGSSAvailable;
-		this.isTEKSAvailable = isTEKSAvailable;
-		this.isCAAvailable = isCAAvailable;
+	public void setEnableStandardButtons(boolean isCCSSAvailable1,
+			boolean isTEKSAvailable1, boolean isNGSSAvailable1,
+			boolean isCAAvailable1) {
+		this.isCCSSAvailable = isCCSSAvailable1;
+		this.isNGSSAvailable = isNGSSAvailable1;
+		this.isTEKSAvailable = isTEKSAvailable1;
+		this.isCAAvailable = isCAAvailable1;
 		
 		if(isCCSSAvailable == true){
 			commonStandards1.getElement().getStyle().clearColor();
+			commonStandards1.setStyleName("primary");
+			commonStandards1.addStyleName(AddStandardsBundle.INSTANCE.css().btnStandardsStyle());
 			commonStandards1.getElement().removeClassName("disabled");
 		}else{
 			commonStandards1.getElement().getStyle().setColor("#999");
@@ -998,7 +996,7 @@ public class AddStandardsPreSearchView extends PopupViewWithUiHandlers<AddStanda
 	 */
 	@Override
 	public void setStandardsStyles(String standardVal) {
-		// TODO Auto-generated method stub
+
 		if(standardVal.equalsIgnoreCase("CCSS")){
 			setDefaultCCSS();
 		}else if(standardVal.equalsIgnoreCase("TEKS")){

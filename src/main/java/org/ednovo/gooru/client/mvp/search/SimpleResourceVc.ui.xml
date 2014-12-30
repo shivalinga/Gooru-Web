@@ -69,17 +69,26 @@
 			width: 100%;
 			float: left;
 		}
+		.paddingClear{
+			padding:0;	
+		}
+
+		.panelHeight{
+			height: 25px;
+		}
 	</ui:style>
 	<g:HTMLPanel>
 		<g:FlowPanel styleName="{style.resourceThumbnailPanel}" ui:field="internalPanel1">
 			<uc:ResourceImageUc ui:field="resourceImageUc" />
 			<g:Label styleName="{style.resourceOrder}" ui:field="positionLbl" />
 			<g:FlowPanel styleName="{style.resourceTitlePanel}" ui:field="resourceTitlePanel">
-			  	<g:HTMLPanel styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleContainer">
-					<g:HTML styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleLbl" />
+			    <g:HTMLPanel styleName="{style.panelHeight}">
+				  	<g:HTMLPanel styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleContainer">
+						<g:HTML styleName="{style.resourceTitle} collectionSearchResource" ui:field="resourceTitleLbl" />
+					</g:HTMLPanel>
+					<g:Image styleName="{style.imgHeight}" ui:field="imgOER"></g:Image>
+					<g:Image styleName="{style.imgHeight}" ui:field="imgNotFriendly"></g:Image>
 				</g:HTMLPanel>
-				<g:Image styleName="{style.imgHeight}" ui:field="imgOER"></g:Image>
-				<g:Image styleName="{style.imgHeight}" ui:field="imgNotFriendly"></g:Image>
 				<g:FlowPanel styleName="{style.metaDataPanel}" ui:field="metaDataFloPanel" />
 				<g:FlowPanel styleName="{style.ratingsPanel}" ui:field="ratingWidgetPanel"></g:FlowPanel>
 			</g:FlowPanel>

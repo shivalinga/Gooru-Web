@@ -35,6 +35,7 @@ import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.mvp.classpages.edit.EditClasspagePresenter;
 import org.ednovo.gooru.client.mvp.search.event.ResetProgressEvent;
 import org.ednovo.gooru.client.service.ClasspageService;
+import org.ednovo.gooru.shared.model.analytics.CollectionSummaryMetaDataDo;
 import org.ednovo.gooru.shared.model.analytics.GradeJsonData;
 import org.ednovo.gooru.shared.model.content.CollectionItemDo;
 
@@ -196,23 +197,18 @@ public class CollectionsPresenter extends ChildPresenter<CollectionsPresenter, I
 	}
 	
 	
-	public void checkCollectionStaus(String classpageId){
-		AppClientFactory.getInjector().getAnalyticsService().getAnalyticsGradeData(classpageId, "", new AsyncCallback<ArrayList<GradeJsonData>>() {
-			
+	public void checkCollectionStaus(String classpageId,String collectionId){
+		AppClientFactory.getInjector().getAnalyticsService().getAssignmentAverageData(classpageId, "", collectionId, new AsyncCallback<CollectionSummaryMetaDataDo>() {
 			@Override
-			public void onSuccess(ArrayList<GradeJsonData> result) {
-				if(result.size()>0){
-						if(result.get(0).getAggregateData()!=null && result.get(0).getAggregateData().equalsIgnoreCase("false")){
-							getView().setViewCollectionAnalytics(false);
-						}else{
-							getView().setViewCollectionAnalytics(true);
-						}
+			public void onSuccess(CollectionSummaryMetaDataDo result) {
+				if(result!=null && result.getViews()!=0){
+					getView().setViewCollectionAnalytics(true);
+				}else{
+					getView().setViewCollectionAnalytics(false);
 				}
 			}
-			
 			@Override
 			public void onFailure(Throwable caught) {
-				
 			}
 		});
 	}

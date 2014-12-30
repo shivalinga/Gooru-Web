@@ -10,23 +10,25 @@
 	 </g:HTMLPanel>
  	 <g:HTMLPanel styleName="{res.css.maincontainer}">
  	 <g:HTMLPanel>
- 	 <g:Label styleName="{res.css.summary_title}"  text="{i18n.GL1586}"></g:Label>
+ 	 <g:Label styleName="{res.css.summary_title}"  text="{i18n.GL1586}" title="{i18n.GL1586}"></g:Label>
  	 <g:HTMLPanel><g:InlineLabel ui:field="collectionTitlelbl"></g:InlineLabel> (<g:InlineLabel ui:field="resourceCountlbl"></g:InlineLabel>  resources | <g:InlineLabel ui:field="questionCountlbl"></g:InlineLabel>  questions)</g:HTMLPanel>
  	 </g:HTMLPanel>
  	 <g:HTMLPanel styleName="{res.css.resource_monitor_header_title}">
-		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.correct_legend_one}" ></g:InlineLabel><g:InlineLabel styleName="correct-one {res.css.correct_incorrect_text}"  text="{i18n.GL2267}"></g:InlineLabel></g:HTMLPanel>
-		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.correct_legend_other}"></g:InlineLabel><g:InlineLabel styleName="correct-other {res.css.correct_incorrect_text}"  text="{i18n.GL2268}"></g:InlineLabel></g:HTMLPanel>
-		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.incorrect_legend}"></g:InlineLabel><g:InlineLabel styleName="incorrect-ans {res.css.correct_incorrect_text}"  text="{i18n.GL2269}"></g:InlineLabel></g:HTMLPanel>
+		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.correct_legend_one}" ></g:InlineLabel><g:InlineLabel styleName="correct-one {res.css.correct_incorrect_text}"  text="{i18n.GL2267}" title="{i18n.GL2267}"></g:InlineLabel></g:HTMLPanel>
+		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.correct_legend_other}"></g:InlineLabel><g:InlineLabel styleName="correct-other {res.css.correct_incorrect_text}"  text="{i18n.GL2268}" title="{i18n.GL2268}"></g:InlineLabel></g:HTMLPanel>
+		      <g:HTMLPanel styleName="{res.css.floatLeft}"><g:InlineLabel styleName="{res.css.incorrect_legend}"></g:InlineLabel><g:InlineLabel styleName="incorrect-ans {res.css.correct_incorrect_text}"  text="{i18n.GL2269}" title="{i18n.GL2269}"></g:InlineLabel></g:HTMLPanel>
 	 </g:HTMLPanel>
  	 <g:HTMLPanel>
- 	 <g:Label styleName="{res.css.narrowreportText}" text="{i18n.GL2266}"></g:Label>
+ 	 <g:Label styleName="{res.css.narrowreportText}" text="{i18n.GL2266}" title="{i18n.GL2266}"></g:Label>
 	 <g:ListBox ui:field="filterDropDown" styleName="{res.css.filterDropDown}">
 	 </g:ListBox>
-	 <g:Label ui:field="leftArrow" styleName="{unitStyle.leftArrow}"></g:Label>
-	 <g:HTMLPanel ui:field="scrollForCollectionProgress">
-	 <g:VerticalPanel ui:field="htmlpnlProgress"/>
-	 </g:HTMLPanel>
-	  <g:Label ui:field="rightArrow" styleName="{unitStyle.rightArrow}"></g:Label>
+	  <g:HTMLPanel styleName="{unitStyle.mainPanelContainer}">
+		 <g:Label ui:field="leftArrow" styleName="{unitStyle.leftArrow}"></g:Label>
+		 <g:HTMLPanel ui:field="scrollForCollectionProgress">
+		 <g:VerticalPanel ui:field="htmlpnlProgress"/>
+		 </g:HTMLPanel>
+		 <g:Label ui:field="rightArrow" styleName="{unitStyle.rightArrow}"></g:Label>
+	  </g:HTMLPanel>
 	 </g:HTMLPanel>
 	 </g:HTMLPanel>
 	</g:HTMLPanel>

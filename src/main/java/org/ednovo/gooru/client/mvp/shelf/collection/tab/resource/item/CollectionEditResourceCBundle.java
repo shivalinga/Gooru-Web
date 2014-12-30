@@ -121,6 +121,8 @@ public interface CollectionEditResourceCBundle extends ClientBundle {
 		String shelfResourceSequencePanel();
 
 		String reorderLabelContainer();
+		
+		String reorderLabelContainerRFormat();
 
 		String newResourceLabel();
 
@@ -221,6 +223,7 @@ public interface CollectionEditResourceCBundle extends ClientBundle {
 		String myFolderCollectionFormInputNoneborder();
 		String myFolderCollectionCategoryDiv();
 		String myFolderCollectionCategoryInputDiv();
+		String myFolderCollectionCategoryInputDivRFormat();
 		String myEducationPanelInputDiv();
 		String myEducationDropdown();
 		String myFolderCollectionCategoryDivText();
@@ -504,6 +507,10 @@ public interface CollectionEditResourceCBundle extends ClientBundle {
         String eInput();
         String advncedOption();
         String shelfGradeInfoBottomWeb();
+        String myFolderCollectionFolderVideoInnerdivRFormat();
+        String myFolderCollectionFolderVideoOuterContainerRFormat();
+        String myFolderCollectionFolderDropdownRFormat();
+        String setBorder();
            
 	}
 	

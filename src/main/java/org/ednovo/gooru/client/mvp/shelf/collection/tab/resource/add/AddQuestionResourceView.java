@@ -2202,18 +2202,16 @@ public abstract class AddQuestionResourceView extends Composite implements Selec
 	 */
 	
 	protected void showEditQuestionResourceView(){
-		
 		TreeSet<QuestionAnswerDo> answerChoicesSet = collectionItemDo.getResource().getAnswers() != null ? collectionItemDo.getResource().getAnswers() : collectionItemDo.getQuestionInfo().getAnswers();
 		Iterator<QuestionAnswerDo> it = answerChoicesSet.iterator(); 
 		List<QuestionAnswerDo> questionAnswerDoList = new ArrayList<QuestionAnswerDo>();
-		
 		try{
 			/**
 			 *  If type = 4 from API, treated as FIB.
 			 */
 			int type = collectionItemDo.getResource().getType() != null ? collectionItemDo.getResource().getType() : collectionItemDo.getQuestionInfo().getType();
 			String explanation = collectionItemDo.getResource().getExplanation() != null ? collectionItemDo.getResource().getExplanation() : collectionItemDo.getQuestionInfo().getExplanation();
-			 if(type==4){
+			if(type==4){
 				 while(it.hasNext()){
 					 QuestionAnswerDo answer = it.next();
 					 questionAnswerDoList.add(answer); 
@@ -2229,18 +2227,16 @@ public abstract class AddQuestionResourceView extends Composite implements Selec
 							 questionText.append("["+questionAnswerDoList.get(j).getAnswerText()+"]");
 					 }
 				 }
-				 
-				 
-				 questionNameTextArea.setText(explanation);
-				 questionNameTextArea.getElement().setAttribute("alt", explanation);
-				 questionNameTextArea.getElement().setAttribute("title", explanation);
+				 questionNameTextArea.setText(questionText.toString());
+				 questionNameTextArea.getElement().setAttribute("alt", questionText.toString());
+				 questionNameTextArea.getElement().setAttribute("title", questionText.toString());
 				 explainationTextArea.setText(explanation);
 				 explainationTextArea.getElement().setAttribute("alt", explanation);
 				 explainationTextArea.getElement().setAttribute("title", explanation);
 			 }else{
-				 questionNameTextArea.setText(explanation);
-				 questionNameTextArea.getElement().setAttribute("alt", explanation);
-				 questionNameTextArea.getElement().setAttribute("title", explanation);
+				 questionNameTextArea.setText(collectionItemDo.getResource().getTitle());
+				 questionNameTextArea.getElement().setAttribute("alt", collectionItemDo.getResource().getTitle());
+				 questionNameTextArea.getElement().setAttribute("title", collectionItemDo.getResource().getTitle());
 				 explainationTextArea.setText(explanation);
 				 explainationTextArea.getElement().setAttribute("alt", explanation);
 				 explainationTextArea.getElement().setAttribute("title", explanation);
@@ -2275,6 +2271,7 @@ public abstract class AddQuestionResourceView extends Composite implements Selec
 			while (it.hasNext()) {
 				QuestionAnswerDo answer = it.next();
 				int widgetCount=questionAnswerChoiceContainer.getWidgetCount();
+				
 				final AddQuestionAnswerChoice addQuestionAnswer=new AddQuestionAnswerChoice(anserChoiceArray[widgetCount],answer.getAnswerText());
 				addQuestionAnswer.optionNoButton.setStyleName(addWebResourceStyle.answerDeselected());
 				if(answer.isIsCorrect()){	

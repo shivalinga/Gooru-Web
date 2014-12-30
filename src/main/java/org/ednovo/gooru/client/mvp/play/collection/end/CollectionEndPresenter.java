@@ -35,9 +35,7 @@ import org.ednovo.gooru.client.mvp.analytics.collectionSummaryIndividual.Collect
 import org.ednovo.gooru.client.mvp.analytics.util.AnalyticsUtil;
 import org.ednovo.gooru.client.mvp.play.collection.CollectionPlayerPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.end.study.CollectionHomeMetadataPresenter;
-import org.ednovo.gooru.client.mvp.play.collection.event.EditCommentChildViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.event.SetPlayerLoginStatusEvent;
-import org.ednovo.gooru.client.mvp.play.collection.event.UpdateCommentChildViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.preview.end.PreviewEndPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.preview.home.PreviewHomePresenter;
 import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataView;
@@ -109,6 +107,8 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 	
 	private MessageProperties i18n = GWT.create(MessageProperties.class);
 	
+	int count=0;
+	
 	@Inject
 	public CollectionEndPresenter(EventBus eventBus, IsCollectionEndView view,PreviewHomePresenter previewHomePresenter,
 			PreviewEndPresenter previewEndPresenter,CollectionHomeMetadataPresenter collectionHomeMetadataPresenter,CollectionSummaryIndividualPresenter collectionSummaryIndividualPresenter) {
@@ -119,8 +119,8 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 		this.collectionHomeMetadataPresenter=collectionHomeMetadataPresenter;
 		this.collectionSummaryIndividualPresenter=collectionSummaryIndividualPresenter;
 		addRegisteredHandler(SetPlayerLoginStatusEvent.TYPE, this);
-		addRegisteredHandler(UpdateCommentChildViewEvent.TYPE, this);
-		addRegisteredHandler(EditCommentChildViewEvent.TYPE, this);
+		//addRegisteredHandler(UpdateCommentChildViewEvent.TYPE, this);
+		//addRegisteredHandler(EditCommentChildViewEvent.TYPE, this);
 	}
 	
 	public void setCollectionMetadata(final CollectionDo collectionDo){
@@ -167,9 +167,17 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 	}
 	
 	public void setCollectionSummaryData(String collectionId,String classpageId,String userId,String sessionId,PrintUserDataDO printData){
-		clearSlot(COLLECTION_REPORTS_SLOT);
+		if(AppClientFactory.isAnonymous()){
+			getView().getLoadingImageLabel().setVisible(false);
+		}
 		collectionSummaryIndividualPresenter.setIndividualData(collectionId, classpageId, userId, sessionId,"",false,getView().getLoadingImageLabel(),printData);
 		setInSlot(COLLECTION_REPORTS_SLOT,collectionSummaryIndividualPresenter,false);
+	}
+	public void clearslot(){
+		getView().resetData();
+		getView().resetCollectionMetaData();
+		clearSlot(COLLECTION_REPORTS_SLOT);
+		setInSlot(COLLECTION_REPORTS_SLOT,null,false);
 	}
 	
 	public void setViewCount(String viewCount){
@@ -221,7 +229,9 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 
 	@Override
 	public void createCommentForCollection(String gooruOid, String comment) {
+		if(collectionPlayerPresenter!=null){
 		collectionPlayerPresenter.triggerCommentDataLogEvent(null, PlayerDataLogEvents.COMMENT_CREATE, comment);
+		}
 		this.playerAppService.createCommentForCollection(gooruOid, comment, new SimpleAsyncCallback<CommentsDo>() {
 			@Override
 			public void onSuccess(CommentsDo commentsDo) {
@@ -231,14 +241,15 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 		});
 	}
 
-	@Override
 	public void updateCommentChildView(String commentUid, String action) {
 		getView().updateCommentChildView(commentUid, action);
 	}
 
 	@Override
 	public void deleteCommentFromCollection(final String gooruOid,String commentUid,final String offset, final String limit,String commentText) {
+		if(collectionPlayerPresenter!=null){
 		collectionPlayerPresenter.triggerCommentDataLogEvent(commentUid, PlayerDataLogEvents.COMMENT_DELETE,commentText);
+		}
 		this.playerAppService.deleteCollectionCommentbyCommentUid(commentUid, new SimpleAsyncCallback<Void>() {
 			@Override
 			public void onSuccess(Void noResult) {
@@ -255,9 +266,11 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 			}
 		});
 	}
-	@Override
+	
 	public void editCommentChildView(String commentUid, String commentText, String action) {
+		if(collectionPlayerPresenter!=null){
 		collectionPlayerPresenter.triggerCommentDataLogEvent(commentUid, PlayerDataLogEvents.COMMENT_EDIT,commentText);
+		}
 		this.playerAppService.updateCollectionCommentbyCommentUid(commentUid, commentText, new SimpleAsyncCallback<CommentsDo>() {
 			@Override
 			public void onSuccess(CommentsDo result) {
@@ -468,6 +481,11 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 					printData.setSessionStartTime(AnalyticsUtil.getCreatedTime((Long.toString(result.get(result.size()-1).getTimeStamp()))));
 					getCollectionMetaDataByUserAndSession(collectionId, classId, userId, result.get(result.size()-1).getSessionId(),printData);
 					getView().setSessionsData(result);
+				}else{
+					clearSlot(COLLECTION_REPORTS_SLOT);
+					getView().hidePanel();
+					collectionSummaryIndividualPresenter.setNoDataMessage(getView().getLoadingImageLabel());
+					setInSlot(COLLECTION_REPORTS_SLOT,collectionSummaryIndividualPresenter,false);
 				}
 			}
 			
@@ -482,14 +500,21 @@ public class CollectionEndPresenter extends PresenterWidget<IsCollectionEndView>
 	@Override
 	public void getCollectionMetaDataByUserAndSession(final String collectionId,final String classId, final String userId, final String sessionId,final PrintUserDataDO printData) {
 		this.analyticService.getCollectionMetaDataByUserAndSession(collectionId, classId, userId, sessionId, new AsyncCallback<ArrayList<CollectionSummaryMetaDataDo>>() {
-			
 			@Override
 			public void onSuccess(ArrayList<CollectionSummaryMetaDataDo> result) {
 				if(result.get(0).getCompletionStatus()!=null){
 					if(result.get(0).getCompletionStatus().equalsIgnoreCase("in-progress")){
-						getCollectionMetaDataByUserAndSession(collectionId, classId, userId, sessionId,printData);
+						if(count<10){
+							getCollectionMetaDataByUserAndSession(collectionId, classId, userId, sessionId,printData);
+							count++;
+						}else{
+							if(count>=10){
+								getView().showMessageWhenDataNotFound();
+							}
+						}
 					}else{
 						if(result.size()!=0){
+							count=0;
 							getView().setCollectionMetaDataByUserAndSession(result);
 							setCollectionSummaryData(collectionId, classId, userId, sessionId,printData);
 						}

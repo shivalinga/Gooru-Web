@@ -783,8 +783,8 @@ public class AddResourceView extends PopupViewWithUiHandlers<AddResourceUiHandle
 
 	public void setThumbnailImages(List<String> thumbnailImages) {
 		addWebResourceWidget.thumbnailImages = thumbnailImages;
-		addWebResourceWidget.activeImageIndex=0;
-        addWebResourceWidget.setImageThumbnail();
+//		addWebResourceWidget.activeImageIndex=0;
+//        addWebResourceWidget.setImageThumbnail();
 	}
 	
 	public ResourceMetaInfoDo getResMetaInfo() {
@@ -906,8 +906,8 @@ public class AddResourceView extends PopupViewWithUiHandlers<AddResourceUiHandle
 				addWebResourceWidget.descriptionTxtAera.setText(resMetaInfo.getDescription());
 			}
 			setResMetaInfo(resMetaInfo);
-			/*setThumbnailImages(resMetaInfo.getImages());
-			updateUi();
+			setThumbnailImages(resMetaInfo.getImages());
+			/*updateUi();
 			if(resMetaInfo.getImages().size()<=0){
 				addWebResourceWidget.generateImageLbl.setVisible(true);
 				addWebResourceWidget.rightArrowLbl.setVisible(false);

@@ -96,6 +96,8 @@ public class UserDo extends ResponseStatusDo implements Serializable {
 	
 	private String refreshToken;
 	
+	private String errorMsg;
+	
 	public UserDo(){}
 	
 	
@@ -458,6 +460,22 @@ public class UserDo extends ResponseStatusDo implements Serializable {
 	 */
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
+	}
+
+
+	/**
+	 * @return the errorMsg
+	 */
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+
+	/**
+	 * @param errorMsg the errorMsg to set
+	 */
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 	
 	

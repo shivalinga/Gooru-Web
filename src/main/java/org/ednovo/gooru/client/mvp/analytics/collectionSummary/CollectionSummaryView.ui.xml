@@ -10,9 +10,9 @@
  	 <g:HTMLPanel styleName="{unitStyle.maincontainer}">
  	 <g:HTMLPanel>
  	 <g:HTMLPanel>
- 	 <g:Label styleName="{unitStyle.summary_title}"  text="{i18n.GL1587}"></g:Label>
+ 	 <g:Label styleName="{unitStyle.summary_title}"  text="{i18n.GL1587}" title="{i18n.GL1587}"></g:Label>
  	 <g:Image ui:field="imgQuestionMark" url="/images/mos/questionmark.png" styleName="{unitStyle.questionImage}"></g:Image>
- 	 <g:Label text="{i18n.GL2270}" styleName="{unitStyle.subText}"></g:Label>
+ 	 <g:Label text="{i18n.GL2270}" title="{i18n.GL2270}" styleName="{unitStyle.subText}"></g:Label>
  	 <g:Image ui:field="exportImage" styleName="{unitStyle.exportImage}" url="images/analytics/export.png"></g:Image>
  	 </g:HTMLPanel>
  	 <g:HTMLPanel>
@@ -28,13 +28,13 @@
 		   <g:HTMLPanel styleName="{unitStyle.gooru_session_data_content}">
 	       		<g:HTMLPanel styleName="{unitStyle.left_session}">
 					<g:HTMLPanel styleName="{unitStyle.collection_last_accessed}">
-						<g:InlineLabel styleName="{unitStyle.collectionLastAccessed}" text="{i18n.GL2272}"> </g:InlineLabel>
+						<g:InlineLabel styleName="{unitStyle.collectionLastAccessed}" text="{i18n.GL2272}" title="{i18n.GL2272}"> </g:InlineLabel>
 						<g:InlineLabel ui:field="lastModifiedTime"></g:InlineLabel>
 					</g:HTMLPanel>
 				</g:HTMLPanel>
 	       		<g:HTMLPanel styleName="{unitStyle.right_session}">
 	       		<g:HTMLPanel>
-				<g:HTMLPanel styleName="{unitStyle.d_filter_session_text}"><g:InlineLabel text="{i18n.GL2273}"></g:InlineLabel><span class="tooltip-icon"><g:Image url="/images/mos/questionmark.png" ui:field="sessionsTooltip"></g:Image> :</span></g:HTMLPanel>
+				<g:HTMLPanel styleName="{unitStyle.d_filter_session_text}"><g:InlineLabel text="{i18n.GL2273}" title="{i18n.GL2273}"></g:InlineLabel><span class="tooltip-icon"><g:Image url="/images/mos/questionmark.png" ui:field="sessionsTooltip"></g:Image> :</span></g:HTMLPanel>
 				<g:HTMLPanel styleName="{unitStyle.session_data}">
 				 <g:ListBox ui:field="sessionsDropDown" styleName="{unitStyle.filterDropDownSessions}">
 				 </g:ListBox>
@@ -48,6 +48,7 @@
  	 <g:HTMLPanel>
 	 <g:HTMLPanel styleName="{unitStyle.htmlpanlProgress}" ui:field="scrollForCollectionProgress">
 	 <g:VerticalPanel ui:field="pnlSummary" styleName="{unitStyle.pnlSummary}"/>
+	 	<g:Frame ui:field="downloadFile"></g:Frame>
 	 </g:HTMLPanel>
 	 </g:HTMLPanel>
 	 </g:HTMLPanel>

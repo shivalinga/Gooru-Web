@@ -79,10 +79,4 @@ public interface IsHomeView extends IsViewWithHandlers<HomeUiHandlers> {
 	
 	Button getBtnSignUp();
 
-	/**
-	 * To show preFilter popup
-	 * @param addStandardsPresenter 
-	 */
-	void showPrefilter(AddStandardsPreSearchPresenter addStandardsPresenter);
-	
 }

@@ -203,8 +203,12 @@ public class PlayerDataLogEvents {
 		try{
 			contextMap.put(CONTENTGOORUID, new JSONString(collectionId));
 			parentGooruId=parentGooruId==null?"":parentGooruId;
-			contextMap.put(PARENTGOORUID, new JSONString(parentGooruId));
-			contextMap.put(PARENTEVENTID, new JSONString(parentEventId));
+			if(parentGooruId!=null){
+				contextMap.put(PARENTGOORUID, new JSONString(parentGooruId));
+			}
+			if(parentEventId!=null){
+				contextMap.put(PARENTEVENTID, new JSONString(parentEventId));
+			}
 			contextMap.put(TYPE, new JSONString(eventType));
 			contextMap.put(RESOURCETYPE, new JSONString(resourceType));
 			contextMap.put(CLIENTSOURCE, new JSONString(WEB));
@@ -232,7 +236,9 @@ public class PlayerDataLogEvents {
 			contextMap.put(CONTENTGOORUID, new JSONString(collectionId));
 			contentItemId=contentItemId!=null?contentItemId:"";
 			contextMap.put(CONTENTITEMID, new JSONString(contentItemId));
-			contextMap.put(PARENTGOORUID, new JSONString(parentGooruOid));
+			if(parentGooruOid!=null){
+				contextMap.put(PARENTGOORUID, new JSONString(parentGooruOid));
+			}
 			if(parentEventId!=null){
 				contextMap.put(PARENTEVENTID, new JSONString(parentEventId));
 			}
@@ -271,7 +277,7 @@ public class PlayerDataLogEvents {
 	public static  JSONString getDataLogVersionObject(){
 		JSONObject versionMap=new JSONObject();
 		try{
-			versionMap.put(LOGAPI, new JSONString("0.1")); //TODO need to implement version
+			versionMap.put(LOGAPI, new JSONString("0.1")); 
 		}catch(Exception e){
 			
 		}

@@ -532,6 +532,7 @@ public class UserSettingsPresenter
 					
 				}
 				updateRefershToken();
+				getView().displayAdminPortal();
 				/**
 				 * This RPC is to get the User profile Details(grade value)
 				 */

@@ -43,7 +43,6 @@ import org.ednovo.gooru.client.mvp.faq.TermsOfUse;
 import org.ednovo.gooru.client.mvp.home.event.HeaderTabType;
 import org.ednovo.gooru.client.mvp.home.event.HomeEvent;
 import org.ednovo.gooru.client.mvp.home.library.LibraryView;
-import org.ednovo.gooru.client.mvp.home.library.events.StandardPreferenceSettingEvent;
 import org.ednovo.gooru.client.mvp.home.presearchstandards.AddStandardsPreSearchPresenter;
 import org.ednovo.gooru.client.mvp.home.register.RegisterVc;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
@@ -58,7 +57,6 @@ import org.ednovo.gooru.shared.model.library.LibraryUserDo;
 import org.ednovo.gooru.shared.model.library.SubjectDo;
 import org.ednovo.gooru.shared.model.search.AutoSuggestKeywordSearchDo;
 import org.ednovo.gooru.shared.model.search.SearchDo;
-import org.ednovo.gooru.shared.model.user.ProfileDo;
 import org.ednovo.gooru.shared.model.user.UserDo;
 import org.ednovo.gooru.shared.util.StringUtil;
 
@@ -94,7 +92,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBox;
@@ -130,24 +127,9 @@ public class HomeView extends BaseViewWithHandlers<HomeUiHandlers> implements Is
 	public AppSuggestBox txtSearch;
 	
 	String jsonDataString = null;
-	
-	private static final String USER_META_ACTIVE_FLAG = "0";
-	
-	PreFilterPopup preFilter =	null;
-	
-	AddStandardsPreSearchPresenter addStandardsPresenter = null;
 
-	private boolean isCCSSAvailable =false;
-	private boolean isNGSSAvailable =false;
-	private boolean isTEKSAvailable =false;
-	private boolean isCAAvailable =false;
-	
-	private boolean isArrowIcon = false;
-	private boolean isOpenPrefilterPopup = true;
-	
 	Map<String, String> allSubject = new HashMap<String, String>();
 	Map<String, String> allCourse  = new HashMap<String, String>();
-	private boolean hasAutoSelected = false;
 	
 	private static HomeViewUiBinder uiBinder = GWT.create(HomeViewUiBinder.class);
 
@@ -968,8 +950,6 @@ public class HomeView extends BaseViewWithHandlers<HomeUiHandlers> implements Is
 			AppClientFactory.fireEvent(new HomeEvent(HeaderTabType.DISCOVER));
 			txtSearch.hideSuggestionList();
 		}
-		
-		hasAutoSelected=true;
 		MixpanelUtil.mixpanelEvent("Select_Autocomplete_Search");
 		getEditSearchTxtBox().setText(searchText.trim());
 
@@ -988,132 +968,6 @@ public class HomeView extends BaseViewWithHandlers<HomeUiHandlers> implements Is
 		this.btnSignUp = btnSignUp;
 	}
 
-
-
-	/* (non-Javadoc)
-	 * @see org.ednovo.gooru.client.mvp.home.IsHomeView#showPrefilter()
-	 */
-	@Override
-	public void showPrefilter(AddStandardsPreSearchPresenter addStandardsPresenter) {
-		this.addStandardsPresenter=addStandardsPresenter;
-//		HeaderUc.getArrowLbl().addClickHandler(new showPrefilterPopup());
-	}
-	
-	/**
-	 * @description This class is used to show the pre-filter search popup
-	 * @author search team
-	 * @date 27-Nov-2014
-	 */
-	public class showPrefilterPopup implements ClickHandler{
-
-		/* (non-Javadoc)
-		 * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
-		 */
-		
-		@Override
-		public void onClick(ClickEvent event) {
-			if(preFilter!=null && preFilter.isShowing()){
-				preFilter.hide();
-				isArrowIcon=true;
-			}else{
-				isArrowIcon=true;
-				//if(preFilter==null){
-					preFilter =	new PreFilterPopup();
-					preFilter.getStandardsInfo().addClickHandler(new ClickHandler() {
-						
-						@Override
-						public void onClick(ClickEvent event) {
-							preFilter.ShowSTandardsPanel().clear();
-							getAddStandards();
-							preFilter.ShowSTandardsPanel().add(addStandardsPresenter.getWidget());
-							
-							addStandardsPresenter.getView().getAddStandardsPanel().getElement().setAttribute("style", "margin: -45px 4px 4px; border: 0px solid #ccc;");
-							addStandardsPresenter.getAddBtn().setVisible(false);
-							
-						}
-					});
-				//}
-				HeaderUc.setPrefilterObj(preFilter);
-				preFilter.setPopupPosition(event.getRelativeElement().getAbsoluteLeft()-176, event.getRelativeElement().getAbsoluteTop()+30);
-				preFilter.setFilter();
-				preFilter.show();
-				preFilter.hidePlanels();
-				ClickHandler handler = new ClickHandler() {
-					@Override
-					public void onClick(ClickEvent event) {
-						preFilter.show();
-						isArrowIcon = true;
-					}
-				};
-				preFilter.addDomHandler(handler, ClickEvent.getType());
-				
-			}
-			
-		}
-		
-	}
-     /**
-      * To show particular user standards 
-      */
-	
-	public void getAddStandards() {
-		
-		if(!AppClientFactory.isAnonymous()){
-		AppClientFactory.getInjector().getUserService().getUserProfileV2Details(AppClientFactory.getLoggedInUser().getGooruUId(),
-				USER_META_ACTIVE_FLAG,
-				new SimpleAsyncCallback<ProfileDo>() {
-					@Override
-					public void onSuccess(final ProfileDo profileObj) {
-					AppClientFactory.fireEvent(new StandardPreferenceSettingEvent(profileObj.getUser().getMeta().getTaxonomyPreference().getCode()));
-					checkStandarsList(profileObj.getUser().getMeta().getTaxonomyPreference().getCode());
-					}
-					public void checkStandarsList(List<String> standarsPreferencesList) {
-						
-					if(standarsPreferencesList!=null){
-							if(standarsPreferencesList.contains("CCSS")){
-								isCCSSAvailable = true;
-							}else{
-								isCCSSAvailable = false;
-							}
-							if(standarsPreferencesList.contains("NGSS")){
-								isNGSSAvailable = true;
-							}else{
-								isNGSSAvailable = false;
-							}
-							if(standarsPreferencesList.contains("TEKS")){
-								isTEKSAvailable = true;
-							}else{
-								isTEKSAvailable = false;
-							}
-							if(standarsPreferencesList.contains("CA")){
-								isCAAvailable = true;
-							}else{
-								isCAAvailable = false;
-							}
-								if(isCCSSAvailable || isNGSSAvailable || isTEKSAvailable || isCAAvailable){
-									addStandardsPresenter.enableStandardsData(isCCSSAvailable,isTEKSAvailable,isNGSSAvailable,isCAAvailable);
-									addStandardsPresenter.callDefaultStandardsLoad();
-									//addToPopupSlot(addStandardsPresenter);
-									//getView().OnStandardsClickEvent(addStandardsPresenter.getAddBtn());
-								}
-							
-					}
-						
-					}
-
-				});
-		}else{
-			isCCSSAvailable = true;
-			isNGSSAvailable = true;
-			isCAAvailable = true;
-			if(isCCSSAvailable || isNGSSAvailable || isTEKSAvailable || isCAAvailable){
-				addStandardsPresenter.enableStandardsData(isCCSSAvailable,isTEKSAvailable,isNGSSAvailable,isCAAvailable);
-				addStandardsPresenter.callDefaultStandardsLoad();
-//				addToPopupSlot(addStandardsPresenter);
-//				getView().OnStandardsClickEvent(addStandardsPresenter.getAddBtn());
-			}
-		}
-	}
 }
 
 

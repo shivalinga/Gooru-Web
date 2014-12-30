@@ -1044,9 +1044,6 @@ public class ResourcePlayerMetadataView extends BaseViewWithHandlers<ResourcePla
 		if(result!=null){
 			this.starRatingsDo=result;
 			isRated=true; 
-			if(result.getRatings()!=null){
-				previousRating=result.getRatings().getAverage();
-			}
 			if(AppClientFactory.getCurrentPlaceToken().equalsIgnoreCase(PlaceTokens.RESOURCE_PLAY)){
 				if(result.getRatings()!=null){
 					if(isFromThanksPopup){
@@ -1075,7 +1072,6 @@ public class ResourcePlayerMetadataView extends BaseViewWithHandlers<ResourcePla
 			}
 		}else{
 			isRated=false;
-			previousRating=0;
 		}
 		
 		if(thankYouResourceStarRatingsPoor!=null){
@@ -1422,6 +1418,7 @@ public class ResourcePlayerMetadataView extends BaseViewWithHandlers<ResourcePla
 		three_star.getElement().removeClassName(FILLED_BLUE);
 		four_star.getElement().removeClassName(FILLED_BLUE);
 		five_star.getElement().removeClassName(FILLED_BLUE);
+		setPreviousRating(0);
 	}
 	
 	
@@ -1432,6 +1429,7 @@ public class ResourcePlayerMetadataView extends BaseViewWithHandlers<ResourcePla
 	private void setStarRatingValue(int starRating) {
 		
 		clearAllStars();
+		setPreviousRating(starRating);
 		if(starRating==1){
 			one_star.getElement().addClassName(FILLED_BLUE);
 		}else if(starRating==2){
@@ -1454,6 +1452,7 @@ public class ResourcePlayerMetadataView extends BaseViewWithHandlers<ResourcePla
 			five_star.getElement().addClassName(FILLED_BLUE);
 		}else{
 			clearAllStars();
+			setPreviousRating(0);
 		}
 	}
 	

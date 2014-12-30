@@ -4,35 +4,39 @@
 	<ui:style field="unitStyle" src="collectionSummaryIndividual.css" />
 	<ui:with field="i18n" type="org.ednovo.gooru.shared.i18n.MessageProperties"/>
 	<g:HTMLPanel>
-		<g:HTMLPanel ui:field="tabContainer"/>
-		 <g:HTMLPanel ui:field="individualScoredDatapnl">
-		 <g:HTMLPanel styleName="{unitStyle.resource_monitor_header_title}">
-		      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.correct_legend_one}" ></g:InlineLabel><g:InlineLabel styleName="correct-one {unitStyle.correct_incorrect_text}" text="{i18n.GL2267}"></g:InlineLabel></g:HTMLPanel>
-		      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.correct_legend_other}"></g:InlineLabel><g:InlineLabel styleName="correct-other {unitStyle.correct_incorrect_text}" text="{i18n.GL2268}"></g:InlineLabel></g:HTMLPanel>
-		      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.incorrect_legend}"></g:InlineLabel><g:InlineLabel styleName="incorrect-ans {unitStyle.correct_incorrect_text}"  text="{i18n.GL2269}"></g:InlineLabel></g:HTMLPanel>
-		 </g:HTMLPanel>
-		<g:HTMLPanel ui:field="individualScoredData" styleName="{unitStyle.individualScore}"/>
-		</g:HTMLPanel>
-		<g:HTMLPanel ui:field="individualOpenendedData"  styleName="{unitStyle.individualScore}" />
-		<g:HTMLPanel ui:field="individualResourceBreakdownDatapnl">
-			 <g:HTMLPanel styleName="{unitStyle.collectionOverViewpnl}">
-			 	   <g:Label styleName="{unitStyle.collectionOverviewText}" text="{i18n.GL2274}" ui:field="lblCollectionOverview"></g:Label>
-				   <div class="{unitStyle.collectionBreakDown_infobox}">
-				   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" text="{i18n.GL2275}" ui:field="lblTotalTimeSpent"></g:Label>
-				   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalTimeSpentlbl"></g:Label>
-				   </div>
-				   <div class="{unitStyle.collectionBreakDown_infobox}">
-				   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" text="{i18n.GL2276}" ui:field="lblViews"></g:Label>
-				   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalViewlbl"></g:Label>
-				   </div>
-				   <div class="{unitStyle.collectionBreakDown_infobox}">
-				   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}"  text="{i18n.GL2277}" ui:field="lblAvgReaction"></g:Label>
-				  <g:HTMLPanel styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalAvgReactionlbl"></g:HTMLPanel> 
-				  </div>
+		<g:HTMLPanel ui:field="maincontainer">
+			<g:HTMLPanel ui:field="tabContainer"/>
+			 <g:HTMLPanel ui:field="individualScoredDatapnl">
+			 <g:HTMLPanel styleName="{unitStyle.resource_monitor_header_title}">
+			      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.correct_legend_one}" ></g:InlineLabel><g:InlineLabel styleName="correct-one {unitStyle.correct_incorrect_text}" text="{i18n.GL2267}" title="{i18n.GL2267}"></g:InlineLabel></g:HTMLPanel>
+			      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.correct_legend_other}"></g:InlineLabel><g:InlineLabel styleName="correct-other {unitStyle.correct_incorrect_text}" text="{i18n.GL2268}" title="{i18n.GL2268}"></g:InlineLabel></g:HTMLPanel>
+			      <g:HTMLPanel styleName="{unitStyle.floatLeft}"><g:InlineLabel styleName="{unitStyle.incorrect_legend}"></g:InlineLabel><g:InlineLabel styleName="incorrect-ans {unitStyle.correct_incorrect_text}"  text="{i18n.GL2269}" title="{i18n.GL2269}"></g:InlineLabel></g:HTMLPanel>
 			 </g:HTMLPanel>
-			 <g:ListBox ui:field="filterDropDown" styleName="{unitStyle.filterDropDown}"/>
-			 <g:HTMLPanel ui:field="individualResourceBreakdownData"  styleName="{unitStyle.individualScore}"/>
-	 </g:HTMLPanel>
-	 <g:HTMLPanel ui:field="printWidget" styleName="{unitStyle.printWidget}"></g:HTMLPanel>
+			<g:HTMLPanel ui:field="individualScoredData" styleName="{unitStyle.individualScore}"/>
+			</g:HTMLPanel>
+			<g:HTMLPanel ui:field="individualOpenendedData"  styleName="{unitStyle.individualScore}" />
+			<g:HTMLPanel ui:field="individualResourceBreakdownDatapnl">
+				 <g:HTMLPanel styleName="{unitStyle.collectionOverViewpnl}">
+				 	   <g:Label styleName="{unitStyle.collectionOverviewText}" text="{i18n.GL2274}" title="{i18n.GL2274}" ui:field="lblCollectionOverview"></g:Label>
+					   <div class="{unitStyle.collectionBreakDown_infobox}">
+					   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" text="{i18n.GL2275}" title="{i18n.GL2275}" ui:field="lblTotalTimeSpent"></g:Label>
+					   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalTimeSpentlbl"></g:Label>
+					   </div>
+					   <div class="{unitStyle.collectionBreakDown_infobox}">
+					   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" text="{i18n.GL2276}" title="{i18n.GL2276}" ui:field="lblViews"></g:Label>
+					   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalViewlbl"></g:Label>
+					   </div>
+					   <div class="{unitStyle.collectionBreakDown_infobox}">
+					   <g:Label styleName="{unitStyle.collectionBreakDown_infobox_titles}"  text="{i18n.GL2277}" title="{i18n.GL2277}" ui:field="lblAvgReaction"></g:Label>
+					  <g:HTMLPanel styleName="{unitStyle.collectionBreakDown_infobox_titles}" ui:field="totalAvgReactionlbl"></g:HTMLPanel> 
+					  </div>
+				 </g:HTMLPanel>
+				 <g:ListBox ui:field="filterDropDown" styleName="{unitStyle.filterDropDown}"/>
+				 <g:HTMLPanel ui:field="individualResourceBreakdownData"  styleName="{unitStyle.individualScore}"/>
+		 </g:HTMLPanel>
+		 	<g:HTMLPanel ui:field="printWidget" styleName="{unitStyle.printWidget}"></g:HTMLPanel>
+			</g:HTMLPanel>
+		<g:Label ui:field="noErrorMesage" styleName="{unitStyle.showEmptyMessage}" text="{i18n.GL3102}" title="{i18n.GL3102}"></g:Label>
+		<g:Frame ui:field="downloadFile"></g:Frame>
 	</g:HTMLPanel>
 </ui:UiBinder> 

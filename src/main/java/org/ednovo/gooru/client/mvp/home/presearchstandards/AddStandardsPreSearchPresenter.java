@@ -125,8 +125,6 @@ public class AddStandardsPreSearchPresenter extends PresenterWidget<IsAddStandar
 	
 	public void callDefaultStandardsLoad()
 	{
-		System.out.println("callDefaultStandardsLoad::");
-		getView().setEnableStandardButtons(isCCSSAvailable,isNGSSAvailable,isTEKSAvailable,isCAAvailable);
 		if(isCCSSAvailable){
 			standardVal = "CCSS";
 			getView().setStandardsStyles(standardVal);
@@ -148,6 +146,7 @@ public class AddStandardsPreSearchPresenter extends PresenterWidget<IsAddStandar
 				for(int i=0;i<result.size();i++) {
 					getView().SetData(result.get(i),i);
 				}
+				getView().setEnableStandardButtons(isCCSSAvailable,isTEKSAvailable,isNGSSAvailable,isCAAvailable);
 			}
 		});
 	}
@@ -239,6 +238,13 @@ public class AddStandardsPreSearchPresenter extends PresenterWidget<IsAddStandar
 		this.isNGSSAvailable= isNGSSAvailable;
 		this.isTEKSAvailable= isTEKSAvailable;
 		this.isCAAvailable= isCAAvailable;
+	}
+
+	public void setEnableStandardButtons(boolean isCCSSAvailable2,
+			boolean isTEKSAvailable2, boolean isNGSSAvailable2,
+			boolean isCAAvailable2) {
+		getView().setEnableStandardButtons(isCCSSAvailable2, isNGSSAvailable2, isTEKSAvailable2, isCAAvailable2);
+		
 	}
 
 }

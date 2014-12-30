@@ -35,7 +35,6 @@ import org.ednovo.gooru.shared.model.analytics.CollectionSummaryUsersDataDo;
 import org.ednovo.gooru.shared.model.analytics.PrintUserDataDO;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -128,6 +127,7 @@ public class CollectionSummaryPresenter extends PresenterWidget<IsCollectionSumm
 			
 			@Override
 			public void onSuccess(ArrayList<CollectionSummaryUsersDataDo> result) {
+				System.out.println("sessions Size::"+result.size());
 				getView().setUserSessionsData(result);
 				if(result.size()!=0){
 					printUserDataDO.setSession("1st Session");
@@ -163,6 +163,11 @@ public class CollectionSummaryPresenter extends PresenterWidget<IsCollectionSumm
 		collectionSummaryIndividualPresenter.setIndividualData(collectionId,classpageId,userId,sessionId,pathwayId,true,getView().getLoadinImage(),printUserDataDO);
 		setInSlot(TEACHER_STUDENT_SLOT, collectionSummaryIndividualPresenter,false);	
 	}
+	@Override
+	protected void onHide() {
+		super.onHide();
+		clearFrames();
+	}
 
 	/* (non-Javadoc)
 	 * @see org.ednovo.gooru.client.mvp.analytics.collectionSummary.CollectionSummaryUiHandlers#exportCollectionSummary(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
@@ -173,12 +178,18 @@ public class CollectionSummaryPresenter extends PresenterWidget<IsCollectionSumm
 			
 			@Override
 			public void onSuccess(String result) {
-				Window.open(result, "_blank", "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,width=0,height=0");
+				getView().getFrame().setUrl(result);
+				//Window.open(result, "_blank", "directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no,width=0,height=0");
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 			}
 		});
+	}
+	@Override
+	public void clearFrames(){
+		collectionSummaryTeacherPresenter.clearFrame();
+		collectionSummaryIndividualPresenter.clearFrame();
 	}
 }

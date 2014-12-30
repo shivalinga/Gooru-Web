@@ -29,6 +29,7 @@ import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
@@ -52,7 +53,8 @@ public class CollectionSummaryView  extends BaseViewWithHandlers<CollectionSumma
 	@UiField InlineLabel lastModifiedTime;
 	@UiField HTMLPanel collectionSummaryDetails,sessionspnl,loadingImageLabel1;
 	@UiField VerticalPanel pnlSummary;
-
+	@UiField Frame downloadFile;
+	
 	Map<String, String> sessionData=new HashMap<String, String>();
 	ToolTip toolTip;
 	private static MessageProperties i18n = GWT.create(MessageProperties.class);
@@ -70,6 +72,7 @@ public class CollectionSummaryView  extends BaseViewWithHandlers<CollectionSumma
 		setWidget(uiBinder.createAndBindUi(this));
 		setData();
 		setStaticData();
+		downloadFile.setVisible(false);
 	}
 	/**
 	 * This method is used to set static data.
@@ -213,7 +216,7 @@ public class CollectionSummaryView  extends BaseViewWithHandlers<CollectionSumma
 		sessionsDropDown.clear();
 		sessionData.clear();
 		for (CollectionSummaryUsersDataDo collectionSummaryUsersDataDo : result) {
-			sessionData.put(collectionSummaryUsersDataDo.getSessionId(), AnalyticsUtil.getCreatedTime(Long.toString(collectionSummaryUsersDataDo.getTimeStamp())));
+			sessionData.put(collectionSummaryUsersDataDo.getSessionId(), AnalyticsUtil.getSessionsCreatedTime(Long.toString(collectionSummaryUsersDataDo.getTimeStamp())));
 			int day=collectionSummaryUsersDataDo.getFrequency();
 			sessionsDropDown.addItem(day+AnalyticsUtil.getOrdinalSuffix(day)+" Session",collectionSummaryUsersDataDo.getSessionId());
 		}
@@ -257,5 +260,9 @@ public class CollectionSummaryView  extends BaseViewWithHandlers<CollectionSumma
 	@UiHandler("exportImage")
 	public void clickedOnExport(ClickEvent e){
 		getUiHandlers().exportCollectionSummary(collectionId, classpageId, "", "", pathwayId, AnalyticsUtil.getTimeZone());
+	}
+	@Override
+	public Frame getFrame() {
+		return downloadFile;
 	}
 }

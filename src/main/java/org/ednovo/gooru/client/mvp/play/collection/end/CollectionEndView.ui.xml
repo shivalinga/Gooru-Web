@@ -71,8 +71,8 @@
 					</g:HTMLPanel>
 					<g:FlowPanel styleName="{playerStyle.insightsFrameContainer}" ui:field="frameContainer">
 	             	 <g:HTMLPanel styleName="{unitStyle.summary_title}" ui:field="collectionSummaryText"></g:HTMLPanel>
-					             	 <!-- Collection Summary Top -->
-					     <g:HTMLPanel>
+					      <!-- Collection Summary Top -->
+					     <g:HTMLPanel ui:field="collectionMetaDataPnl">
 						    <g:HTMLPanel styleName="{unitStyle.collectionSummaryDetailsWrapper}">
 							<g:HTMLPanel styleName="{unitStyle.left_container}">
 							<g:Image ui:field="collectionImage" styleName="{unitStyle.collection_teacher_img}"></g:Image>

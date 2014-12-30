@@ -31,6 +31,7 @@ import org.ednovo.gooru.shared.model.analytics.OetextDataDO;
 import org.ednovo.gooru.shared.model.analytics.PrintUserDataDO;
 import org.ednovo.gooru.shared.model.analytics.UserDataDo;
 
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 
@@ -73,4 +74,13 @@ public interface IsCollectionSummaryIndividualView extends IsViewWithHandlers<Co
 	 * @param path
 	 */
 	void setPdfForEmail(String path);
+	/**
+	 * This method is used to set empty error message.
+	 */
+	void setErrorMessage();
+	/**
+	 * Get Ifame tag
+	 * @return
+	 */
+	Frame getFrame();
 }

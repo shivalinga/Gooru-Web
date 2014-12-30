@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import org.ednovo.gooru.client.gin.IsViewWithHandlers;
 import org.ednovo.gooru.shared.model.analytics.GradeJsonData;
 
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 
@@ -55,4 +56,9 @@ public interface IsAnalyticsView extends IsViewWithHandlers<AnalyticsUiHandlers>
      * This method is used to enable the no data message text.
      */
     void setNoDataText();
+    /**
+     * This method is used to reset the data.
+     */
+    void resetDataText() ;
+	Frame getFrame();
 }

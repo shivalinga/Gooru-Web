@@ -2727,5 +2727,9 @@ public class EditClasspageView extends
 			
 		}
 	}
+	@Override
+	public HTMLPanel getFrameContainer(){
+		return frameContainer;
+	}
 }
 

@@ -71,4 +71,6 @@ void setIndividualData(String collectionId,String classpageId,String userId,Stri
  * @param timeZone
  */
 void exportCollectionSummary(String collectionId,String classpageId,String userId,String sessionId,String pathwayId,String timeZone);
+
+public void clearFrames();
 }

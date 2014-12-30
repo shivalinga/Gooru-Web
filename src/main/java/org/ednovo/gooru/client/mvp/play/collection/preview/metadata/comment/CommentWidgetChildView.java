@@ -24,8 +24,10 @@
  ******************************************************************************/
 package org.ednovo.gooru.client.mvp.play.collection.preview.metadata.comment;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.ednovo.gooru.client.SimpleAsyncCallback;
@@ -98,6 +100,8 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 	
 	private static boolean CHECK_COLLOBORATOR =false;
 	
+	private List<String> getPermissionsList = null;
+	
 	private static final String EDUCATOR_DEFAULT_IMG = "../images/settings/setting-user-image.png";
 	
 	private static final String DATE_FORMAT="MMMM dd, yyyy";
@@ -107,6 +111,7 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 	private String loggedInOwnerUid = null;
 	
 	private CommentsDo commentsDo;
+	private CollectionDo collectionDo;
 	
 	private DeleteConfirmationPopupVc deleteConfirmationPopupVc;
 	
@@ -120,6 +125,7 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 		initWidget(uiBinder.createAndBindUi(this));
 		enableEditFunction(false);
 		this.commentsDo = commentsDo;
+		this.collectionDo = collectionDo;
 		successPostMsg.setVisible(false);
 		commentField.addKeyUpHandler(new ValidateConfirmText());
 		commentField.addBlurHandler(new OnCommentsFieldBlur());
@@ -170,6 +176,21 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 		
 		setCommentData(commentsDo, collectionDo);
 		
+		if(collectionDo.getSettings()!=null)
+		{
+			if(collectionDo.getSettings().getComment()!=null)
+			{
+	
+				if(collectionDo.getSettings().getComment().equalsIgnoreCase("turn-on"))
+				{
+					editButton.setVisible(true);
+				}
+				else
+				{
+					editButton.setVisible(false);
+				}
+			}
+		}
 		
 		userPhoto.getElement().setId("imgUserPhoto");
 		messageInfo.getElement().setId("pnlMessageInfo");
@@ -212,6 +233,7 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 	 */
 	private void setCommentData(CommentsDo commentsDo, CollectionDo collectionDo) {
 		//Added try catch because "commentsDo.getCommentorUid().getGooruUId()" is null.
+		getPermissionsList = new ArrayList<String>();
 		characterLimit.setVisible(false);
 		try{
 			setCommentUid(commentsDo.getCommentUid());
@@ -219,6 +241,9 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 			commentOwnerUid = commentsDo.getCommentorUid().getGooruUId() != null ? commentsDo.getCommentorUid().getGooruUId() : null;
 			loggedInOwnerUid = AppClientFactory.getLoggedInUser().getGooruUId();
 			CHECK_COLLOBORATOR = collectionDo.getMeta().isIsCollaborator();
+			 if(collectionDo.getMeta().getPermissions()!=null){
+			getPermissionsList = collectionDo.getMeta().getPermissions();
+			 }
 			userPhoto.setUrl(AppClientFactory.loggedInUser.getSettings().getProfileImageUrl()+commentOwnerUid+PNG);
 			userPhoto.addErrorHandler(new ErrorHandler() {
 				@Override
@@ -248,6 +273,11 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 			commentField.setText(commentsDo.getComment());
 			commentField.getElement().setAttribute("alt",commentsDo.getComment());
 			commentField.getElement().setAttribute("title",commentsDo.getComment());
+			
+			
+			
+			
+			
 			setOptionsButtons();
 			
 		}catch(Exception e){
@@ -271,7 +301,7 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 		} else if(!AppClientFactory.isAnonymous() && AppClientFactory.getLoggedInUser().getUserRoleSetString().contains(CONTENT_ADMIN_ROLE)){
 			deleteButton.setVisible(true);
 			editButton.setVisible(false);
-		}else if(!AppClientFactory.isAnonymous() && CHECK_COLLOBORATOR == true){
+		}else if(!AppClientFactory.isAnonymous() && getPermissionsList!=null && getPermissionsList.toString().contains("edit")){
 				deleteButton.setVisible(false);
 				editButton.setVisible(true);
 		}
@@ -338,7 +368,6 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 					}else{
 						commentField.getElement().getStyle().clearBackgroundColor();
 						commentField.getElement().getStyle().setBorderColor("#ccc");
-						
 						AppClientFactory.fireEvent(new EditCommentChildViewEvent(getCommentUid(),removeHtmlTags(commentField.getText()),EDIT));
 				    	displaySuccessMsg(true);
 						Timer timer = new Timer(){
@@ -599,4 +628,16 @@ public class CommentWidgetChildView extends ChildView<CommentWidgetChildPresente
 		html = html.replaceAll("</p>", " ").replaceAll("<p>", "").replaceAll("<br data-mce-bogus=\"1\">", "").replaceAll("<br>", "").replaceAll("</br>", "").replaceAll("</a>", "").replaceAll("<a>", "");
         return html;
 	}
+
+
+	public HTMLPanel getEditButton() {
+		return editButton;
+	}
+
+
+	public void setEditButton(HTMLPanel editButton) {
+		this.editButton = editButton;
+	}
+	
+	
 }

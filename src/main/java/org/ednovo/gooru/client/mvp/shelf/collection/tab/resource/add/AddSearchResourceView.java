@@ -461,6 +461,7 @@ public abstract class AddSearchResourceView extends Composite {
 		}
 		filterResourceParams.put("pageSize", "8");
 		filterResourceParams.put("pageNum", "1");
+		filterResourceParams.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
 		hidePopup();
 		AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.RESOURCE_SEARCH, filterResourceParams);
 	}
@@ -471,6 +472,7 @@ public abstract class AddSearchResourceView extends Composite {
 		noFilterResourceParams.put("category", "All");
 		noFilterResourceParams.put("pageSize", "8");
 		noFilterResourceParams.put("pageNum", "1");
+		noFilterResourceParams.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
 		hidePopup();
 		AppClientFactory.getPlaceManager().revealPlace(PlaceTokens.RESOURCE_SEARCH, noFilterResourceParams);
 	}

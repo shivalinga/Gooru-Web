@@ -596,13 +596,6 @@ public class HomePresenter extends BasePlacePresenter<IsHomeView, HomePresenter.
 		}
 		return autoKeyWordSuggestionAsyncCallback;
 	}
-	
-	/**
-	 * 
-	 */
-	private void showPrefilterPopup() {
-		getView().showPrefilter(addStandardsPresenter);
-	}
 
 
 	

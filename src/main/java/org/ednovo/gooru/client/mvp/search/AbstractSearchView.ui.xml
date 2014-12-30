@@ -144,7 +144,7 @@
 		}
 		.searchResult {
 			color: #515151;
-			<!-- float: left; -->
+			/* float: left; */
 			margin: 0px 0 0 6px;
 			display: inline-block;
 			padding-bottom: 10px;
@@ -157,7 +157,7 @@
 		}
 		.searchResultSpell {
 			color: #515151;
-			<!-- float: left; -->
+			/* float: left;*/
 			margin: 0px 0 0 6px;
 			display: inline-block;
 			padding-bottom: 10px;
@@ -167,7 +167,7 @@
 			}
 		.searchResultError {
 			color: #515151;
-				<!-- float: left; -->
+				/*float: left; */
 				margin: 5px 0 0 6px;
 				padding-bottom: 10px;
 	

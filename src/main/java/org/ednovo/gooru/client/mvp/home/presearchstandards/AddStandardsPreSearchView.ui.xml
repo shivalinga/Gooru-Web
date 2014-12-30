@@ -2,20 +2,20 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:panel="urn:import:org.ednovo.gooru.client.ui"
 	xmlns:uc="urn:import:org.ednovo.gooru.client.uc">
 	<ui:style field="createCollectionStyle" src="CreateCollectionPopUp.css"/>
-
+	<ui:with field="i18n" type="org.ednovo.gooru.shared.i18n.MessageProperties"/>
 	<g:HTMLPanel styleName="{createCollectionStyle.shelfItemContentDiv}" ui:field="addStandardsPanel">
 	<g:HTMLPanel>
 		<g:HTMLPanel styleName="{createCollectionStyle.btnStandardsContainer}">
-		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="commonStandards1">Common Core State Standards</g:Button>
+		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="commonStandards1" text="{i18n.GL1560}"/>
 			</g:HTMLPanel>
 			<g:HTMLPanel>
-		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="texasKnowledge1">Texas Essential Knowledge and Skills</g:Button>
+		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="texasKnowledge1" text="{i18n.GL1562}"/>
 			</g:HTMLPanel>
 			<g:HTMLPanel>
-		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="ngss1">Next Generation Science Standards</g:Button>
+		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}" ui:field="ngss1" text="{i18n.GL1655}"/>
 			</g:HTMLPanel>
 			<g:HTMLPanel>
-		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}"  ui:field="californiaStandards1">California State Standards</g:Button>
+		<g:Button styleName="secondary {createCollectionStyle.btnStandardsStyle}"  ui:field="californiaStandards1" text="{i18n.GL2105}"/>
 			</g:HTMLPanel>
 		</g:HTMLPanel>
 		<g:HTMLPanel styleName="{createCollectionStyle.dropContainer}">
@@ -24,7 +24,7 @@
 		<g:HTMLPanel styleName="{createCollectionStyle.dropOverContainer}" ui:field="levelThreeStandards"/>
 		<g:HTMLPanel styleName="{createCollectionStyle.dropOverContainerLastlevel}" ui:field="levelFourStandards"/>
 		</g:HTMLPanel>
-		<g:HTMLPanel styleName="addBtnOuterContainer"><g:Button styleName="primary {createCollectionStyle.addBtnStyle}" ui:field="addBtn">Add</g:Button></g:HTMLPanel>
+		<g:HTMLPanel styleName="addBtnOuterContainer"><g:Button styleName="primary {createCollectionStyle.addBtnStyle}" ui:field="addBtn" text="{i18n.GL0590}"/></g:HTMLPanel>
 		
 	</g:HTMLPanel>
 </ui:UiBinder>

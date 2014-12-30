@@ -38,8 +38,10 @@ import org.ednovo.gooru.shared.model.player.CommentsListDo;
 import org.ednovo.gooru.shared.util.AttemptedAnswersDo;
 
 import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 
 public interface IsCollectionEndView extends IsViewWithHandlers<CollectionEndUiHandlers>{
@@ -104,4 +106,10 @@ public void setCollectionMetadata(CollectionDo collectionDo);
 	public void resetCollectionMetaData();
 	
 	public HTMLPanel getLoadingImageLabel();
+	
+	public void hidePanel();
+	
+	public void resetData();
+	
+	public void showMessageWhenDataNotFound();
 }

@@ -1,5 +1,6 @@
 /*******************************************************************************
  * Copyright 2013 Ednovo d/b/a Gooru. All rights reserved.
+
  * 
  *  http://www.goorulearning.org/
  * 
@@ -22,35 +23,36 @@
  *  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  *  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-package org.ednovo.gooru.client.mvp.analytics.collectionSummaryTeacher;
+package org.ednovo.gooru.client.mvp.rating.events;
 
-import org.ednovo.gooru.client.gin.BaseUiHandlers;
-import org.ednovo.gooru.shared.model.analytics.CollectionSummaryMetaDataDo;
 
-import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.event.shared.GwtEvent;
 
-public interface CollectionSummaryTeacherUiHandlers extends BaseUiHandlers{
- 
- /**
- * @param collectionId
- * @param classpageId
- * @param pathwayId
- * @param result
- * @param loadingImage
- */
-void setTeacherData(String collectionId,String classpageId,String pathwayId,CollectionSummaryMetaDataDo result,HTMLPanel loadingImage);
- 
- /**
- * @param resourceGooruId
- * @param questionType
- */
-void setOEtextData(String resourceGooruId,String questionType);
+public class PostUserReviewResourceEvent extends GwtEvent<PostUserReviewResourceEventHandler> {
 
-/**
- * @param string
- */
-void setHtmltopdf(String string,String collectionTitle);
+	public static final Type<PostUserReviewResourceEventHandler> TYPE = new Type<PostUserReviewResourceEventHandler>();
+	
+	String userReview="";
+	String assocGooruOId="";
+	Integer score;
+	 boolean isUpdate;
+	 
+	public PostUserReviewResourceEvent(String assocGooruOId, String userReview, Integer score, boolean isUpdate) { 
+		this.assocGooruOId = assocGooruOId;
+		this.userReview = userReview;
+		this.score = score;
+		this.isUpdate = isUpdate;
+	}
 
-public void clearFrame();
+	
+	@Override
+	public com.google.gwt.event.shared.GwtEvent.Type<PostUserReviewResourceEventHandler> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(PostUserReviewResourceEventHandler handler) {
+		handler.postReviewForResource(assocGooruOId,userReview,score,isUpdate);
+	}
 
 }

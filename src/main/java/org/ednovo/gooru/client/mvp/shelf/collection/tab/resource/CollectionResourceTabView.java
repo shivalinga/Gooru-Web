@@ -169,10 +169,10 @@ public class CollectionResourceTabView extends
 		buttonContainer.getElement().setAttribute("title",i18n.GL0851());
 		
 		
-		editAssesmentButton.setText(i18n.GL3102());
+		editAssesmentButton.setText(i18n.GL3102A());
 		editAssesmentButton.getElement().setId("btnEditAssessment");
-		editAssesmentButton.getElement().setAttribute("alt",i18n.GL3102());
-		editAssesmentButton.getElement().setAttribute("title",i18n.GL3102());
+		editAssesmentButton.getElement().setAttribute("alt",i18n.GL3102A());
+		editAssesmentButton.getElement().setAttribute("title",i18n.GL3102A());
 		
 		buttonContainerAddGray.setText(i18n.GL0851());
 		buttonContainerAddGray.getElement().setId("btnButtonContainerAddGray");

@@ -176,7 +176,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 	
 	@UiField ScrollPanel spanelMediaFeaturePanel;
 	
-	@UiField HTMLPanel htmlMediaFeatureListContainer,mediaLabelContainer;
+	@UiField HTMLPanel htmlMediaFeatureListContainer,mediaLabelContainer,mediaDropdownArrowConatainer;
 	
 	@UiField HTMLEventPanel AdvancedSetupContainer,eHearderIconEducationalUse,eHearderIconMomentsOfLearning,eHearderIconstandards,
 	eHearderIconAccessHazard,eHearderIconMediafeature,eHearderIconMobileFriendly,defaultPanelMomentsOfLearningPnl,defaultPanel;
@@ -225,6 +225,9 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 	final List<String> tagList = new ArrayList<String>();
 	
 	List<String> tagListGlobal = new ArrayList<String>();
+	
+	HandlerRegistration videoClickHandler,websiteClickHandler,interactiveClickHandler,imageClickHandler,textClickHandler,audioClickHandler=null;
+
 	
 	private static EditResourcePopupVcUiBinder uiBinder = GWT
 			.create(EditResourcePopupVcUiBinder.class);
@@ -361,7 +364,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		rightArrowLbl.setVisible(false);
 		setThumbnailImage.setVisible(true);
 		setThumbnailImage.getElement().setId("imgSetThumbnailImage");
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		loadingTextLbl.getElement().getStyle().setFontStyle(FontStyle.ITALIC);
 		generateImageLbl.setVisible(false);
 		saveButtonContainer.getElement().setId("pnlSaveButtonContainer");
@@ -486,7 +489,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		loadingTextLbl.getElement().setAttribute("alt", i18n.GL0808().toLowerCase());
 		loadingTextLbl.getElement().setAttribute("title", i18n.GL0808().toLowerCase());
 //		otherPanel.getElement().setInnerHTML(MessageProperties.i18n.GL1047);  
-		resourceFormat.getElement().setInnerHTML(i18n.GL0906()); 
+		resourceFormat.getElement().setInnerHTML(i18n.GL3103()+i18n.GL_SPL_STAR()); 
 		resourceFormat.getElement().setId("pnlResourceFormat");
 		resourceFormat.getElement().setAttribute("alt", i18n.GL0906());
 		resourceFormat.getElement().setAttribute("title", i18n.GL0906());
@@ -653,6 +656,14 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		rightsContainer.getElement().setId("pnlRightsContainer");
 		lblContentRights.getElement().setId("epnlLblContentRights");
 		cancelResourcePopupBtnLbl.getElement().setAttribute("style", "margin-left:10px");
+		
+		 	videoClickHandler=videoResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		 	websiteClickHandler=websiteResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		 	interactiveClickHandler = interactiveResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		 	imageClickHandler=imageResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		 	textClickHandler = textResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		 	audioClickHandler = audioResourcePanel.addClickHandler(new checkAvailableClickHandler());
+		
 		displayResourceInfo();
 		show();
 		center();
@@ -757,7 +768,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			}
 
 		});
-		
+		mediaDropdownArrowConatainer.getElement().getStyle().setRight(10, Unit.PX);
 		moblieFriendly.setText(i18n.GL1811());
 		moblieFriendly.getElement().setId("spnMobileFriendly");
 		moblieFriendly.getElement().setAttribute("alt",i18n.GL1811());
@@ -857,6 +868,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		HTMLPanel defaultMediaFeatureText = new HTMLPanel("");
 		defaultMediaFeatureText.getElement().setInnerHTML(i18n.GL3093());
 		defaultMediaFeatureText.getElement().setClassName(CollectionEditResourceCBundle.INSTANCE.css().myEducationalPanelSubTitles());
+		defaultMediaFeatureText.getElement().addClassName(CollectionEditResourceCBundle.INSTANCE.css().setBorder());
 		defaultMediaFeaturePnl.add(defaultMediaFeatureText);
 		defaultMediaFeaturePnl.addClickHandler(new ClickHandler() {
 			@Override
@@ -903,121 +915,110 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		standardsBrowseContainer.setVisible(false);
 		mobileFriendlyContainer.setVisible(false);
 		
-		addSetupAdvancedView.educationUseAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+		addSetupAdvancedView.educationUseAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.momentsOfLearningAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.accessHazardAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.mediaFeatureAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.mobileFreindlyAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		
+		eHearderIconEducationalUse.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMomentsOfLearning.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconstandards.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconAccessHazard.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMediafeature.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMobileFriendly.addClickHandler(new MinimizePanelsClickHandler());
+		
+		/** Add Advanced Setup Changes End**/
+	}
+	
+	
+	private class MinimizePanelsClickHandler implements ClickHandler{
+		@Override
+		public void onClick(ClickEvent event) {
+			addSetupAdvancedView.setUpLabel.setVisible(true);
+			if(event.getSource()==eHearderIconEducationalUse){
+				educationalContainer.setVisible(false);
+				educationalUsePanel.setVisible(false);
+				addSetupAdvancedView.educationUseAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMomentsOfLearning){
+				momentsOfLearningContainer.setVisible(false);
+				momentsOfLearningPanel.setVisible(false);
+				addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconstandards){
+				standardsBrowseContainer.setVisible(false);
+				addSetupAdvancedView.standardsAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconAccessHazard){
+				accessHazardContainer.setVisible(false);
+				addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMediafeature){
+				mediaFeatureContainer.setVisible(false);
+				addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMobileFriendly){
+				mobileFriendlyContainer.setVisible(false);
+				addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(true);
+			}
+		}
+	}
+	
+	private class AddSetupAdvancedClickHandlers implements ClickHandler{
+		public AddSetupAdvancedClickHandlers() {
+		}
+		@Override
+		public void onClick(ClickEvent event) {
+			if(event.getSource()==addSetupAdvancedView.educationUseAdvancedPnl){
 			educationalContainer.setVisible(true);
 			educationalUsePanel.setVisible(true);
 			addSetupAdvancedView.educationUseAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.momentsOfLearningAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.momentsOfLearningAdvancedPnl){
 				momentsOfLearningContainer.setVisible(true);
 				momentsOfLearningPanel.setVisible(true);
 				addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.standardsAdvancedPnl){
 				standardContainer.setVisible(true);
+				standardsBrowseContainer.setVisible(true);
 				addSetupAdvancedView.standardsAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.accessHazardAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.accessHazardAdvancedPnl){
 				accessHazardContainer.setVisible(true);
 				addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.mediaFeatureAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.mediaFeatureAdvancedPnl){
 				mediaFeatureContainer.setVisible(true);
 				addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.mobileFreindlyAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.mobileFreindlyAdvancedPnl){
 				mobileFriendlyContainer.setVisible(true);
 				addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(false);
 			}
-		});
-		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new ClickHandler() {
 			
-			@Override
-			public void onClick(ClickEvent event) {
-				standardsBrowseContainer.setVisible(true);
-				addSetupAdvancedView.standardsAdvancedPnl.setVisible(false);
+			if(isAllAdditionalTagsOpen()){
+				addSetupAdvancedView.setUpLabel.setVisible(false);
 			}
-		});
-		
-		/** Add Advanced Setup Changes End**/
-		
-		eHearderIconEducationalUse.addClickHandler(new eHeaderClickHandler());
-		eHearderIconMomentsOfLearning.addClickHandler(new eHeaderMomentsOfLearningClickHandler());
-		eHearderIconstandards.addClickHandler(new eHeaderStandardsClickHandler());
-		eHearderIconAccessHazard.addClickHandler(new eHeaderAccessHazardClickHandler());
-		eHearderIconMediafeature.addClickHandler(new eHeaderMediaFeatureOnCLick());
-		eHearderIconMobileFriendly.addClickHandler(new eHeaderMobileFriendlyOnClick());
+		}
 	}
+	
+	/**
+	 * This method will check all additional tags are open or not.
+	 * 
+	 * @return allAdditionalTagInVisisble
+	 */
+	public boolean isAllAdditionalTagsOpen() {
+		
+		boolean allAdditionalTagInVisisble = false;
+		
+
+		if (!addSetupAdvancedView.educationUseAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.momentsOfLearningAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.standardsAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.accessHazardAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.mediaFeatureAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.mobileFreindlyAdvancedPnl.isVisible()) {
+			allAdditionalTagInVisisble = true;
+		}
+		return allAdditionalTagInVisisble;
+	}
+	
 	public abstract void browseStandardsInfo(boolean val,boolean userResource);
 	public abstract void closeStandardsPopup();
-	private class eHeaderClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			educationalContainer.setVisible(false);
-			educationalUsePanel.setVisible(false);
-			addSetupAdvancedView.educationUseAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderMomentsOfLearningClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			momentsOfLearningContainer.setVisible(false);
-			momentsOfLearningPanel.setVisible(false);
-			addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderStandardsClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			standardsBrowseContainer.setVisible(false);
-			addSetupAdvancedView.standardsAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderAccessHazardClickHandler implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			accessHazardContainer.setVisible(false);
-			addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderMediaFeatureOnCLick implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			mediaFeatureContainer.setVisible(false);
-			addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(true);
-			}
-	}
-	private class eHeaderMobileFriendlyOnClick implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			mobileFriendlyContainer.setVisible(false);
-			addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(true);
-		}
-		
-	}
+	
 	private class onBrowseStandardsClick implements ClickHandler {
 		@Override
 		public void onClick(ClickEvent event) {
@@ -1118,9 +1119,13 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 
 	public void setData(ResourceMetaInfoDo result) {
 		setResMetaInfo(result);
+		if(result.getImages()!=null && result.getImages().size()>1){
+			rightArrowLbl.setVisible(true);
+		}else{
+			rightArrowLbl.setVisible(false);
+		}
 		setThumbnailImages(result.getImages());
 		updateUi();
-		rightArrowLbl.setVisible(true);
 	}
 	private class rightsChecked implements ClickHandler {
 			@Override
@@ -1173,6 +1178,31 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		urlTextLbl.getElement().setAttribute("alt", i18n.GL0827());
 		urlTextLbl.getElement().setAttribute("title", i18n.GL0827());
 		
+		if(urlTextLbl.getText().contains("youtube")){
+						setVideoCategory();
+						if(websiteClickHandler!=null){
+							websiteClickHandler.removeHandler();
+						}
+						 if(interactiveClickHandler!=null){
+							 interactiveClickHandler.removeHandler();
+						}
+						 if(imageClickHandler!=null){
+							 imageClickHandler.removeHandler();
+						}
+						 if(textClickHandler!=null){
+							 textClickHandler.removeHandler();
+						}
+						 if(audioClickHandler!=null){
+							 audioClickHandler.removeHandler();
+						}
+					}else{
+						websiteClickHandler=websiteResourcePanel.addClickHandler(new checkAvailableClickHandler());
+						interactiveClickHandler = interactiveResourcePanel.addClickHandler(new checkAvailableClickHandler());
+						imageClickHandler=imageResourcePanel.addClickHandler(new checkAvailableClickHandler());
+						textClickHandler = textResourcePanel.addClickHandler(new checkAvailableClickHandler());
+						audioClickHandler = audioResourcePanel.addClickHandler(new checkAvailableClickHandler());
+					}
+		
 		if (collectionItemDo.getResource().getDescription().length() >= 300) {
 			descriptionTxtAera.setText(collectionItemDo.getResource()
 					.getDescription().substring(0, 300));
@@ -1203,30 +1233,34 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL0918());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL0918());
 			categorypanel.setStyleName(video.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			videoResourcePanel.addStyleName("active");
 		} else if (category.equalsIgnoreCase("Interactive")) {
 			resourceCategoryLabel.setText(i18n.GL0919());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL0919());
 			resourceCategoryLabel.getElement().setAttribute("title",i18n.GL0919());
 			categorypanel.setStyleName(interactive.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			interactiveResourcePanel.addStyleName("active");
 		} else if (category.equalsIgnoreCase("Website")||category.equalsIgnoreCase("websites")||category.equalsIgnoreCase("webpage")) {
 			resourceCategoryLabel.setText(i18n.GL1396());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1396());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1396());
 			categorypanel.setStyleName(website.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			websiteResourcePanel.addStyleName("active");
 		}
 		else if(category.equalsIgnoreCase("audio")) {
 			resourceCategoryLabel.setText(i18n.GL1045());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1045());
 			resourceCategoryLabel.getElement().setAttribute("title",i18n.GL1045());
 			categorypanel.setStyleName(audio.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			audioResourcePanel.addStyleName("active");
 		}
 	//	else if((category.equalsIgnoreCase("texts")||(category.equalsIgnoreCase("Slide")||(category.equalsIgnoreCase("Handout")||(category.equalsIgnoreCase("Textbook")||(category.equalsIgnoreCase("Lesson")) {
 		else if(category.equalsIgnoreCase("texts")||category.equalsIgnoreCase("text")) {
@@ -1234,16 +1268,18 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 				resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 				resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 			categorypanel.setStyleName(texts.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			textResourcePanel.addStyleName("active");
 		}
 		else if (category.equalsIgnoreCase("image")) {
 			resourceCategoryLabel.setText(i18n.GL1046());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1046());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1046());
 			categorypanel.setStyleName(image.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			imageResourcePanel.addStyleName("active");
 		}
 //		else if (category.equalsIgnoreCase("other")) {
 //			resourceCategoryLabel.setText(MessageProperties.i18n.GL1047);
@@ -1256,28 +1292,28 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1046());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1046());
 			categorypanel.setStyleName(image.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
 		} else if (category.equalsIgnoreCase("Handout")) {
 			resourceCategoryLabel.setText(i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 			categorypanel.setStyleName(texts.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
 		} else if (category.equalsIgnoreCase("Textbook")) {
 			resourceCategoryLabel.setText(i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 			categorypanel.setStyleName(texts.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
 		} else if (category.equalsIgnoreCase("Lesson")) {
 			resourceCategoryLabel.setText(i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 			categorypanel.setStyleName(texts.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
 //		} else if (category.equalsIgnoreCase("Question")) {
 //			resourceCategoryLabel.setText("Question");
@@ -1289,12 +1325,13 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1396());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1396());
 			categorypanel.setStyleName(website.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
 		}
 
-		thumbnailUrlStr = collectionItemDo.getResource().getThumbnailUrl();
+		thumbnailUrlStr = collectionItemDo.getResource().getThumbnails() != null ? collectionItemDo.getResource().getThumbnails().getUrl() : null;
 		setImage(thumbnailUrlStr, category);
+		
 		if( collectionItemDo.getResource().getEducationalUse()!=null){
 			for (checkboxSelectedDo item : collectionItemDo.getResource().getEducationalUse()) {
 				
@@ -1351,21 +1388,19 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 	}
 
 	public void setImage(String thumbnailUrlImage, String category){
-		System.out.println("thumbnailUrlImage : "+thumbnailUrlImage);
 		if (thumbnailUrlImage.endsWith("null")) {
-			if (thumbnailUrlImage.indexOf("youtube") >0){
-				String youTubeIbStr = ResourceImageUtil.getYoutubeVideoId(thumbnailUrlImage);
-				thumbnailUrlImage = "http://img.youtube.com/vi/"+youTubeIbStr+"/1.jpg";
-			}else{
-				thumbnailUrlImage = DEFULT_IMAGE_PREFIX + category.toLowerCase() + PNG;
-			}
+			thumbnailUrlImage = DEFULT_IMAGE_PREFIX + category.toLowerCase() + PNG;
 		} 
+		if (thumbnailUrlImage!=null && thumbnailUrlImage.indexOf("youtube") >0){
+			String urlStr = urlTextLbl.getText().trim();
+			String youTubeIbStr = ResourceImageUtil.getYoutubeVideoId(urlStr);
+			thumbnailUrlImage = "http://img.youtube.com/vi/"+youTubeIbStr+"/1.jpg";
+		}
 		setThumbnailImage.setUrl(thumbnailUrlImage);
 	}
 	public void updateUi() {
 		generateImageLbl.setVisible(false);
 		setThumbnailImage.setVisible(true);
-
 		if (urlTextLbl.getText().indexOf("youtube") != -1) {
 			rightArrowLbl.setVisible(false);
 		}
@@ -1497,14 +1532,12 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 													collectionItemDo.getResource().getThumbnails().setUrl(null);
 												}
 //												collectionItemDo.getResource().setUrl(urlStr);
-												
 												if(!resourceEducationalLabel.getText().equalsIgnoreCase(i18n.GL1684())){
 													ArrayList<checkboxSelectedDo> arrayOfEducational=new ArrayList<checkboxSelectedDo>();
 													checkboxSelectedDo educationalOfObj=new checkboxSelectedDo();
 													educationalOfObj.setSelected(true);
 													educationalOfObj.setValue(resourceEducationalLabel.getText());
 													arrayOfEducational.add(educationalOfObj);
-													
 													if(collectionOriginalItemDo.getResource().getEducationalUse() != null)
 													{
 													for(int eduI=0; eduI<collectionOriginalItemDo.getResource().getEducationalUse().size(); eduI++)
@@ -1518,10 +1551,25 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 														}
 													}
 													}
-													
-													
-													
 													collectionItemDo.getResource().setEducationalUse(arrayOfEducational);
+												}else{
+													ArrayList<checkboxSelectedDo> arrayOfEducational=new ArrayList<checkboxSelectedDo>();
+													checkboxSelectedDo educationalOfObj=new checkboxSelectedDo();
+												if(resourceEducationalLabel.getText().equalsIgnoreCase(i18n.GL1684())){
+													if(collectionOriginalItemDo.getResource().getEducationalUse() != null){
+														for(int eduI=0; eduI<collectionOriginalItemDo.getResource().getEducationalUse().size(); eduI++)
+														{
+															if(!resourceEducationalLabel.getText().equalsIgnoreCase(collectionOriginalItemDo.getResource().getEducationalUse().get(eduI).getValue()))
+															{
+																checkboxSelectedDo eduUseObjPrevious=new checkboxSelectedDo();
+																eduUseObjPrevious.setSelected(false);
+																eduUseObjPrevious.setValue(collectionOriginalItemDo.getResource().getEducationalUse().get(eduI).getValue());
+																arrayOfEducational.add(eduUseObjPrevious);
+															}
+														}
+													}
+														collectionItemDo.getResource().setEducationalUse(arrayOfEducational);
+													}
 												}
 												if(!resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(i18n.GL1684())){
 													ArrayList<checkboxSelectedDo> arrayOfMoments=new ArrayList<checkboxSelectedDo>();
@@ -1544,6 +1592,25 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 													}
 													}
 													collectionItemDo.getResource().setMomentsOfLearning(arrayOfMoments);
+												}else{
+													ArrayList<checkboxSelectedDo> arrayOfMoments=new ArrayList<checkboxSelectedDo>();
+													checkboxSelectedDo momentsOfObj=new checkboxSelectedDo();
+													if(resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(i18n.GL1684())){
+														if(collectionOriginalItemDo.getResource().getMomentsOfLearning() != null)
+														{
+														for(int momentsI=0; momentsI<collectionOriginalItemDo.getResource().getMomentsOfLearning().size(); momentsI++)
+														{
+															if(!resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(collectionOriginalItemDo.getResource().getMomentsOfLearning().get(momentsI).getValue()))
+															{
+																checkboxSelectedDo momentsOfObjPrevious=new checkboxSelectedDo();
+																momentsOfObjPrevious.setSelected(false);
+																momentsOfObjPrevious.setValue(collectionOriginalItemDo.getResource().getMomentsOfLearning().get(momentsI).getValue());
+																arrayOfMoments.add(momentsOfObjPrevious);
+															}
+														}
+														}
+														collectionItemDo.getResource().setMomentsOfLearning(arrayOfMoments);
+													}
 												}
 												collectionItemDo.getResource().setTaxonomySet(standardsDo);
 												
@@ -1653,64 +1720,104 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		activeImageIndex++;
 		setImageThumbnail();
 	}
-	@UiHandler("videoResourcePanel")
-	void videoResourcePanel(ClickEvent event){
+	
+	void setVideoCategory(){
 		resourceCategoryLabel.setText(i18n.GL0918());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL0918());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL0918());
 		//resourceCategoryLabel.setStyleName(video.getStyleName());
 		categorypanel.setStyleName(video.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen=false;
+		videoResourcePanel.addStyleName("active");
+		websiteResourcePanel.removeStyleName("active");
+		interactiveResourcePanel.removeStyleName("active");
+		audioResourcePanel.removeStyleName("active");
+		textResourcePanel.removeStyleName("active");
+		imageResourcePanel.removeStyleName("active");
 	}
-	@UiHandler("interactiveResourcePanel")
-	void interactiveResourcePanel(ClickEvent event){
+	
+	void setInteractiveCategory(){
 		resourceCategoryLabel.setText(i18n.GL0919());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL0919());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL0919());
 		categorypanel.setStyleName(interactive.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen=false;
+		interactiveResourcePanel.addStyleName("active");
+		websiteResourcePanel.removeStyleName("active");
+		audioResourcePanel.removeStyleName("active");
+		textResourcePanel.removeStyleName("active");
+		videoResourcePanel.removeStyleName("active");
+		imageResourcePanel.removeStyleName("active");
 	}
-	@UiHandler("websiteResourcePanel")
-	void websiteResourcePanel(ClickEvent event){
+	
+	void setWebsiteCategory(){
 		resourceCategoryLabel.setText(i18n.GL1396());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1396());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1396());
 		categorypanel.setStyleName(website.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen=false;
+		websiteResourcePanel.addStyleName("active");
+		interactiveResourcePanel.removeStyleName("active");
+		audioResourcePanel.removeStyleName("active");
+		textResourcePanel.removeStyleName("active");
+		videoResourcePanel.removeStyleName("active");
+		imageResourcePanel.removeStyleName("active");
 	}
-	@UiHandler("imageResourcePanel")
-	void slideResourcePanel(ClickEvent event) {
+	
+	void setImageCategory() {
 		resourceCategoryLabel.setText(i18n.GL1046());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1046());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1046());
 		categorypanel.setStyleName(image.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen = false;
+		mandatoryCategoryLbl.setVisible(false);
+		imageResourcePanel.addStyleName("active");
+		websiteResourcePanel.removeStyleName("active");
+		interactiveResourcePanel.removeStyleName("active");
+		audioResourcePanel.removeStyleName("active");
+		textResourcePanel.removeStyleName("active");
+		videoResourcePanel.removeStyleName("active");
 		clearCategoryErrorMessage();
+
 	}
 
-	@UiHandler("textResourcePanel")
-	void handoutResourcePanel(ClickEvent event) {
+	
+	void setTextCategory() {
 		resourceCategoryLabel.setText(i18n.GL1044());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 		categorypanel.setStyleName(texts.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen = false;
+		mandatoryCategoryLbl.setVisible(false);
+		textResourcePanel.addStyleName("active");
+		websiteResourcePanel.removeStyleName("active");
+		interactiveResourcePanel.removeStyleName("active");
+		audioResourcePanel.removeStyleName("active");
+		videoResourcePanel.removeStyleName("active");
+		imageResourcePanel.removeStyleName("active");
 		clearCategoryErrorMessage();
 	}
 
-	@UiHandler("audioResourcePanel")
-	void textbookResourcePanel(ClickEvent event) {
+	
+	void setAudioCategory() {
 		resourceCategoryLabel.setText(i18n.GL1045());
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1045());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1045());
 		categorypanel.setStyleName(audio.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen = false;
+		mandatoryCategoryLbl.setVisible(false);
+		audioResourcePanel.addStyleName("active");
+		websiteResourcePanel.removeStyleName("active");
+		interactiveResourcePanel.removeStyleName("active");
+		textResourcePanel.removeStyleName("active");
+		videoResourcePanel.removeStyleName("active");
+		imageResourcePanel.removeStyleName("active");
 		clearCategoryErrorMessage();
 	}
 
@@ -1764,7 +1871,7 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		resourceTypePanel.setVisible(false);
 		resoureDropDownLblOpen=false;
 	}*/
-	@UiHandler("resoureDropDownLbl")
+	/*@UiHandler("resoureDropDownLbl")
 	public void dropDownClick(ClickEvent event){
 		if(resoureDropDownLblOpen==false){
 			resourceTypePanel.setVisible(true);
@@ -1775,28 +1882,31 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			resoureDropDownLblOpen=false;
 		}
 		
-	}
+	}*/
 
 	public void setImageThumbnail() {
+		
 		if (activeImageIndex == 0) {
 			leftArrowLbl.setVisible(false);
 		} else {
 			leftArrowLbl.setVisible(true);
 		}
-		if (activeImageIndex == thumbnailImagesLink.size()) {
-			rightArrowLbl.setVisible(false);
-		} else {
-			rightArrowLbl.setVisible(true);
+			if (thumbnailImagesLink != null) {
+				
+			if (activeImageIndex == thumbnailImagesLink.size()) {
+				rightArrowLbl.setVisible(false);
+			} else {
+				rightArrowLbl.setVisible(true);
+			}
+			setThumbnailImage.setUrl(thumbnailImagesLink.get(activeImageIndex));
+			thumbnailUrlStr = thumbnailImagesLink.get(activeImageIndex);
 		}
-		setThumbnailImage.setUrl(thumbnailImagesLink.get(activeImageIndex));
-		thumbnailUrlStr = thumbnailImagesLink.get(activeImageIndex);
 	}
 
 	@UiHandler("refreshLbl")
 	void refreshClick(ClickEvent event) {
-		
-		setImage(collectionItemDo.getResource()
-				.getThumbnailUrl(), collectionItemDo.getResource().getCategory());
+		String thumbnailUrlStr = collectionItemDo.getResource().getThumbnails() != null ? collectionItemDo.getResource().getThumbnails().getUrl() : null;
+		setImage(thumbnailUrlStr, collectionItemDo.getResource().getCategory());
 		
 		leftArrowLbl.setVisible(false);
 		if (urlTextLbl.getText().contains("youtube")) {
@@ -2350,6 +2460,25 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		closeStandardsPopup();
 		updateStandardsAdvancedSetupStyle();
 	}
+	/**
+	 * 
+	 * @function DisableStandars 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description    This method is used to disable the standrds based on user selected standards from settings
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
+	 */
 	public void DisableStandars(){
 		browseStandardsTooltip=new BrowseStandardsTooltip("To see all standards, please edit your standards preference in","settings");
 		browseStandards.getElement().getStyle().setColor("#999");
@@ -2397,13 +2526,47 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		}
 		return false;
 	}
-
+	/**
+	 * 
+	 * @function enableStandards 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description  This method is used to enable the standrds based on user selected standards from settings
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
+	 */
 	public void enableStandards(){
 		browseStandards.getElement().getStyle().clearColor();
 		browseStandards.getElement().removeClassName("disabled");
 	}
 	/**
-	 * This method is used to set Styles for Advanced Options(Educational Use,Moments Of Learning and Media Feature)
+	 * 
+	 * @function setAdvancedOptionsStyles 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description  This method is used to set styles for educationaluse,momentsoflearning and mediafeature based on dropdown selection.
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
 	 */
 	public void setAdvancedOptionsStyles(){
 		if(resourceEducationalLabel.getText().equalsIgnoreCase(i18n.GL1684())){
@@ -2426,8 +2589,23 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		}
 	}
 	/**
-	 * This method is used to set Styles for Access Hazard Advanced Options 
-	 * @param length
+	 * 
+	 * @function setAdvancedAccessHazardStyles 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description  This method is used to set styles for accesshazard on click of perticular panel.
+	 * 
+	 * 
+	 * @parm(s) : @param length
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
 	 */
 	public void setAdvancedAccessHazardStyles(int length){
 		if(length == 0){
@@ -2438,7 +2616,23 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		}
 	}
 	/**
-	 * This method is used to set Styles for Standards Advanced Option 
+	 * 
+	 * @function updateStandardsAdvancedSetupStyle 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description This method is used to set styles for standards based on the number of standards.
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
 	 */
 	public void updateStandardsAdvancedSetupStyle() {
 		if(standardsPanel.getWidgetCount()==0){
@@ -2449,7 +2643,23 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 		}
 	}
 	/**
-	 *  This method is used to set Styles for Mobile Friendly Advanced Option 
+	 * 
+	 * @function updateMobileFriendlyAdvancedStyles 
+	 * 
+	 * @created_date : 15-Dec-2014
+	 * 
+	 * @description This method is used to set styles for MobileFriendly tags based on the user selection(Yes/No).
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
 	 */
 	public void updateMobileFriendlyAdvancedStyles(){
 		if(mobileYes.getStyleName().contains(AddTagesCBundle.INSTANCE.css().OffButtonsActive()))
@@ -2463,4 +2673,24 @@ public abstract class EditResourcePopupVc extends AppPopUp implements SelectionH
 			/*addSetupAdvancedView.mobileFreindlyAdvancedContainer.addStyleName(AddSetupAdvancedCBundle.INSTANCE.css().active());*/
 		}	
 	}
+	
+	private class  checkAvailableClickHandler implements ClickHandler{
+			@Override
+				public void onClick(ClickEvent event) {
+					if(event.getSource() == websiteResourcePanel){
+						setWebsiteCategory();
+					}else if(event.getSource() == videoResourcePanel){
+						setVideoCategory();
+					}else if(event.getSource() == interactiveResourcePanel){
+						setInteractiveCategory();
+					}else if(event.getSource() == imageResourcePanel){
+						setImageCategory();
+					}
+					else if(event.getSource() == textResourcePanel){
+						setTextCategory();
+					}else if(event.getSource() == audioResourcePanel){
+						setAudioCategory();
+					}
+				}
+			}
 }

@@ -42,7 +42,6 @@ import org.ednovo.gooru.client.mvp.classpages.event.OpenClasspageListEvent;
 import org.ednovo.gooru.client.mvp.classpages.event.OpenClasspageListHandler;
 import org.ednovo.gooru.client.mvp.home.event.HeaderTabType;
 import org.ednovo.gooru.client.mvp.home.event.HomeEvent;
-import org.ednovo.gooru.client.mvp.home.event.PreFilterEvent;
 import org.ednovo.gooru.client.mvp.search.IsSearchView;
 import org.ednovo.gooru.client.mvp.search.event.ConfirmStatusPopupEvent;
 import org.ednovo.gooru.client.mvp.search.event.ConfirmStatusPopupHandler;
@@ -83,8 +82,6 @@ import com.google.gwt.event.dom.client.ErrorHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
@@ -113,7 +110,6 @@ import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Image;
@@ -374,9 +370,6 @@ public class HeaderUc extends Composite implements
 			public void keyAction(String text) {
 				MixpanelUtil.Search_autocomplete_select();
 				autokeySuggestOracle.clear();
-				
-				
-				
 				autoSuggestKeywordDo.setQuery(text);
 				searchData = getEditSearchTxtBox().getText();
 				autoSuggestKeywordDo.setType("resource");
@@ -385,9 +378,7 @@ public class HeaderUc extends Composite implements
 				} else {
 					getEditSearchTxtBox().hideSuggestionList();
 				}
-
 			}
-
 		});
 		getEditSearchTxtBox().addSelectionHandler(this);
 		getEditSearchTxtBox().setPopupStyleName("shelfEditSearchTextBox");
@@ -441,7 +432,7 @@ public class HeaderUc extends Composite implements
 //		registerLinkLbl.addClickHandler(new studyClickHandler());
 	/*	getEditSearchTxtBox().addKeyUpHandler(new SearchKeyUpHandler());*/
 		getEditSearchTxtBox().addKeyDownHandler(new SearchKeyDownHandler());
-		getEditSearchTxtBox().addFocusListener(new SearchClickHandler());
+//		getEditSearchTxtBox().addFocusListener(new SearchClickHandler());
 		editSearchInputFloPanel.setVisible(false);
 		// gooruGuideImgLbl.setStyleName(GooruCBundle.INSTANCE.css().gooruGuideImg());
 		this.switchToClassicView();
@@ -1356,7 +1347,6 @@ public class HeaderUc extends Composite implements
 				Map<String, String> map = params;
 				map.put("query", queryVal);	
 				editSearchTxtBox.setText(queryVal);
-				System.out.println("queryValeditSearchBtn::"+queryVal);
 				if(prefilter!=null){
 					prefilter.hide();
 				}
@@ -1433,24 +1423,51 @@ public class HeaderUc extends Composite implements
 		if(prefilter!=null){
 			params=prefilter.getFilter();
 			String subject = params.get(IsSearchView.SUBJECT_FLT);
+			if(AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.SUBJECT_FLT)!=null)
+			{
+				subject = AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.SUBJECT_FLT);
+			}
 			if (subject != null) {
 				params.put(IsSearchView.SUBJECT_FLT, subject);
 			}else{
 				params.remove(IsSearchView.SUBJECT_FLT);
 			}
 			String grade = params.get(IsSearchView.GRADE_FLT);
+			
+			if(AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.GRADE_FLT)!=null)
+			{
+				grade = AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.GRADE_FLT);
+			}
+			
 			if (grade != null) {
 				params.put(IsSearchView.GRADE_FLT, grade);
 			}else{
 				params.remove(IsSearchView.GRADE_FLT);
 			}
-			if(stadardCode!=null && !stadardCode.equals("")){
-				params.put(IsSearchView.STANDARD_FLT, stadardCode);
+			String standardsUrlParam = null;
+			if(AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.STANDARD_FLT)!=null)
+			{
+				standardsUrlParam = AppClientFactory.getPlaceManager().getRequestParameter(IsSearchView.STANDARD_FLT);
+				params.put(IsSearchView.STANDARD_FLT, standardsUrlParam);
 			}
+			else
+			{
+				if(stadardCode!=null && !stadardCode.equals("")){
+				params.put(IsSearchView.STANDARD_FLT, stadardCode);
+				stadardCode=null;
+				}
+			}
+
+			
+
 		}
 		params.put("category", "All");
 		params.put("query", getEditSearchText());
+		String currentPlaceToken=AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken();
+		if(currentPlaceToken.equals(PlaceTokens.RESOURCE_SEARCH))
+		{
 		params.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
+		}
 		params.put("pageNum", "1");
 		params.put("pageSize", "8");
 		
@@ -1594,7 +1611,7 @@ public class HeaderUc extends Composite implements
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	private class SearchClickHandler implements FocusListener{
 
 		@Override
@@ -1608,7 +1625,7 @@ public class HeaderUc extends Composite implements
 		public void onLostFocus(Widget sender) {
 		}
 
-	}
+	}*/
 
 	/**
 	 * @author Search Team
@@ -1618,8 +1635,10 @@ public class HeaderUc extends Composite implements
 
 		@Override
 		public void onKeyDown(KeyDownEvent event) {
-			
 			arrowLbl.setVisible(true);
+			if(prefilter!=null){
+				prefilter.hide();
+			}
 			if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 				if (getEditSearchTxtBox().getText() != null
 						&& getEditSearchTxtBox().getText().length() > 0) {

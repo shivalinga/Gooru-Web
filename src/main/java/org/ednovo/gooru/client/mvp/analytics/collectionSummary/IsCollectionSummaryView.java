@@ -30,6 +30,7 @@ import org.ednovo.gooru.shared.model.analytics.CollectionSummaryMetaDataDo;
 import org.ednovo.gooru.shared.model.analytics.CollectionSummaryUsersDataDo;
 import org.ednovo.gooru.shared.model.analytics.UserDataDo;
 
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 
@@ -61,4 +62,9 @@ public interface IsCollectionSummaryView extends IsViewWithHandlers<CollectionSu
 	 * @return
 	 */
 	HTMLPanel getLoadinImage();
+	/**
+	 * This method is used to get the frame
+	 * @return
+	 */
+	Frame getFrame();
 }

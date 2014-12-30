@@ -257,4 +257,25 @@ public interface IsUserSettingsView extends IsViewWithHandlers<UserSettingsUiHan
 	 * 
 	*/
 	public void setConnectedAs(String connectedEmailId);
+	
+	/**
+	 * 
+	 * @function displayAdminPortal 
+	 * 
+	 * @created_date : 30-Dec-2014
+	 * 
+	 * @description
+	 * 
+	 * 
+	 * @parm(s) : 
+	 * 
+	 * @return : void
+	 *
+	 * @throws : <Mentioned if any exceptions>
+	 *
+	 * 
+	 *
+	 *
+	 */
+	public void displayAdminPortal();
 }

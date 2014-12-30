@@ -112,14 +112,16 @@ public class CollectionSummaryIndividualPresenter extends PresenterWidget<IsColl
 	 * @see org.ednovo.gooru.client.mvp.analytics.collectionSummaryIndividual.CollectionSummaryIndividualUiHandlers#setHtmltopdf(java.lang.String, boolean)
 	 */
 	@Override
-	public void setHtmltopdf(String htmlString,final boolean isClickedOnEmail) {
-		this.analyticService.setHTMLtoPDF(htmlString, new AsyncCallback<String>() {
+	public void setHtmltopdf(String htmlString,String fileName,final boolean isClickedOnEmail) {
+		this.analyticService.setHTMLtoPDF(htmlString,fileName, new AsyncCallback<String>() {
 			@Override
 			public void onSuccess(String result) {
 				if(isClickedOnEmail){
 					getView().setPdfForEmail(result);
 				}else{
-					Window.open(result, "_blank", "status=0,toolbar=0,menubar=0,location=0");
+					System.out.println("result::"+result);
+					getView().getFrame().setUrl(result);
+					//Window.open("http://www.goorulearning.org/gooruapi/rest/v2/media/download?sessionToken=93bc84d8-8cd0-11e4-8d16-123141016e2a&url=http://westrepository.goorulearning.org/prod1/uploaded-media/summary/Mymedia-1419578993351.pdf&filename=Classroom_Rules_Collection_Summary.pdf", "_blank", "status=0,toolbar=0,menubar=0,location=0");
 				}
 			}
 			
@@ -143,5 +145,15 @@ public class CollectionSummaryIndividualPresenter extends PresenterWidget<IsColl
 			public void onFailure(Throwable caught) {
 			}
 		});
+	}
+
+	@Override
+	public void setNoDataMessage(HTMLPanel loadingImage) {
+		loadingImage.setVisible(false);
+		getView().setErrorMessage();
+	}
+	@Override
+	public void clearFrame(){
+		getView().getFrame().setUrl("");
 	}
 }

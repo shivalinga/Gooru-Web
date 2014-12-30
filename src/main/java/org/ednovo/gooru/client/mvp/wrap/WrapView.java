@@ -26,6 +26,7 @@ package org.ednovo.gooru.client.mvp.wrap;
 
 import java.util.List;
 
+import org.ednovo.gooru.client.GooruCBundle;
 import org.ednovo.gooru.client.PlaceTokens;
 import org.ednovo.gooru.client.SimpleAsyncCallback;
 import org.ednovo.gooru.client.gin.AppClientFactory;
@@ -48,9 +49,12 @@ import org.ednovo.gooru.shared.util.UAgentInfo;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.Navigator;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -95,8 +99,6 @@ public class WrapView extends BaseView implements IsWrapView {
 	private boolean isArrowIcon = false;
 	
 	PreFilterPopup preFilter =	null;
-	
-	private boolean isOpenPrefilterPopup = true;
 	
 	/**
 	 * Class constructor 
@@ -154,17 +156,14 @@ public class WrapView extends BaseView implements IsWrapView {
 		  setUiText();
 		  
 		  ClickHandler rootClick = new ClickHandler(){
-
 				@Override
 				public void onClick(ClickEvent event) {
 					if(!isArrowIcon && preFilter!=null){
-						isOpenPrefilterPopup=true;
 						preFilter.hide();
 					}else{
 						isArrowIcon=false;
 					}
 				}
-				
 			};
 			
 			RootPanel.get().addDomHandler(rootClick, ClickEvent.getType());
@@ -297,6 +296,15 @@ public class WrapView extends BaseView implements IsWrapView {
 	public void showPrefilter(AddStandardsPreSearchPresenter addStandardsPresenter) {
 		this.addStandardsPresenter=addStandardsPresenter;
 		headerUc.getArrowLbl().addClickHandler(new showPrefilterPopup());
+		
+		//This is used for handle the mouse left click event to display the search prefilter popup.
+		MouseDownHandler hanlder=new MouseDownHandler() {
+			@Override
+			public void onMouseDown(MouseDownEvent event) {
+				displayPreFilterpopup();
+			}
+		};
+		headerUc.getEditSearchTxtBox().addDomHandler(hanlder, MouseDownEvent.getType());
 	}
 	
 	/**
@@ -322,7 +330,7 @@ public class WrapView extends BaseView implements IsWrapView {
 	}
 
 	public void displayPreFilterpopup() { 
-
+			
 		if(preFilter!=null && preFilter.isShowing()){
 			preFilter.hide();
 			isArrowIcon=true;
@@ -344,7 +352,8 @@ public class WrapView extends BaseView implements IsWrapView {
 					}
 				});
 			//}
-			HeaderUc.setPrefilterObj(preFilter);
+			headerUc.setPrefilterObj(preFilter);
+			preFilter.setStyleName(GooruCBundle.INSTANCE.css().positionStyle());
 			preFilter.setPopupPosition(headerUc.getEditSearchTxtBox().getElement().getAbsoluteLeft(), headerUc.getEditSearchTxtBox().getElement().getAbsoluteTop()+30);
 			preFilter.setFilter();
 			preFilter.show();
@@ -401,7 +410,7 @@ public class WrapView extends BaseView implements IsWrapView {
 							}
 								if(isCCSSAvailable || isNGSSAvailable || isTEKSAvailable || isCAAvailable){
 									addStandardsPresenter.enableStandardsData(isCCSSAvailable,isTEKSAvailable,isNGSSAvailable,isCAAvailable);
-									addStandardsPresenter.callDefaultStandardsLoad();
+									addStandardsPresenter.callDefaultStandardsLoad();								
 								}
 							
 					}
@@ -416,6 +425,7 @@ public class WrapView extends BaseView implements IsWrapView {
 			if(isCCSSAvailable || isNGSSAvailable || isTEKSAvailable || isCAAvailable){
 				addStandardsPresenter.enableStandardsData(isCCSSAvailable,isTEKSAvailable,isNGSSAvailable,isCAAvailable);
 				addStandardsPresenter.callDefaultStandardsLoad();
+			
 			}
 		}
 	}

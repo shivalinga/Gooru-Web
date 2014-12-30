@@ -136,6 +136,14 @@ public class CollectionSearchPresenter extends AbstractSearchPresenter<Collectio
 
 	@Override
 	protected void requestSearch(SearchDo<CollectionSearchResultDo> searchDo, SearchAsyncCallback<SearchDo<CollectionSearchResultDo>> searchAsyncCallback) {
+		if(getPlaceManager().getRequestParameter("disableSpellCheck") != null)
+		{
+			String disableSpellCheckVal = getPlaceManager().getRequestParameter("disableSpellCheck");
+			Map<String, String> filterMap = new HashMap<String, String>();
+			filterMap = searchDo.getFilters();
+			filterMap.put("disableSpellCheck", "true");
+			searchDo.setFilters(filterMap);
+		}
 		getSearchService().getCollectionSearchResults(searchDo, searchAsyncCallback);
 		AppClientFactory.fireEvent(new SetFooterEvent(AppClientFactory.getPlaceManager().getCurrentPlaceRequest().getNameToken()));
 

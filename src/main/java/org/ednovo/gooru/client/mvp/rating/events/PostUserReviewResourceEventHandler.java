@@ -1,5 +1,6 @@
 /*******************************************************************************
  * Copyright 2013 Ednovo d/b/a Gooru. All rights reserved.
+
  * 
  *  http://www.goorulearning.org/
  * 
@@ -22,35 +23,12 @@
  *  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  *  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ******************************************************************************/
-package org.ednovo.gooru.client.mvp.analytics.collectionSummaryTeacher;
+package org.ednovo.gooru.client.mvp.rating.events;
 
-import org.ednovo.gooru.client.gin.BaseUiHandlers;
-import org.ednovo.gooru.shared.model.analytics.CollectionSummaryMetaDataDo;
+import com.google.gwt.event.shared.EventHandler;
 
-import com.google.gwt.user.client.ui.HTMLPanel;
+public interface PostUserReviewResourceEventHandler extends EventHandler {
 
-public interface CollectionSummaryTeacherUiHandlers extends BaseUiHandlers{
- 
- /**
- * @param collectionId
- * @param classpageId
- * @param pathwayId
- * @param result
- * @param loadingImage
- */
-void setTeacherData(String collectionId,String classpageId,String pathwayId,CollectionSummaryMetaDataDo result,HTMLPanel loadingImage);
- 
- /**
- * @param resourceGooruId
- * @param questionType
- */
-void setOEtextData(String resourceGooruId,String questionType);
-
-/**
- * @param string
- */
-void setHtmltopdf(String string,String collectionTitle);
-
-public void clearFrame();
+	void postReviewForResource(String assocGooruOId, String userReview, Integer score, boolean isUpdate);   
 
 }

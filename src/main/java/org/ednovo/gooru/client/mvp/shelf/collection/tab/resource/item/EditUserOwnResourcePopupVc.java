@@ -141,7 +141,7 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 	@UiField
 	HTMLPanel uploadContainer,uploadName,defaultFileTxtContainer,panelContentRights,imagesText,textsText,imageContainer,rightsContent,
 	mediaLabelContainer,educationalContainer,momentsOfLearningContainer,mediaFeatureContainer,accessHazardContainer,standardsBrowseContainer,
-	mobileFriendlyContainer;
+	mobileFriendlyContainer,mediaDropdownArrowConatainer;
 	
 
 	@UiField
@@ -387,6 +387,7 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 			}
 		};
 		AdvancedSetupContainer.add(addSetupAdvancedView);
+		mediaDropdownArrowConatainer.getElement().getStyle().setRight(10, Unit.PX);
 		
 		momentsOfLearningPanel.setVisible(false);
 		momentsOfLearningPanel.getElement().setId("pnlMomentsOfLearningPanel");
@@ -547,7 +548,7 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		descriptionText.getElement().setId("pnlDescriptionText");
 		descriptionText.getElement().setAttribute("alt", i18n.GL0904());
 		descriptionText.getElement().setAttribute("title", i18n.GL0904());
-		categoryLabel.getElement().setInnerHTML(i18n.GL0906());
+		categoryLabel.getElement().setInnerHTML(i18n.GL3103()+i18n.GL_SPL_STAR());
 		categoryLabel.getElement().setId("pnlCategoryLabel");
 		categoryLabel.getElement().setAttribute("alt", i18n.GL0906());
 		categoryLabel.getElement().setAttribute("title", i18n.GL0906());
@@ -659,7 +660,7 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		descCharcterLimit.setVisible(false);
 		setThumbnailImage.getElement().setId("imgSetThumbnailImage");
 		setThumbnailImage.setVisible(true);
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		chooseResourceBtn.getElement().setId("uploadFile");
 		panelContentRights.getElement().setId("pnlPanelContentRights");
 		panelContentRights.setVisible(false);
@@ -898,6 +899,7 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		HTMLPanel defaultMediaFeatureText = new HTMLPanel("");
 		defaultMediaFeatureText.getElement().setInnerHTML(i18n.GL3093());
 		defaultMediaFeatureText.getElement().setClassName(CollectionEditResourceCBundle.INSTANCE.css().myEducationalPanelSubTitles());
+		defaultMediaFeatureText.getElement().addClassName(CollectionEditResourceCBundle.INSTANCE.css().setBorder());
 		defaultMediaFeaturePnl.add(defaultMediaFeatureText);
 		defaultMediaFeaturePnl.addClickHandler(new ClickHandler() {
 			@Override
@@ -946,120 +948,105 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		standardsBrowseContainer.setVisible(false);
 		mobileFriendlyContainer.setVisible(false);
 		
-		addSetupAdvancedView.educationUseAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+		addSetupAdvancedView.educationUseAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.momentsOfLearningAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.accessHazardAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.mediaFeatureAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		addSetupAdvancedView.mobileFreindlyAdvancedPnl.addClickHandler(new AddSetupAdvancedClickHandlers());
+		
+		eHearderIconEducationalUse.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMomentsOfLearning.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconstandards.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconAccessHazard.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMediafeature.addClickHandler(new MinimizePanelsClickHandler());
+		eHearderIconMobileFriendly.addClickHandler(new MinimizePanelsClickHandler());
+		
+		/** Add Advanced Setup Changes End**/
+	}
+	
+	private class MinimizePanelsClickHandler implements ClickHandler{
+		@Override
+		public void onClick(ClickEvent event) {
+			addSetupAdvancedView.setUpLabel.setVisible(true);
+			if(event.getSource()==eHearderIconEducationalUse){
+				educationalContainer.setVisible(false);
+				educationalUsePanel.setVisible(false);
+				addSetupAdvancedView.educationUseAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMomentsOfLearning){
+				momentsOfLearningContainer.setVisible(false);
+				momentsOfLearningPanel.setVisible(false);
+				addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconstandards){
+				standardsBrowseContainer.setVisible(false);
+				addSetupAdvancedView.standardsAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconAccessHazard){
+				accessHazardContainer.setVisible(false);
+				addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMediafeature){
+				mediaFeatureContainer.setVisible(false);
+				addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(true);
+			}else if(event.getSource()==eHearderIconMobileFriendly){
+				mobileFriendlyContainer.setVisible(false);
+				addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(true);
+			}
+		}
+	}
+	
+	private class AddSetupAdvancedClickHandlers implements ClickHandler{
+		public AddSetupAdvancedClickHandlers() {
+		}
+		@Override
+		public void onClick(ClickEvent event) {
+			if(event.getSource()==addSetupAdvancedView.educationUseAdvancedPnl){
 			educationalContainer.setVisible(true);
 			educationalUsePanel.setVisible(true);
 			addSetupAdvancedView.educationUseAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.momentsOfLearningAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.momentsOfLearningAdvancedPnl){
 				momentsOfLearningContainer.setVisible(true);
 				momentsOfLearningPanel.setVisible(true);
 				addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.standardsAdvancedPnl){
 				standardContainer.setVisible(true);
+				standardsBrowseContainer.setVisible(true);
 				addSetupAdvancedView.standardsAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.accessHazardAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.accessHazardAdvancedPnl){
 				accessHazardContainer.setVisible(true);
 				addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.mediaFeatureAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.mediaFeatureAdvancedPnl){
 				mediaFeatureContainer.setVisible(true);
 				addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(false);
-			}
-		});
-		addSetupAdvancedView.mobileFreindlyAdvancedPnl.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
+			}else if(event.getSource()==addSetupAdvancedView.mobileFreindlyAdvancedPnl){
 				mobileFriendlyContainer.setVisible(true);
 				addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(false);
 			}
-		});
-		addSetupAdvancedView.standardsAdvancedPnl.addClickHandler(new ClickHandler() {
 			
-			@Override
-			public void onClick(ClickEvent event) {
-				standardsBrowseContainer.setVisible(true);
-				addSetupAdvancedView.standardsAdvancedPnl.setVisible(false);
+			if(isAllAdditionalTagsOpen()){
+				addSetupAdvancedView.setUpLabel.setVisible(false);
 			}
-		});
+		}
+	}
+	
+	/**
+	 * This method will check all additional tags are open or not.
+	 * 
+	 * @return allAdditionalTagInVisisble
+	 */
+	public boolean isAllAdditionalTagsOpen() {
 		
-		/** Add Advanced Setup Changes End**/
+		boolean allAdditionalTagInVisisble = false;
 		
-		eHearderIconEducationalUse.addClickHandler(new eHeaderClickHandler());
-		eHearderIconMomentsOfLearning.addClickHandler(new eHeaderMomentsOfLearningClickHandler());
-		eHearderIconstandards.addClickHandler(new eHeaderStandardsClickHandler());
-		eHearderIconAccessHazard.addClickHandler(new eHeaderAccessHazardClickHandler());
-		eHearderIconMediafeature.addClickHandler(new eHeaderMediaFeatureOnCLick());
-		eHearderIconMobileFriendly.addClickHandler(new eHeaderMobileFriendlyOnClick());
-		
-	}
-	private class eHeaderClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			educationalContainer.setVisible(false);
-			educationalUsePanel.setVisible(false);
-			addSetupAdvancedView.educationUseAdvancedPnl.setVisible(true);
+		if (!addSetupAdvancedView.educationUseAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.momentsOfLearningAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.standardsAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.accessHazardAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.mediaFeatureAdvancedPnl.isVisible()
+				&& !addSetupAdvancedView.mobileFreindlyAdvancedPnl.isVisible()) {
+			allAdditionalTagInVisisble = true;
 		}
+		return allAdditionalTagInVisisble;
 	}
-	private class eHeaderMomentsOfLearningClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			momentsOfLearningContainer.setVisible(false);
-			momentsOfLearningPanel.setVisible(false);
-			addSetupAdvancedView.momentsOfLearningAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderStandardsClickHandler implements ClickHandler{
-		@Override
-		public void onClick(ClickEvent event) {
-			standardsBrowseContainer.setVisible(false);
-			addSetupAdvancedView.standardsAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderAccessHazardClickHandler implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			accessHazardContainer.setVisible(false);
-			addSetupAdvancedView.accessHazardAdvancedPnl.setVisible(true);
-		}
-	}
-	private class eHeaderMediaFeatureOnCLick implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			mediaFeatureContainer.setVisible(false);
-			addSetupAdvancedView.mediaFeatureAdvancedPnl.setVisible(true);
-			}
-	}
-	private class eHeaderMobileFriendlyOnClick implements ClickHandler{
-
-		@Override
-		public void onClick(ClickEvent event) {
-			mobileFriendlyContainer.setVisible(false);
-			addSetupAdvancedView.mobileFreindlyAdvancedPnl.setVisible(true);
-		}
-		
-	}
+	
 	public void onLoad(){
 		super.onLoad();
 		Scheduler.get().scheduleDeferred(new ScheduledCommand(){
@@ -1210,8 +1197,9 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1046());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1046());
 			categorypanel.setStyleName(image.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			imageResourcePanel.addStyleName("active");
 //		} else if (category.equalsIgnoreCase("Question")) {
 //			resourceCategoryLabel.setText("Question");
 //			categorypanel.setStyleName(question.getStyleName());
@@ -1222,8 +1210,9 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 			resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 			resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 			categorypanel.setStyleName(texts.getStyleName());
-			resourceTypePanel.setVisible(false);
+			resourceTypePanel.setVisible(true);
 			resoureDropDownLblOpen=false;
+			textResourcePanel.addStyleName("active");
 		/*}else if (category.equalsIgnoreCase(i18n.GL1045)) {
 			resourceCategoryLabel.setText(i18n.GL1045);
 			categorypanel.setStyleName(audio.getStyleName());
@@ -1489,6 +1478,22 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 													}
 												}
 												collectionItemDo.getResource().setEducationalUse(arrayOfEducational);
+											}else{
+												if(resourceEducationalLabel.getText().equalsIgnoreCase(i18n.GL1684())){
+													ArrayList<checkboxSelectedDo> arrayOfEducational=new ArrayList<checkboxSelectedDo>();
+													checkboxSelectedDo educationalOfObj=new checkboxSelectedDo();
+													if(collectionOriginalItemDo.getResource().getEducationalUse() != null){
+														for(int eduI=0; eduI<collectionOriginalItemDo.getResource().getEducationalUse().size(); eduI++){
+															if(!resourceEducationalLabel.getText().equalsIgnoreCase(collectionOriginalItemDo.getResource().getEducationalUse().get(eduI).getValue())){
+																checkboxSelectedDo eduUseObjPrevious=new checkboxSelectedDo();
+																eduUseObjPrevious.setSelected(false);
+																eduUseObjPrevious.setValue(collectionOriginalItemDo.getResource().getEducationalUse().get(eduI).getValue());
+																arrayOfEducational.add(eduUseObjPrevious);
+															}
+														}
+													}
+													collectionItemDo.getResource().setEducationalUse(arrayOfEducational);
+												}
 											}
 											if(!resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(i18n.GL1684())){
 												ArrayList<checkboxSelectedDo> arrayOfMoments=new ArrayList<checkboxSelectedDo>();
@@ -1507,6 +1512,22 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 													}
 												}
 												collectionItemDo.getResource().setMomentsOfLearning(arrayOfMoments);
+											}else{
+												if(resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(i18n.GL1684())){
+													ArrayList<checkboxSelectedDo> arrayOfMoments=new ArrayList<checkboxSelectedDo>();
+													checkboxSelectedDo momentsOfObj=new checkboxSelectedDo();
+													if(collectionOriginalItemDo.getResource().getMomentsOfLearning() != null){
+														for(int momentsI=0; momentsI<collectionOriginalItemDo.getResource().getMomentsOfLearning().size(); momentsI++){
+															if(!resourcemomentsOfLearningLabel.getText().equalsIgnoreCase(collectionOriginalItemDo.getResource().getMomentsOfLearning().get(momentsI).getValue())){
+																checkboxSelectedDo momentsOfObjPrevious=new checkboxSelectedDo();
+																momentsOfObjPrevious.setSelected(false);
+																momentsOfObjPrevious.setValue(collectionOriginalItemDo.getResource().getMomentsOfLearning().get(momentsI).getValue());
+																arrayOfMoments.add(momentsOfObjPrevious);
+															}
+														}
+													}
+													collectionItemDo.getResource().setMomentsOfLearning(arrayOfMoments);
+												}
 											}
 											collectionItemDo.getResource().setTaxonomySet(standardsDo);
 											
@@ -1681,9 +1702,11 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1046());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1046());
 		categorypanel.setStyleName(image.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen = false;
 		mandatoryCategoryLbl.setVisible(false);
+		imageResourcePanel.addStyleName("active");
+		textResourcePanel.removeStyleName("active");
 	}
 
 	@UiHandler("textResourcePanel")
@@ -1693,9 +1716,11 @@ public abstract class EditUserOwnResourcePopupVc extends AppPopUp implements Sel
 		resourceCategoryLabel.getElement().setAttribute("alt", i18n.GL1044());
 		resourceCategoryLabel.getElement().setAttribute("title", i18n.GL1044());
 		categorypanel.setStyleName(texts.getStyleName());
-		resourceTypePanel.setVisible(false);
+		resourceTypePanel.setVisible(true);
 		resoureDropDownLblOpen = false;
 		mandatoryCategoryLbl.setVisible(false);
+		imageResourcePanel.removeStyleName("active");
+		textResourcePanel.addStyleName("active");
 	}
 
 	/*@UiHandler("audioResourcePanel")

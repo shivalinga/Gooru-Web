@@ -466,7 +466,7 @@
 							<g:FlowPanel styleName="{style.searchMainPanel}" ui:field="headerSearchBarFloPanel">
 								<uc:AppSuggestBox ui:field="editSearchTxtBox"
 								styleName="{res.css.editInputBox}"/>
-								<g:Label styleName="{style.arrowLable}" ui:field="arrowLbl" visible="false"></g:Label>
+								<g:Label styleName="{style.arrowLable}" ui:field="arrowLbl" visible="true"></g:Label>
 							<g:Button styleName="primary"
 								ui:field="editSearchBtn" />
 							</g:FlowPanel>

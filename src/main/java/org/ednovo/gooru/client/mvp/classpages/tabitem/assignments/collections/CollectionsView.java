@@ -661,7 +661,7 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 		@Override
 		public void onClick(ClickEvent event) {
 			String classpageId=AppClientFactory.getPlaceManager().getRequestParameter("classpageid", null);
-			getPresenter().checkCollectionStaus(classpageId);
+			getPresenter().checkCollectionStaus(classpageId,classpageItemDo.getCollectionId());
 			
 		}
 	}
@@ -1388,6 +1388,7 @@ public class CollectionsView extends ChildView<CollectionsPresenter> implements 
 			toolTip.getElement().getStyle().setBackgroundColor("transparent");
 			toolTip.getElement().getStyle().setPosition(Position.ABSOLUTE);
 			toolTip.setPopupPosition(viewClassItemAnalyticsButton.getAbsoluteLeft(), viewClassItemAnalyticsButton.getAbsoluteTop()+36);
+			toolTip.setAutoHideEnabled(true);
 			toolTip.show();
 		}
 	}

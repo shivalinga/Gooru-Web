@@ -28,15 +28,6 @@ import org.ednovo.gooru.client.mvp.shelf.collection.tab.resource.item.AddSetupAd
 import org.ednovo.gooru.shared.i18n.MessageProperties;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasMouseOutHandlers;
-import com.google.gwt.event.dom.client.HasMouseOverHandlers;
-import com.google.gwt.event.dom.client.MouseOutEvent;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverEvent;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Anchor;
@@ -44,7 +35,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public  abstract class AddSetupAdvancedView extends Composite implements HasMouseOutHandlers,HasMouseOverHandlers{
+public  abstract class AddSetupAdvancedView extends Composite{
 
 	private  MessageProperties i18n = GWT.create(MessageProperties.class);
 	@UiField
@@ -54,7 +45,7 @@ public  abstract class AddSetupAdvancedView extends Composite implements HasMous
 	accessHazardAdvancedContainer,mediaFeatureAdvancedContainer,mobileFreindlyAdvancedContainer,setUpLabel;
 
 	public AddSetupAdvancedView(){
-		initWidget(obj.createAndBindUi(this));
+		initWidget(Uibinder.createAndBindUi(this));
 		AddSetupAdvancedCBundle.INSTANCE.css().ensureInjected();
 		setUpLabel.getElement().setInnerText(i18n.GL3097()+i18n.GL_SPL_QUESTION());
 		educationUseAdvancedPnl.setText(i18n.GL1664());
@@ -70,19 +61,7 @@ public  abstract class AddSetupAdvancedView extends Composite implements HasMous
 	{
 		
 	}
-	public static Binder obj = GWT.create(Binder.class); 
-	
-	@Override
-	public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
-		// TODO Auto-generated method stub
-		return addDomHandler(handler, MouseOverEvent.getType());
-	}
-	@Override
-	public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
-		// TODO Auto-generated method stub
-		return addDomHandler(handler, MouseOutEvent.getType());
-	}
-	
+	public static Binder Uibinder = GWT.create(Binder.class); 
 	
 	public  abstract  void showAndHideContainers();
 }

@@ -1,174 +1,166 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
-	<ui:with field="i18n" type="org.ednovo.gooru.shared.i18n.MessageProperties"/>
+	<ui:with field="i18n" type="org.ednovo.gooru.shared.i18n.MessageProperties" />
 	<ui:style>
-		/* Add CSS here. See the GWT docs on UI Binder for more
-		details */
-		.searchPop{
-		width:360px;
+	.searchPop {
+		width: 360px;
 		border: 1px solid #cacaca;
-		box-shadow:0 0 10px rgba(0, 0, 0, 0.1);
-		}
-		.clearfix{
-		clear:both;
-		}
-		.searchPopMenu{
-		display:block;
-		}
-		.searchPopMenu ul {
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+	
+	.clearfix {
+		clear: both;
+	}
+	
+	.searchPopMenu {
+		display: block;
+	}
+	
+	.searchPopMenu ul {
 		color: #1076bb;
 		background: #efefef;
-		background: -webkit-gradient(linear, 0 0, 0 100%,
-		from(#fdfdfd), to(#ddd));
-		background: -webkit-linear-gradient(top,
-		#fdfdfd, #ddd);
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(#fdfdfd),
+			to(#ddd));
+		background: -webkit-linear-gradient(top, #fdfdfd, #ddd);
 		background: -moz-linear-gradient(top, #fdfdfd, #ddd);
 		background: -ms-linear-gradient(top, #fdfdfd, #ddd);
-		background:
-		-o-linear-gradient(top, #fdfdfd, #ddd);
-		border-bottom: 1px solid
-		#e5e5e5;
-		margin:0 0;
-		padding:0 0;
-
-		}
-		.searchPopMenu ul li{
-		list-style:none;
-		display:inline-block;
-		margin:0 0;
-		padding:0 0;
-		}
-		.searchPopMenu ul > li
-		+li{
-		margin-left:-5px;
-		}
-		.searchPopMenu ul li a{
-		display:block;
-		font-size:
-		13px;
-		letter-spacing:-0.02em;
-		text-decoration:none;
+		background: -o-linear-gradient(top, #fdfdfd, #ddd);
+		border-bottom: 1px solid #e5e5e5;
+		margin: 0 0;
+		padding: 0 0;
+	}
+	
+	.searchPopMenu ul li {
+		list-style: none;
+		display: inline-block;
+		margin: 0 0;
+		padding: 0 0;
+	}
+	
+	.searchPopMenu ul>li+li {
+		margin-left: -5px;
+	}
+	
+	.searchPopMenu ul li a {
+		display: block;
+		font-size: 13px;
+		letter-spacing: -0.02em;
+		text-decoration: none;
 		padding: 10px 15px;
-		color:#515151;
-		font-family:Arial, Helvetica, sans-serif;
-
-		}
-		.searchPopMenu ul li a:hover{
-		background:#e5e5e5;
-		}
-		.searchPopContent{
-		padding:0 15px;
-		}
-		.searchPopMenu ul li.active a{
-		background:#e5e5e5;
-		}
-
-		.searchPopGrade{
+		color: #515151;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	
+	.searchPopMenu ul li a:hover {
+		background: #e5e5e5;
+	}
+	
+	.searchPopContent {
+		padding: 0 15px;
+	}
+	
+	.searchPopMenu ul li.active a {
+		background: #e5e5e5;
+	}
+	
+	.searchPopGrade {
 		box-sizing: border-box;
-		box-sizing:
-		border-box;
+		box-sizing: border-box;
 		float: left;
 		width: 50%;
-		padding-top:12px;
-		}
-		.searchPopSubject{
-		width:50%;
+		padding-top: 12px;
+	}
+	
+	.searchPopSubject {
+		width: 50%;
 		border-left: 1px solid #cacaca;
 		padding-left: 4%;
 		height: 155px;
-		box-sizing:border-box;
-		-moz-box-sizing:border-box;
-		-webkit-box-sizing:border-box;
-		float:left;
-		padding-top:12px;
-		}
-
-		.searchPopSmallHead{
-		font-weight:bold;
-		font-size:12px;
-		color:#515151;
-		font-family:Arial, Helvetica, sans-serif;
-		}
-
-		.col1{
-		width:33%;
-		float:left;
-		box-sizing:border-box;
-		-moz-box-sizing:border-box;
-		-webkit-box-sizing:border-box;
-		}
-
-		.checkBoxContaner{
-		margin:8px 0;
-		}
-		.checkBoxContaner input{
-		margin:0 3px 0
-		0;
-		vertical-align:middle;
-		}
-		.checkBoxContaner label{
-		vertical-align:middle;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		float: left;
+		padding-top: 12px;
+	}
+	
+	.searchPopSmallHead {
+		font-weight: bold;
+		font-size: 12px;
+		color: #515151;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	
+	.col1 {
+		width: 33%;
+		float: left;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+	
+	.checkBoxContaner {
+		margin: 8px 0;
+	}
+	
+	.checkBoxContaner input {
+		margin: 0 3px 0 0;
+		vertical-align: middle;
+	}
+	
+	.checkBoxContaner label {
+		vertical-align: middle;
 		font-weight: normal !important;
 		margin-bottom: 0px !important;
-		margin-left:2px;
-		}
-
-		.checkBoxContaner{
-		font-size:12px;
-		color:#515151;
-		font-family:Arial, Helvetica, sans-serif;
-		}
-		.checkBoxContaner p{
-		margin:0 0 6px 0;
-		}
-		.filterHeaderPanel {
-		color:
-		#1076bb;
+		margin-left: 2px;
+	}
+	
+	.checkBoxContaner {
+		font-size: 12px;
+		color: #515151;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	
+	.checkBoxContaner p {
+		margin: 0 0 6px 0;
+	}
+	
+	.filterHeaderPanel {
+		color: #1076bb;
 		background: #efefef;
-		background:
-		-webkit-gradient(linear, 0 0, 0
-		100%,
-		from(#fdfdfd), to(#ddd));
-		background: -webkit-linear-gradient(top,
-		#fdfdfd, #ddd);
-		background:
-		-moz-linear-gradient(top, #fdfdfd, #ddd);
-		background:
-		-ms-linear-gradient(top, #fdfdfd, #ddd);
-		background:
-		-o-linear-gradient(top, #fdfdfd, #ddd);
-		border-bottom: 1px solid
-		#e5e5e5;
-		margin:0 0;
-		padding:0 0;
-
-		}
-
-		.filterGradePanel{
-		list-style:none;
-		display:inline-block;
-		margin:0 0;
-		padding:0 0;
-		}
-
-		.filterLable{
-		display:block;
-		font-size:13px;
-		letter-spacing:-0.02em;
-		text-decoration:none;
+		background: -webkit-gradient(linear, 0 0, 0 100%, from(#fdfdfd),
+			to(#ddd));
+		background: -webkit-linear-gradient(top, #fdfdfd, #ddd);
+		background: -moz-linear-gradient(top, #fdfdfd, #ddd);
+		background: -ms-linear-gradient(top, #fdfdfd, #ddd);
+		background: -o-linear-gradient(top, #fdfdfd, #ddd);
+		border-bottom: 1px solid #e5e5e5;
+		margin: 0 0;
+		padding: 0 0;
+	}
+	
+	.filterGradePanel {
+		list-style: none;
+		display: inline-block;
+		margin: 0 0;
+		padding: 0 0;
+	}
+	
+	.filterLable {
+		display: block;
+		font-size: 13px;
+		letter-spacing: -0.02em;
+		text-decoration: none;
 		padding: 10px 15px;
-		color:#515151;
-		font-family:Arial, Helvetica, sans-serif;
-		cursor:pointer;
-
-		}
+		color: #515151;
+		font-family: Arial, Helvetica, sans-serif;
+		cursor: pointer;
+	}
 	</ui:style>
 	<g:HTMLPanel>
 		<!-- Add GWT widgets here. Enter < and hit Ctrl-Space to auto-complete 
 			widget names. The ui:field attribute binds an element to a field in the owner 
-			class. See the GWT docs on UI Binder for more details. -->
-
+			class. -->
 		<g:HTMLPanel styleName="{style.searchPop}" ui:field="filterPanel">
 			<g:HTMLPanel styleName="{style.searchPopMenu}">
 				<g:HTMLPanel styleName="{style.filterHeaderPanel}">
@@ -179,44 +171,34 @@
 						<g:Label styleName="{style.filterLable}" ui:field="lblStandards" />
 					</g:HTMLPanel>
 				</g:HTMLPanel>
-
 			</g:HTMLPanel>
-
-			<g:HTMLPanel styleName="{style.searchPopContent}" ui:field="gradesPanel">
-
+			<g:HTMLPanel styleName="{style.searchPopContent}"
+				ui:field="gradesPanel">
 				<g:HTMLPanel styleName="{style.searchPopGrade}">
-					<g:Label styleName="{style.searchPopSmallHead}" text="{i18n.GL0325}"/>
+					<g:Label styleName="{style.searchPopSmallHead}" text="{i18n.GL0325}" />
 					<g:HTMLPanel styleName="{style.checkBoxContaner}">
-
 						<g:HTMLPanel styleName="{style.col1}">
 							<g:HTMLPanel ui:field="eleGradePanelUc" />
 						</g:HTMLPanel>
 						<g:HTMLPanel styleName="{style.col1}">
 							<g:HTMLPanel ui:field="middleGradePanelUc" />
 						</g:HTMLPanel>
-
 						<g:HTMLPanel styleName="{style.col1}">
 							<g:HTMLPanel ui:field="highrGradePanelUc" />
 						</g:HTMLPanel>
 						<g:HTMLPanel styleName="{style.clearfix}"></g:HTMLPanel>
 					</g:HTMLPanel>
 				</g:HTMLPanel>
-
 				<g:HTMLPanel styleName="{style.searchPopSubject}">
-					<g:Label styleName="{style.searchPopSmallHead}" text="{i18n.GL0226}"/>
+					<g:Label styleName="{style.searchPopSmallHead}" text="{i18n.GL0226}" />
 					<g:HTMLPanel styleName="{style.checkBoxContaner}">
 						<g:HTMLPanel ui:field="subjectPanelUc" />
 					</g:HTMLPanel>
-
-
 				</g:HTMLPanel>
-
 				<g:HTMLPanel styleName="{style.clearfix}"></g:HTMLPanel>
-
 			</g:HTMLPanel>
 			<!-- Standards tab content -->
 			<g:HTMLPanel ui:field="standardsPanel"></g:HTMLPanel>
-
 		</g:HTMLPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

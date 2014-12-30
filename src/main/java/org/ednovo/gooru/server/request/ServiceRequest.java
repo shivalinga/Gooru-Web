@@ -28,14 +28,19 @@
 package org.ednovo.gooru.server.request;
 
 
+
+import org.ednovo.gooru.server.AppSessionHolder;
 import org.ednovo.gooru.shared.exception.ServerDownException;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.engine.header.Header;
+import org.restlet.engine.header.HeaderConstants;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.ClientResource;
 import org.restlet.resource.ResourceException;
+import org.restlet.util.Series;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,17 +107,27 @@ public abstract class ServiceRequest {
 	public String parseJsonErrorResponse(Representation errorRepresentation){
 		String messageString=null;
 		try{
-			JsonRepresentation jsonRepresentation=new JsonRepresentation(errorRepresentation.getText());
-			JSONObject errorObject=jsonRepresentation.getJsonObject();
-			if(errorObject!=null){
-				messageString=errorObject.isNull("status")?null:errorObject.getString("status");
+			/**
+			 *  Taking values from response header to check authorized user or not. Implemented to differentiate from blocked user or authentication issue.
+			 */
+			Series<org.restlet.engine.header.Header> responseHeaders=(Series<Header>)this.clientResource.getResponseAttributes().get(HeaderConstants.ATTRIBUTE_HEADERS);
+			if(responseHeaders!=null){
+				if(responseHeaders.getValues("Unauthorized")!=null){
+					messageString = responseHeaders.getValues("Unauthorized");
+				}else{
+					JsonRepresentation jsonRepresentation=new JsonRepresentation(errorRepresentation.getText());
+					JSONObject errorObject=jsonRepresentation.getJsonObject();
+					if(errorObject!=null){
+						messageString=errorObject.isNull("status")?null:errorObject.getString("status");
+					}
+				}
 			}
 			return messageString;
 		}catch(Exception exception){
 			logger.error(ERROR, exception);
 			return messageString;
 		}
-		
+
 	}
 	
 	protected String getApiServerStatus(){
@@ -183,7 +198,14 @@ public abstract class ServiceRequest {
 	}
 
 	public ClientResource getClientResource() {
-		return clientResource;
+	   Series<org.restlet.engine.header.Header> requestHeaders=(Series<Header>)this.clientResource.getRequestAttributes().get(HeaderConstants.ATTRIBUTE_HEADERS);
+       if(requestHeaders==null){
+    	   requestHeaders= new Series<Header>(Header.class);
+    	   this.clientResource.getRequestAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS,requestHeaders);
+       }
+       Header userAgentHeader=new Header(HeaderConstants.HEADER_USER_AGENT, AppSessionHolder.getInstance().getRequest().getHeader(HeaderConstants.HEADER_USER_AGENT));
+       requestHeaders.add(userAgentHeader);
+	   return clientResource;
 	}
 
 	public void setClientResource(ClientResource clientResource) {

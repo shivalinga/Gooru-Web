@@ -49,6 +49,7 @@ import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataPres
 import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataView;
 import org.ednovo.gooru.client.mvp.play.resource.flag.ResourceFlagPresenter;
 import org.ednovo.gooru.client.mvp.play.resource.share.ResourceSharePresenter;
+import org.ednovo.gooru.client.mvp.rating.events.PostUserReviewResourceEvent;
 import org.ednovo.gooru.client.mvp.search.AddResourceContainerPresenter;
 import org.ednovo.gooru.client.mvp.search.event.UpdateSearchResultMetaDataEvent;
 import org.ednovo.gooru.client.mvp.settings.CustomAnimation;
@@ -340,6 +341,7 @@ public class ResourcePlayerPresenter extends BasePlacePresenter<IsResourcePlayer
 	  addRegisteredHandler(ShowResourceViewEvent.TYPE, this);
 	  addRegisteredHandler(ShowResourceTabWidgetEvent.TYPE, this);
 	  addRegisteredHandler(RefreshCollectionInShelfListInResourcePlayEvent.TYPE, this);
+	  addRegisteredHandler(PostUserReviewResourceEvent.TYPE, this);
 	}
 	@Override
 	protected void onReveal() {
@@ -1054,7 +1056,7 @@ public class ResourcePlayerPresenter extends BasePlacePresenter<IsResourcePlayer
 	 * @param previousRate specifies the user previous star rating.
 	 */
 	public void triggerRatingDataLogEvent(String resourceId,double currentRate,double previousRate){
-		PlayerDataLogEvents.triggerRatingDataLogEvent(resourceId,null, resourceNewDataLogEventId,sessionId, "", null,currentRate,previousRate);
+		PlayerDataLogEvents.triggerRatingDataLogEvent(resourceId,null, null,sessionId, "", null,currentRate,previousRate);
 	}
 	
 	/**
@@ -1063,7 +1065,7 @@ public class ResourcePlayerPresenter extends BasePlacePresenter<IsResourcePlayer
 	 * @param reviewText specifies user entered review text.
 	 */
 	public void triggerReviewDataLogEvent(String resourceId,String reviewText){
-		PlayerDataLogEvents.triggerReviewDataLogEvent(resourceId,null, resourceNewDataLogEventId,sessionId, "", null,reviewText);
+		PlayerDataLogEvents.triggerReviewDataLogEvent(resourceId,null, null,sessionId, "", null,reviewText);
 	}
 
 	/**
@@ -1147,6 +1149,15 @@ public class ResourcePlayerPresenter extends BasePlacePresenter<IsResourcePlayer
 			}
 		}
 	}
+	
+	public double getResourceRating(String gooruOid) { 
+		if(collectionItemDo!=null){
+			if(gooruOid.equalsIgnoreCase(collectionItemDo.getResource().getGooruOid())){
+				return collectionItemDo.getResource().getRatings().getAverage(); 
+			}
+		}
+		return 0;
+	}
 	public String getSearchKeyword(){
 		String keyword=null;
 		PlaceRequest placeRequest=AppClientFactory.getPlaceManager().getPreviousPlayerRequestUrl();
@@ -1157,6 +1168,15 @@ public class ResourcePlayerPresenter extends BasePlacePresenter<IsResourcePlayer
 			}
 		}
 		return keyword;
+	}
+
+	@Override
+	public void postReviewForResource(String assocGooruOId, String userReview,
+			Integer score, boolean isUpdate) {
+		if(resoruceMetadataPresenter!=null){
+			resoruceMetadataPresenter.postReviewForResource(assocGooruOId, userReview, score, isUpdate);
+		}
+		
 	}
 	
 }

@@ -69,7 +69,6 @@
 								<g:Label styleName="{noResultStyle.liContent}" ui:field="changeToggleText"></g:Label>
 							</div>
 						</div>
-						<div class="{noResultStyle.rightColumn}"></div>
 					</div>
 				</div>
 				<g:HTMLPanel styleName="{noResultStyle.suggestedResources}"

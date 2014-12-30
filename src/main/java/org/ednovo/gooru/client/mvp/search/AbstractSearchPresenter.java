@@ -40,7 +40,6 @@ import org.ednovo.gooru.client.gin.AppClientFactory;
 import org.ednovo.gooru.client.gin.BasePlacePresenter;
 import org.ednovo.gooru.client.mvp.authentication.SignUpPresenter;
 import org.ednovo.gooru.client.mvp.home.AlmostDoneUc;
-import org.ednovo.gooru.client.mvp.home.HeaderUc;
 import org.ednovo.gooru.client.mvp.home.event.HeaderTabType;
 import org.ednovo.gooru.client.mvp.home.event.HomeEvent;
 import org.ednovo.gooru.client.mvp.home.library.events.StandardPreferenceSettingEvent;
@@ -49,7 +48,6 @@ import org.ednovo.gooru.client.mvp.search.event.AggregatorSuggestionEvent;
 import org.ednovo.gooru.client.mvp.search.event.ConfirmStatusPopupEvent;
 import org.ednovo.gooru.client.mvp.search.event.ConsumeShelfCollectionsEvent;
 import org.ednovo.gooru.client.mvp.search.event.DisableSpellSearchEvent;
-import org.ednovo.gooru.client.mvp.search.event.DisableSpellSearchHandler;
 import org.ednovo.gooru.client.mvp.search.event.PostSearchEvent;
 import org.ednovo.gooru.client.mvp.search.event.PreSearchEvent;
 import org.ednovo.gooru.client.mvp.search.event.RefreshSearchEvent;
@@ -75,7 +73,6 @@ import org.ednovo.gooru.shared.model.user.ProfileDo;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
@@ -464,6 +461,9 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		getSearchDo().setPageSize(null);
 		getSearchDo().setNotFriendly(null);
 		getSearchDo().setQuery(searchQuery);
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
+		getSearchDo().setFilters(params);
 		onSearchRequest(viewToken);
 	}
 	@Override
@@ -473,7 +473,11 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 		getSearchDo().setNotFriendly(null);
 		getSearchDo().setQuery(searchQuery);
 		Map<String, String> filterMap = new HashMap<String, String>();
+		filterMap.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
+		if(getSearchDo().getFilters() != null)
+		{
 		filterMap = getSearchDo().getFilters();
+		}
 		filterMap.put("disableSpellCheck", "true");
 		getSearchDo().setFilters(filterMap);
 		onSearchDisableSpellCheck(viewToken);
@@ -518,6 +522,8 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 					String notFriendly = getPlaceManager().getRequestParameter(IsSearchView.MEDIATYPE_FLT);
 					String oer = getPlaceManager().getRequestParameter(IsSearchView.OWNER_FLT);
 					String accessMode = getPlaceManager().getRequestParameter(IsSearchView.ACCESS_MODE_FLT);
+					String reviewTag = getPlaceManager().getRequestParameter(IsSearchView.REVIEWS_FLT);
+					params.put(IsSearchView.RATINGS_FLT, "5,4,3,2,1,0");
 					if (notFriendly != null) {
 						params.put(IsSearchView.MEDIATYPE_FLT, notFriendly);
 					}
@@ -527,6 +533,10 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 					
 					if (accessMode != null) {
 						params.put(IsSearchView.ACCESS_MODE_FLT, accessMode);
+					}
+					if(reviewTag != null)
+					{
+						params.put(IsSearchView.REVIEWS_FLT, reviewTag);
 					}
 				}else{
 					params.remove(IsSearchView.MEDIATYPE_FLT);
@@ -574,6 +584,12 @@ public abstract class AbstractSearchPresenter<T extends ResourceSearchResultDo, 
 					String notFriendly = getPlaceManager().getRequestParameter(IsSearchView.MEDIATYPE_FLT);
 					String oer = getPlaceManager().getRequestParameter(IsSearchView.OWNER_FLT);
 					String accessMode = getPlaceManager().getRequestParameter(IsSearchView.ACCESS_MODE_FLT);
+					String ratingMode = getPlaceManager().getRequestParameter(IsSearchView.RATINGS_FLT);
+					if(ratingMode != null)
+					{
+					params.put(IsSearchView.RATINGS_FLT, ratingMode);
+					}
+					
 					if (notFriendly != null) {
 						params.put(IsSearchView.MEDIATYPE_FLT, notFriendly);
 					}

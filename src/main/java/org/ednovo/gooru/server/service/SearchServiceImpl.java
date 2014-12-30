@@ -241,6 +241,10 @@ public class SearchServiceImpl extends BaseServiceImpl implements SearchService 
 				collectionQuery=collectionQuery.replaceAll(" ","%20");
 			}
 		}*/
+		if(collectionQuery.equalsIgnoreCase("'*'"))
+		{
+			collectionQuery = "*";
+		}
 		String url = UrlGenerator.generateUrl(getSearchEndPoint(), UrlToken.SIMPLE_COLLECTION_SEARCH, searchDo.getFilters(), getLoggedInSessionToken(), collectionQuery, searchDo.getPageNum() + "", searchDo.getPageSize() + "", MY_STRING);
 		if(getSearchEndPoint().contains(HTTPS)){
 			url = appendHttpsURL(url);

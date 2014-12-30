@@ -481,3 +481,12 @@ div.emailSuccessMessage{
 	padding-bottom: 7px;
 }
 /*Email popup css end*/
+.showEmptyMessage{
+	font-weight: normal;
+	margin: 5% 0;
+	text-align: center;
+	width: 100%;
+	background-color: white;
+	padding: 20px 0px;
+	box-shadow: 0 2px 2px #ccc;
+}

@@ -223,9 +223,12 @@ public class AnalyticsServiceImpl extends BaseServiceImpl implements AnalyticsSe
 	}
 
 	@Override
-	public String setHTMLtoPDF(String htmlString) {
+	public String setHTMLtoPDF(String htmlString,String fileName) {
+		String pdfName=fileName.replaceAll(" ", "_");
+		pdfName = pdfName + "_Collection_Summary.pdf";
 		String savedFileName=null;
 		StringRepresentation stringRepresentation= null;
+		String downloadUrl="";
 		try{
 			//String url = "http://www.goorulearning.org/gooruapi/rest/v2/media/htmltopdf?sessionToken=aec96f9c-42df-11e4-8d6c-123141016e2a";
 			String url = UrlGenerator.generateUrl(getRestEndPoint(), UrlToken.V2_GENERATE_PDF,getLoggedInSessionToken());
@@ -234,10 +237,11 @@ public class AnalyticsServiceImpl extends BaseServiceImpl implements AnalyticsSe
 			LOGGER.info(dataPassing);
 			stringRepresentation = ServiceProcessor.postString(url, getRestUsername(), getRestPassword(),dataPassing);
 			savedFileName=stringRepresentation.getText();
+			downloadUrl=UrlGenerator.generateUrl(getRestEndPoint(), UrlToken.V2_DOWNLOADFILE,getLoggedInSessionToken(),savedFileName,pdfName);
 		}catch(Exception e){
 			
 		}
-		return savedFileName;
+		return downloadUrl;
 	}
 
 	@Override
@@ -435,7 +439,7 @@ public class AnalyticsServiceImpl extends BaseServiceImpl implements AnalyticsSe
 			mainObj.put("parentItemId",parentItemId);
 			mainObj.put("parentGooruOId",collectionId);
 			mainObj.put("freeText",freeText);
-			mainObj.put("playLoadObject",setPlayLoadObj.toString());
+			mainObj.put("payLoadObject",setPlayLoadObj.toString());
 			mainObj.put("user",userObj);
 			LOGGER.info("mainObj.toString()::"+mainObj.toString());
 			JsonResponseRepresentation jsonResponseRep = ServiceProcessor.post(url, getRestUsername(), getRestPassword(),mainObj.toString());

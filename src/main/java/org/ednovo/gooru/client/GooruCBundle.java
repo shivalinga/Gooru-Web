@@ -168,6 +168,7 @@ public interface GooruCBundle extends ClientBundle {
 		String discoverDropDownBorder();
 		
 		String discoverTextStyle();
+		String positionStyle();
 		
 	}
 	@Source("Gooru.css")

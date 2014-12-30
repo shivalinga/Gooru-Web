@@ -44,10 +44,13 @@ import org.ednovo.gooru.client.mvp.home.LoginPopupUc;
 import org.ednovo.gooru.client.mvp.play.collection.add.AddCollectionPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.body.CollectionPlayerMetadataPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.end.CollectionEndPresenter;
+import org.ednovo.gooru.client.mvp.play.collection.end.study.CloseCollectionPlayerEvent;
 import org.ednovo.gooru.client.mvp.play.collection.end.study.CollectionHomeMetadataPresenter;
+import org.ednovo.gooru.client.mvp.play.collection.event.EditCommentChildViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.event.ShowCollectionTabWidgetEvent;
 import org.ednovo.gooru.client.mvp.play.collection.event.ShowResourceViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.event.UpdateCollectionViewCountEvent;
+import org.ednovo.gooru.client.mvp.play.collection.event.UpdateCommentChildViewEvent;
 import org.ednovo.gooru.client.mvp.play.collection.flag.CollectionFlagPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.info.ResourceInfoPresenter;
 import org.ednovo.gooru.client.mvp.play.collection.preview.PreviewPlayerPresenter;
@@ -61,6 +64,7 @@ import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataPres
 import org.ednovo.gooru.client.mvp.play.resource.body.ResourcePlayerMetadataView;
 import org.ednovo.gooru.client.mvp.play.resource.flag.ResourceFlagPresenter;
 import org.ednovo.gooru.client.mvp.play.resource.narration.ResourceNarrationPresenter;
+import org.ednovo.gooru.client.mvp.rating.events.PostUserReviewEvent;
 import org.ednovo.gooru.client.mvp.rating.events.UpdateFlagIconColorEvent;
 import org.ednovo.gooru.client.mvp.search.AddResourceContainerPresenter;
 import org.ednovo.gooru.client.mvp.search.event.SetHeaderZIndexEvent;
@@ -262,6 +266,8 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
     
     private Long totalTimeSpendInMs=0L;
     
+    int count=0;
+    
     /**
 	 * @return the answerIdsObject
 	 */
@@ -446,6 +452,9 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 		getView().hideFlagButton(false);
 		addRegisteredHandler(UpdateFlagIconColorEvent.TYPE,this);
 		addRegisteredHandler(RefreshDisclosurePanelEvent.TYPE, this);
+		addRegisteredHandler(EditCommentChildViewEvent.TYPE, this);
+		addRegisteredHandler(UpdateCommentChildViewEvent.TYPE, this);
+		addRegisteredHandler(PostUserReviewEvent.TYPE, this);
 	}
 
 	@ProxyCodeSplit
@@ -465,6 +474,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 		addRegisteredHandler(UpdateCollectionViewCountEvent.TYPE, this);
 		addRegisteredHandler(ShowCollectionTabWidgetEvent.TYPE, this);
 		addRegisteredHandler(RefreshCollectionInShelfListInPlayEvent.TYPE, this);
+		addRegisteredHandler(CloseCollectionPlayerEvent.TYPE, this);
 	}
 	@Override
 	protected void onReveal() {
@@ -756,6 +766,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 		showClasspageButton();
 		setOpenEndedAnswerSubmited(true);
 		getView().setResourceTitle(collectionDo.getTitle());
+		collectionEndPresenter.clearslot();
 		collectionEndPresenter.setCollectionDoOnRefresh(collectionDo);
 		collectionEndPresenter.setCollectionMetadata(collectionDo);
 		 showSignupPopup(); 
@@ -812,16 +823,21 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 				public void onSuccess(InsightsCollectionDo insightsCollectionDo) {
 					if(insightsCollectionDo!=null){
 						if(insightsCollectionDo.getCompletionStatus()!=null&&insightsCollectionDo.getCompletionStatus().equalsIgnoreCase("completed")){
+							collectionEndPresenter.showAvgReaction(insightsCollectionDo.getAvgReaction());
 							convertMilliSecondsToTime(insightsCollectionDo.getAvgTimeSpent());
 							displayScoreCount(insightsCollectionDo.getScore(),insightsCollectionDo.getTotalQuestionCount());
-							collectionEndPresenter.showAvgReaction(insightsCollectionDo.getAvgReaction());
+							count=0;
 						}else{
-							displayCollectionSummaryData(collectionId,classpageId,sessionId);
+							if(count<10){
+								displayCollectionSummaryData(collectionId,classpageId,sessionId);
+								count++;
+							}
 						}
 					}else{
+						collectionEndPresenter.showAvgReaction(0);
 						convertMilliSecondsToTime(0L);
 						displayScoreCount(0,0);
-						collectionEndPresenter.showAvgReaction(0);
+					
 					}
 					
 				}
@@ -1738,6 +1754,7 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 			AppClientFactory.getEventBus().fireEvent(new UpdateViewCountInSearchEvent(collectionDo));
 			stopCollectionDataLogs();
 			getView().hidePlayerButtons(true,null);
+			AppClientFactory.getPlaceManager().setDataLogClasspageId(null);
 			collectionDo=null;
 			collectionItemDo=null;
 			collectionMetadataId=null;
@@ -2278,13 +2295,19 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 //					}
 //				}
 //			}
+		if(questionCount!=null)
+		{
 			if(questionCount==0){
 				collectionEndPresenter.displayScoreCount(questionCount,questionCount);
 			}else{
 				collectionEndPresenter.displayScoreCount(score,questionCount);
 			}
-			
-//		}
+		}
+		else
+		{
+			questionCount = 0;
+			collectionEndPresenter.displayScoreCount(score,questionCount);
+		}
 	}
 
 	@Override
@@ -2366,6 +2389,18 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 			}
 		}
 	}
+	
+	public double getResourceRating(String gooruOid){
+		if(gooruOid!=null&&!gooruOid.equalsIgnoreCase("")&&collectionDo!=null&&collectionDo.getGooruOid()!=null){
+			for(int i=0;i<collectionDo.getCollectionItems().size();i++){	
+				CollectionItemDo collectionItemDo=collectionDo.getCollectionItems().get(i);
+				if(gooruOid.equalsIgnoreCase(collectionItemDo.getResource().getGooruOid())){
+					return collectionItemDo.getResource().getRatings().getAverage();   
+				}
+			}
+		}
+		return 0;
+	}
 
 	@Override
 	public void navigateToNext(final String direction) {
@@ -2432,5 +2467,34 @@ public class CollectionPlayerPresenter extends BasePlacePresenter<IsCollectionPl
 		}
 		return updateCollectionAsyncCallback;
 	}
+
+	@Override
+	public void closePreviewPlayer(boolean isClose) {
+		getView().closePreviewPlayer();
+		
+	}
 	
+	public void editCommentChildView(String commentUid, String commentText, String action) {
+		if(getPlaceManager().getRequestParameter("view")!=null){
+			collectionEndPresenter.editCommentChildView(commentUid, commentText, action);
+		}else{
+			metadataPresenter.editCommentChildView(commentUid, commentText, action);
+		}
+	}
+	
+	public void updateCommentChildView(String commentUid, String action){
+		if(getPlaceManager().getRequestParameter("view")!=null){
+			collectionEndPresenter.updateCommentChildView(commentUid, action);
+		}else{
+			metadataPresenter.updateCommentChildView(commentUid,action);
+		}
+	}
+
+	@Override
+	public void postReview(String assocGooruOId, String userReview,Integer score, boolean isUpdate) {
+		if(resoruceMetadataPresenter!=null){
+			resoruceMetadataPresenter.postReview(assocGooruOId, userReview, score, isUpdate);
+		}
+		
+	}
 }

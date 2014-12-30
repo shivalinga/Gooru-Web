@@ -30,6 +30,7 @@ import org.ednovo.gooru.shared.model.analytics.CollectionSummaryMetaDataDo;
 import org.ednovo.gooru.shared.model.analytics.OetextDataDO;
 import org.ednovo.gooru.shared.model.analytics.UserDataDo;
 
+import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 
@@ -51,4 +52,5 @@ public interface IsCollectionSummaryTeacherView extends IsViewWithHandlers<Colle
 	 * @param questionType
 	 */
 	void setViewResponseData(ArrayList<OetextDataDO> result,String resourceGooruId,String collectionId,String classpageId,String pathwayId,String questionType,String session);
+	Frame getFrame();
 }

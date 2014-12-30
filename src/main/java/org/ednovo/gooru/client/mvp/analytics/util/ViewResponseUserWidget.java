@@ -184,7 +184,6 @@ public class ViewResponseUserWidget extends Composite {
 			}else{
 				userResponselbl.setText(oetextDataDO.getOEText());
 			}
-			System.out.println("isSummary::"+isSummary);
 			if((isSummary && feedBackStatus!=null && feedBackStatus.equalsIgnoreCase("false")) && (oeText!=null && !oeText.trim().isEmpty())){
 				giveFeedBackpnl.setVisible(true);
 			}

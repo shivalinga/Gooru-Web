@@ -55,4 +55,6 @@ public interface AnalyticsUiHandlers extends BaseUiHandlers{
 	 * @return
 	 */
 	CollectionSummaryPresenter getCollectionSummaryPresenter();
+	
+	void checkCollectionStaus(String classpageId,String collectionId);
 }

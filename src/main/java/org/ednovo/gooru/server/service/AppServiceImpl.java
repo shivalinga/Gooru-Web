@@ -130,8 +130,6 @@ public class AppServiceImpl extends BaseServiceImpl implements AppService {
 		V2UserDo v2UserDo = null;
 		JsonRepresentation jsonRep = null;
 		String url = UrlGenerator.generateUrl(getRestEndPoint(), UrlToken.V2_SIGNIN, getApiKey());
-		System.out.println("signin urll==>"+url);
-		System.out.println("signin postData==>"+postData);
 		JsonResponseRepresentation jsonResponseRep = ServiceProcessor.post(url, getRestUsername(), getRestPassword(), postData);
 		jsonRep =jsonResponseRep.getJsonRepresentation();
 		String content = null;
@@ -139,6 +137,7 @@ public class AppServiceImpl extends BaseServiceImpl implements AppService {
 			if(jsonResponseRep.getStatusCode()==401){
 				user = new UserDo();
 				user.setStatusCode(jsonResponseRep.getStatusCode());
+				user.setErrorMsg(jsonResponseRep.getErrorMessage());
 				return user;
 			}else if(jsonResponseRep.getStatusCode()==400){
 				user = new UserDo();
